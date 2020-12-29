@@ -23,6 +23,7 @@
 		D1B65A242598D21F00A9A7CB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A232598D21F00A9A7CB /* SnapKit */; };
 		D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A272598D24D00A9A7CB /* Alamofire */; };
 		D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A2B2598D27D00A9A7CB /* Then */; };
+		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 				D1B65A1A2598D16600A9A7CB /* RxCocoa in Frameworks */,
 				D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */,
 				D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */,
+				DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */,
 				D1B65A182598D16600A9A7CB /* RxSwift in Frameworks */,
 				D1B65A242598D21F00A9A7CB /* SnapKit in Frameworks */,
 			);
@@ -172,6 +174,7 @@
 				D1B65A232598D21F00A9A7CB /* SnapKit */,
 				D1B65A272598D24D00A9A7CB /* Alamofire */,
 				D1B65A2B2598D27D00A9A7CB /* Then */,
+				DA10C688259B3C3F00AC91D9 /* FSCalendar */,
 			);
 			productName = Housing;
 			productReference = D19179E2259890A40035AF74 /* Housing.app */;
@@ -206,6 +209,7 @@
 				D1B65A222598D21F00A9A7CB /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D1B65A262598D24C00A9A7CB /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */,
+				DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = D19179E3259890A40035AF74 /* Products */;
 			projectDirPath = "";
@@ -477,6 +481,14 @@
 				minimumVersion = 2.7.0;
 			};
 		};
+		DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -514,6 +526,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		DA10C688259B3C3F00AC91D9 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
