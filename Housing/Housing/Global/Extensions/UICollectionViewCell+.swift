@@ -1,8 +1,10 @@
 //
-//  UICollectionViewCell.swift
+//  UICollectionViewCell+.swift
 //  Housing
 //
 //  Created by 오준현 on 2020/12/29.
 //
 
-import Foundation
+import UIKit
+
+extension UICollectionViewCell: ReusableView { }
