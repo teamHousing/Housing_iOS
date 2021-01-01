@@ -44,6 +44,7 @@
 		D1B65A242598D21F00A9A7CB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A232598D21F00A9A7CB /* SnapKit */; };
 		D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A272598D24D00A9A7CB /* Alamofire */; };
 		D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A2B2598D27D00A9A7CB /* Then */; };
+		DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050945259F343E00DDB916 /* CameraWorkViewController.swift */; };
 		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		D1B44510259F1D5A005C2C68 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D1B65A102598CE5C00A9A7CB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D1B65A132598CE6400A9A7CB /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		DA050945259F343E00DDB916 /* CameraWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWorkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				D1B444DC259F096C005C2C68 /* PromiseViewController.swift */,
+				DA050945259F343E00DDB916 /* CameraWorkViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				D1311895259B6BBF00897DF4 /* UITableViewCell+.swift in Sources */,
 				D13118A3259B70EF00897DF4 /* KeychainStorage.swift in Sources */,
 				D1B444EE259F0A10005C2C68 /* CommunicationViewController.swift in Sources */,
+				DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */,
 				D1311898259B6BD100897DF4 /* UIColor+.swift in Sources */,
 				D13118A6259B718900897DF4 /* CALayer+.swift in Sources */,
 				D19179E8259890A40035AF74 /* SceneDelegate.swift in Sources */,
@@ -619,14 +623,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36BC59Q598;
+				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.housing.Housing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.housing.Housings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -639,14 +643,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36BC59Q598;
+				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.housing.Housing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.housing.Housings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

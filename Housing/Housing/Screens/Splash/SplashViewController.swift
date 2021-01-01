@@ -139,6 +139,7 @@ class SplashViewController: BaseViewController {
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "PromiseViewController")
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
+		//self.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	
 	// 한솔
