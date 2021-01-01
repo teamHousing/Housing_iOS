@@ -45,6 +45,7 @@
 		D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A272598D24D00A9A7CB /* Alamofire */; };
 		D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A2B2598D27D00A9A7CB /* Then */; };
 		DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050945259F343E00DDB916 /* CameraWorkViewController.swift */; };
+		DA050953259F4AFB00DDB916 /* AssetsPickerViewController in Frameworks */ = {isa = PBXBuildFile; productRef = DA050952259F4AFB00DDB916 /* AssetsPickerViewController */; };
 		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 				D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */,
 				D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */,
 				DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */,
+				DA050953259F4AFB00DDB916 /* AssetsPickerViewController in Frameworks */,
 				D1B65A182598D16600A9A7CB /* RxSwift in Frameworks */,
 				D1B65A242598D21F00A9A7CB /* SnapKit in Frameworks */,
 			);
@@ -393,6 +395,7 @@
 				D1B65A272598D24D00A9A7CB /* Alamofire */,
 				D1B65A2B2598D27D00A9A7CB /* Then */,
 				DA10C688259B3C3F00AC91D9 /* FSCalendar */,
+				DA050952259F4AFB00DDB916 /* AssetsPickerViewController */,
 			);
 			productName = Housing;
 			productReference = D19179E2259890A40035AF74 /* Housing.app */;
@@ -428,6 +431,7 @@
 				D1B65A262598D24C00A9A7CB /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */,
 				DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				DA050951259F4AFB00DDB916 /* XCRemoteSwiftPackageReference "AssetsPickerViewController" */,
 			);
 			productRefGroup = D19179E3259890A40035AF74 /* Products */;
 			projectDirPath = "";
@@ -721,6 +725,14 @@
 				minimumVersion = 2.7.0;
 			};
 		};
+		DA050951259F4AFB00DDB916 /* XCRemoteSwiftPackageReference "AssetsPickerViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DragonCherry/AssetsPickerViewController";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.7;
+			};
+		};
 		DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
@@ -766,6 +778,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		DA050952259F4AFB00DDB916 /* AssetsPickerViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA050951259F4AFB00DDB916 /* XCRemoteSwiftPackageReference "AssetsPickerViewController" */;
+			productName = AssetsPickerViewController;
 		};
 		DA10C688259B3C3F00AC91D9 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;

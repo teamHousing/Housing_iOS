@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "AssetsPickerViewController",
+        "repositoryURL": "https://github.com/DragonCherry/AssetsPickerViewController",
+        "state": {
+          "branch": null,
+          "revision": "288cf078a78fb9f590fc8519d88b4b87089f3103",
+          "version": "2.9.7"
+        }
+      },
+      {
         "package": "FSCalendar",
         "repositoryURL": "https://github.com/WenchaoD/FSCalendar.git",
         "state": {
