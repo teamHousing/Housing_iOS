@@ -37,11 +37,17 @@
                                 <rect key="frame" x="73" y="433" width="82" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="사진 촬영하기"/>
+                                <connections>
+                                    <action selector="addPictureFromCamera:" destination="R8k-k5-DAs" eventType="touchUpInside" id="4pY-J3-NvO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWh-pc-H4r">
                                 <rect key="frame" x="272" y="433" width="69" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="사진 보관함"/>
+                                <connections>
+                                    <action selector="addPictureFromLibrary:" destination="R8k-k5-DAs" eventType="touchUpInside" id="lC1-eo-UVR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ngG-QB-ySM"/>
