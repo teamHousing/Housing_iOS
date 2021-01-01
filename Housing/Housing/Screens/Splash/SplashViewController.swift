@@ -12,6 +12,14 @@ import SnapKit
 
 class SplashViewController: BaseViewController {
 
+	private let loginButton = UIButton().then {
+		$0.setTitle("로그인", for: .normal)
+		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+		$0.backgroundColor = .black
+		$0.setRounded(radius: 10)
+		$0.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+	}
+	
 	private let communicationButton = UIButton().then {
 		$0.setTitle("민제", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
@@ -60,13 +68,17 @@ class SplashViewController: BaseViewController {
 	
 	private func layout() {
 		view.adds([
+			loginButton,
 			communicationButton,
 			promiseButton,
 			detailButton,
 			calendarButton,
 			homeButton
 		])
-		
+		loginButton.snp.makeConstraints {
+			$0.centerX.centerY.equalTo(view)
+			$0.width.height.equalTo(60)
+		}
 		homeButton.snp.makeConstraints {
 			$0.bottom.equalTo(view).offset(-50)
 			$0.leading.equalTo(view).offset(10)
@@ -99,6 +111,17 @@ class SplashViewController: BaseViewController {
 		}
 	}
 	
+	// 민제
+	@objc
+	func loginButtonDidTap() {
+		let storyboard = UIStoryboard(name: StoryboardStorage.login,
+																	bundle: nil)
+		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		viewcontroller.modalPresentationStyle = .fullScreen
+		present(viewcontroller, animated: true)
+	}
+
+	// 주은
 	@objc
 	func communicationButtonDidTap() {
 		let storyboard = UIStoryboard(name: StoryboardStorage.communication,
@@ -107,6 +130,8 @@ class SplashViewController: BaseViewController {
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
 	}
+	
+	// 태훈
 	@objc
 	func promiseButtonDidTap() {
 		let storyboard = UIStoryboard(name: StoryboardStorage.promise,
@@ -115,6 +140,8 @@ class SplashViewController: BaseViewController {
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
 	}
+	
+	// 한솔
 	@objc
 	func detailButtonDidTap() {
 		let storyboard = UIStoryboard(name: StoryboardStorage.detail,
@@ -123,12 +150,16 @@ class SplashViewController: BaseViewController {
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
 	}
+	
+	// 준현
 	@objc
 	func calendarButtonDidTap() {
 		let viewcontroller = CalendarViewController()
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
 	}
+	
+	// 민제
 	@objc
 	func homeButtonDidTap() {
 		let storyboard = UIStoryboard(name: StoryboardStorage.home,
