@@ -9,6 +9,10 @@ import Foundation
 
 enum StoryboardStorage {
 	
+	static var login: String {
+		return "Login"
+	}
+
 	static var promise: String {
 		return "Promise"
 	}
