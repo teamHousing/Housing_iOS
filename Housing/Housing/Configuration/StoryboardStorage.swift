@@ -6,3 +6,23 @@
 //
 
 import Foundation
+
+enum StoryboardStorage {
+	
+	static var promise: String {
+		return "Promise"
+	}
+	
+	static var detail: String {
+		return "Detail"
+	}
+	
+	static var communication: String {
+		return "Communication"
+	}
+	
+	static var home: String {
+		return "Home"
+	}
+	
+}
