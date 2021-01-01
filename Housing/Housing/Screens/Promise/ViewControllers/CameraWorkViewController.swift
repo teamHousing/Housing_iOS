@@ -5,10 +5,11 @@
 //  Created by 김태훈 on 2021/01/01.
 //
 
-import UIKit
-import Photos
 import AVFoundation
-import AssetsPickerViewController
+import Photos
+import UIKit
+
+import YPImagePicker
 
 class CameraWorkViewController: UIViewController{
 	
@@ -19,10 +20,13 @@ class CameraWorkViewController: UIViewController{
 	
 	
 	let imagePickerController = UIImagePickerController()
-	let picker = AssetsPickerViewController()
-	
 	var thumbnailPictures : [UIImage] = []
-
+	
+	
+	
+	let picker = YPImagePicker()
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -31,7 +35,7 @@ class CameraWorkViewController: UIViewController{
 		print(thumbnailPictures)
 		// Do any additional setup after loading the view.
 	}
-  @IBAction func addPictureFromCamera(_ sender: Any) {
+	@IBAction func addPictureFromCamera(_ sender: Any) {
 		switch PHPhotoLibrary.authorizationStatus() {
 		case .denied:
 			break
@@ -54,8 +58,8 @@ class CameraWorkViewController: UIViewController{
 		default:
 			break
 		}
-  }
-  @IBAction func addPictureFromLibrary(_ sender: Any) {
+	}
+	@IBAction func addPictureFromLibrary(_ sender: Any) {
 		switch PHPhotoLibrary.authorizationStatus() {
 		case .denied:
 			break
@@ -76,37 +80,49 @@ class CameraWorkViewController: UIViewController{
 		default:
 			break
 		}
-  }
+	}
 	
 }
-extension CameraWorkViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+extension CameraWorkViewController :
+	UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	func imagePickerController(_
+															picker: UIImagePickerController,
+														 didFinishPickingMediaWithInfo info:
+															[UIImagePickerController.InfoKey : Any]) {
 		//사진 정보
-    print(picker.sourceType)
+		print(picker.sourceType)
 		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-			var thumbnail = UIImage()
-			image.
-			thumbnailPictures.append(image)
+			
+			thumbnailPictures.append(image.resizeImage(newSize: CGSize(width: 40, height: 40)))
+			dump(thumbnailPictures.last)
 		}
 		dismiss(animated: true, completion: nil)
 	}
 }
-extension CameraWorkViewController : AssetsPickerViewControllerDelegate {
-	func assetsPicker(controller: AssetsPickerViewController, selected assets: [PHAsset]) {
-		for items in assets {
-			thumbnailPictures.append(items.image(targetSize: CGSize(width: 40, height: 40), contentMode: .aspectFill, options: .none))
-		}
-		
-		dismiss(animated: true, completion: nil)
-	}
-}
+
 extension PHAsset {
-		func image(targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?) -> UIImage {
-				var thumbnail = UIImage()
-				let imageManager = PHCachingImageManager()
-				imageManager.requestImage(for: self, targetSize: targetSize, contentMode: contentMode, options: options, resultHandler: { image, _ in
-						thumbnail = image!
-				})
-				return thumbnail
+	func thumbnailImage(targetSize: CGSize,
+											contentMode: PHImageContentMode,
+											options: PHImageRequestOptions?) -> UIImage {
+		var thumbnail = UIImage()
+		let imageManager = PHCachingImageManager()
+		PHImageManager
+		imageManager.requestImage(for: self,
+															targetSize: targetSize,
+															contentMode: contentMode,
+															options: options,
+															resultHandler: { image, _ in
+			thumbnail = image!
+		})
+		return thumbnail
+	}
+	func assetURL(asset : PHAsset) {
+		let URL = assetURL(asset: asset)
+		if asset.mediaType == .image {
+			
 		}
+		else if asset.mediaType == .video {
+			
+		}
+	}
 }

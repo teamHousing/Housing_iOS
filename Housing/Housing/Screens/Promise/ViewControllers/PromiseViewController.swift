@@ -13,8 +13,12 @@ class PromiseViewController: UIViewController {
 		super.viewDidLoad()
 		view.backgroundColor = .cyan
 		
-		guard let cameraview : UIViewController = self.storyboard?.instantiateViewController(identifier: "cameraViewController") as? CameraWorkViewController else {
-			return }
+		guard let cameraview : UIViewController =
+						self.storyboard?.instantiateViewController(identifier: "cameraViewController")
+						as? CameraWorkViewController
+		else {
+			return
+		}
 		let navigationController = UINavigationController(rootViewController: cameraview)
 		self.navigationController?.pushViewController(cameraview, animated: true)
 	}
