@@ -28,7 +28,7 @@ class SplashViewController: BaseViewController {
 	}
 	
 	private let communicationButton = UIButton().then {
-		$0.setTitle("민제", for: .normal)
+		$0.setTitle("주은", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
 		$0.backgroundColor = .black
 		$0.setRounded(radius: 10)
@@ -60,7 +60,7 @@ class SplashViewController: BaseViewController {
 	}
 	
 	private let homeButton = UIButton().then {
-		$0.setTitle("주은", for: .normal)
+		$0.setTitle("민제", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
 		$0.backgroundColor = .black
 		$0.addTarget(self, action: #selector(homeButtonDidTap), for: .touchUpInside)
@@ -152,6 +152,7 @@ class SplashViewController: BaseViewController {
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "PromiseViewController")
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
+		//self.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	
 	// 한솔
