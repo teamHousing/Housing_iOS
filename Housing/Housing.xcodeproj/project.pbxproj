@@ -44,6 +44,7 @@
 		D1B65A242598D21F00A9A7CB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A232598D21F00A9A7CB /* SnapKit */; };
 		D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A272598D24D00A9A7CB /* Alamofire */; };
 		D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A2B2598D27D00A9A7CB /* Then */; };
+		D1F33A8A25A08C44003C1576 /* BaskFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F33A8925A08C44003C1576 /* BaskFont.swift */; };
 		DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050945259F343E00DDB916 /* CameraWorkViewController.swift */; };
 		DA050956259F692E00DDB916 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050955259F692E00DDB916 /* UIImage+.swift */; };
 		DA050961259F7FE800DDB916 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = DA050960259F7FE800DDB916 /* YPImagePicker */; };
@@ -84,6 +85,8 @@
 		D1B44510259F1D5A005C2C68 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D1B65A102598CE5C00A9A7CB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D1B65A132598CE6400A9A7CB /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		D1F33A8625A08B5F003C1576 /* BASKE1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BASKE1.ttf; sourceTree = "<group>"; };
+		D1F33A8925A08C44003C1576 /* BaskFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaskFont.swift; sourceTree = "<group>"; };
 		DA050945259F343E00DDB916 /* CameraWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWorkViewController.swift; sourceTree = "<group>"; };
 		DA050955259F692E00DDB916 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -333,6 +336,7 @@
 		D1B65A002598C61600A9A7CB /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				D1F33A8825A08C2A003C1576 /* Enums */,
 				D1311886259B6B7500897DF4 /* Protocols */,
 				D1311885259B6B5B00897DF4 /* Extensions */,
 			);
@@ -350,6 +354,7 @@
 		D1B65A022598C61800A9A7CB /* Supports */ = {
 			isa = PBXGroup;
 			children = (
+				D1F33A8625A08B5F003C1576 /* BASKE1.ttf */,
 				D19179F3259890A70035AF74 /* Info.plist */,
 				D19179E7259890A40035AF74 /* SceneDelegate.swift */,
 				D19179E5259890A40035AF74 /* AppDelegate.swift */,
@@ -373,6 +378,14 @@
 				D19179E9259890A40035AF74 /* SplashViewController.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		D1F33A8825A08C2A003C1576 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				D1F33A8925A08C44003C1576 /* BaskFont.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,6 +493,7 @@
 				D1B44505259F0FCE005C2C68 /* StoryboardStorage.swift in Sources */,
 				D1B444FF259F0B13005C2C68 /* HomeViewController.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
+				D1F33A8A25A08C44003C1576 /* BaskFont.swift in Sources */,
 				D131188E259B6BA900897DF4 /* UICollectionViewCell+.swift in Sources */,
 				D1B65A112598CE5C00A9A7CB /* Network.swift in Sources */,
 				D1311888259B6B9400897DF4 /* ReusableView.swift in Sources */,

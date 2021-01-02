@@ -12,6 +12,13 @@ import SnapKit
 
 class SplashViewController: BaseViewController {
 
+
+	private let housingLabel = UILabel().then {
+		$0.text = "Housing"
+		$0.textColor = .black
+		$0.font = BaskFont.bold.of(size: 30)
+	}
+	
 	private let loginButton = UIButton().then {
 		$0.setTitle("로그인", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
@@ -68,6 +75,7 @@ class SplashViewController: BaseViewController {
 	
 	private func layout() {
 		view.adds([
+			housingLabel,
 			loginButton,
 			communicationButton,
 			promiseButton,
@@ -75,6 +83,11 @@ class SplashViewController: BaseViewController {
 			calendarButton,
 			homeButton
 		])
+		
+		housingLabel.snp.makeConstraints {
+			$0.centerX.equalToSuperview()
+			$0.top.equalToSuperview().offset(60)
+		}
 		loginButton.snp.makeConstraints {
 			$0.centerX.centerY.equalTo(view)
 			$0.width.height.equalTo(60)
