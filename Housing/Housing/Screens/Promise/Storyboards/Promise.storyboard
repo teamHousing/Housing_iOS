@@ -49,6 +49,14 @@
                                     <action selector="addPictureFromLibrary:" destination="R8k-k5-DAs" eventType="touchUpInside" id="lC1-eo-UVR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0P-33-CfI">
+                                <rect key="frame" x="192" y="650" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="다음"/>
+                                <connections>
+                                    <action selector="submitPictures:" destination="R8k-k5-DAs" eventType="touchUpInside" id="ifz-Ie-4ZB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ngG-QB-ySM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

@@ -46,8 +46,9 @@
 		D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A2B2598D27D00A9A7CB /* Then */; };
 		DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050945259F343E00DDB916 /* CameraWorkViewController.swift */; };
 		DA050956259F692E00DDB916 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050955259F692E00DDB916 /* UIImage+.swift */; };
-		DA050961259F7FE800DDB916 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = DA050960259F7FE800DDB916 /* YPImagePicker */; };
 		DA050965259F801A00DDB916 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DA050964259F801A00DDB916 /* SwiftKeychainWrapper */; };
+		DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05096B25A05A6100DDB916 /* RequestDataModel.swift */; };
+		DA05097225A0722000DDB916 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = DA05097125A0722000DDB916 /* YPImagePicker */; };
 		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		D1B65A132598CE6400A9A7CB /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		DA050945259F343E00DDB916 /* CameraWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWorkViewController.swift; sourceTree = "<group>"; };
 		DA050955259F692E00DDB916 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		DA05096B25A05A6100DDB916 /* RequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1B65A202598D1FF00A9A7CB /* Kingfisher in Frameworks */,
-				DA050961259F7FE800DDB916 /* YPImagePicker in Frameworks */,
+				DA05097225A0722000DDB916 /* YPImagePicker in Frameworks */,
 				D1B65A1C2598D16600A9A7CB /* RxRelay in Frameworks */,
 				D1B65A1A2598D16600A9A7CB /* RxCocoa in Frameworks */,
 				D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */,
@@ -202,6 +204,7 @@
 		D1B444CA259F08CA005C2C68 /* Promise */ = {
 			isa = PBXGroup;
 			children = (
+				DA05096A25A05A4000DDB916 /* Model */,
 				D1B444CC259F08DC005C2C68 /* ViewControllers */,
 				D1B444CB259F08D5005C2C68 /* Storyboards */,
 			);
@@ -375,6 +378,14 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
+		DA05096A25A05A4000DDB916 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DA05096B25A05A6100DDB916 /* RequestDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -400,8 +411,8 @@
 				D1B65A272598D24D00A9A7CB /* Alamofire */,
 				D1B65A2B2598D27D00A9A7CB /* Then */,
 				DA10C688259B3C3F00AC91D9 /* FSCalendar */,
-				DA050960259F7FE800DDB916 /* YPImagePicker */,
 				DA050964259F801A00DDB916 /* SwiftKeychainWrapper */,
+				DA05097125A0722000DDB916 /* YPImagePicker */,
 			);
 			productName = Housing;
 			productReference = D19179E2259890A40035AF74 /* Housing.app */;
@@ -437,8 +448,8 @@
 				D1B65A262598D24C00A9A7CB /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */,
 				DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */,
-				DA05095F259F7FE800DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 				DA050963259F801A00DDB916 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				DA05097025A0722000DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 			);
 			productRefGroup = D19179E3259890A40035AF74 /* Products */;
 			projectDirPath = "";
@@ -474,6 +485,7 @@
 				D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */,
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
+				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,
 				D19179E6259890A40035AF74 /* AppDelegate.swift in Sources */,
 				D131189E259B6BE300897DF4 /* UIViewController+.swift in Sources */,
@@ -733,20 +745,20 @@
 				minimumVersion = 2.7.0;
 			};
 		};
-		DA05095F259F7FE800DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Yummypets/YPImagePicker";
-			requirement = {
-				branch = spm;
-				kind = branch;
-			};
-		};
 		DA050963259F801A00DDB916 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.1;
+			};
+		};
+		DA05097025A0722000DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Yummypets/YPImagePicker";
+			requirement = {
+				branch = spm;
+				kind = branch;
 			};
 		};
 		DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
@@ -795,15 +807,15 @@
 			package = D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
 		};
-		DA050960259F7FE800DDB916 /* YPImagePicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA05095F259F7FE800DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
-			productName = YPImagePicker;
-		};
 		DA050964259F801A00DDB916 /* SwiftKeychainWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DA050963259F801A00DDB916 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		DA05097125A0722000DDB916 /* YPImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA05097025A0722000DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
+			productName = YPImagePicker;
 		};
 		DA10C688259B3C3F00AC91D9 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
