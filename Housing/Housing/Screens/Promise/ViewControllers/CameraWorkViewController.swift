@@ -12,44 +12,78 @@ import UIKit
 import YPImagePicker
 
 class CameraWorkViewController: UIViewController{
-	
-	let sessionn = AVCaptureSession()
-	var camera : AVCaptureDevice?
-	var cameraPreViewLayer : AVCaptureVideoPreviewLayer?
-	var cameraCaptureOutput : AVCapturePhotoOutput?
-	
-	
-	let imagePickerController = UIImagePickerController()
 	var thumbnailPictures : [UIImage] = []
 	
+	var config : YPImagePickerConfiguration {
+		var realconfig = YPImagePickerConfiguration()
+		realconfig.usesFrontCamera = false
+		realconfig.screens = [.library, .photo]
+		realconfig.library.maxNumberOfItems = 10
+		realconfig.library.defaultMultipleSelection = true
+		realconfig.showsPhotoFilters = false
+		realconfig.onlySquareImagesFromCamera = false
+		realconfig.hidesBottomBar = true
+		return realconfig
+	}
 	
+	func cameraWork() {
+		let picker = YPImagePicker(configuration: self.config)
+		picker.didFinishPicking{ [unowned picker] items, _ in
+			if let photo = items.singlePhoto {
+				print(photo.fromCamera)
+				print(photo.image)
+				self.thumbnailPictures.append(photo.image)
+			}
+			picker.dismiss(animated: true, completion: nil)
+		}
+		present(picker, animated: true, completion: nil)
+	}
 	
-	let picker = YPImagePicker()
-	
+	func photoLibraryWork() {
+		var config : YPImagePickerConfiguration {
+			var realconfig = self.config
+			realconfig.library.maxNumberOfItems = 10
+			realconfig.library.defaultMultipleSelection = true
+			realconfig.startOnScreen = YPPickerScreen.library
+			realconfig.library.preSelectItemOnMultipleSelection = false
+			return realconfig
+		}
+		let picker = YPImagePicker(configuration: config)
+		picker.didFinishPicking{ [unowned picker] items, cancelled in
+			for item in items {
+				switch item {
+				case .photo(let photo):
+					print(photo.image)
+					self.thumbnailPictures.append(photo.image)
+				default:
+					print("비디오")
+				}
+			}
+			picker.dismiss(animated: true, completion: nil)
+		}
+		present(picker, animated: true, completion: nil)
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		imagePickerController.delegate = self
-		picker.pickerDelegate = self
 		print(thumbnailPictures)
 		// Do any additional setup after loading the view.
 	}
+	
 	@IBAction func addPictureFromCamera(_ sender: Any) {
+
 		switch PHPhotoLibrary.authorizationStatus() {
 		case .denied:
 			break
 		case .restricted:
 			break
 		case .authorized:
-			self.imagePickerController.sourceType = .camera
-			self.present(self.imagePickerController, animated: true, completion: nil)
+			self.cameraWork()
 		case .notDetermined:
 			PHPhotoLibrary.requestAuthorization{
 				state in
 				if state == .authorized {
-					self.imagePickerController.sourceType = .camera
-					self.present(self.imagePickerController, animated: true, completion: nil)
+					self.cameraWork()
 				}
 				else {
 					self.dismiss(animated: true, completion: nil)
@@ -66,12 +100,12 @@ class CameraWorkViewController: UIViewController{
 		case .restricted:
 			break
 		case .authorized:
-			self.present(self.picker, animated: true, completion: nil)
+			self.photoLibraryWork()
 		case .notDetermined:
 			PHPhotoLibrary.requestAuthorization{
 				state in
 				if state == .authorized {
-					self.present(self.picker, animated: true, completion: nil)
+					self.photoLibraryWork()
 				}
 				else {
 					self.dismiss(animated: true, completion: nil)
@@ -79,50 +113,6 @@ class CameraWorkViewController: UIViewController{
 			}
 		default:
 			break
-		}
-	}
-	
-}
-extension CameraWorkViewController :
-	UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-	func imagePickerController(_
-															picker: UIImagePickerController,
-														 didFinishPickingMediaWithInfo info:
-															[UIImagePickerController.InfoKey : Any]) {
-		//사진 정보
-		print(picker.sourceType)
-		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-			
-			thumbnailPictures.append(image.resizeImage(newSize: CGSize(width: 40, height: 40)))
-			dump(thumbnailPictures.last)
-		}
-		dismiss(animated: true, completion: nil)
-	}
-}
-
-extension PHAsset {
-	func thumbnailImage(targetSize: CGSize,
-											contentMode: PHImageContentMode,
-											options: PHImageRequestOptions?) -> UIImage {
-		var thumbnail = UIImage()
-		let imageManager = PHCachingImageManager()
-		PHImageManager
-		imageManager.requestImage(for: self,
-															targetSize: targetSize,
-															contentMode: contentMode,
-															options: options,
-															resultHandler: { image, _ in
-			thumbnail = image!
-		})
-		return thumbnail
-	}
-	func assetURL(asset : PHAsset) {
-		let URL = assetURL(asset: asset)
-		if asset.mediaType == .image {
-			
-		}
-		else if asset.mediaType == .video {
-			
 		}
 	}
 }
