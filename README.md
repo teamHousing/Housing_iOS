@@ -15,6 +15,8 @@
 👷 iOS 곽민제
 ```
 
+<br/>
+
 ## 코딩 컨벤션
 
 ### 네이밍
@@ -22,10 +24,12 @@
 * boolean 값은 다른 타입과 구분하기 위해 `isSpaceship`, `hasSpacesuit`와 같이  is, has를 붙여준다. 
 * parameter에 _(언더 바) 사용은 지양하도록 한다.
 
+<br/>
 
 ## 폴더링, 브랜치, 코딩컨벤션
 https://github.com/teamHousing/Housing_iOS/wiki
 
+<br/>
 
 ## 커밋 메시지 컨벤션
 * gitmoji
@@ -36,7 +40,7 @@ https://github.com/teamHousing/Housing_iOS/wiki
 
 
 ## MARK
-// MARK: - 
+* // MARK: - 
 Component, Property, Helper, Lifecycle, Object Extension마다 MARK 주석을 사용해 설명합니다. (ex. // MARK: - UITableView Extension,  // MARK: - Helper Extension)
 
 
