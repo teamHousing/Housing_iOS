@@ -41,6 +41,7 @@ https://github.com/teamHousing/Housing_iOS/wiki
 
 ## MARK
 * // MARK: - 
+<br/>
 Component, Property, Helper, Lifecycle, Object Extension마다 MARK 주석을 사용해 설명합니다. (ex. // MARK: - UITableView Extension,  // MARK: - Helper Extension)
 
 
