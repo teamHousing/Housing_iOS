@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */; };
+		D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */; };
+		D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */; };
+		D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */; };
+		D11C1BEF25A2083B002606B2 /* NoticeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BEE25A2083B002606B2 /* NoticeCollectionViewCell.swift */; };
 		D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12D6DE025A1C84200E9A43A /* BaskervilleFont.swift */; };
 		D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12D6DE525A1C92D00E9A43A /* TabBarViewController.swift */; };
 		D1311888259B6B9400897DF4 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1311887259B6B9400897DF4 /* ReusableView.swift */; };
@@ -57,6 +61,10 @@
 
 /* Begin PBXFileReference section */
 		37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommunmicationTableViewCell.swift; path = Housing/Screens/Communication/ViewControllers/CommunmicationTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
+		D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionReusableView.swift; sourceTree = "<group>"; };
+		D11C1BEE25A2083B002606B2 /* NoticeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D12D6DDE25A1C7F600E9A43A /* BASKE1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BASKE1.ttf; sourceTree = "<group>"; };
 		D12D6DE025A1C84200E9A43A /* BaskervilleFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaskervilleFont.swift; sourceTree = "<group>"; };
 		D12D6DE525A1C92D00E9A43A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +126,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D11C1BDF25A1FE3B002606B2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */,
+				D11C1BEE25A2083B002606B2 /* NoticeCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D11C1BE925A20244002606B2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D12D6DDF25A1C81400E9A43A /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +156,7 @@
 			children = (
 				D131188A259B6BA000897DF4 /* UICollectionView+.swift */,
 				D131188D259B6BA900897DF4 /* UICollectionViewCell+.swift */,
+				D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */,
 				D1311891259B6BB300897DF4 /* UITableView+.swift */,
 				D1311894259B6BBF00897DF4 /* UITableViewCell+.swift */,
 				D1311897259B6BD100897DF4 /* UIColor+.swift */,
@@ -211,6 +237,8 @@
 		D1B444C9259F08AE005C2C68 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				D11C1BE925A20244002606B2 /* Views */,
+				D11C1BDF25A1FE3B002606B2 /* Cells */,
 				D1B444D7259F0948005C2C68 /* ViewController */,
 			);
 			path = Calendar;
@@ -501,6 +529,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */,
+				D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */,
+				D11C1BEF25A2083B002606B2 /* NoticeCollectionViewCell.swift in Sources */,
+				D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */,
 				D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */,
 				D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */,
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
