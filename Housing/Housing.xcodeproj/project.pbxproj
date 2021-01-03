@@ -17,6 +17,7 @@
 		D131189E259B6BE300897DF4 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D131189D259B6BE300897DF4 /* UIViewController+.swift */; };
 		D13118A3259B70EF00897DF4 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13118A2259B70EF00897DF4 /* KeychainStorage.swift */; };
 		D13118A6259B718900897DF4 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13118A5259B718900897DF4 /* CALayer+.swift */; };
+		D160A21D25A1BE4C00150380 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160A21C25A1BE4C00150380 /* TabBarViewController.swift */; };
 		D19179E6259890A40035AF74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19179E5259890A40035AF74 /* AppDelegate.swift */; };
 		D19179E8259890A40035AF74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19179E7259890A40035AF74 /* SceneDelegate.swift */; };
 		D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19179E9259890A40035AF74 /* SplashViewController.swift */; };
@@ -63,6 +64,7 @@
 		D131189D259B6BE300897DF4 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		D13118A2259B70EF00897DF4 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		D13118A5259B718900897DF4 /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
+		D160A21C25A1BE4C00150380 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		D19179E2259890A40035AF74 /* Housing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Housing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D19179E5259890A40035AF74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D19179E7259890A40035AF74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				D1B444C6259F0857005C2C68 /* Home */,
 				D1B65A042598C65900A9A7CB /* Splash */,
 				D1B44507259F1447005C2C68 /* BaseViewController.swift */,
+				D160A21C25A1BE4C00150380 /* TabBarViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,
+				D160A21D25A1BE4C00150380 /* TabBarViewController.swift in Sources */,
 				D19179E6259890A40035AF74 /* AppDelegate.swift in Sources */,
 				D131189E259B6BE300897DF4 /* UIViewController+.swift in Sources */,
 				D1B44505259F0FCE005C2C68 /* StoryboardStorage.swift in Sources */,
@@ -649,7 +653,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
+				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -669,7 +673,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
+				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

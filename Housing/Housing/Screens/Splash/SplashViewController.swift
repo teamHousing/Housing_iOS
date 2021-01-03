@@ -19,24 +19,17 @@ class SplashViewController: BaseViewController {
 		$0.font = BaskFont.bold.of(size: 30)
 	}
 	
-	private let loginButton = UIButton().then {
-		$0.setTitle("로그인", for: .normal)
+	private let tabButton = UIButton().then {
+		$0.setTitle("탭바", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
 		$0.backgroundColor = .black
 		$0.setRounded(radius: 10)
-		$0.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+		$0.addTarget(self, action: #selector(tabButtonDidTap), for: .touchUpInside)
 	}
 	
-	private let communicationButton = UIButton().then {
-		$0.setTitle("주은", for: .normal)
-		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
-		$0.backgroundColor = .black
-		$0.setRounded(radius: 10)
-		$0.addTarget(self, action: #selector(communicationButtonDidTap), for: .touchUpInside)
-	}
 	
 	private let promiseButton = UIButton().then {
-		$0.setTitle("태훈", for: .normal)
+		$0.setTitle("문의/태훈", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
 		$0.setRounded(radius: 10)
 		$0.backgroundColor = .black
@@ -44,26 +37,18 @@ class SplashViewController: BaseViewController {
 	}
 	
 	private let detailButton = UIButton().then {
-		$0.setTitle("한솔", for: .normal)
+		$0.setTitle("상세/한솔", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
 		$0.backgroundColor = .black
 		$0.addTarget(self, action: #selector(detailButtonDidTap), for: .touchUpInside)
 		$0.setRounded(radius: 10)
 	}
 	
-	private let calendarButton = UIButton().then {
-		$0.setTitle("준현", for: .normal)
-		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
-		$0.backgroundColor = .black
-		$0.addTarget(self, action: #selector(calendarButtonDidTap), for: .touchUpInside)
-		$0.setRounded(radius: 10)
-	}
-	
 	private let homeButton = UIButton().then {
-		$0.setTitle("민제", for: .normal)
+		$0.setTitle("로그인/민제", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
 		$0.backgroundColor = .black
-		$0.addTarget(self, action: #selector(homeButtonDidTap), for: .touchUpInside)
+		$0.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
 		$0.setRounded(radius: 10)
 	}
 	
@@ -76,11 +61,9 @@ class SplashViewController: BaseViewController {
 	private func layout() {
 		view.adds([
 			housingLabel,
-			loginButton,
-			communicationButton,
+			tabButton,
 			promiseButton,
 			detailButton,
-			calendarButton,
 			homeButton
 		])
 		
@@ -88,40 +71,29 @@ class SplashViewController: BaseViewController {
 			$0.centerX.equalToSuperview()
 			$0.top.equalToSuperview().offset(60)
 		}
-		loginButton.snp.makeConstraints {
+		tabButton.snp.makeConstraints {
 			$0.centerX.centerY.equalTo(view)
 			$0.width.height.equalTo(60)
 		}
 		homeButton.snp.makeConstraints {
 			$0.bottom.equalTo(view).offset(-50)
 			$0.leading.equalTo(view).offset(10)
-			$0.width.equalTo((view.frame.width/5)-10)
+			$0.width.equalTo((view.frame.width/3)-10)
 			$0.height.equalTo(60)
 		}
 		detailButton.snp.makeConstraints {
 			$0.bottom.equalTo(view).offset(-50)
 			$0.leading.equalTo(homeButton.snp.trailing).offset(10)
-			$0.width.equalTo((view.frame.width/5)-10)
+			$0.width.equalTo((view.frame.width/3)-10)
 			$0.height.equalTo(60)
 		}
 		promiseButton.snp.makeConstraints {
 			$0.bottom.equalTo(view).offset(-50)
 			$0.leading.equalTo(detailButton.snp.trailing).offset(10)
-			$0.width.equalTo((view.frame.width/5)-10)
+			$0.width.equalTo((view.frame.width/3)-20)
 			$0.height.equalTo(60)
 		}
-		calendarButton.snp.makeConstraints {
-			$0.bottom.equalTo(view).offset(-50)
-			$0.leading.equalTo(promiseButton.snp.trailing).offset(10)
-			$0.width.equalTo((view.frame.width/5)-10)
-			$0.height.equalTo(60)
-		}
-		communicationButton.snp.makeConstraints {
-			$0.bottom.equalTo(view).offset(-50)
-			$0.leading.equalTo(calendarButton.snp.trailing).offset(10)
-			$0.width.equalTo((view.frame.width/5)-10)
-			$0.height.equalTo(60)
-		}
+
 	}
 	
 	// 민제
@@ -130,16 +102,6 @@ class SplashViewController: BaseViewController {
 		let storyboard = UIStoryboard(name: StoryboardStorage.login,
 																	bundle: nil)
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
-	}
-
-	// 주은
-	@objc
-	func communicationButtonDidTap() {
-		let storyboard = UIStoryboard(name: StoryboardStorage.communication,
-																	bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "CommunicationViewController")
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
 	}
@@ -167,19 +129,10 @@ class SplashViewController: BaseViewController {
 	
 	// 준현
 	@objc
-	func calendarButtonDidTap() {
-		let viewcontroller = CalendarViewController()
+	func tabButtonDidTap() {
+		let viewcontroller = TabBarViewController()
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
 	}
 	
-	// 민제
-	@objc
-	func homeButtonDidTap() {
-		let storyboard = UIStoryboard(name: StoryboardStorage.home,
-																	bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
-	}
 }
