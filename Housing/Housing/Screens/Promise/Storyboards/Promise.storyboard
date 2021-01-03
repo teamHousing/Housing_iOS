@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PK9-DN-4Ie">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +15,7 @@
             <objects>
                 <viewController storyboardIdentifier="PromiseViewController2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n6O-Y2-h7e" customClass="PromiseViewController" customModule="Housing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X0D-Gx-yXw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="ZAC-zH-IdV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -25,47 +26,118 @@
             </objects>
             <point key="canvasLocation" x="973.91304347826099" y="136.60714285714286"/>
         </scene>
-        <!--요청/문의사항 작성-->
+        <!--Camera Work View Controller-->
         <scene sceneID="78p-mE-owc">
             <objects>
                 <viewController storyboardIdentifier="cameraViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R8k-k5-DAs" customClass="CameraWorkViewController" customModule="Housing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cti-Zb-iCe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezl-HL-U0S">
-                                <rect key="frame" x="73" y="433" width="82" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="사진 촬영하기"/>
-                                <connections>
-                                    <action selector="addPictureFromCamera:" destination="R8k-k5-DAs" eventType="touchUpInside" id="4pY-J3-NvO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWh-pc-H4r">
-                                <rect key="frame" x="272" y="433" width="69" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="사진 보관함"/>
-                                <connections>
-                                    <action selector="addPictureFromLibrary:" destination="R8k-k5-DAs" eventType="touchUpInside" id="lC1-eo-UVR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0P-33-CfI">
-                                <rect key="frame" x="192" y="650" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="다음"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfb-Vt-tLX">
+                                <rect key="frame" x="20" y="44" width="272.5" height="68"/>
+                                <string key="text">함께 보여주고 싶은 
+사진이나 동영상이 있나요?</string>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJn-CM-9pr">
+                                <rect key="frame" x="300.5" y="103" width="74.5" height="1"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="yqT-d8-Nel"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0P-33-CfI">
+                                <rect key="frame" x="60" y="529" width="255" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <state key="normal" title="다음 단계">
+                                    <color key="titleColor" red="0.96258121730000001" green="0.96271926159999999" blue="0.96255105730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="submitPictures:" destination="R8k-k5-DAs" eventType="touchUpInside" id="ifz-Ie-4ZB"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="20E-PF-OnI">
+                                <rect key="frame" x="0.0" y="168" width="375" height="162"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rFu-8z-oss">
+                                    <size key="itemSize" width="116" height="137"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photos" id="f9V-Pb-kPV" customClass="photoCollectionViewCell" customModule="Housing" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="12.5" width="116" height="137"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="teY-Y8-p9D">
+                                            <rect key="frame" x="0.0" y="0.0" width="116" height="137"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="photos" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8XC-FI-ujO">
+                                                    <rect key="frame" x="0.0" y="2" width="116" height="133"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="162" id="ITc-hl-vKg"/>
+                                                        <constraint firstAttribute="width" secondItem="8XC-FI-ujO" secondAttribute="height" id="fhH-sV-UI4"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hg-KE-tD0">
+                                                    <rect key="frame" x="86" y="10" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="8hz-rP-LrP"/>
+                                                        <constraint firstAttribute="height" constant="20" id="j0G-cP-8aQ"/>
+                                                    </constraints>
+                                                    <state key="normal" image="xmark" catalog="system"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="5hg-KE-tD0" secondAttribute="trailing" constant="10" id="3Wh-Ae-uhb"/>
+                                                <constraint firstItem="8XC-FI-ujO" firstAttribute="leading" secondItem="teY-Y8-p9D" secondAttribute="leading" id="3fl-ic-RNV"/>
+                                                <constraint firstAttribute="trailing" secondItem="8XC-FI-ujO" secondAttribute="trailing" id="8O0-8O-nRO"/>
+                                                <constraint firstAttribute="bottom" secondItem="8XC-FI-ujO" secondAttribute="bottom" id="HbF-vT-ybK"/>
+                                                <constraint firstItem="5hg-KE-tD0" firstAttribute="top" secondItem="teY-Y8-p9D" secondAttribute="top" constant="10" id="Kb6-Pf-X29"/>
+                                                <constraint firstItem="8XC-FI-ujO" firstAttribute="top" secondItem="teY-Y8-p9D" secondAttribute="top" id="gGd-Ys-SXz"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="116" height="137"/>
+                                        <connections>
+                                            <outlet property="deleteBtn" destination="5hg-KE-tD0" id="JGK-iS-kiS"/>
+                                            <outlet property="evidenceImages" destination="8XC-FI-ujO" id="omq-sD-nih"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ngG-QB-ySM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="20E-PF-OnI" firstAttribute="leading" secondItem="ngG-QB-ySM" secondAttribute="leading" id="4Tk-dV-4BW"/>
+                            <constraint firstItem="hfb-Vt-tLX" firstAttribute="top" secondItem="ngG-QB-ySM" secondAttribute="top" id="Ahb-ea-8Md"/>
+                            <constraint firstItem="hfb-Vt-tLX" firstAttribute="leading" secondItem="ngG-QB-ySM" secondAttribute="leading" constant="20" id="EB2-6R-t1R"/>
+                            <constraint firstItem="ngG-QB-ySM" firstAttribute="trailing" secondItem="20E-PF-OnI" secondAttribute="trailing" id="EUx-KM-vui"/>
+                            <constraint firstItem="ngG-QB-ySM" firstAttribute="bottom" secondItem="j0P-33-CfI" secondAttribute="bottom" constant="90" id="OTQ-Fo-vbc"/>
+                            <constraint firstItem="j0P-33-CfI" firstAttribute="height" secondItem="cti-Zb-iCe" secondAttribute="height" multiplier="48:667" id="Ra4-NL-w3h"/>
+                            <constraint firstItem="WJn-CM-9pr" firstAttribute="top" secondItem="ngG-QB-ySM" secondAttribute="top" constant="59" id="cmp-My-50I"/>
+                            <constraint firstItem="20E-PF-OnI" firstAttribute="height" secondItem="cti-Zb-iCe" secondAttribute="height" multiplier="162:667" id="hIb-KC-Po5"/>
+                            <constraint firstItem="WJn-CM-9pr" firstAttribute="trailing" secondItem="ngG-QB-ySM" secondAttribute="trailing" id="hhp-QV-44m"/>
+                            <constraint firstItem="j0P-33-CfI" firstAttribute="centerX" secondItem="ngG-QB-ySM" secondAttribute="centerX" id="oHH-2w-fX7"/>
+                            <constraint firstItem="WJn-CM-9pr" firstAttribute="leading" secondItem="hfb-Vt-tLX" secondAttribute="trailing" constant="8" id="tK1-nb-Amx"/>
+                            <constraint firstItem="20E-PF-OnI" firstAttribute="top" secondItem="hfb-Vt-tLX" secondAttribute="bottom" constant="56" id="uwH-05-3ZJ"/>
+                            <constraint firstItem="j0P-33-CfI" firstAttribute="width" secondItem="cti-Zb-iCe" secondAttribute="width" multiplier="255:375" id="vR5-Gk-yEm"/>
+                            <constraint firstItem="hfb-Vt-tLX" firstAttribute="height" secondItem="cti-Zb-iCe" secondAttribute="height" multiplier="68:667" id="xBx-nd-2Lb"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="요청/문의사항 작성" id="GrQ-3t-Qix"/>
+                    <navigationItem key="navigationItem" id="GrQ-3t-Qix"/>
+                    <connections>
+                        <outlet property="photoSelectCollectionView" destination="20E-PF-OnI" id="VzG-6B-TZT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="STi-DT-8dk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2852.1739130434785" y="136.60714285714286"/>
+            <point key="canvasLocation" x="2852" y="136.28185907046478"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jcz-3E-QFc">
@@ -73,7 +145,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1pT-n9-32q" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2yf-BG-0XQ">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -91,7 +163,7 @@
                 <navigationController storyboardIdentifier="PromiseViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PK9-DN-4Ie" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PQH-lW-kGr">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -105,6 +177,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

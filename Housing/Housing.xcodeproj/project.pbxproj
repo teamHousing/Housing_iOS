@@ -51,6 +51,7 @@
 		DA050965259F801A00DDB916 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DA050964259F801A00DDB916 /* SwiftKeychainWrapper */; };
 		DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05096B25A05A6100DDB916 /* RequestDataModel.swift */; };
 		DA05097225A0722000DDB916 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = DA05097125A0722000DDB916 /* YPImagePicker */; };
+		DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */; };
 		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,7 @@
 		DA050945259F343E00DDB916 /* CameraWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWorkViewController.swift; sourceTree = "<group>"; };
 		DA050955259F692E00DDB916 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		DA05096B25A05A6100DDB916 /* RequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataModel.swift; sourceTree = "<group>"; };
+		DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 		D1B444CC259F08DC005C2C68 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DA05097825A2174B00DDB916 /* Cell */,
 				D1B444DC259F096C005C2C68 /* PromiseViewController.swift */,
 				DA050945259F343E00DDB916 /* CameraWorkViewController.swift */,
 			);
@@ -402,6 +405,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		DA05097825A2174B00DDB916 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -513,6 +524,7 @@
 				D131188E259B6BA900897DF4 /* UICollectionViewCell+.swift in Sources */,
 				D1B65A112598CE5C00A9A7CB /* Network.swift in Sources */,
 				D1311888259B6B9400897DF4 /* ReusableView.swift in Sources */,
+				DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */,
 				D1B444E4259F09C5005C2C68 /* DetailViewController.swift in Sources */,
 				D131188B259B6BA000897DF4 /* UICollectionView+.swift in Sources */,
 				D1B44508259F1447005C2C68 /* BaseViewController.swift in Sources */,
@@ -665,7 +677,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36BC59Q598;
+				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -685,7 +697,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36BC59Q598;
+				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
