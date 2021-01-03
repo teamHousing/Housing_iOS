@@ -17,16 +17,7 @@
 
 <br/>
 
-## 코딩 컨벤션
-
-### 네이밍
-* type과 protocol 이름은 PascalCase를 사용하고, 나머지는 모두 lowerCamelCase를 사용한다.
-* boolean 값은 다른 타입과 구분하기 위해 `isSpaceship`, `hasSpacesuit`와 같이  is, has를 붙여준다. 
-* parameter에 _(언더 바) 사용은 지양하도록 한다.
-
-<br/>
-
-## 폴더링, 브랜치, 코딩컨벤션
+## 코딩컨벤션, 폴더링, git branch strategy
 https://github.com/teamHousing/Housing_iOS/wiki
 
 <br/>
