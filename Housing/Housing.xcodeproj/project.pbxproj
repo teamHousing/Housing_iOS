@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */; };
 		D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */; };
 		D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */; };
 		D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommunmicationTableViewCell.swift; path = Housing/Screens/Communication/ViewControllers/CommunmicationTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
 		D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				D1B444ED259F0A10005C2C68 /* CommunicationViewController.swift */,
+				37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
+				37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,
 				D19179E6259890A40035AF74 /* AppDelegate.swift in Sources */,
 				D131189E259B6BE300897DF4 /* UIViewController+.swift in Sources */,
