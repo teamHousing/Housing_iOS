@@ -2,7 +2,7 @@
 
 --------------
 
-<img width="500" height="500" align="left" alt="스크린샷 2021-01-03 오후 11 04 58" src="https://user-images.githubusercontent.com/72001692/103480681-f1edb080-4e18-11eb-8b65-3cc8350b0165.png">
+<img width="500" align="left" alt="스크린샷 2021-01-03 오후 11 04 58" src="https://user-images.githubusercontent.com/72001692/103480681-f1edb080-4e18-11eb-8b65-3cc8350b0165.png">
 
 
 ```
