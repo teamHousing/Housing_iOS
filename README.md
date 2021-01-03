@@ -23,49 +23,9 @@
 * boolean 값은 다른 타입과 구분하기 위해 `isSpaceship`, `hasSpacesuit`와 같이  is, has를 붙여준다. 
 * parameter에 _(언더 바) 사용은 지양하도록 한다.
 
-## 폴더링
+## 폴더링, 브랜치, 코딩컨벤션
 ---
-
-```
-- Housing/
-  ├── Util/
-  ├── Supports/
-  │   ├── ...
-  │   ├── LaunchScreen.storyboard
-  │   ├── Assets.xcassets
-  │   └── Info.plist
-  ├── Network/
-  ├── Global/
-  │   ├── Enums/
-  │   │     └── Font+.swift
-  │   └── Extensions/
-  │         │── ...swift
-  │         └── UIView+.swift
-  ├── Configuration/
-  ├── Screens/
-  │   └── View/
-  │    	├── Cell/
-  │     │   └── TableviewCell / CollectionviewCell.swift
-  │     ├── Storyboards/
-  │     │   └── View.storyboard
-  │     └── ViewControllers/
-  │         └── ViewVC.swift
-  ├── Housing.xcdatamodeld/
-  └── Housing.xcodeproj/
-```
-
-## 깃 브랜치 전략
----
-
-### Git-Flow
-- master : 제품으로 출시될 수 있는 브랜치
-- develop : 다음 출시 버전을 개발하는 브랜치
-- feature : 기능을 개발하는 브랜치
-- release : 이번 출시 버전을 준비하는 브랜치
-- hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치
-<br>
-<img width="500" height="500" align="left" alt="스크린샷 2021-01-04 오전 12 26 03" src="https://user-images.githubusercontent.com/72001692/103482480-798cec80-4e24-11eb-8b0c-ecfd9c88e356.png">
-<br/>
+https://github.com/teamHousing/Housing_iOS/wiki
 
 ## 커밋 메시지 컨벤션
 ---
@@ -79,4 +39,6 @@
 ---
 // MARK: - 
 Component, Property, Helper, Lifecycle, Object Extension마다 MARK 주석을 사용해 설명합니다. (ex. // MARK: - UITableView Extension,  // MARK: - Helper Extension)
+
+
 
