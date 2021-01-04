@@ -60,9 +60,10 @@
                                     <action selector="submitPictures:" destination="R8k-k5-DAs" eventType="touchUpInside" id="ifz-Ie-4ZB"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="20E-PF-OnI">
-                                <rect key="frame" x="0.0" y="168" width="375" height="162"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="20E-PF-OnI">
+                                <rect key="frame" x="0.0" y="169" width="375" height="162"/>
+                                <color key="backgroundColor" red="0.99560362099999999" green="0.59073221679999999" blue="0.46462774280000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.99560362099999999" green="0.59073221679999999" blue="0.46462774280000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rFu-8z-oss">
                                     <size key="itemSize" width="116" height="137"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -71,21 +72,21 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photos" id="f9V-Pb-kPV" customClass="photoCollectionViewCell" customModule="Housing" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="12.5" width="116" height="137"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162" height="162"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="teY-Y8-p9D">
-                                            <rect key="frame" x="0.0" y="0.0" width="116" height="137"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="162" height="162"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="photos" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8XC-FI-ujO">
-                                                    <rect key="frame" x="0.0" y="2" width="116" height="133"/>
+                                                    <rect key="frame" x="0.0" y="2" width="162" height="158"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="162" id="ITc-hl-vKg"/>
                                                         <constraint firstAttribute="width" secondItem="8XC-FI-ujO" secondAttribute="height" id="fhH-sV-UI4"/>
+                                                        <constraint firstAttribute="height" constant="162" id="tCX-fE-IyH"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hg-KE-tD0">
-                                                    <rect key="frame" x="86" y="10" width="20" height="20"/>
+                                                    <rect key="frame" x="132" y="10" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="8hz-rP-LrP"/>
                                                         <constraint firstAttribute="height" constant="20" id="j0G-cP-8aQ"/>
@@ -93,6 +94,7 @@
                                                     <state key="normal" image="xmark" catalog="system"/>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="5hg-KE-tD0" secondAttribute="trailing" constant="10" id="3Wh-Ae-uhb"/>
                                                 <constraint firstItem="8XC-FI-ujO" firstAttribute="leading" secondItem="teY-Y8-p9D" secondAttribute="leading" id="3fl-ic-RNV"/>
@@ -102,8 +104,10 @@
                                                 <constraint firstItem="8XC-FI-ujO" firstAttribute="top" secondItem="teY-Y8-p9D" secondAttribute="top" id="gGd-Ys-SXz"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="116" height="137"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <size key="customSize" width="162" height="162"/>
                                         <connections>
+                                            <outlet property="cellHeight" destination="tCX-fE-IyH" id="3fK-va-8hZ"/>
                                             <outlet property="deleteBtn" destination="5hg-KE-tD0" id="JGK-iS-kiS"/>
                                             <outlet property="evidenceImages" destination="8XC-FI-ujO" id="omq-sD-nih"/>
                                         </connections>
@@ -131,6 +135,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GrQ-3t-Qix"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="photoSelectCollectionView" destination="20E-PF-OnI" id="VzG-6B-TZT"/>
                     </connections>

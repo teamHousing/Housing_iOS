@@ -29,7 +29,7 @@ class CameraWorkViewController: UIViewController{
 	
 	
 	@IBOutlet weak var photoSelectCollectionView: UICollectionView!
-	
+  
 	func collectionViewConfig() {
 		self.photoSelectCollectionView.delegate = self
 		self.photoSelectCollectionView.dataSource = self
@@ -148,6 +148,8 @@ extension CameraWorkViewController: UICollectionViewDataSource {
 		else {
 			return UICollectionViewCell()
 		}
+		
+		cell.layout()
 		print(cell.frame.size)
 		cell.evidenceImages.contentMode = .scaleAspectFit
 		if evidencePictures.count == 0 {
@@ -179,8 +181,11 @@ extension CameraWorkViewController: UICollectionViewDataSource {
 }
 extension CameraWorkViewController : UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let cellWidth = self.view.frame.width * (162/375)
+		let cellWidth = self.view.frame.height * (162/677)
 		let cellSize = CGSize(width:cellWidth, height: cellWidth)
 		return cellSize
 	}
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 10.0
+  }
 }
