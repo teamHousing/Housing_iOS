@@ -1,19 +1,15 @@
 //
-//  CommunmicationTableViewCell.swift
+//  EmptyTableViewCell.swift
 //  Housing
 //
-//  Created by JUEUN KIM on 2021/01/04.
+//  Created by JUEUN KIM on 2021/01/05.
 //
 
 import UIKit
 
-class CommunmicationTableViewCell: UITableViewCell {
-	//MARK: Property
-	@IBOutlet var category: UILabel!
-	@IBOutlet var titleLabel: UILabel!
-	@IBOutlet var statusLabel: UILabel!
-	@IBOutlet var contentLabel: UILabel!
-	
+class EmptyTableViewCell: UITableViewCell {
+	static let identifier = "EmptyTableViewCell"
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
