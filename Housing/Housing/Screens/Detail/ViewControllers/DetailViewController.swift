@@ -119,12 +119,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		return viewController
 	}
 
-	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if (scrollView.contentOffset.y == (scrollView.contentSize.height
-																				- scrollView.bounds.size.height)) {
-			viewController.detailView.isScrollEnabled = false
-		}
-	}
+	
 	
 	
 	
