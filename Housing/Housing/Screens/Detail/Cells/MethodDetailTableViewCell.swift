@@ -15,17 +15,21 @@ class MethodDetailTableViewCell: UITableViewCell {
 	let dateLabel = UILabel().then{
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-		$0.textAlignment = .left
+		$0.textAlignment = .center
 	}
 	let timeLabel = UILabel().then {
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-		$0.textAlignment = .left
+		$0.textAlignment = .center
 	}
 	let methodLabel = UILabel().then {
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-		$0.textAlignment = .left
+		$0.textAlignment = .center
+	}
+	
+	static func estimatedRowHeight() -> CGFloat {
+		return 57
 	}
 	
 	func layout() {
@@ -37,22 +41,22 @@ class MethodDetailTableViewCell: UITableViewCell {
 				$0.trailing.equalTo(self.contentView.snp.trailing).offset(-20)
 			}
 		}
+		containerView.add(timeLabel) {
+			$0.snp.makeConstraints {
+				$0.centerX.equalTo(self.containerView.snp.centerX).offset(15)
+				$0.centerY.equalTo(self.containerView.snp.centerY)
+			}
+		}
 		containerView.add(dateLabel) {
 			$0.snp.makeConstraints {
 				$0.centerY.equalTo(self.containerView.snp.centerY)
-				$0.leading.equalTo(self.containerView.snp.leading).offset(20)
-			}
-		}
-		containerView.add(timeLabel) {
-			$0.snp.makeConstraints {
-				$0.centerY.equalTo(self.containerView.snp.centerY)
-				$0.leading.equalTo(self.dateLabel.snp.trailing).offset(48)
+				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(-109)
 			}
 		}
 		containerView.add(methodLabel) {
 			$0.snp.makeConstraints {
 				$0.centerY.equalTo(self.containerView.snp.centerY)
-				$0.leading.equalTo(self.timeLabel.snp.trailing).offset(48)
+				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(93)
 			}
 		}
 	}

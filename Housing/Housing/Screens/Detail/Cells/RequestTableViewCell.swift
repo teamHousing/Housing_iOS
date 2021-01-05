@@ -48,7 +48,7 @@ class RequestTableViewCell: UITableViewCell {
 		self.requestView.add(contextLabel){
 			$0.snp.makeConstraints{
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(12)
-				$0.leading.equalTo(self.contentView.snp.leading)
+				$0.leading.equalTo(self.contentView.snp.leading).offset(20)
 			}
 		}
 	}

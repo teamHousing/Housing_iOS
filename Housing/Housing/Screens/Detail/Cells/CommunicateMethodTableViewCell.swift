@@ -12,7 +12,7 @@ import SnapKit
 
 class CommunicateMethodTableViewCell: UITableViewCell {
 	
-	var method = [CommunicationMethod(date: "aa", time: "bb", method: "cc"),
+	var method = [CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
 								CommunicationMethod(date: "", time: "", method: "")]
 	
 	let titleLabel = UILabel().then{
@@ -30,6 +30,8 @@ class CommunicateMethodTableViewCell: UITableViewCell {
 		return 202
 	}
 	
+	
+	
 	func layout() {
 		self.contentView.add(titleLabel){
 			$0.snp.makeConstraints{
@@ -40,18 +42,25 @@ class CommunicateMethodTableViewCell: UITableViewCell {
 		self.contentView.add(self.methodTableView){
 			$0.snp.makeConstraints{
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(20)
-				$0.leading.equalTo(self.contentView.snp.leading).offset(48)
-				$0.trailing.equalTo(self.contentView.snp.trailing).offset(-20)
+				$0.leading.equalTo(self.contentView.snp.leading)
+				$0.trailing.equalTo(self.contentView.snp.trailing)
+				$0.height.equalTo(126)
 			}
 		}
 	}
 	
+	func registerCell() {
+		methodTableView.register(MethodDetailTableViewCell.self, forCellReuseIdentifier: MethodDetailTableViewCell.reuseIdentifier)
+	}
 
 		override func awakeFromNib() {
 			super.awakeFromNib()
+			registerCell()
+			layout()
+			self.methodTableView.isScrollEnabled = false
+			self.methodTableView.separatorStyle = .none
 			self.methodTableView.delegate = self
 			self.methodTableView.dataSource = self
-			self.methodTableView.reloadData()
 			// Initialization code
 		}
 	
@@ -63,6 +72,10 @@ class CommunicateMethodTableViewCell: UITableViewCell {
 	
 }
 extension CommunicateMethodTableViewCell: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 70
+	}
+	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "MethodDetailTableViewCell") as?
 						MethodDetailTableViewCell else {
@@ -75,6 +88,8 @@ extension CommunicateMethodTableViewCell: UITableViewDelegate {
 		cell.methodLabel.text = self.method[indexPath.row].method
 		return cell
 	}
+	
+
 }
 
 extension CommunicateMethodTableViewCell: UITableViewDataSource{
