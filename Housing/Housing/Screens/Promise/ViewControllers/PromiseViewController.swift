@@ -12,14 +12,15 @@ class PromiseViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = .cyan
-		
-		guard let cameraview : UIViewController =
-						self.storyboard?.instantiateViewController(identifier: "cameraViewController")
-						as? CameraWorkViewController
-		else {
-			return
-		}
-		let navigationController = UINavigationController(rootViewController: cameraview)
-		self.navigationController?.pushViewController(cameraview, animated: true)
 	}
+  @IBAction func nextStep(_ sender: Any) {
+    guard let cameraview : UIViewController =
+            self.storyboard?.instantiateViewController(identifier: "cameraViewController")
+            as? CameraWorkViewController
+    else {
+      return
+    }
+    let navigationController = UINavigationController(rootViewController: cameraview)
+    self.navigationController?.pushViewController(cameraview, animated: true)
+  }
 }
