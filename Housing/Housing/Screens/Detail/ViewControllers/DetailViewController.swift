@@ -16,92 +16,125 @@ class DetailViewController: SegementSlideDefaultViewController {
 	var category : String = "고장/수리"
 	var status : String = "확인 전"
 	var viewTitle : String = "수도꼭지가 고장났어요ㅠ 집이 물바다"
-	var context : String = "저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!"
+	var context : String = "저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n\n저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n"
 	
-	override func segementSlideHeaderView() -> UIView? {
-		let categoryLabel = UILabel()
-		let statusLabel = UILabel()
-		let titleLabel = UILabel()
-		let categoryContainerView = UIView()
-		let contextLabel = UILabel()
-		let headerHeight : CGFloat = CGFloat(267)
-		let headerView = UIView().then{
-			$0.isUserInteractionEnabled = true
-			$0.contentMode = .scaleAspectFill
-			$0.snp.makeConstraints{
-				$0.height.equalTo(headerHeight)
-			}
-		}
-		headerView.add(categoryContainerView){
+	let detailHeaderView = UIView().then{
+		$0.isUserInteractionEnabled = true
+		$0.contentMode = .scaleAspectFill
+		
+	}
+	let categoryLabel = UILabel()
+	let statusLabel = UILabel()
+	let titleLabel = UILabel()
+	let categoryContainerView = UIView()
+	let contextLabel = UILabel()
+	
+	var heightWithSafeArea: CGFloat {
+		return 243+self.contextLabel.frame.size.height
+	}
+	
+	
+	
+	func headerViewLayout() {
+		self.detailHeaderView.add(self.categoryContainerView) {
 			$0.backgroundColor = .primaryBlack
 			$0.layer.cornerRadius = 13
 		}
-		headerView.add(categoryLabel){
+		self.detailHeaderView.add(categoryLabel) {
 			$0.text = self.category
 			$0.backgroundColor = UIColor.primaryBlack
 			$0.textColor = UIColor.primaryWhite
 			$0.textAlignment = .center
 			$0.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
 			$0.snp.makeConstraints{
-				$0.top.equalTo(headerView).offset(16)
-				$0.leading.equalTo(headerView).offset(20)
+				$0.top.equalTo(self.detailHeaderView).offset(16)
+				$0.leading.equalTo(self.detailHeaderView).offset(20)
 			}
 		}
-		categoryContainerView.snp.makeConstraints{
-			$0.top.equalTo(categoryLabel.snp.top).offset(-6)
-			$0.bottom.equalTo(categoryLabel.snp.bottom).offset(6)
-			$0.leading.equalTo(categoryLabel.snp.leading).offset(-10)
-			$0.trailing.equalTo(categoryLabel.snp.trailing).offset(10)
+		self.categoryContainerView.snp.makeConstraints{
+			$0.top.equalTo(self.categoryLabel.snp.top).offset(-6)
+			$0.bottom.equalTo(self.categoryLabel.snp.bottom).offset(6)
+			$0.leading.equalTo(self.categoryLabel.snp.leading).offset(-10)
+			$0.trailing.equalTo(self.categoryLabel.snp.trailing).offset(10)
 		}
-		headerView.add(statusLabel) {
+		self.detailHeaderView.add(self.statusLabel) {
 			$0.text = self.status
 			$0.textColor = .primaryOrange
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
 			$0.snp.makeConstraints{
-				$0.centerY.equalTo(categoryLabel.snp.centerY)
-				$0.trailing.equalTo(headerView.snp.trailing).offset(-20)
-				$0.width.equalTo(headerView.bounds.width*41/375)
+				$0.centerY.equalTo(self.categoryLabel.snp.centerY)
+				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
 				$0.height.equalTo(17)
 			}
 		}
-		headerView.add(titleLabel) {
+		self.detailHeaderView.add(self.titleLabel) {
 			$0.text = self.viewTitle
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 21, weight: .bold)
 			$0.snp.makeConstraints{
-				$0.centerX.equalTo(headerView.snp.centerX)
-				$0.top.equalTo(categoryLabel.snp.bottom).offset(20)
-				$0.width.equalTo(headerView.frame.width*335/375)
+				$0.top.equalTo(self.categoryLabel.snp.bottom).offset(20)
+				$0.leading.equalTo(self.detailHeaderView.snp.leading).offset(20)
+				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
 				$0.height.equalTo(25)
 			}
 		}
-		headerView.add(contextLabel) {
+		self.detailHeaderView.add(self.contextLabel) {
 			$0.text = self.context
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-			$0.numberOfLines = 4
+			$0.numberOfLines = 0
 			$0.snp.makeConstraints{
-				$0.centerX.equalTo(headerView.snp.centerX)
-				$0.top.equalTo(titleLabel.snp.bottom).offset(40)
-				$0.width.equalTo(titleLabel.snp.width)
+				$0.leading.equalTo(self.detailHeaderView.snp.leading).offset(20)
+				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
+				$0.top.equalTo(self.titleLabel.snp.bottom).offset(40)
 			}
 		}
-		return headerView
+	}
+	
+	override func segementSlideHeaderView() -> UIView? {
+		self.headerViewLayout()
+		self.detailHeaderView.snp.makeConstraints{
+			$0.height.equalTo(243+self.contextLabel.frame.size.height)
+		}
+		return self.detailHeaderView
 	}
 	
 	override var titlesInSwitcher: [String] {
-		return ["aaa","bbb"]
+		return ["상세 정보","하우징 쪽지"]
 	}
 	
+	override var switcherConfig: SegementSlideDefaultSwitcherConfig {
+		var config = super.switcherConfig
+		config.type = .tab
+		config.indicatorColor = .primaryOrange
+		config.indicatorWidth = (self.view.frame.width/2)-40
+		config.indicatorHeight = 2
+		return config
+	}
+	
+	let viewController = ContentViewController()
+	
 	override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-					return ContentViewController()
-			}
+		return viewController
+	}
+
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		if (scrollView.contentOffset.y == (scrollView.contentSize.height
+																				- scrollView.bounds.size.height)) {
+			viewController.detailView.isScrollEnabled = false
+		}
+	}
+	
+	
 	
 	// MARK : - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
 		defaultSelectedIndex = 0
 		reloadData()
 	}
 }
+
+

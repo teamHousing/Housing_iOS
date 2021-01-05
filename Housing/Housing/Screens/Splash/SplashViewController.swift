@@ -148,8 +148,9 @@ class SplashViewController: BaseViewController {
 		let storyboard = UIStoryboard(name: StoryboardStorage.detail,
 																	bundle: nil)
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "DetailViewController")
-		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
+		let navigationViewController = UINavigationController(rootViewController: viewcontroller)
+		navigationViewController.modalPresentationStyle = .fullScreen
+		present(navigationViewController, animated: true)
 	}
 	
 	// 준현
