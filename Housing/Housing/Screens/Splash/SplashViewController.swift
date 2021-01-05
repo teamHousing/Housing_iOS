@@ -109,7 +109,7 @@ class SplashViewController: BaseViewController {
 	func promiseButtonDidTap() {
 		let storyboard = UIStoryboard(name: StoryboardStorage.promise,
 																	bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "PromiseViewController")
+		let viewcontroller = PromiseViewController()
 		viewcontroller.modalPresentationStyle = .fullScreen
 		present(viewcontroller, animated: true)
 		//self.navigationController?.pushViewController(viewcontroller, animated: true)

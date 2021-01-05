@@ -53,6 +53,7 @@
 		DA05097225A0722000DDB916 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = DA05097125A0722000DDB916 /* YPImagePicker */; };
 		DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */; };
 		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
+		DA813FBF25A475E500D33AD2 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA813FBE25A475E500D33AD2 /* MessageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		DA050955259F692E00DDB916 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		DA05096B25A05A6100DDB916 /* RequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataModel.swift; sourceTree = "<group>"; };
 		DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewCell.swift; sourceTree = "<group>"; };
+		DA813FBE25A475E500D33AD2 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 				DA05097825A2174B00DDB916 /* Cell */,
 				D1B444DC259F096C005C2C68 /* PromiseViewController.swift */,
 				DA050945259F343E00DDB916 /* CameraWorkViewController.swift */,
+				DA813FBE25A475E500D33AD2 /* MessageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */,
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
+				DA813FBF25A475E500D33AD2 /* MessageViewController.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,

@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Promise View Controller-->
+        <!--View Controller-->
         <scene sceneID="Avi-cL-yJs">
             <objects>
-                <viewController storyboardIdentifier="PromiseViewController2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n6O-Y2-h7e" customClass="PromiseViewController" customModule="Housing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PromiseViewController2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n6O-Y2-h7e" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X0D-Gx-yXw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1130"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -330,6 +330,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="OtQ-6N-l92" secondAttribute="height" multiplier="335:27" id="7Tf-WR-iwq"/>
                                                         </constraints>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="21"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -430,10 +431,10 @@
             </objects>
             <point key="canvasLocation" x="973.60000000000002" y="135.832083958021"/>
         </scene>
-        <!--Camera Work View Controller-->
+        <!--View Controller-->
         <scene sceneID="78p-mE-owc">
             <objects>
-                <viewController storyboardIdentifier="cameraViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R8k-k5-DAs" customClass="CameraWorkViewController" customModule="Housing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cameraViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R8k-k5-DAs" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cti-Zb-iCe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -586,20 +587,194 @@
             </objects>
             <point key="canvasLocation" x="63.768115942028992" y="136.60714285714286"/>
         </scene>
-        <!--View Controller-->
+        <!--Message View Controller-->
         <scene sceneID="RBz-mj-rCU">
             <objects>
-                <viewController id="XlK-Fm-H1f" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="messageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XlK-Fm-H1f" customClass="MessageViewController" customModule="Housing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vqo-3M-NIB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="집주인께 전하고 싶은 말이 있나요?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uO-MR-5eD">
+                                <rect key="frame" x="20" y="44" width="257" height="62.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="26"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgV-wH-A7p">
+                                <rect key="frame" x="266" y="102" width="93" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="6pS-wg-KgE"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="YPG-xW-Cbe">
+                                <rect key="frame" x="20" y="146.5" width="335" height="328"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PhT-yL-13B">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="56"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.53333705659999997" green="0.53332662580000001" blue="0.53333371880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbO-Kj-cRa">
+                                        <rect key="frame" x="0.0" y="68" width="335" height="56"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.53333705659999997" green="0.53332662580000001" blue="0.53333371880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="275-SE-qfF">
+                                        <rect key="frame" x="0.0" y="136" width="335" height="56"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.53333705659999997" green="0.53332662580000001" blue="0.53333371880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DRC-WT-5mJ">
+                                        <rect key="frame" x="0.0" y="204" width="335" height="56"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.53333705659999997" green="0.53332662580000001" blue="0.53333371880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="직접 입력하기" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2GW-Wd-Mx6">
+                                        <rect key="frame" x="0.0" y="272" width="335" height="56"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.53333705659999997" green="0.53332662580000001" blue="0.53333371880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="PhT-yL-13B" firstAttribute="height" secondItem="DRC-WT-5mJ" secondAttribute="height" id="0G4-ip-5sP"/>
+                                    <constraint firstItem="PhT-yL-13B" firstAttribute="width" secondItem="DRC-WT-5mJ" secondAttribute="width" id="VPf-4W-SW2"/>
+                                    <constraint firstItem="nbO-Kj-cRa" firstAttribute="width" secondItem="PhT-yL-13B" secondAttribute="width" id="YUb-DU-qbd"/>
+                                    <constraint firstItem="PhT-yL-13B" firstAttribute="height" secondItem="nbO-Kj-cRa" secondAttribute="height" id="hb3-yZ-LLh"/>
+                                    <constraint firstItem="PhT-yL-13B" firstAttribute="height" secondItem="2GW-Wd-Mx6" secondAttribute="height" id="o4B-hn-Am6"/>
+                                    <constraint firstItem="PhT-yL-13B" firstAttribute="width" secondItem="275-SE-qfF" secondAttribute="width" id="qgJ-Tp-zra"/>
+                                    <constraint firstItem="PhT-yL-13B" firstAttribute="width" secondItem="2GW-Wd-Mx6" secondAttribute="width" id="t1f-LG-4eO"/>
+                                    <constraint firstItem="PhT-yL-13B" firstAttribute="height" secondItem="275-SE-qfF" secondAttribute="height" id="unO-Zz-EKA"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fp9-8o-cPB">
+                                <rect key="frame" x="60" y="507.5" width="255" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="200"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="UGG-c0-dZH">
+                                <rect key="frame" x="126.5" y="579.5" width="122.5" height="27.5"/>
+                            </pageControl>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="W5V-kh-6Zy"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YPG-xW-Cbe" firstAttribute="top" secondItem="0uO-MR-5eD" secondAttribute="bottom" constant="40" id="9tJ-kU-JtR"/>
+                            <constraint firstItem="Fp9-8o-cPB" firstAttribute="height" secondItem="Vqo-3M-NIB" secondAttribute="height" multiplier="48:667" id="Ba6-AW-cTX"/>
+                            <constraint firstItem="VgV-wH-A7p" firstAttribute="width" secondItem="Vqo-3M-NIB" secondAttribute="width" multiplier="93 : 375" id="HgL-hd-6AC"/>
+                            <constraint firstItem="VgV-wH-A7p" firstAttribute="top" secondItem="W5V-kh-6Zy" secondAttribute="top" constant="58" id="KQo-fU-NwR"/>
+                            <constraint firstItem="W5V-kh-6Zy" firstAttribute="bottom" secondItem="UGG-c0-dZH" secondAttribute="bottom" constant="60" id="MOT-tR-ahH"/>
+                            <constraint firstItem="Fp9-8o-cPB" firstAttribute="centerX" secondItem="W5V-kh-6Zy" secondAttribute="centerX" id="QSN-2M-fHy"/>
+                            <constraint firstItem="W5V-kh-6Zy" firstAttribute="trailing" secondItem="YPG-xW-Cbe" secondAttribute="trailing" constant="20" id="QfR-IL-Cz5"/>
+                            <constraint firstItem="PhT-yL-13B" firstAttribute="height" secondItem="Vqo-3M-NIB" secondAttribute="height" multiplier="56 : 667" id="Sp0-xx-wp7"/>
+                            <constraint firstItem="UGG-c0-dZH" firstAttribute="centerX" secondItem="W5V-kh-6Zy" secondAttribute="centerX" id="dKI-Ae-GIf"/>
+                            <constraint firstItem="PhT-yL-13B" firstAttribute="width" secondItem="Vqo-3M-NIB" secondAttribute="width" multiplier="335:375" id="dfw-HK-SJn"/>
+                            <constraint firstItem="UGG-c0-dZH" firstAttribute="top" secondItem="Fp9-8o-cPB" secondAttribute="bottom" constant="24" id="gqt-YJ-W8r"/>
+                            <constraint firstItem="VgV-wH-A7p" firstAttribute="trailing" secondItem="Vqo-3M-NIB" secondAttribute="trailingMargin" id="lcC-kV-PaF"/>
+                            <constraint firstItem="Fp9-8o-cPB" firstAttribute="width" secondItem="Vqo-3M-NIB" secondAttribute="width" multiplier="255:375" id="oem-pp-DZA"/>
+                            <constraint firstItem="YPG-xW-Cbe" firstAttribute="leading" secondItem="W5V-kh-6Zy" secondAttribute="leading" constant="20" id="ris-uI-YVd"/>
+                            <constraint firstItem="0uO-MR-5eD" firstAttribute="leading" secondItem="W5V-kh-6Zy" secondAttribute="leading" constant="20" id="x4I-fd-yrz"/>
+                            <constraint firstItem="0uO-MR-5eD" firstAttribute="top" secondItem="W5V-kh-6Zy" secondAttribute="top" id="zWg-3d-7KY"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="q9m-JD-cfT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PX-Mk-pKj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4004" y="113"/>
+            <point key="canvasLocation" x="4732" y="26.53673163418291"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="THf-TJ-tqB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VTK-yj-MA7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JMh-4c-yvY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XlK-Fm-H1f" kind="relationship" relationship="rootViewController" id="b5R-m3-LtQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ac-XR-Gm7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3792.8000000000002" y="26.53673163418291"/>
         </scene>
     </scenes>
     <resources>
