@@ -149,7 +149,7 @@ extension CameraWorkViewController: UICollectionViewDataSource {
 			return UICollectionViewCell()
 		}
 		
-		cell.layout()
+		cell.cellHeight.constant = self.view.frame.height * (162/677)
 		print(cell.frame.size)
 		cell.evidenceImages.contentMode = .scaleAspectFit
 		if evidencePictures.count == 0 {
@@ -162,7 +162,9 @@ extension CameraWorkViewController: UICollectionViewDataSource {
 				cell.deleteBtn.isHidden = true
 			}
 			else {
-				cell.evidenceImages.image = evidencePictures[indexPath.row - 1]
+				let uiimage = evidencePictures[indexPath.row - 1]
+
+				cell.evidenceImages.image = uiimage.resizeImage(newSize: CGSize(width: self.view.frame.height * (162/677), height: self.view.frame.height * (162/677)))
 				cell.deleteBtn.isHidden = false
 				cell.deleteBtn.tag = indexPath.row - 1
 				cell.deleteBtn.addTarget(self, action: #selector(deleteCell), for: .touchUpInside)
@@ -186,6 +188,9 @@ extension CameraWorkViewController : UICollectionViewDelegateFlowLayout {
 		return cellSize
 	}
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 10.0
+		return 8.0
   }
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+	}
 }

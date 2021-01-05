@@ -15,7 +15,7 @@ class photoCollectionViewCell: UICollectionViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		//evidenceImages.translatesAutoresizingMaskIntoConstraints = true
-		self.cellHeight.constant = self.contentView.frame.width
+		//self.cellHeight.constant = 214
 		//evidenceImages.widthConstraint?.constant = 162
 		//evidenceImages.heightConstraint?.constant = 162
  	}
