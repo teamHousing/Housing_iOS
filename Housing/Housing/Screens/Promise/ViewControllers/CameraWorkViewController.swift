@@ -42,11 +42,19 @@ class CameraWorkViewController: UIViewController{
 		$0.setTitle("다음 단계", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
 		$0.setRounded(radius: 25)
+		$0.addTarget(self, action: #selector(nextButtonDidTapped), for: .touchUpInside)
 	}
-	
-	
-	
-	
+	private let page = UIPageControl().then{
+		$0.numberOfPages = 4
+		$0.currentPage = 1
+		$0.currentPageIndicatorTintColor = .salmon
+		$0.tintColor = .gray01
+		$0.pageIndicatorTintColor = .gray01
+	}
+	@objc func nextButtonDidTapped() {
+		let cameraView = MessageViewController()
+		self.navigationController?.pushViewController(cameraView, animated: true)
+	}
 	
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
 		let superViewWidth = self.view.frame.width
@@ -59,13 +67,17 @@ class CameraWorkViewController: UIViewController{
 		return (value / 677) * superViewHeight
 	}
 	private func layout() {
+		if !requestData.isPromiseNeeded {
+			page.numberOfPages = 3
+		}
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .white
 		self.view.adds([
 		mainLabel,
 		lineImage,
 		photoSelectCollectionView,
-		nextStep])
+		nextStep,
+		page])
 				
 		mainLabel.snp.makeConstraints{
 			
@@ -92,6 +104,14 @@ class CameraWorkViewController: UIViewController{
 			$0.width.equalTo(widthConstraintAmount(value: 255))
 			$0.height.equalTo(48)
 			$0.bottom.equalTo(view).offset(-110)
+			
+		}
+		
+		page.snp.makeConstraints{
+			$0.top.equalTo(nextStep.snp.bottom).offset(24)
+			$0.bottom.equalToSuperview()
+			$0.height.equalTo(20)
+			$0.centerX.equalToSuperview()
 		}
 	}
 	
@@ -165,67 +185,8 @@ class CameraWorkViewController: UIViewController{
 		collectionViewConfig()
 		// Do any additional setup after loading the view.
 	}
-	//MARK: IBAction - 사진 찍기
-	@IBAction func addPictureFromCamera(_ sender: Any) {
-		switch PHPhotoLibrary.authorizationStatus() {
-		case .denied:
-			break
-		case .restricted:
-			break
-		case .authorized:
-			self.cameraWork()
-		case .notDetermined:
-			PHPhotoLibrary.requestAuthorization{
-				state in
-				if state == .authorized {
-					self.cameraWork()
-				}
-				else {
-					self.dismiss(animated: true, completion: nil)
-				}
-			}
-		default:
-			break
-		}
-	}
-	//MARK: IBAction - 사진 선택하기
-	@IBAction func addPictureFromLibrary(_ sender: Any) {
-		switch PHPhotoLibrary.authorizationStatus() {
-		case .denied:
-			break
-		case .restricted:
-			break
-		case .authorized:
-			self.photoLibraryWork()
-		case .notDetermined:
-			PHPhotoLibrary.requestAuthorization{
-				state in
-				if state == .authorized {
-					self.photoLibraryWork()
-				}
-				else {
-					self.dismiss(animated: true, completion: nil)
-				}
-			}
-		default:
-			break
-		}
-	}
-	//MARK: IBAction - 다음 버튼
-	@IBAction func submitPictures(_ sender: Any) {
-		print(self.evidencePictures)
-		self.requestData.images = self.evidencePictures
-		dump(self.requestData)
-		guard let messageView : UIViewController =
-						self.storyboard?.instantiateViewController(identifier: "messageViewController")
-						as? MessageViewController
-		else {
-			return
-		}
-		let navigationController = UINavigationController(rootViewController: messageView)
-		self.navigationController?.pushViewController(messageView, animated: true)
-	}
 }
+
 
 extension CameraWorkViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

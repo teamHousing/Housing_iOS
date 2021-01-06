@@ -32,5 +32,8 @@ extension UIColor {
 	@nonobjc class var primaryGray: UIColor {
 		return UIColor(red: 245.0 / 255.0, green: 246.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
 	}
-
+	@nonobjc class var salmon: UIColor {
+		return UIColor(red: 1.0, green: 133.0 / 255.0, blue: 119.0 / 255.0, alpha: 1.0)
+	}
+	
 }

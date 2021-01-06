@@ -17,7 +17,6 @@ class photoCollectionViewCell: UICollectionViewCell {
 	}
 	let deleteBtn = UIButton().then{
 		$0.isHidden = false
-		//$0.image(<#T##s: String##String#>)
 	}
   @IBOutlet weak var cellHeight: NSLayoutConstraint!
 	

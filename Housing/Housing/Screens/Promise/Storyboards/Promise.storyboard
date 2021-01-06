@@ -52,6 +52,10 @@
                                                             <action selector="nextStep:" destination="n6O-Y2-h7e" eventType="touchUpInside" id="tZK-KE-5YM"/>
                                                         </connections>
                                                     </button>
+                                                    <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="mvR-i4-tYB">
+                                                        <rect key="frame" x="99" y="123" width="123" height="28"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </pageControl>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>

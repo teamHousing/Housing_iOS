@@ -11,7 +11,7 @@ import UIKit
 //MARK: 데이터 모델
 struct RequestDataModel {
 	static let shared = RequestDataModel()
-	var isPromiseNeeded: Bool = false
+	var isPromiseNeeded: Bool = true
 	var images: [UIImage]? = []
 	var cartegory: RequestCartegory = .repair
 	var title: String = ""
