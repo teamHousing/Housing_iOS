@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7D82BD0A7BDB673C00E7A6B8 /* Pods_Housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE989042B75B926FB7CC268C /* Pods_Housing.framework */; };
 		CC096D5525A2415E00E07017 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC096D5425A2415E00E07017 /* ContentViewController.swift */; };
+		CC6A1DF825A58C6C00C86865 /* AddedImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6A1DF725A58C6C00C86865 /* AddedImageCollectionViewCell.swift */; };
+		CC6A1E0425A5A2A800C86865 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6A1E0325A5A2A800C86865 /* UIImageView+.swift */; };
+		CC6A1E0E25A5AE6C00C86865 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */; };
 		CC8B595025A4964200EC3AC7 /* RequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B594F25A4964200EC3AC7 /* RequestTableViewCell.swift */; };
 		CC8B595325A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595225A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift */; };
 		CC8B595625A496B300EC3AC7 /* MethodDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */; };
@@ -62,6 +65,9 @@
 		340DE7B3E8247CCAEA231AB4 /* Pods-Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.release.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.release.xcconfig"; sourceTree = "<group>"; };
 		3C93D2349047CC7DE6C0CE9C /* Pods-Housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.debug.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.debug.xcconfig"; sourceTree = "<group>"; };
 		CC096D5425A2415E00E07017 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		CC6A1DF725A58C6C00C86865 /* AddedImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		CC6A1E0325A5A2A800C86865 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		CC8B594F25A4964200EC3AC7 /* RequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableViewCell.swift; sourceTree = "<group>"; };
 		CC8B595225A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicateMethodTableViewCell.swift; sourceTree = "<group>"; };
 		CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 				CC8B595225A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift */,
 				CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */,
 				CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */,
+				CC6A1DF725A58C6C00C86865 /* AddedImageCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -174,6 +181,7 @@
 				D131189D259B6BE300897DF4 /* UIViewController+.swift */,
 				D13118A5259B718900897DF4 /* CALayer+.swift */,
 				DA050955259F692E00DDB916 /* UIImage+.swift */,
+				CC6A1E0325A5A2A800C86865 /* UIImageView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -286,6 +294,7 @@
 			children = (
 				D1B444E3259F09C5005C2C68 /* DetailViewController.swift */,
 				CC096D5425A2415E00E07017 /* ContentViewController.swift */,
+				CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -567,6 +576,7 @@
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				D131188E259B6BA900897DF4 /* UICollectionViewCell+.swift in Sources */,
 				D1B65A112598CE5C00A9A7CB /* Network.swift in Sources */,
+				CC6A1E0425A5A2A800C86865 /* UIImageView+.swift in Sources */,
 				D1311888259B6B9400897DF4 /* ReusableView.swift in Sources */,
 				D1B444E4259F09C5005C2C68 /* DetailViewController.swift in Sources */,
 				D131188B259B6BA000897DF4 /* UICollectionView+.swift in Sources */,
@@ -584,6 +594,8 @@
 				CC8B595025A4964200EC3AC7 /* RequestTableViewCell.swift in Sources */,
 				D1311898259B6BD100897DF4 /* UIColor+.swift in Sources */,
 				D13118A6259B718900897DF4 /* CALayer+.swift in Sources */,
+				CC6A1E0E25A5AE6C00C86865 /* MessageViewController.swift in Sources */,
+				CC6A1DF825A58C6C00C86865 /* AddedImageCollectionViewCell.swift in Sources */,
 				CC8B596025A49F6D00EC3AC7 /* AddedImageTableViewCell.swift in Sources */,
 				D19179E8259890A40035AF74 /* SceneDelegate.swift in Sources */,
 			);

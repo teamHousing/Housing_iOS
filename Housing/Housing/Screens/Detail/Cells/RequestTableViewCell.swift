@@ -13,7 +13,7 @@ import SnapKit
 class RequestTableViewCell: UITableViewCell {
 	
 	let titleLabel = UILabel().then{
-		$0.text = "요청 사항"
+		$0.text = "🚨 요청 사항"
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 15, weight: .bold)
 		$0.textAlignment = .left
@@ -30,7 +30,7 @@ class RequestTableViewCell: UITableViewCell {
 	}
 	
 	static func estimatedRowHeight() -> CGFloat {
-		return 138
+		return 104
 	}
 	
 	func layout() {
@@ -42,13 +42,14 @@ class RequestTableViewCell: UITableViewCell {
 		self.requestView.add(titleLabel){
 			$0.snp.makeConstraints{
 				$0.top.equalTo(self.requestView.snp.top).offset(2)
-				$0.leading.equalTo(self.requestView.snp.leading).offset(39)
+				$0.leading.equalTo(self.requestView.snp.leading).offset(20)
 			}
 		}
 		self.requestView.add(contextLabel){
 			$0.snp.makeConstraints{
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(12)
-				$0.leading.equalTo(self.contentView.snp.leading).offset(20)
+				$0.leading.equalTo(self.titleLabel.snp.leading).offset(1)
+				$0.top.equalTo(self.requestView.snp.bottom).offset(-56)
 			}
 		}
 	}

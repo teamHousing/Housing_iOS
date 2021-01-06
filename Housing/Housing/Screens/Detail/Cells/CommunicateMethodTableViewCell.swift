@@ -13,21 +13,23 @@ import SnapKit
 class CommunicateMethodTableViewCell: UITableViewCell {
 	
 	var method = [CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "", time: "", method: "")]
+								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
+								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
+								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문")]
 	
 	let titleLabel = UILabel().then{
-		$0.text = "소통 방식"
+		$0.text = "🗣 소통 방식"
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 15, weight: .bold)
 		$0.textAlignment = .left
 	}
 	let methodTableView = UITableView().then{
-		$0.backgroundColor = .primaryBlack
+		$0.backgroundColor = .primaryWhite
 	}
 	
 	
 	static func estimatedRowHeight() -> CGFloat {
-		return 202
+		return 300
 	}
 	
 	
@@ -36,15 +38,19 @@ class CommunicateMethodTableViewCell: UITableViewCell {
 		self.contentView.add(titleLabel){
 			$0.snp.makeConstraints{
 				$0.top.equalTo(self.contentView.snp.top).offset(5)
-				$0.leading.equalTo(self.contentView.snp.leading).offset(40)
+				$0.leading.equalTo(self.contentView.snp.leading).offset(20)
 			}
 		}
 		self.contentView.add(self.methodTableView){
+			$0.isScrollEnabled = false
+			$0.isPagingEnabled = false
+			$0.isUserInteractionEnabled = false
 			$0.snp.makeConstraints{
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(20)
 				$0.leading.equalTo(self.contentView.snp.leading)
 				$0.trailing.equalTo(self.contentView.snp.trailing)
-				$0.height.equalTo(126)
+				$0.bottom.equalTo(self.contentView.snp.bottom)
+				$0.height.equalTo(self.method.count*70)
 			}
 		}
 	}
@@ -61,6 +67,9 @@ class CommunicateMethodTableViewCell: UITableViewCell {
 			self.methodTableView.separatorStyle = .none
 			self.methodTableView.delegate = self
 			self.methodTableView.dataSource = self
+			self.methodTableView.estimatedRowHeight = CGFloat(self.method.count * 70)
+			self.methodTableView.rowHeight = UITableView.automaticDimension
+			self.methodTableView.reloadData()
 			// Initialization code
 		}
 	
@@ -81,7 +90,6 @@ extension CommunicateMethodTableViewCell: UITableViewDelegate {
 						MethodDetailTableViewCell else {
 			return UITableViewCell()
 		}
-		print(#function)
 		cell.awakeFromNib()
 		cell.dateLabel.text = self.method[indexPath.row].date
 		cell.timeLabel.text = self.method[indexPath.row].time

@@ -114,13 +114,16 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 	
 	let viewController = ContentViewController()
+	let messageViewController = MessageViewController()
 	
 	override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-		return viewController
+		if(contentView.selectedIndex == 0 ) {
+			return messageViewController
+		}
+		else {
+			return viewController
+		}
 	}
-
-	
-	
 	
 	
 	// MARK : - Lifecycle

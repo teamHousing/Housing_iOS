@@ -27,7 +27,7 @@ open class SegementSlideDefaultViewController: SegementSlideViewController {
     }
     
     open override var switcherHeight: CGFloat {
-        return 44
+        return 53
     }
     
     open var titlesInSwitcher: [String] {
