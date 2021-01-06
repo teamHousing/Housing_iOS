@@ -16,12 +16,12 @@ class AddedImageTableViewCell: UITableViewCell {
 	let imageURL = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAD","https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fko%2Fdocs%2FWeb%2FHTML%2FElement%2Fimg&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAI","https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-photo%2Fimage-human-brain_5013322.htm&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAO"]
 	
 	
-//	let addedImageCollectionView =
-//		UICollectionView(frame: CGRect(x: 0, y: 0, width: 500, height: 127),
-//										 collectionViewLayout: UICollectionViewLayout.init()).then() {
-//		$0.backgroundColor = .primaryWhite
-//		$0.isPagingEnabled = true
-//	}
+	//	let addedImageCollectionView =
+	//		UICollectionView(frame: CGRect(x: 0, y: 0, width: 500, height: 127),
+	//										 collectionViewLayout: UICollectionViewLayout.init()).then() {
+	//		$0.backgroundColor = .primaryWhite
+	//		$0.isPagingEnabled = true
+	//	}
 	
 	let addedImageCollectionView: UICollectionView = {
 		
@@ -44,8 +44,17 @@ class AddedImageTableViewCell: UITableViewCell {
 		$0.textAlignment = .left
 	}
 	
+	let cancelButton = UIButton().then{
+		$0.setTitle("요청 취소", for: .normal)
+		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+		$0.titleLabel?.textAlignment = .center
+		$0.titleLabel?.textColor = .primaryBlack
+		$0.backgroundColor = .none
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
+	}
+	
 	static func estimatedRowHeight() -> CGFloat {
-		return 190
+		return 500
 	}
 	
 	func layout() {
@@ -59,39 +68,48 @@ class AddedImageTableViewCell: UITableViewCell {
 			$0.snp.makeConstraints {
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(16)
 				$0.leading.equalTo(self.titleLabel.snp.leading)
-				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-100)
 				$0.height.equalTo(127)
 				$0.width.equalTo(self.imageURL.count*135)
 			}
 		}
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .horizontal
-		self.addedImageCollectionView.collectionViewLayout = layout
-	}
+		self.contentView.add(self.cancelButton) {
+			$0.snp.makeConstraints {
+				$0.top.equalTo(self.addedImageCollectionView.snp.bottom).offset(0)
+				$0.leading.equalTo(self.contentView.snp.leading).offset(60)
+				$0.trailing.equalTo(self.contentView.snp.trailing).offset(-60)
+				$0.height.equalTo(48)
+				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-80)
+			}
+		}
 	
-	func registerCell() {
-		addedImageCollectionView.register(AddedImageCollectionViewCell.self,
-																			forCellWithReuseIdentifier:
-																				AddedImageCollectionViewCell.reuseIdentifier)
-	}
+	let layout = UICollectionViewFlowLayout()
+	layout.scrollDirection = .horizontal
+	self.addedImageCollectionView.collectionViewLayout = layout
+}
+
+func registerCell() {
+	addedImageCollectionView.register(AddedImageCollectionViewCell.self,
+																		forCellWithReuseIdentifier:
+																			AddedImageCollectionViewCell.reuseIdentifier)
+}
+
+override func awakeFromNib() {
+	super.awakeFromNib()
+	print(#file, #function)
+	layout()
+	registerCell()
+	self.addedImageCollectionView.delegate = self
+	self.addedImageCollectionView.dataSource = self
+	self.addedImageCollectionView.reloadData()
+	// Initialization code
+}
+
+override func setSelected(_ selected: Bool, animated: Bool) {
+	super.setSelected(selected, animated: false)
 	
-	override func awakeFromNib() {
-		super.awakeFromNib()
-		print(#file, #function)
-		layout()
-		registerCell()
-		self.addedImageCollectionView.delegate = self
-		self.addedImageCollectionView.dataSource = self
-		self.addedImageCollectionView.reloadData()
-		// Initialization code
-	}
-	
-	override func setSelected(_ selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: false)
-		
-		// Configure the view for the selected state
-	}
-	
+	// Configure the view for the selected state
+}
+
 }
 
 extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
