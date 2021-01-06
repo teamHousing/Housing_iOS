@@ -77,8 +77,12 @@ class MessageViewController: UIViewController {
 	private let presetButton5 = UITextField().then {
 		$0.text = "직접 입력하기"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
+		$0.textColor = .black
 		$0.setRounded(radius: 12)
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
+		let padding =  UIView(frame: CGRect(x: 0, y: 0, width: 16, height: $0.frame.height))
+		$0.leftView = padding
+		$0.leftViewMode = .always
 	}
 	private let nextStep = UIButton().then {
 		$0.setTitle("다음 단계", for: .normal)
@@ -100,12 +104,16 @@ class MessageViewController: UIViewController {
 		let appointmentview = AppointmentViewController()
 		self.navigationController?.pushViewController(appointmentview, animated: true)
 	}
+	@objc func popToRootController() {
+		self.navigationController?.popToRootViewController(animated: true)
+	}
 	@objc func presetMessageSelected(sender : UIButton) {
 		clearSelection()
 		sender.setBorder(borderColor: .salmon, borderWidth: 2)
-		sender.layer.applyShadow()
+		//sender.layer.applyShadow()
 		requestData.editionalRequest = sender.titleLabel?.text ?? ""
 	}
+	
 	
 	func clearSelection() {
 		self.presetButton1.setBorder(borderColor: .gray01, borderWidth: 1)
@@ -185,14 +193,14 @@ class MessageViewController: UIViewController {
 		if !requestData.isPromiseNeeded {
 			nextStep.setTitle("등록하기", for: .normal)
 			nextStep.removeTarget(self, action: #selector(nextButtonDidTapped), for: .touchUpInside)
-			//nextStep.addTarget(self, action: #selector(<#T##@objc method#>), for: .touchUpInside)
+			nextStep.addTarget(self, action: #selector(popToRootController), for: .touchUpInside)
 			page.numberOfPages = 3
 			
 		}
 		nextStep.snp.makeConstraints{
 			$0.centerX.equalTo(view)
 			$0.width.equalTo(widthConstraintAmount(value: 255))
-			$0.height.equalTo(48)
+			$0.height.equalTo(nextStep.snp.width).multipliedBy(1 / 5.3125)
 			$0.top.equalTo(presetButton5.snp.bottom).offset(60)
 			
 		}
@@ -202,7 +210,7 @@ class MessageViewController: UIViewController {
 			$0.height.equalTo(20)
 			$0.centerX.equalToSuperview()
 		}
-		
+		presetButton5.delegate = self
 	}
 	
     override func viewDidLoad() {
@@ -210,7 +218,13 @@ class MessageViewController: UIViewController {
 			dataPreset()
 			layout()
         // Do any additional setup after loading the view.
-    }
+			let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+			self.view.addGestureRecognizer(tap)
+		}
+		@objc func handleTap(recognizer: UITapGestureRecognizer){
+			
+			self.view.endEditing(true)
+		}
     
 
     /*
@@ -233,10 +247,16 @@ extension MessageViewController : UITextFieldDelegate {
 		textField.setBorder(borderColor: .salmon, borderWidth: 2)
 	}
 	func textFieldDidEndEditing(_ textField: UITextField) {
-		if textField.text == nil {
+		if textField.text == ""{
 			textField.text = "직접 입력하기"
 		}
 		
 		requestData.editionalRequest = textField.text ?? ""
 	}
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
+	}
+	
+
 }

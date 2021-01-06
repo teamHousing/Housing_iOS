@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 //MARK: 데이터 모델
-struct RequestDataModel {
+class RequestDataModel {
 	static let shared = RequestDataModel()
 	var isPromiseNeeded: Bool = true
 	var images: [UIImage]? = []

@@ -46,6 +46,7 @@ class PromiseViewController: UIViewController {
 				집주인과
 				약속이 필요한 문의에요!
 				"""
+			$0.textColor = .black
 			$0.numberOfLines = 2
 			$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		}
@@ -71,7 +72,7 @@ class PromiseViewController: UIViewController {
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.white, for: .normal)
 		$0.backgroundColor = .salmon
-		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 		
 	}
@@ -82,7 +83,7 @@ class PromiseViewController: UIViewController {
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
-		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 		
 	}
@@ -93,7 +94,7 @@ class PromiseViewController: UIViewController {
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
-		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 		
 	}
@@ -104,7 +105,7 @@ class PromiseViewController: UIViewController {
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
-		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 		
 	}
@@ -115,7 +116,7 @@ class PromiseViewController: UIViewController {
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
-		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 		
 	}
@@ -126,7 +127,7 @@ class PromiseViewController: UIViewController {
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
-		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 	}
 	
@@ -134,16 +135,18 @@ class PromiseViewController: UIViewController {
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 		$0.borderStyle = .none
 		$0.placeholder("제목을 작성해주세요")
+		$0.textColor = .black
 	}
 	private let underBar = UIView().then {
 		$0.backgroundColor = .gray01
 	}
 	private let questionDescription = UITextView().then{
-		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
+		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 15)
 		$0.setRounded(radius: 16)
-		$0.setBorder(borderColor: .lightGray, borderWidth: 1)
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.text = "내용을 작성해주세요"
-		$0.textColor = UIColor.lightGray
+		$0.backgroundColor = .white
+		$0.textColor = .gray01
 		$0.textContainerInset = UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
 	}
 	private let nextStep = UIButton().then{
@@ -172,28 +175,34 @@ class PromiseViewController: UIViewController {
 		buttonBackgroundRefresher()
 		sender.backgroundColor = .salmon
 		sender.setTitleColor(.white, for: .normal)
+		sender.setBorder(borderColor: .salmon, borderWidth: 1)
 		//		self.requestData.cartegory = sender.titleLabel.text
 	}
 	func buttonBackgroundRefresher() {
 		fixRepairButton.setTitleColor(.black, for: .normal)
+		fixRepairButton.setBorder(borderColor: .gray01, borderWidth: 1)
 		fixRepairButton.backgroundColor = .white
 		contractButton.setTitleColor(.black, for: .normal)
 		contractButton.backgroundColor = .white
+		contractButton.setBorder(borderColor: .gray01, borderWidth: 1)
 		rentalFeeButton.setTitleColor(.black, for: .normal)
 		rentalFeeButton.backgroundColor = .white
+		rentalFeeButton.setBorder(borderColor: .gray01, borderWidth: 1)
+
 		noiseButton.setTitleColor(.black, for: .normal)
 		noiseButton.backgroundColor = .white
+		noiseButton.setBorder(borderColor: .gray01, borderWidth: 1)
+
 		questionButton.setTitleColor(.black, for: .normal)
 		questionButton.backgroundColor = .white
+		questionButton.setBorder(borderColor: .gray01, borderWidth: 1)
+
 		etcButton.setTitleColor(.black, for: .normal)
 		etcButton.backgroundColor = .white
+		etcButton.setBorder(borderColor: .gray01, borderWidth: 1)
+
 	}
 	
-	
-	@objc func someAction(_ sender:UITapGestureRecognizer){
-		sender.view?.setBorder(borderColor: .red, borderWidth: 1)
-		print(sender.view)
-	}
 	private let promiseNotRequiredView = UIView().then{
 		$0.backgroundColor = .white
 		$0.setRounded(radius: 16)
@@ -205,6 +214,8 @@ class PromiseViewController: UIViewController {
 				문의에요!
 				"""
 			$0.numberOfLines = 2
+			$0.textColor = .black
+
 			$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		}
 		$0.adds([icon,description])
@@ -226,10 +237,14 @@ class PromiseViewController: UIViewController {
 	private let requestTypeLabel = UILabel().then{
 		$0.text = "어떤 종류의 문제인가요?"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
+		$0.textColor = .black
+
 	}
 	private let message = UILabel().then{
 		$0.text = "집주인께 문의를 남겨주세요"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
+		$0.textColor = .black
+
 	}
 	
 	
@@ -253,6 +268,7 @@ class PromiseViewController: UIViewController {
 		requestData.cartegory = .repair
 	}
 	private func layout() {
+		dataPreset()
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .white
 		self.view.addSubview(totalScroll)
@@ -427,10 +443,6 @@ class PromiseViewController: UIViewController {
 		self.view.frame.origin.y = 0 // Move view to original position
 	}
 	
-	//		let gesture = UIGestureRecognizer(target: self, action: #selector(self.someAction(_:)))
-	//		promiseRequiredView.addGestureRecognizer(gesture)
-	//		promiseNotRequiredView.addGestureRecognizer(gesture)
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 //		view.backgroundColor = .cyan
@@ -438,8 +450,6 @@ class PromiseViewController: UIViewController {
 		layout()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.contentView.addGestureRecognizer(tap)
-		print("싱글톤데이터")
-		print(requestData)
 	}
 	@objc func handleTap(recognizer: UITapGestureRecognizer){
 		
@@ -453,7 +463,7 @@ class PromiseViewController: UIViewController {
 
 extension PromiseViewController : UITextViewDelegate {
 	func textViewDidBeginEditing(_ textView: UITextView) {
-		if textView.textColor == UIColor.lightGray {
+		if textView.textColor == UIColor.gray01 {
 			textView.text = nil
 			textView.textColor = UIColor.black
 		}
@@ -461,7 +471,7 @@ extension PromiseViewController : UITextViewDelegate {
 	func textViewDidEndEditing(_ textView: UITextView) {
 		if textView.text.isEmpty {
 			textView.text = "내용을 작성해주세요"
-			textView.textColor = UIColor.lightGray
+			textView.textColor = UIColor.gray01
 			requestData.discription = ""
 
 		}
@@ -482,10 +492,8 @@ extension PromiseViewController : UITextViewDelegate {
 }
 extension PromiseViewController : UITextFieldDelegate{
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		
 		textField.resignFirstResponder()
 		return true
-		
 	}
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		requestData.title = textField.text ?? ""

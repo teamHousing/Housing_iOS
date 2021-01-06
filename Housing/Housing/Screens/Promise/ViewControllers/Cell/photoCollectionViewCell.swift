@@ -13,7 +13,7 @@ class photoCollectionViewCell: UICollectionViewCell {
 	static let registerId = "\(photoCollectionViewCell.self)"
 	let evidenceImages = UIImageView().then{
 		$0.setRounded(radius: 15)
-		$0.setBorder(borderColor: .systemGray5, borderWidth: 1)
+		$0.layer.applyShadow()
 	}
 	let deleteBtn = UIButton().then{
 		$0.isHidden = false

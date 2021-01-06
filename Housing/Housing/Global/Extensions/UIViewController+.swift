@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIViewController {
-
 		/// 🍞
 		/// - Parameters:
 		///   - message: 메세지

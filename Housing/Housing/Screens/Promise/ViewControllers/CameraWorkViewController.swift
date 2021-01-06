@@ -181,6 +181,7 @@ class CameraWorkViewController: UIViewController{
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		print(requestData)
 		layout()
 		collectionViewConfig()
 		// Do any additional setup after loading the view.
