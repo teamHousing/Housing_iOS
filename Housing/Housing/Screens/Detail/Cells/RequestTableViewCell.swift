@@ -36,7 +36,8 @@ class RequestTableViewCell: UITableViewCell {
 	func layout() {
 		self.contentView.add(requestView){
 			$0.snp.makeConstraints{
-				$0.top.bottom.leading.trailing.equalTo(self.contentView).offset(0)
+				$0.bottom.leading.trailing.equalTo(self.contentView).offset(0)
+				$0.top.equalTo(self.contentView).offset(52)
 			}
 		}
 		self.requestView.add(titleLabel){

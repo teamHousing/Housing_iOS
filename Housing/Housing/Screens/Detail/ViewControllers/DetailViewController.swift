@@ -28,6 +28,10 @@ class DetailViewController: SegementSlideDefaultViewController {
 	let titleLabel = UILabel()
 	let categoryContainerView = UIView()
 	let contextLabel = UILabel()
+	let seperateLineView = UIView().then {
+		$0.backgroundColor = .gray01
+	}
+	
 	func contextHeight() -> Int {
 		let myText = self.contextLabel.text! as NSString
 		let rect = CGSize(width: self.contextLabel.bounds.width, height: CGFloat.greatestFiniteMagnitude)
@@ -97,6 +101,16 @@ class DetailViewController: SegementSlideDefaultViewController {
 		}
 	}
 	
+	func layout() {
+		self.view.add(self.seperateLineView) {
+			$0.snp.makeConstraints {
+				$0.height.equalTo(1)
+				$0.leading.trailing.equalTo(self.view)
+				$0.bottom.equalTo(self.switcherView.snp.bottom)
+			}
+		}
+	}
+	
 	override func segementSlideHeaderView() -> UIView? {
 		self.headerViewLayout()
 		self.detailHeaderView.snp.makeConstraints{
@@ -118,10 +132,9 @@ class DetailViewController: SegementSlideDefaultViewController {
 		return config
 	}
 	
-	let viewController = ContentViewController()
-	let messageViewController = MessageViewController()
-	
 	override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+		let viewController = ContentViewController()
+		let messageViewController = MessageViewController()
 		if(contentView.selectedIndex == 0 ) {
 			return messageViewController
 		}
@@ -134,8 +147,8 @@ class DetailViewController: SegementSlideDefaultViewController {
 	// MARK : - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		defaultSelectedIndex = 0
+		layout()
 		reloadData()
 	}
 }
