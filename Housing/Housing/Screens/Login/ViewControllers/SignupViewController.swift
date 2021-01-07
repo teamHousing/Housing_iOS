@@ -101,7 +101,7 @@ class SignupViewController: UIViewController {
             lessorView.isEnabled = false
             
             nextButtonView.layer.backgroundColor = UIColor.primaryBlack.cgColor
-            nextButtonView.isEnabled = true
+            nextButtonView.isEnabled = false
         }
         else {
             tenantView.isSelected = false

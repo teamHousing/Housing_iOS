@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1F8ECE5425A5A6FF00C0E0FA /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5325A5A6FF00C0E0FA /* Signup.storyboard */; };
 		1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5625A5A71300C0E0FA /* SignupViewController.swift */; };
+		1F8ECE8925A700B900C0E0FA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE8825A700B900C0E0FA /* AddressViewController.swift */; };
+		1F8ECE8C25A7138100C0E0FA /* SignupCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE8B25A7138100C0E0FA /* SignupCompleteViewController.swift */; };
 		37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */; };
 		D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */; };
 		D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */; };
@@ -64,6 +66,8 @@
 /* Begin PBXFileReference section */
 		1F8ECE5325A5A6FF00C0E0FA /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		1F8ECE5625A5A71300C0E0FA /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		1F8ECE8825A700B900C0E0FA /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		1F8ECE8B25A7138100C0E0FA /* SignupCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCompleteViewController.swift; sourceTree = "<group>"; };
 		37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommunmicationTableViewCell.swift; path = Housing/Screens/Communication/ViewControllers/CommunmicationTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
@@ -335,7 +339,6 @@
 		D1B4450A259F1D2E005C2C68 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				1F8ECE6625A5BE5500C0E0FA /* Cells */,
 				D1B4450B259F1D35005C2C68 /* ViewControllers */,
 				D1B4450C259F1D3C005C2C68 /* Storyboards */,
 			);
@@ -347,6 +350,8 @@
 			children = (
 				D1B44510259F1D5A005C2C68 /* LoginViewController.swift */,
 				1F8ECE5625A5A71300C0E0FA /* SignupViewController.swift */,
+				1F8ECE8825A700B900C0E0FA /* AddressViewController.swift */,
+				1F8ECE8B25A7138100C0E0FA /* SignupCompleteViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -544,6 +549,7 @@
 				D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */,
 				D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */,
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
+				1F8ECE8C25A7138100C0E0FA /* SignupCompleteViewController.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
@@ -570,6 +576,7 @@
 				D1311898259B6BD100897DF4 /* UIColor+.swift in Sources */,
 				1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */,
 				D13118A6259B718900897DF4 /* CALayer+.swift in Sources */,
+				1F8ECE8925A700B900C0E0FA /* AddressViewController.swift in Sources */,
 				D19179E8259890A40035AF74 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
