@@ -100,8 +100,9 @@ class SplashViewController: BaseViewController {
 		let storyboard = UIStoryboard(name: StoryboardStorage.login,
 																	bundle: nil)
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
+		let navigationViewController = UINavigationController(rootViewController: viewcontroller)
+		navigationViewController.modalPresentationStyle = .fullScreen
+		present(navigationViewController, animated: true)
 	}
 	
 	// 태훈
