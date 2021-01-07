@@ -207,6 +207,8 @@ class PromiseViewController: UIViewController {
 		$0.backgroundColor = .white
 		$0.setRounded(radius: 16)
 		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
+		$0.isUserInteractionEnabled = true
+		$0.isMultipleTouchEnabled = true
 		let icon = UIImageView()
 		let description = UILabel().then {
 			$0.text = """

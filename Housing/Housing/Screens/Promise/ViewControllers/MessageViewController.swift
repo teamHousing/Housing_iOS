@@ -89,9 +89,7 @@ class MessageViewController: UIViewController {
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.backgroundColor = .black
 		$0.setRounded(radius: 25)
-		
-		$0.addTarget(self, action: #selector(nextButtonDidTapped), for: .touchUpInside)
-	}
+		}
 	
 	private let page = UIPageControl().then{
 		$0.numberOfPages = 4
@@ -192,10 +190,11 @@ class MessageViewController: UIViewController {
 		}
 		if !requestData.isPromiseNeeded {
 			nextStep.setTitle("등록하기", for: .normal)
-			nextStep.removeTarget(self, action: #selector(nextButtonDidTapped), for: .touchUpInside)
 			nextStep.addTarget(self, action: #selector(popToRootController), for: .touchUpInside)
 			page.numberOfPages = 3
-			
+		}
+		else {
+			nextStep.addTarget(self, action: #selector(nextButtonDidTapped), for: .touchUpInside)
 		}
 		nextStep.snp.makeConstraints{
 			$0.centerX.equalTo(view)
