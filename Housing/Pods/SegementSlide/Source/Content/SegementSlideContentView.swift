@@ -220,7 +220,7 @@ extension SegementSlideContentView {
     }
     let offsetX = CGFloat(index)*scrollView.bounds.width
     childViewController.view.translatesAutoresizingMaskIntoConstraints = false
-    childViewController.view.topConstraint = childViewController.view.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50)
+    childViewController.view.topConstraint = childViewController.view.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0)
     childViewController.view.widthConstraint = childViewController.view.widthAnchor.constraint(equalToConstant: scrollView.bounds.width)
     childViewController.view.heightConstraint = childViewController.view.heightAnchor.constraint(equalToConstant: scrollView.bounds.height)
     childViewController.view.leadingConstraint = childViewController.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: offsetX)

@@ -19,7 +19,6 @@ class AddedImageTableViewCell: UITableViewCell {
 		
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
-		layout.minimumInteritemSpacing = 6
 		
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.isScrollEnabled = true
@@ -41,9 +40,9 @@ class AddedImageTableViewCell: UITableViewCell {
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.layer.cornerRadius = 24
 		$0.setTitle("요청 취소", for: .normal)
-//		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-//		$0.titleLabel?.textAlignment = .center
-//		$0.titleLabel?.textColor = .primaryBlack
+		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+		$0.titleLabel?.textAlignment = .center
+		$0.titleLabel?.textColor = .primaryBlack
 		$0.setTitleColor(.primaryBlack, for: .normal)
 	}
 	
@@ -59,6 +58,8 @@ class AddedImageTableViewCell: UITableViewCell {
 			}
 		}
 		self.contentView.add(self.addedImageCollectionView) {
+			$0.backgroundColor = .none
+			$0.contentMode = .scaleAspectFill
 			$0.snp.makeConstraints {
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(16)
 				$0.leading.equalTo(self.titleLabel.snp.leading)
@@ -68,42 +69,42 @@ class AddedImageTableViewCell: UITableViewCell {
 		}
 		self.contentView.add(self.cancelButton) {
 			$0.snp.makeConstraints {
-				$0.top.equalTo(self.addedImageCollectionView.snp.bottom).offset(0)
+				$0.top.equalTo(self.addedImageCollectionView.snp.bottom).offset(72)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(60)
 				$0.trailing.equalTo(self.contentView.snp.trailing).offset(-60)
 				$0.height.equalTo(48)
-				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-80)
+				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-100)
 			}
 		}
+		
+		let layout = UICollectionViewFlowLayout()
+		layout.scrollDirection = .horizontal
+		self.addedImageCollectionView.collectionViewLayout = layout
+	}
 	
-	let layout = UICollectionViewFlowLayout()
-	layout.scrollDirection = .horizontal
-	self.addedImageCollectionView.collectionViewLayout = layout
-}
-
-func registerCell() {
-	addedImageCollectionView.register(AddedImageCollectionViewCell.self,
-																		forCellWithReuseIdentifier:
-																			AddedImageCollectionViewCell.reuseIdentifier)
-}
-
-override func awakeFromNib() {
-	super.awakeFromNib()
-	print(#file, #function)
-	layout()
-	registerCell()
-	self.addedImageCollectionView.delegate = self
-	self.addedImageCollectionView.dataSource = self
-	self.addedImageCollectionView.reloadData()
-	// Initialization code
-}
-
-override func setSelected(_ selected: Bool, animated: Bool) {
-	super.setSelected(selected, animated: false)
+	func registerCell() {
+		addedImageCollectionView.register(AddedImageCollectionViewCell.self,
+																			forCellWithReuseIdentifier:
+																				AddedImageCollectionViewCell.reuseIdentifier)
+	}
 	
-	// Configure the view for the selected state
-}
-
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		print(#file, #function)
+		layout()
+		registerCell()
+		self.addedImageCollectionView.delegate = self
+		self.addedImageCollectionView.dataSource = self
+		self.addedImageCollectionView.reloadData()
+		// Initialization code
+	}
+	
+	override func setSelected(_ selected: Bool, animated: Bool) {
+		super.setSelected(selected, animated: false)
+		
+		// Configure the view for the selected state
+	}
+	
 }
 
 extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
@@ -114,7 +115,7 @@ extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView,
 											layout collectionViewLayout: UICollectionViewLayout,
 											minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return 0
+		return 8
 	}
 	func collectionView(_ collectionView: UICollectionView,
 											layout collectionViewLayout: UICollectionViewLayout,

@@ -18,11 +18,11 @@ class AddedImageCollectionViewCell: UICollectionViewCell {
 	func layout() {
 		contentView.backgroundColor = .white
 		self.contentView.add(addedImageView) {
-			$0.setBorder(borderColor: .red, borderWidth: 2)
-
+			$0.setBorder(borderColor: .red, borderWidth: 1)
+			$0.layer.cornerRadius = 15
 			$0.snp.makeConstraints {
 				$0.top.trailing.equalTo(self.contentView)
-				$0.leading.equalTo(self.contentView).offset(2)
+				$0.edges.equalTo(self.contentView)
 			}
 		}
 	}
