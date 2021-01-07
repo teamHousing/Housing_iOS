@@ -15,4 +15,26 @@ extension UICollectionView {
 		}
 		return cell
 	}
+	
+	func dequeueHeaderView<T: UICollectionReusableView>(forIndexPath indexPath: IndexPath) -> T {
+		guard let view = dequeueReusableSupplementaryView(
+			ofKind: UICollectionView.elementKindSectionHeader,
+			withReuseIdentifier: T.reuseIdentifier,
+			for: indexPath
+		) as? T else {
+			fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
+		}
+		return view
+	}
+	
+	func dequeueFooterView<T: UICollectionReusableView>(forIndexPath indexPath: IndexPath) -> T {
+		guard let view = dequeueReusableSupplementaryView(
+			ofKind: UICollectionView.elementKindSectionFooter,
+			withReuseIdentifier: T.reuseIdentifier,
+			for: indexPath
+		) as? T else {
+			fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
+		}
+		return view
+	}
 }
