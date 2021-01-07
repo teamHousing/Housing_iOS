@@ -295,9 +295,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6K-j0-K73">
-                                <rect key="frame" x="166.5" y="358" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6K-j0-K73">
+                                <rect key="frame" x="68.5" y="358" width="238" height="34"/>
+                                <string key="text">담당자 확인 후 회원가입이 완료됩니다.
+확인까지 최대 2~3일이 소요될 수 있습니다.</string>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -323,8 +325,9 @@
                             <constraint firstItem="oGT-jh-a5g" firstAttribute="centerX" secondItem="bcf-6p-pxf" secondAttribute="centerX" id="1AL-bz-lkP"/>
                             <constraint firstItem="ix5-mI-g5P" firstAttribute="leading" secondItem="K7c-k8-mkI" secondAttribute="leading" constant="26" id="3Qk-Gg-nKJ"/>
                             <constraint firstItem="vVV-Yi-vYa" firstAttribute="top" secondItem="ix5-mI-g5P" secondAttribute="bottom" constant="72" id="5VE-qi-qrt"/>
+                            <constraint firstItem="U6K-j0-K73" firstAttribute="top" secondItem="vVV-Yi-vYa" secondAttribute="bottom" constant="25" id="7B7-bc-5fe"/>
+                            <constraint firstItem="U6K-j0-K73" firstAttribute="centerX" secondItem="bcf-6p-pxf" secondAttribute="centerX" id="7vY-ge-XqG"/>
                             <constraint firstItem="vVV-Yi-vYa" firstAttribute="centerX" secondItem="bcf-6p-pxf" secondAttribute="centerX" id="83W-Nu-YkH"/>
-                            <constraint firstItem="U6K-j0-K73" firstAttribute="top" secondItem="vVV-Yi-vYa" secondAttribute="bottom" constant="25" id="EgZ-00-44B"/>
                             <constraint firstItem="ix5-mI-g5P" firstAttribute="top" secondItem="K7c-k8-mkI" secondAttribute="top" id="Nrh-Bg-RGc"/>
                             <constraint firstItem="K7c-k8-mkI" firstAttribute="bottom" secondItem="oGT-jh-a5g" secondAttribute="bottom" constant="56" id="j6L-Pf-keo"/>
                             <constraint firstItem="U6K-j0-K73" firstAttribute="centerX" secondItem="vVV-Yi-vYa" secondAttribute="centerX" id="jYF-h4-Ls9"/>
