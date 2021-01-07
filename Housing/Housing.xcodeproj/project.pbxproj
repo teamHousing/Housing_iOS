@@ -130,9 +130,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F8ECE6625A5BE5500C0E0FA /* Cells */ = {
-			isa = PBXGroup;
-			children = (
 		D11C1BDF25A1FE3B002606B2 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
