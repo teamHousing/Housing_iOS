@@ -28,12 +28,16 @@ class DetailViewController: SegementSlideDefaultViewController {
 	let titleLabel = UILabel()
 	let categoryContainerView = UIView()
 	let contextLabel = UILabel()
+	func contextHeight() -> Int {
+		let myText = self.contextLabel.text! as NSString
+		let rect = CGSize(width: self.contextLabel.bounds.width, height: CGFloat.greatestFiniteMagnitude)
+		let labelSize = myText.boundingRect(with: rect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self.contextLabel.font], context: nil)
+		return Int(ceil(CGFloat(labelSize.height) / self.contextLabel.font.lineHeight))
+	}
 	
 	var heightWithSafeArea: CGFloat {
 		return 243+self.contextLabel.frame.size.height
 	}
-	
-	
 	
 	func headerViewLayout() {
 		self.detailHeaderView.add(self.categoryContainerView) {
@@ -88,6 +92,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 				$0.leading.equalTo(self.detailHeaderView.snp.leading).offset(20)
 				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(40)
+				$0.height.equalTo(self.contextHeight()*22)
 			}
 		}
 	}
@@ -95,7 +100,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 	override func segementSlideHeaderView() -> UIView? {
 		self.headerViewLayout()
 		self.detailHeaderView.snp.makeConstraints{
-			$0.height.equalTo(243+self.contextLabel.frame.size.height)
+			$0.height.equalTo(130+self.contextHeight()*22)
 		}
 		return self.detailHeaderView
 	}
