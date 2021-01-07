@@ -28,6 +28,17 @@ class MethodDetailTableViewCell: UITableViewCell {
 		$0.textAlignment = .center
 	}
 	
+	let circleView = UIView().then() {
+		$0.backgroundColor = .primaryBlack
+		$0.layer.cornerRadius = 6
+	}
+	let firstSeperatorView = UIView().then {
+		$0.backgroundColor = .gray01
+	}
+	let secondSeperatorView = UIView().then {
+		$0.backgroundColor = .gray01
+	}
+	
 	static func estimatedRowHeight() -> CGFloat {
 		return 57
 	}
@@ -39,6 +50,13 @@ class MethodDetailTableViewCell: UITableViewCell {
 				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-6)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(48)
 				$0.trailing.equalTo(self.contentView.snp.trailing).offset(-20)
+			}
+		}
+		self.contentView.add(circleView) {
+			$0.snp.makeConstraints{
+				$0.width.height.equalTo(12)
+				$0.leading.equalTo(self.contentView.snp.leading).offset(20)
+				$0.centerY.equalTo(self.containerView.snp.centerY)
 			}
 		}
 		containerView.add(timeLabel) {
@@ -57,6 +75,22 @@ class MethodDetailTableViewCell: UITableViewCell {
 			$0.snp.makeConstraints {
 				$0.centerY.equalTo(self.containerView.snp.centerY)
 				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(93)
+			}
+		}
+		containerView.add(firstSeperatorView) {
+			$0.snp.makeConstraints {
+				$0.height.equalTo(self.methodLabel)
+				$0.width.equalTo(2)
+				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(-49)
+				$0.centerY.equalTo(self.containerView.snp.centerY)
+			}
+		}
+		containerView.add(secondSeperatorView) {
+			$0.snp.makeConstraints {
+				$0.height.equalTo(self.methodLabel)
+				$0.width.equalTo(2)
+				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(52)
+				$0.centerY.equalTo(self.containerView.snp.centerY)
 			}
 		}
 	}

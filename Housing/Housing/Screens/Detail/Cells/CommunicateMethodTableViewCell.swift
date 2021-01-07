@@ -94,6 +94,7 @@ extension CommunicateMethodTableViewCell: UITableViewDelegate {
 		cell.dateLabel.text = self.method[indexPath.row].date
 		cell.timeLabel.text = self.method[indexPath.row].time
 		cell.methodLabel.text = self.method[indexPath.row].method
+		cell.selectionStyle = .none
 		return cell
 	}
 	

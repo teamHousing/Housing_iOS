@@ -42,16 +42,19 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		if indexPath.row == 0 {
 			let cell: RequestTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 			cell.awakeFromNib()
+			cell.selectionStyle = .none
 			return cell
 		}
 		else if indexPath.row == 1 {
 			let cell: CommunicateMethodTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 			cell.awakeFromNib()
+			cell.selectionStyle = .none
 			return cell
 		}
 		else if indexPath.row == 2 {
 			let cell: AddedImageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 			cell.awakeFromNib()
+			cell.selectionStyle = .none
 			return cell
 		}
 		

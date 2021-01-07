@@ -27,12 +27,6 @@ class AddedImageCollectionViewCell: UICollectionViewCell {
 		}
 	}
 	
-	func configImg(imageURL: String) {
-		print(imageURL)
-		let data = try? Data(contentsOf: URL(string: imageURL)!)
-		self.addedImageView.image = UIImage(data: data!)
-	}
-	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		layout()

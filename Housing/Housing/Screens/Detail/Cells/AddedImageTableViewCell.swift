@@ -15,14 +15,6 @@ class AddedImageTableViewCell: UITableViewCell {
 	
 	let imageURL = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAD","https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fko%2Fdocs%2FWeb%2FHTML%2FElement%2Fimg&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAI","https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-photo%2Fimage-human-brain_5013322.htm&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAO"]
 	
-	
-	//	let addedImageCollectionView =
-	//		UICollectionView(frame: CGRect(x: 0, y: 0, width: 500, height: 127),
-	//										 collectionViewLayout: UICollectionViewLayout.init()).then() {
-	//		$0.backgroundColor = .primaryWhite
-	//		$0.isPagingEnabled = true
-	//	}
-	
 	let addedImageCollectionView: UICollectionView = {
 		
 		let layout = UICollectionViewFlowLayout()
@@ -44,13 +36,15 @@ class AddedImageTableViewCell: UITableViewCell {
 		$0.textAlignment = .left
 	}
 	
-	let cancelButton = UIButton().then{
-		$0.setTitle("요청 취소", for: .normal)
-		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-		$0.titleLabel?.textAlignment = .center
-		$0.titleLabel?.textColor = .primaryBlack
+	let cancelButton = UIButton().then() {
 		$0.backgroundColor = .none
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
+		$0.layer.cornerRadius = 24
+		$0.setTitle("요청 취소", for: .normal)
+//		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+//		$0.titleLabel?.textAlignment = .center
+//		$0.titleLabel?.textColor = .primaryBlack
+		$0.setTitleColor(.primaryBlack, for: .normal)
 	}
 	
 	static func estimatedRowHeight() -> CGFloat {
