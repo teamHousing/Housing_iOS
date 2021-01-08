@@ -1,15 +1,14 @@
 //
-//  CompleteTableViewCell.swift
+//  emptyComTableViewCell.swift
 //  Housing
 //
-//  Created by JUEUN KIM on 2021/01/07.
+//  Created by JUEUN KIM on 2021/01/08.
 //
 
 import UIKit
 
-class CompleteTableViewCell: UITableViewCell {
-	@IBOutlet var countOfComplete: UILabel!
-	
+class emptyComTableViewCell: UITableViewCell {
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

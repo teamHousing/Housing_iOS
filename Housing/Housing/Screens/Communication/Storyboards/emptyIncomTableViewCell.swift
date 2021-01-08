@@ -1,14 +1,18 @@
 //
-//  CompleteTableViewCell.swift
+//  emptyIncomTableViewCell.swift
 //  Housing
 //
-//  Created by JUEUN KIM on 2021/01/07.
+//  Created by JUEUN KIM on 2021/01/08.
 //
 
 import UIKit
 
-class CompleteTableViewCell: UITableViewCell {
-	@IBOutlet var countOfComplete: UILabel!
+class emptyIncomTableViewCell: UITableViewCell {
+	@IBOutlet var inquiryButton: UIButton!
+	func makeButtonRounded(){
+		inquiryButton.setRounded(radius: 15)
+		
+	}
 	
     override func awakeFromNib() {
         super.awakeFromNib()

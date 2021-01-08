@@ -10,15 +10,21 @@ import UIKit
 class EmptyTableViewCell: UITableViewCell {
 	static let identifier = "EmptyTableViewCell"
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+	@IBOutlet var inquiryButton: UIButton!
+	func makeButtonRounded(){
+		inquiryButton.setRounded(radius: 15)
+		
+	}
+		override func awakeFromNib() {
+				super.awakeFromNib()
+				// Initialization code
+		}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+		override func setSelected(_ selected: Bool, animated: Bool) {
+				super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
-    }
+				// Configure the view for the selected state
+		}
 
 }
+

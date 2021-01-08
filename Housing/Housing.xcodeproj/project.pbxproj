@@ -11,6 +11,8 @@
 		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
 		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
 		371878AC25A4A77500803944 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878AB25A4A77500803944 /* EmptyTableViewCell.swift */; };
+		37259E8D25A829EF006550AF /* emptyComTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */; };
+		37259E9025A82A22006550AF /* emptyIncomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */; };
 		D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12D6DE025A1C84200E9A43A /* BaskervilleFont.swift */; };
 		D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12D6DE525A1C92D00E9A43A /* TabBarViewController.swift */; };
 		D1311888259B6B9400897DF4 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1311887259B6B9400897DF4 /* ReusableView.swift */; };
@@ -63,6 +65,8 @@
 		37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTableViewCell.swift; sourceTree = "<group>"; };
 		371878A625A4A6E200803944 /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
 		371878AB25A4A77500803944 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
+		37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = emptyComTableViewCell.swift; path = Housing/Screens/Communication/Storyboards/emptyComTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = emptyIncomTableViewCell.swift; path = Housing/Screens/Communication/Storyboards/emptyIncomTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D12D6DDE25A1C7F600E9A43A /* BASKE1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BASKE1.ttf; sourceTree = "<group>"; };
 		D12D6DE025A1C84200E9A43A /* BaskervilleFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaskervilleFont.swift; sourceTree = "<group>"; };
 		D12D6DE525A1C92D00E9A43A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -277,8 +281,10 @@
 			isa = PBXGroup;
 			children = (
 				D1B444ED259F0A10005C2C68 /* CommunicationViewController.swift */,
-				37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */,
+				37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */,
+				37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */,
 				37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */,
+				37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */,
 				371878A625A4A6E200803944 /* ContentTableViewCell.swift */,
 				371878AB25A4A77500803944 /* EmptyTableViewCell.swift */,
 			);
@@ -514,6 +520,7 @@
 				37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */,
 				D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */,
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
+				37259E9025A82A22006550AF /* emptyIncomTableViewCell.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
@@ -533,6 +540,7 @@
 				D1B44508259F1447005C2C68 /* BaseViewController.swift in Sources */,
 				D1311892259B6BB300897DF4 /* UITableView+.swift in Sources */,
 				D1B65A142598CE6400A9A7CB /* Util.swift in Sources */,
+				37259E8D25A829EF006550AF /* emptyComTableViewCell.swift in Sources */,
 				371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */,
 				DA050956259F692E00DDB916 /* UIImage+.swift in Sources */,
 				D1311895259B6BBF00897DF4 /* UITableViewCell+.swift in Sources */,
