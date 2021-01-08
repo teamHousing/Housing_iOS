@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */; };
+		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
+		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
+		371878AC25A4A77500803944 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878AB25A4A77500803944 /* EmptyTableViewCell.swift */; };
+		37259E8D25A829EF006550AF /* emptyComTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */; };
+		37259E9025A82A22006550AF /* emptyIncomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */; };
 		1F8ECE5425A5A6FF00C0E0FA /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5325A5A6FF00C0E0FA /* Signup.storyboard */; };
 		1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5625A5A71300C0E0FA /* SignupViewController.swift */; };
 		1F8ECE8925A700B900C0E0FA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE8825A700B900C0E0FA /* AddressViewController.swift */; };
@@ -25,6 +31,8 @@
 		CC8B595625A496B300EC3AC7 /* MethodDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */; };
 		CC8B595A25A498B200EC3AC7 /* CommunicationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595925A498B200EC3AC7 /* CommunicationMethod.swift */; };
 		CC8B596025A49F6D00EC3AC7 /* AddedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */; };
+		CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */; };
+		CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */; };
 		D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */; };
 		D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */; };
 		D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */; };
@@ -83,6 +91,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
+		37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTableViewCell.swift; sourceTree = "<group>"; };
+		371878A625A4A6E200803944 /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
+		371878AB25A4A77500803944 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
+		37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = emptyComTableViewCell.swift; path = Housing/Screens/Communication/Storyboards/emptyComTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = emptyIncomTableViewCell.swift; path = Housing/Screens/Communication/Storyboards/emptyIncomTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		1F8ECE5325A5A6FF00C0E0FA /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		1F8ECE5625A5A71300C0E0FA /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		1F8ECE8825A700B900C0E0FA /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +116,8 @@
 		CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodDetailTableViewCell.swift; sourceTree = "<group>"; };
 		CC8B595925A498B200EC3AC7 /* CommunicationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationMethod.swift; sourceTree = "<group>"; };
 		CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedImageTableViewCell.swift; sourceTree = "<group>"; };
+		CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
+		CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTableViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
 		D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -202,6 +218,7 @@
 				CC6A1DF725A58C6C00C86865 /* AddedImageCollectionViewCell.swift */,
 				CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */,
 				CC42D06125A74E54002A461D /* MessageDetailTableViewCell.swift */,
+				CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -374,6 +391,7 @@
 				D1B444E3259F09C5005C2C68 /* DetailViewController.swift */,
 				CC096D5425A2415E00E07017 /* ContentViewController.swift */,
 				CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */,
+				CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -400,6 +418,12 @@
 				D1B444ED259F0A10005C2C68 /* CommunicationViewController.swift */,
 				37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */,
 				DAB322BE25A865350098175E /* AddNoticeViewController.swift */,
+				37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */,
+				37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */,
+				37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */,
+				37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */,
+				371878A625A4A6E200803944 /* ContentTableViewCell.swift */,
+				371878AB25A4A77500803944 /* EmptyTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -673,18 +697,21 @@
 				D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */,
 				D11C1BEF25A2083B002606B2 /* NoticeCollectionViewCell.swift in Sources */,
 				D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */,
+				CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */,
 				D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */,
+				37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */,
 				D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */,
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
+				37259E9025A82A22006550AF /* emptyIncomTableViewCell.swift in Sources */,
 				1F8ECE8C25A7138100C0E0FA /* SignupCompleteViewController.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
 				DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
-				37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,
 				D19179E6259890A40035AF74 /* AppDelegate.swift in Sources */,
 				D131189E259B6BE300897DF4 /* UIViewController+.swift in Sources */,
+				371878AC25A4A77500803944 /* EmptyTableViewCell.swift in Sources */,
 				D1B44505259F0FCE005C2C68 /* StoryboardStorage.swift in Sources */,
 				CC42D06225A74E54002A461D /* MessageDetailTableViewCell.swift in Sources */,
 				DAB322BF25A865350098175E /* AddNoticeViewController.swift in Sources */,
@@ -693,6 +720,7 @@
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */,
 				CC8B595325A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift in Sources */,
+				CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				CC42D05F25A74D21002A461D /* MessageTableViewCell.swift in Sources */,
 				D131188E259B6BA900897DF4 /* UICollectionViewCell+.swift in Sources */,
@@ -701,12 +729,15 @@
 				D1311888259B6B9400897DF4 /* ReusableView.swift in Sources */,
 				DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */,
 				D1B444E4259F09C5005C2C68 /* DetailViewController.swift in Sources */,
+				37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */,
 				D131188B259B6BA000897DF4 /* UICollectionView+.swift in Sources */,
 				D1B44508259F1447005C2C68 /* BaseViewController.swift in Sources */,
 				DAB3225925A72A520098175E /* DatePickerViewController.swift in Sources */,
 				D1311892259B6BB300897DF4 /* UITableView+.swift in Sources */,
 				CC096D5525A2415E00E07017 /* ContentViewController.swift in Sources */,
 				D1B65A142598CE6400A9A7CB /* Util.swift in Sources */,
+				37259E8D25A829EF006550AF /* emptyComTableViewCell.swift in Sources */,
+				371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */,
 				DA050956259F692E00DDB916 /* UIImage+.swift in Sources */,
 				D1311895259B6BBF00897DF4 /* UITableViewCell+.swift in Sources */,
 				DA6D898525A5A98E00CF47C4 /* AppointmentViewController.swift in Sources */,
