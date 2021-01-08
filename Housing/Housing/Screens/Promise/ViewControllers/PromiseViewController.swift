@@ -7,10 +7,13 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
 import Then
 import SnapKit
 class PromiseViewController: UIViewController {
 	var requestData = RequestDataModel.shared
+	var disposeBag = DisposeBag()
 	private let totalScroll = UIScrollView()
 	private let contentView = UIView()
 	private let backButton = UIButton().then{
@@ -131,7 +134,7 @@ class PromiseViewController: UIViewController {
 		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 	}
 	
-	private let questionTitle = UITextField().then{
+	private var questionTitle = UITextField().then{
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 		$0.borderStyle = .none
 		$0.placeholder("제목을 작성해주세요")
@@ -140,7 +143,7 @@ class PromiseViewController: UIViewController {
 	private let underBar = UIView().then {
 		$0.backgroundColor = .gray01
 	}
-	private let questionDescription = UITextView().then{
+	private var questionDescription = UITextView().then{
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 15)
 		$0.setRounded(radius: 16)
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
@@ -149,7 +152,7 @@ class PromiseViewController: UIViewController {
 		$0.textColor = .gray01
 		$0.textContainerInset = UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
 	}
-	private let nextStep = UIButton().then{
+	private var nextStep = UIButton().then{
 		$0.backgroundColor = .gray01
 		$0.setTitle("다음 단계", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
@@ -188,19 +191,19 @@ class PromiseViewController: UIViewController {
 		rentalFeeButton.setTitleColor(.black, for: .normal)
 		rentalFeeButton.backgroundColor = .white
 		rentalFeeButton.setBorder(borderColor: .gray01, borderWidth: 1)
-
+		
 		noiseButton.setTitleColor(.black, for: .normal)
 		noiseButton.backgroundColor = .white
 		noiseButton.setBorder(borderColor: .gray01, borderWidth: 1)
-
+		
 		questionButton.setTitleColor(.black, for: .normal)
 		questionButton.backgroundColor = .white
 		questionButton.setBorder(borderColor: .gray01, borderWidth: 1)
-
+		
 		etcButton.setTitleColor(.black, for: .normal)
 		etcButton.backgroundColor = .white
 		etcButton.setBorder(borderColor: .gray01, borderWidth: 1)
-
+		
 	}
 	
 	private let promiseNotRequiredView = UIView().then{
@@ -217,7 +220,7 @@ class PromiseViewController: UIViewController {
 				"""
 			$0.numberOfLines = 2
 			$0.textColor = .black
-
+			
 			$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		}
 		$0.adds([icon,description])
@@ -240,13 +243,13 @@ class PromiseViewController: UIViewController {
 		$0.text = "어떤 종류의 문제인가요?"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
 		$0.textColor = .black
-
+		
 	}
 	private let message = UILabel().then{
 		$0.text = "집주인께 문의를 남겨주세요"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
 		$0.textColor = .black
-
+		
 	}
 	
 	
@@ -411,7 +414,7 @@ class PromiseViewController: UIViewController {
 			$0.height.equalTo(20)
 			$0.centerX.equalToSuperview()
 		}
-
+		
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 		
 		
@@ -423,6 +426,35 @@ class PromiseViewController: UIViewController {
 		let notPromiseTap = UITapGestureRecognizer(target: self, action: #selector(notPromiseTapped))
 		self.promiseRequiredView.addGestureRecognizer(promiseTap)
 		self.promiseNotRequiredView.addGestureRecognizer(notPromiseTap)
+	}
+	
+	
+	
+	private func bind() {
+		let inputOb : Observable<Bool> = questionTitle.rx.text.map{$0 == ""}.asObservable()
+		let desInputOb : Observable<Bool> = questionDescription.rx.text.orEmpty.map{$0 == "내용을 작성해주세요"}.asObservable()
+		inputOb.subscribe{ b in
+			
+		}.disposed(by: disposeBag)
+		desInputOb.subscribe{ b in
+		}.disposed(by: disposeBag)
+		
+		Observable.combineLatest(inputOb, desInputOb, resultSelector: { !$0 && !$1})
+			.subscribe{ b in
+				self.nextStep.isEnabled = b.element!
+				self.nextButtonLayout(b.element!)
+			}
+			.disposed(by: disposeBag)
+	}
+	func nextButtonLayout(_ b : Bool) {
+		if b {
+			self.nextStep.backgroundColor = .black
+			
+		}
+		else {
+			self.nextStep.backgroundColor = .gray01
+			
+		}
 	}
 	@objc func promiseTapped(recognizer: UITapGestureRecognizer) {
 		self.promiseRequiredView.setBorder(borderColor: .salmon, borderWidth: 2)
@@ -447,7 +479,8 @@ class PromiseViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-//		view.backgroundColor = .cyan
+		bind()
+		//		view.backgroundColor = .cyan
 		dataPreset()
 		layout()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
@@ -480,17 +513,7 @@ extension PromiseViewController : UITextViewDelegate {
 		else {
 			requestData.discription = textView.text
 		}
-		
-		if requestData.title.isEmpty || requestData.discription.isEmpty {
-			nextStep.isEnabled = false
-			nextStep.backgroundColor = .gray01
-		}
-		else {
-			nextStep.isEnabled = true
-			nextStep.backgroundColor = .black
-		}
 	}
-	
 }
 extension PromiseViewController : UITextFieldDelegate{
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -499,13 +522,6 @@ extension PromiseViewController : UITextFieldDelegate{
 	}
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		requestData.title = textField.text ?? ""
-		if requestData.title.isEmpty || requestData.discription.isEmpty {
-			nextStep.isEnabled = false
-			nextStep.backgroundColor = .gray01
-		}
-		else {
-			nextStep.isEnabled = true
-			nextStep.backgroundColor = .black
-		}
+		
 	}
 }

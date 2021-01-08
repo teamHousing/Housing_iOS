@@ -6,12 +6,15 @@
 //
 import UIKit
 
-import Then
+import RxSwift
+import RxCocoa
 import SnapKit
-class AppointmentViewController: UIViewController {
+import Then
 
+class AppointmentViewController: UIViewController {
 	var requestData = RequestDataModel.shared
-	private let totalScroll = UIScrollView()
+	
+	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
 	private let backgroundLabel = UILabel().then{
 		$0.text = "문제를 어떻게 해결할까요?"
@@ -67,7 +70,7 @@ class AppointmentViewController: UIViewController {
 			
 			$0.text = "전화로 해결하고 싶어요!"
 			$0.textColor = .black
-
+			
 			$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		}
 		$0.adds([icon,description])
@@ -85,7 +88,7 @@ class AppointmentViewController: UIViewController {
 		}
 		
 	}
-
+	
 	private let pickDateLabel = UILabel().then{
 		$0.text = "일자를 선택해주세요"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
@@ -97,6 +100,7 @@ class AppointmentViewController: UIViewController {
 		$0.text = "YYYY.MM.DD"
 		$0.isUserInteractionEnabled = true
 		$0.isMultipleTouchEnabled = true
+		
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 	}
 	private let underBar = UIView().then{
@@ -110,6 +114,8 @@ class AppointmentViewController: UIViewController {
 	private let startHour = UILabel().then {
 		$0.textColor = .textGrayBlank
 		$0.text = "07시"
+		$0.isUserInteractionEnabled = true
+		$0.isMultipleTouchEnabled = true
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 	}
 	private let startHourUnderBar = UIView().then{
@@ -119,6 +125,8 @@ class AppointmentViewController: UIViewController {
 	private let endHour = UILabel().then {
 		$0.textColor = .textGrayBlank
 		$0.text = "17시"
+		$0.isUserInteractionEnabled = true
+		$0.isMultipleTouchEnabled = true
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 	}
 	private let endHourUnderBar = UIView().then{
@@ -132,11 +140,27 @@ class AppointmentViewController: UIViewController {
 		$0.setTitleColor(.gray01, for: .normal)
 		$0.setRounded(radius: 25)
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
+		$0.addTarget(self, action: #selector(addTimeStamp(sender:)), for: .touchUpInside)
+	}
+	private let underGrayView = UIView().then{
+		$0.backgroundColor = .primaryGray
 		
 	}
-	
-	private let datePicker = UIDatePicker()
-	
+	let timeStampTableView = UITableView(frame: .zero)
+	private let registerButton = UIButton().then {
+		$0.backgroundColor = .gray01
+		$0.setTitle("등록하기", for: .normal)
+		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
+		$0.setTitleColor(.white, for: .normal)
+		$0.setRounded(radius: 25)
+	}
+	private let page = UIPageControl().then{
+		$0.numberOfPages = 4
+		$0.currentPage = 3
+		$0.currentPageIndicatorTintColor = .salmon
+		$0.tintColor = .gray01
+		$0.pageIndicatorTintColor = .gray01
+	}
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
 		let superViewWidth = self.view.frame.width
 		
@@ -151,30 +175,31 @@ class AppointmentViewController: UIViewController {
 	private func layout() {
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .white
-		self.view.addSubview(totalScroll)
-		totalScroll.snp.makeConstraints{
-			$0.edges.equalToSuperview()
-		}
-		self.totalScroll.addSubview(contentView)
-		contentView.snp.makeConstraints{
-			$0.width.equalToSuperview().priority(1000)
-			$0.centerX.top.bottom.equalToSuperview()
-		}
-		self.contentView.adds([
-		backgroundLabel,
-		lineImage,
-		comunicationType,
-		visitView,
-		phoneCallView,
-		pickDateLabel,
-		datePickerLabel,
-		underBar,
-		timeSelectLabel,
-		startHour,
-		startHourUnderBar,
-		endHour,
-		endHourUnderBar,
-		addButton])
+		//		self.view.addSubview(appointmentScroll)
+		//		appointmentScroll.snp.makeConstraints{
+		//			$0.edges.equalToSuperview()
+		//		}
+		//		self.appointmentScroll.addSubview(contentView)
+		//		contentView.snp.makeConstraints{
+		//			$0.width.equalToSuperview().priority(1000)
+		//			$0.centerX.top.bottom.equalToSuperview()
+		//		}
+		//		self.contentView
+		self.view.adds([
+										backgroundLabel,
+										lineImage,
+										comunicationType,
+										visitView,
+										phoneCallView,
+										pickDateLabel,
+										datePickerLabel,
+										underBar,
+										timeSelectLabel,
+										startHour,
+										startHourUnderBar,
+										endHour,
+										endHourUnderBar,
+										addButton])
 		backgroundLabel.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(0)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
@@ -211,19 +236,13 @@ class AppointmentViewController: UIViewController {
 			$0.top.equalTo(visitView.snp.bottom).offset(64)
 			$0.width.equalTo(widthConstraintAmount(value: 145))
 		}
-		let visitTapped = UITapGestureRecognizer(target: self, action: #selector(visitGesture))
-		let phoneCallTapped = UITapGestureRecognizer(target: self, action: #selector(phoneCallGesture))
-		self.visitView.addGestureRecognizer(visitTapped)
-		self.phoneCallView.addGestureRecognizer(phoneCallTapped)
+		
 		datePickerLabel.snp.makeConstraints{
 			$0.top.equalTo(pickDateLabel.snp.bottom).offset(28)
 			$0.centerX.equalTo(view)
 			$0.width.equalTo(widthConstraintAmount(value: 335))
 			$0.height.equalTo(datePickerLabel.snp.width).multipliedBy(1 / 13.4)
 		}
-		let callDatePicker = UITapGestureRecognizer(target: self, action: #selector(callDatePickerView))
-		self.datePickerLabel.addGestureRecognizer(callDatePicker)
-		
 		underBar.snp.makeConstraints{
 			$0.top.equalTo(datePickerLabel.snp.bottom).offset(6)
 			$0.width.equalTo(datePickerLabel)
@@ -268,6 +287,19 @@ class AppointmentViewController: UIViewController {
 			$0.width.equalTo(widthConstraintAmount(value: 255))
 			$0.height.equalTo(addButton.snp.width).multipliedBy(1 / 5.3215)
 		}
+		
+		
+		let visitTapped = UITapGestureRecognizer(target: self, action: #selector(visitGesture(recognizer:)))
+		let phoneCallTapped = UITapGestureRecognizer(target: self, action: #selector(phoneCallGesture(recognizer:)))
+		visitView.addGestureRecognizer(visitTapped)
+		phoneCallView.addGestureRecognizer(phoneCallTapped)
+		
+		let callDatePicker = UITapGestureRecognizer(target: self, action: #selector(callDatePickerView))
+		let callStartTimePicker = UITapGestureRecognizer(target: self, action: #selector(callStartTimePickerView))
+		let callEndTimePicker = UITapGestureRecognizer(target: self, action: #selector(callEndTimePickerView))
+		self.datePickerLabel.addGestureRecognizer(callDatePicker)
+		self.startHour.addGestureRecognizer(callStartTimePicker)
+		self.endHour.addGestureRecognizer(callEndTimePicker)
 	}
 	
 	@objc func visitGesture(recognizer: UITapGestureRecognizer) {
@@ -281,26 +313,100 @@ class AppointmentViewController: UIViewController {
 		requestData.solution = "phone"
 	}
 	@objc func callDatePickerView(recognizer : UITapGestureRecognizer) {
-		let pickerView = UIViewController()
-		print("dd")
-		pickerView.view.addSubview(datePicker)
-		self.present(pickerView, animated: true, completion: nil)
+		let pickerView = DatePickerViewController()
+		pickerView.pickerMode = 0
+		pickerView.grayImage.image = self.view.asImage()
+		self.present(pickerView, animated: false, completion: nil)
 	}
-    override func viewDidLoad() {
-        super.viewDidLoad()
-			layout()
-        // Do any additional setup after loading the view.
-    }
-    
+	@objc func callStartTimePickerView(recognizer : UITapGestureRecognizer) {
+		let pickerView = DatePickerViewController()
+		pickerView.grayImage.image = self.view.asImage()
+		pickerView.pickerMode = 1
+		self.present(pickerView, animated: false, completion: nil)
+	}
+	@objc func callEndTimePickerView(recognizer : UITapGestureRecognizer) {
+		let pickerView = DatePickerViewController()
+		pickerView.pickerMode = 2
+		pickerView.grayImage.image = self.view.asImage()
+		self.present(pickerView, animated: false, completion: nil)
+	}
+	@objc func addTimeStamp(sender : UIButton) {
+		self.resetPickerLayout()
+	}
+	func resetPickerLayout() {
+		datePickerLabel.textColor = .textGrayBlank
+		underBar.backgroundColor = .textGrayBlank
+		datePickerLabel.text = "YYYY.MM.DD"
 
-    /*
-    // MARK: - Navigation
+		startHour.textColor = .textGrayBlank
+		startHourUnderBar.backgroundColor = .textGrayBlank
+		startHour.text = "07시"
+		endHour.textColor = .textGrayBlank
+		endHourUnderBar.backgroundColor = .textGrayBlank
+		endHour.text = "17시"
+		self.requestData.date.observeOn(MainScheduler.instance)
+			.subscribe(onNext: { str in
+				let day = String(str.split(separator: " ")[0])
+				let date = String(str.split(separator: " ")[1])
+				self.requestData.availableTimeList.append(VisitDate(day: day, date: date, startTime: "", endTime: ""))
+			}).dispose()
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+		requestData.date.onNext("")
+		requestData.startTime.onNext("")
+		requestData.endTime.onNext("")
+	}
+		
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		bind()
+		let requestDatamonitor = DispatchWorkItem{
+			while(true){
+				dump(self.requestData)
+				sleep(10)
+			}
+		}
+		DispatchQueue.global().async(execute: requestDatamonitor)
 
+		layout()
+		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+		self.contentView.addGestureRecognizer(tap)
+		// Do any additional setup after loading the view.
+	}
+	
+	func bind() {
+		let _ = self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
+			print(str)
+			self.datePickerLabel.textColor = .black
+			self.underBar.backgroundColor = .black
+			self.datePickerLabel.text = str
+		})
+		let _ = self.requestData.startTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
+			print(str)
+			self.startHour.textColor = .black
+			self.startHourUnderBar.backgroundColor = .black
+			self.startHour.text = str
+		})
+		let _ = self.requestData.endTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
+			print(str)
+			self.endHour.textColor = .black
+			self.endHourUnderBar.backgroundColor = .black
+			self.endHour.text = str
+		})
+		let isDateEmpty: Observable<Bool> = requestData.date.map{$0.isEmpty}.asObservable()
+		let isStartTimeEmpty: Observable<Bool> = requestData.startTime.map{$0.isEmpty}.asObservable()
+		let isEndTimeEmpty: Observable<Bool> = requestData.endTime.map{$0.isEmpty}.asObservable()
+		Observable.combineLatest(
+			isDateEmpty,
+			isStartTimeEmpty,
+			isEndTimeEmpty,
+			resultSelector: {!$0 && !$1 && !$2})
+			.subscribe{ result in
+			print(result)
+			self.addButton.isEnabled = result.element!
+			self.addButton.backgroundColor = result.element! ? .black : .white
+		}.disposed(by: DisposeBag())
+	}
+	@objc func handleTap(recognizer: UITapGestureRecognizer){
+		self.view.endEditing(true)
+	}
 }

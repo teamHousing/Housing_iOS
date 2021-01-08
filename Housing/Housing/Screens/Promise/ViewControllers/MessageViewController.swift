@@ -210,6 +210,7 @@ class MessageViewController: UIViewController {
 			$0.centerX.equalToSuperview()
 		}
 		presetButton5.delegate = self
+		
 	}
 	
     override func viewDidLoad() {
