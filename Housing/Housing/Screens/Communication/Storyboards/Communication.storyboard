@@ -93,19 +93,9 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfG-4X-N3k">
                                                                     <rect key="frame" x="72" y="53.5" width="225" height="21"/>
                                                                     <attributedString key="attributedText">
-                                                                        <fragment content="뚝딱뚝딱">
-                                                                            <attributes>
-                                                                                <font key="NSFont" size="16" name="AppleSDGothicNeoM00"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                        <fragment content="🛠">
+                                                                        <fragment content="뚝딱뚝딱🛠 아직은 해결 중이에요!!">
                                                                             <attributes>
                                                                                 <font key="NSFont" metaFont="system" size="16"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                        <fragment content=" 아직은 해결 중이에요!!">
-                                                                            <attributes>
-                                                                                <font key="NSFont" size="16" name="AppleSDGothicNeoM00"/>
                                                                             </attributes>
                                                                         </fragment>
                                                                     </attributedString>
@@ -183,30 +173,18 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9R4-r1-ba9">
-                                                                    <rect key="frame" x="0.0" y="63.5" width="55" height="1"/>
+                                                                    <rect key="frame" x="0.0" y="63.5" width="56" height="1"/>
                                                                     <color key="backgroundColor" systemColor="labelColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="1" id="fpQ-m9-dpv"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOR-eg-d50">
-                                                                    <rect key="frame" x="63" y="53.5" width="234" height="21"/>
+                                                                    <rect key="frame" x="64" y="53.5" width="233" height="21"/>
                                                                     <attributedString key="attributedText">
-                                                                        <fragment content="해결 완료">
-                                                                            <attributes>
-                                                                                <font key="NSFont" size="16" name="AppleSDGothicNeoM00"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                        <fragment content="😝">
+                                                                        <fragment content="해결 완료😝 한층 더 높아진 삶의 질!">
                                                                             <attributes>
                                                                                 <font key="NSFont" metaFont="system" size="16"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                        <fragment content=" 한층 더 높아진 삶의 질!">
-                                                                            <attributes>
-                                                                                <font key="NSFont" size="16" name="AppleSDGothicNeoM00"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                             </attributes>
                                                                         </fragment>
