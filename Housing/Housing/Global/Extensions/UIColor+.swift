@@ -7,8 +7,7 @@
 
 import UIKit
 
-extension UIColor {
-    
+extension UIColor {    
     @nonobjc class var primaryWhite: UIColor {
         return UIColor(white: 1.0, alpha: 1.0)
     }
