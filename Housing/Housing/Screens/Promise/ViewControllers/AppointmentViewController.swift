@@ -223,6 +223,7 @@ class AppointmentViewController: UIViewController {
 			$0.top.equalTo(backgroundLabel.snp.bottom).offset(60)
 			$0.width.equalTo(widthConstraintAmount(value: 151))
 		}
+		requestData.solution = "집방문"
 		visitView.snp.makeConstraints{
 			$0.top.equalTo(comunicationType.snp.bottom).offset(24)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
@@ -335,29 +336,33 @@ class AppointmentViewController: UIViewController {
 	@objc func visitGesture(recognizer: UITapGestureRecognizer) {
 		self.visitView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.phoneCallView.setBorder(borderColor: .gray01, borderWidth: 1)
-		requestData.solution = "visit"
+		requestData.solution = "집방문"
 	}
 	@objc func phoneCallGesture(recognizer: UITapGestureRecognizer) {
 		self.phoneCallView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.visitView.setBorder(borderColor: .gray01, borderWidth: 1)
-		requestData.solution = "phone"
+		requestData.solution = "전화 통화"
 	}
 	@objc func callDatePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 0
-		pickerView.grayImage.image = self.view.asImage()
+		pickerView.grayImage.image = self.view.window?.asImage()
+		pickerView.modalPresentationStyle = .fullScreen
 		self.present(pickerView, animated: false, completion: nil)
 	}
 	@objc func callStartTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
-		pickerView.grayImage.image = self.view.asImage()
+		pickerView.grayImage.image = self.view.window?.asImage()
+		pickerView.modalPresentationStyle = .fullScreen
+		
 		pickerView.pickerMode = 1
 		self.present(pickerView, animated: false, completion: nil)
 	}
 	@objc func callEndTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 2
-		pickerView.grayImage.image = self.view.asImage()
+		pickerView.grayImage.image = self.view.window?.asImage()
+		pickerView.modalPresentationStyle = .fullScreen
 		self.present(pickerView, animated: false, completion: nil)
 	}
 	@objc func addTimeStamp(sender : UIButton) {
@@ -376,7 +381,7 @@ class AppointmentViewController: UIViewController {
 		self.underGrayView.snp.updateConstraints{
 			$0.height.equalTo(CGFloat(70 * requestData.availableTimeList.count) + 300)
 		}
-
+		
 	}
 	func resetPickerLayout() {
 		datePickerLabel.textColor = .textGrayBlank
@@ -389,13 +394,20 @@ class AppointmentViewController: UIViewController {
 		endHour.textColor = .textGrayBlank
 		endHourUnderBar.backgroundColor = .textGrayBlank
 		endHour.text = "17시"
-		self.requestData.date.observeOn(MainScheduler.instance)
-			.subscribe(onNext: { str in
-				let day = String(str.split(separator: " ")[0])
-				let date = String(str.split(separator: " ")[1])
-				self.requestData.availableTimeList.append(VisitDate(day: day, date: date, startTime: "", endTime: ""))
-			}).dispose()
-		
+		var temp = VisitDate()
+		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
+			print(str)
+			let day = String(str.element!.split(separator: " ")[0])
+			let date = String(str.element!.split(separator: " ")[1])
+			temp.date = date
+			
+			let newday = day.replacingOccurrences(of: "-", with: ". ")
+			temp.day = newday
+			}.disposed(by: disposeBag)
+		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
+		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
+		requestData.availableTimeList.append(temp)
+	
 		requestData.date.onNext("")
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
@@ -422,7 +434,7 @@ class AppointmentViewController: UIViewController {
 		// Do any additional setup after loading the view.
 	}
 	func tableViewBind() {
-
+		
 		timeStampTableView.estimatedRowHeight = CGFloat(70 * requestData.availableTimeList.count)
 		
 	}
@@ -432,18 +444,18 @@ class AppointmentViewController: UIViewController {
 			self.datePickerLabel.textColor = .black
 			self.underBar.backgroundColor = .black
 			self.datePickerLabel.text = str
-
+			
 		}).disposed(by: disposeBag)
 		let _ = self.requestData.startTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
 			print(str)
 			self.startHour.textColor = .black
 			self.startHourUnderBar.backgroundColor = .black
 			self.startHour.text = str
-
+			
 		}).disposed(by: disposeBag)
 		let _ = self.requestData.endTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
 			print(str)
-
+			
 			self.endHour.textColor = .black
 			self.endHourUnderBar.backgroundColor = .black
 			self.endHour.text = str
@@ -478,9 +490,9 @@ extension AppointmentViewController: UITableViewDelegate {
 			return UITableViewCell()
 		}
 		cell.awakeFromNib()
-		cell.dateLabel.text = self.requestData.availableTimeList[indexPath.row].date
-		cell.timeLabel.text = self.requestData.availableTimeList[indexPath.row].date
-		cell.methodLabel.text = self.requestData.availableTimeList[indexPath.row].date
+		cell.dateLabel.text = self.requestData.availableTimeList[indexPath.row].day
+		cell.timeLabel.text = "\(self.requestData.availableTimeList[indexPath.row].startTime) - \(self.requestData.availableTimeList[indexPath.row].endTime)"
+		cell.methodLabel.text = self.requestData.solution
 		cell.selectionStyle = .none
 		cell.deleteButton.tag = indexPath.row
 		cell.deleteButton.addTarget(self, action: #selector(deleteCell), for: .touchUpInside)

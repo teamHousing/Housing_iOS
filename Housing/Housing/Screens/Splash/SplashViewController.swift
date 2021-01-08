@@ -110,7 +110,8 @@ class SplashViewController: BaseViewController {
 	// 태훈
 	@objc
 	func promiseButtonDidTap() {
-		let viewcontroller = PromiseViewController()
+		//let viewcontroller = PromiseViewController()
+		let viewcontroller = AddNoticeViewController()
 		let navigationController = UINavigationController(rootViewController: viewcontroller)
 
 		navigationController.modalPresentationStyle = .fullScreen

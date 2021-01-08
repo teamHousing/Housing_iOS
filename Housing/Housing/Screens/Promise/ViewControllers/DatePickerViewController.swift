@@ -34,6 +34,11 @@ class DatePickerViewController: UIViewController {
 		$0.timeZone = NSTimeZone.local
 		$0.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
 	}
+	private let confirmButton = UIButton().then{
+		$0.setTitle("확인", for: .normal)
+		$0.setTitleColor(.primaryOrange, for: .normal)
+		$0.addTarget(self, action: #selector(confirmButtonClicked), for: .touchUpInside)
+	}
 	@objc func datePickerValueChanged(_ sender: UIDatePicker){
 		
 		let dateFormatter: DateFormatter = DateFormatter()
@@ -41,8 +46,9 @@ class DatePickerViewController: UIViewController {
 		let selectedDate: String = dateFormatter.string(from: sender.date)
 		//dateStringValue()
 		print("Selected value \(selectedDate)")
-
-		
+	}
+	@objc func confirmButtonClicked(sender : UIButton){
+		hideCardAndGoBack()
 	}
 	private func layout() {
 		self.view.adds([grayImage, dimmerView, cardView])
@@ -58,6 +64,7 @@ class DatePickerViewController: UIViewController {
 			$0.trailing.equalToSuperview().offset(0)
 			$0.leading.equalToSuperview().offset(0)
 		}
+		
 		cardView.snp.makeConstraints{
 			$0.bottom.equalToSuperview().offset(0)
 			$0.trailing.equalToSuperview().offset(0)
@@ -69,12 +76,18 @@ class DatePickerViewController: UIViewController {
 					$0.top.equalToSuperview().offset(safeAreaHeight + bottomPadding)
 				}
 			}
-			cardView.adds([datePicker])
+			cardView.adds([datePicker, confirmButton])
 			datePicker.snp.makeConstraints{
 				$0.leading.equalTo(cardView.snp.leading)
 				$0.trailing.equalTo(cardView.snp.trailing)
 				$0.top.equalTo(cardView.snp.top).offset(49)
 				$0.bottom.equalTo(cardView.snp.bottom)
+			}
+			confirmButton.snp.makeConstraints{
+				$0.top.equalTo(cardView.snp.top)
+				$0.bottom.equalTo(datePicker.snp.top)
+				$0.trailing.equalTo(cardView.snp.trailing)
+				$0.width.equalTo(40)
 			}
 			if pickerMode == 0 {
 				datePicker.datePickerMode = .date
@@ -101,7 +114,7 @@ class DatePickerViewController: UIViewController {
 			 let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
 			
 			cardView.snp.updateConstraints{
-				$0.top.equalToSuperview().offset((safeAreaHeight + bottomPadding) / 2.0)
+				$0.top.equalToSuperview().offset((safeAreaHeight + bottomPadding) / 1.66)
 			}
 		}
 		let showCard = UIViewPropertyAnimator(duration: 0.25, curve: .easeIn, animations: {
@@ -128,13 +141,14 @@ class DatePickerViewController: UIViewController {
 				.bind(onNext: {a in self.requestData.date.onNext(a)})
 			.disposed(by: disposeBag)
 		case 1:
-			dateFormatter.dateFormat = "hh"
-			self.datePicker.rx.date.map{ dateFormatter.string(from: $0) + "시"}
+			dateFormatter.dateFormat = "HH"
+			self.datePicker.rx.date.map{
+				dateFormatter.string(from: $0)}
 				.bind(to: requestData.startTime)
 			.disposed(by: disposeBag)
 		case 2:
-			dateFormatter.dateFormat = "hh"
-			self.datePicker.rx.date.map{dateFormatter.string(from: $0) + "시"}
+			dateFormatter.dateFormat = "HH"
+			self.datePicker.rx.date.map{dateFormatter.string(from: $0)}
 				.bind(to: requestData.endTime)
 			.disposed(by: disposeBag)
 		default:
