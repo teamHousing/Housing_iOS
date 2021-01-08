@@ -35,7 +35,7 @@ class AppointmentViewController: UIViewController {
 	private let visitView = UIView().then{
 		$0.backgroundColor = .white
 		$0.setRounded(radius: 16)
-		$0.setBorder(borderColor: .salmon, borderWidth: 2)
+		$0.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		$0.isUserInteractionEnabled = true
 		$0.isMultipleTouchEnabled = true
 		let icon = UIImageView()
@@ -163,7 +163,7 @@ class AppointmentViewController: UIViewController {
 	private let page = UIPageControl().then{
 		$0.numberOfPages = 4
 		$0.currentPage = 3
-		$0.currentPageIndicatorTintColor = .salmon
+		$0.currentPageIndicatorTintColor = .primaryOrange
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
@@ -333,12 +333,12 @@ class AppointmentViewController: UIViewController {
 	}
 	
 	@objc func visitGesture(recognizer: UITapGestureRecognizer) {
-		self.visitView.setBorder(borderColor: .salmon, borderWidth: 2)
+		self.visitView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.phoneCallView.setBorder(borderColor: .gray01, borderWidth: 1)
 		requestData.solution = "visit"
 	}
 	@objc func phoneCallGesture(recognizer: UITapGestureRecognizer) {
-		self.phoneCallView.setBorder(borderColor: .salmon, borderWidth: 2)
+		self.phoneCallView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.visitView.setBorder(borderColor: .gray01, borderWidth: 1)
 		requestData.solution = "phone"
 	}

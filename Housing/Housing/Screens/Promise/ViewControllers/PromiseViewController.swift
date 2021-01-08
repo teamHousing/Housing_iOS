@@ -40,7 +40,7 @@ class PromiseViewController: UIViewController {
 	private let promiseRequiredView = UIView().then{
 		$0.backgroundColor = .white
 		$0.setRounded(radius: 16)
-		$0.setBorder(borderColor: .salmon, borderWidth: 2)
+		$0.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		$0.isUserInteractionEnabled = true
 		$0.isMultipleTouchEnabled = true
 		let icon = UIImageView()
@@ -74,7 +74,7 @@ class PromiseViewController: UIViewController {
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.white, for: .normal)
-		$0.backgroundColor = .salmon
+		$0.backgroundColor = .primaryOrange
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 		
@@ -163,7 +163,7 @@ class PromiseViewController: UIViewController {
 	private let page = UIPageControl().then{
 		$0.numberOfPages = 4
 		$0.currentPage = 0
-		$0.currentPageIndicatorTintColor = .salmon
+		$0.currentPageIndicatorTintColor = .primaryOrange
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
@@ -176,9 +176,9 @@ class PromiseViewController: UIViewController {
 	
 	@objc func buttonClicked(sender : UIButton) {
 		buttonBackgroundRefresher()
-		sender.backgroundColor = .salmon
+		sender.backgroundColor = .primaryOrange
 		sender.setTitleColor(.white, for: .normal)
-		sender.setBorder(borderColor: .salmon, borderWidth: 1)
+		sender.setBorder(borderColor: .primaryOrange, borderWidth: 1)
 		//		self.requestData.cartegory = sender.titleLabel.text
 	}
 	func buttonBackgroundRefresher() {
@@ -457,13 +457,13 @@ class PromiseViewController: UIViewController {
 		}
 	}
 	@objc func promiseTapped(recognizer: UITapGestureRecognizer) {
-		self.promiseRequiredView.setBorder(borderColor: .salmon, borderWidth: 2)
+		self.promiseRequiredView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.promiseNotRequiredView.setBorder(borderColor: .gray01, borderWidth: 1)
 		self.page.numberOfPages = 4
 		requestData.isPromiseNeeded = true
 	}
 	@objc func notPromiseTapped(recognizer: UITapGestureRecognizer) {
-		self.promiseNotRequiredView.setBorder(borderColor: .salmon, borderWidth: 2)
+		self.promiseNotRequiredView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.promiseRequiredView.setBorder(borderColor: .gray01, borderWidth: 1)
 		self.page.numberOfPages = 3
 		requestData.isPromiseNeeded = false

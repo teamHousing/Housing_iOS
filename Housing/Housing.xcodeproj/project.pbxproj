@@ -75,7 +75,7 @@
 		DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */; };
 		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 		DA6D898525A5A98E00CF47C4 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D898425A5A98E00CF47C4 /* AppointmentViewController.swift */; };
-		DA813FBF25A475E500D33AD2 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA813FBE25A475E500D33AD2 /* MessageViewController.swift */; };
+		DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA813FBE25A475E500D33AD2 /* AdditionalRequestViewController.swift */; };
 		DAB3225925A72A520098175E /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225825A72A510098175E /* DatePickerViewController.swift */; };
 		DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225B25A73F900098175E /* UIDatePicker+.swift */; };
 		DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */; };
@@ -144,7 +144,7 @@
 		DA05096B25A05A6100DDB916 /* RequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataModel.swift; sourceTree = "<group>"; };
 		DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA6D898425A5A98E00CF47C4 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
-		DA813FBE25A475E500D33AD2 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		DA813FBE25A475E500D33AD2 /* AdditionalRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRequestViewController.swift; sourceTree = "<group>"; };
 		DAB3225825A72A510098175E /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		DAB3225B25A73F900098175E /* UIDatePicker+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+.swift"; sourceTree = "<group>"; };
 		DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStampTableViewCell.swift; sourceTree = "<group>"; };
@@ -359,7 +359,7 @@
 				DA05097825A2174B00DDB916 /* Cell */,
 				D1B444DC259F096C005C2C68 /* PromiseViewController.swift */,
 				DA050945259F343E00DDB916 /* CameraWorkViewController.swift */,
-				DA813FBE25A475E500D33AD2 /* MessageViewController.swift */,
+				DA813FBE25A475E500D33AD2 /* AdditionalRequestViewController.swift */,
 				DA6D898425A5A98E00CF47C4 /* AppointmentViewController.swift */,
 				DAB3225825A72A510098175E /* DatePickerViewController.swift */,
 			);
@@ -675,7 +675,7 @@
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
 				1F8ECE8C25A7138100C0E0FA /* SignupCompleteViewController.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
-				DA813FBF25A475E500D33AD2 /* MessageViewController.swift in Sources */,
+				DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
 				37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */,
@@ -685,7 +685,7 @@
 				D1B44505259F0FCE005C2C68 /* StoryboardStorage.swift in Sources */,
 				CC42D06225A74E54002A461D /* MessageDetailTableViewCell.swift in Sources */,
 				D1B444FF259F0B13005C2C68 /* HomeViewController.swift in Sources */,
-        DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */,
+				DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */,
 				CC8B595325A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift in Sources */,

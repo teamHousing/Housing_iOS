@@ -47,13 +47,13 @@ class CameraWorkViewController: UIViewController{
 	private let page = UIPageControl().then{
 		$0.numberOfPages = 4
 		$0.currentPage = 1
-		$0.currentPageIndicatorTintColor = .salmon
+		$0.currentPageIndicatorTintColor = .primaryOrange
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
 	@objc func nextButtonDidTapped() {
-		let cameraView = MessageViewController()
-		self.navigationController?.pushViewController(cameraView, animated: true)
+		let additionalRequestViewController = AdditionalRequestViewController()
+		self.navigationController?.pushViewController(additionalRequestViewController, animated: true)
 	}
 	
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {

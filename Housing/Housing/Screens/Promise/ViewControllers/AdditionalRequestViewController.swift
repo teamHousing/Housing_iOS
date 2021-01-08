@@ -9,7 +9,7 @@ import SnapKit
 
 import UIKit
 
-class MessageViewController: UIViewController {
+class AdditionalRequestViewController: UIViewController {
 
 	var requestData = RequestDataModel.shared
 	func dataPreset() {
@@ -37,7 +37,7 @@ class MessageViewController: UIViewController {
 		$0.setRounded(radius: 12)
 		$0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 		$0.contentHorizontalAlignment = .left
-		$0.setBorder(borderColor: .salmon, borderWidth: 2)
+		$0.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		$0.setTitleColor(.black, for: .normal)
 		$0.addTarget(self, action: #selector(presetMessageSelected), for: .touchUpInside)
 
@@ -94,7 +94,7 @@ class MessageViewController: UIViewController {
 	private let page = UIPageControl().then{
 		$0.numberOfPages = 4
 		$0.currentPage = 2
-		$0.currentPageIndicatorTintColor = .salmon
+		$0.currentPageIndicatorTintColor = .primaryOrange
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
@@ -107,7 +107,7 @@ class MessageViewController: UIViewController {
 	}
 	@objc func presetMessageSelected(sender : UIButton) {
 		clearSelection()
-		sender.setBorder(borderColor: .salmon, borderWidth: 2)
+		sender.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		//sender.layer.applyShadow()
 		requestData.editionalRequest = sender.titleLabel?.text ?? ""
 	}
@@ -238,13 +238,13 @@ class MessageViewController: UIViewController {
     */
 
 }
-extension MessageViewController : UITextFieldDelegate {
+extension AdditionalRequestViewController : UITextFieldDelegate {
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		clearSelection()
 		if textField.text == "직접 입력하기" {
 			textField.text = nil
 		}
-		textField.setBorder(borderColor: .salmon, borderWidth: 2)
+		textField.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 	}
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		if textField.text == ""{
