@@ -416,11 +416,7 @@ class PromiseViewController: UIViewController {
 		}
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-		
-		
-		
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-		
 		
 		let promiseTap = UITapGestureRecognizer(target: self, action: #selector(promiseTapped))
 		let notPromiseTap = UITapGestureRecognizer(target: self, action: #selector(notPromiseTapped))

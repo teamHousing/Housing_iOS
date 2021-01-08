@@ -19,6 +19,7 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 	
 	func registerCell() {
 		tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCell.reuseIdentifier)
+		
 	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -43,9 +44,16 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell: MessageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 		cell.awakeFromNib()
+		let cell2: MessageDetailTableViewCell = cell.messageTableView.dequeueCell(forIndexPath: indexPath)
+		cell2.transitionButton.addTarget(self, action: #selector(self.touchUpConfirm), for: .touchUpInside)
 		cell.selectionStyle = .none
 		return cell
 	}
 	
+	@objc func touchUpConfirm(_sender: UIButton) {
+		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
+		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "ConfirmViewController")
+		self.navigationController?.pushViewController(viewcontroller, animated: true)
+	}
 	
 }
