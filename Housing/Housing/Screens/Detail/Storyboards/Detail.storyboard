@@ -13,9 +13,15 @@
         <scene sceneID="e7E-3a-nQW">
             <objects>
                 <navigationController id="0ch-4Z-YoH" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FXi-lZ-eHc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="btnBack" id="FXi-lZ-eHc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Z9I-b8-lkV" kind="relationship" relationship="rootViewController" id="qoT-rH-Cqh"/>
@@ -41,8 +47,47 @@
             </objects>
             <point key="canvasLocation" x="45" y="111"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XDW-1f-E5S">
+            <objects>
+                <navigationController id="Mjj-oF-HJ9" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="btnBack" id="enU-Jg-RDV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Pgw-CT-lI6" kind="relationship" relationship="rootViewController" id="Cij-na-Xk0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FpB-Nx-e6o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-655" y="898"/>
+        </scene>
+        <!--Confirm View Controller-->
+        <scene sceneID="VnP-04-uL3">
+            <objects>
+                <viewController storyboardIdentifier="ConfirmViewController" id="Pgw-CT-lI6" customClass="ConfirmViewController" customModule="Housing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="irY-Is-Qnt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="AK1-bS-NpL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oW0-Ak-hZi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3RT-1u-6hA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="390" y="897"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="btnBack" width="44" height="44"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

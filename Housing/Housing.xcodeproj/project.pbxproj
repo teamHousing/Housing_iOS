@@ -25,6 +25,8 @@
 		CC8B595625A496B300EC3AC7 /* MethodDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */; };
 		CC8B595A25A498B200EC3AC7 /* CommunicationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595925A498B200EC3AC7 /* CommunicationMethod.swift */; };
 		CC8B596025A49F6D00EC3AC7 /* AddedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */; };
+		CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */; };
+		CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */; };
 		D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */; };
 		D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */; };
 		D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */; };
@@ -101,6 +103,8 @@
 		CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodDetailTableViewCell.swift; sourceTree = "<group>"; };
 		CC8B595925A498B200EC3AC7 /* CommunicationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationMethod.swift; sourceTree = "<group>"; };
 		CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedImageTableViewCell.swift; sourceTree = "<group>"; };
+		CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
+		CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTableViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
 		D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 				CC6A1DF725A58C6C00C86865 /* AddedImageCollectionViewCell.swift */,
 				CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */,
 				CC42D06125A74E54002A461D /* MessageDetailTableViewCell.swift */,
+				CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				D1B444E3259F09C5005C2C68 /* DetailViewController.swift */,
 				CC096D5425A2415E00E07017 /* ContentViewController.swift */,
 				CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */,
+				CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -670,6 +676,7 @@
 				D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */,
 				D11C1BEF25A2083B002606B2 /* NoticeCollectionViewCell.swift in Sources */,
 				D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */,
+				CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */,
 				D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */,
 				D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */,
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
@@ -689,6 +696,7 @@
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */,
 				CC8B595325A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift in Sources */,
+				CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				CC42D05F25A74D21002A461D /* MessageTableViewCell.swift in Sources */,
 				D131188E259B6BA900897DF4 /* UICollectionViewCell+.swift in Sources */,
