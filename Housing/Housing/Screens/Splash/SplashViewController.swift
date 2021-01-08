@@ -46,6 +46,7 @@ class SplashViewController: BaseViewController {
 		$0.setTitle("로그인/민제", for: .normal)
 		$0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
 		$0.backgroundColor = .black
+		$0.translatesAutoresizingMaskIntoConstraints = false
 		$0.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
 		$0.setRounded(radius: 10)
 	}
@@ -57,6 +58,7 @@ class SplashViewController: BaseViewController {
 	}
 	
 	private func layout() {
+		
 		view.adds([
 			logoLabel,
 			tabButton,
@@ -64,7 +66,7 @@ class SplashViewController: BaseViewController {
 			detailButton,
 			homeButton
 		])
-		
+
 		logoLabel.snp.makeConstraints {
 			$0.centerX.equalToSuperview()
 			$0.top.equalToSuperview().offset(60)
@@ -80,7 +82,7 @@ class SplashViewController: BaseViewController {
 			$0.height.equalTo(60)
 		}
 		detailButton.snp.makeConstraints {
-			$0.bottom.equalTo(view).offset(-50)
+			$0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
 			$0.leading.equalTo(homeButton.snp.trailing).offset(10)
 			$0.width.equalTo((view.frame.width/3)-10)
 			$0.height.equalTo(60)
@@ -100,18 +102,19 @@ class SplashViewController: BaseViewController {
 		let storyboard = UIStoryboard(name: StoryboardStorage.login,
 																	bundle: nil)
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
+		let navigationViewController = UINavigationController(rootViewController: viewcontroller)
+		navigationViewController.modalPresentationStyle = .fullScreen
+		present(navigationViewController, animated: true)
 	}
 	
 	// 태훈
 	@objc
 	func promiseButtonDidTap() {
-		let storyboard = UIStoryboard(name: StoryboardStorage.promise,
-																	bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "PromiseViewController")
-		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
+		let viewcontroller = PromiseViewController()
+		let navigationController = UINavigationController(rootViewController: viewcontroller)
+
+		navigationController.modalPresentationStyle = .fullScreen
+		present(navigationController, animated: true)
 		//self.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	
@@ -121,8 +124,9 @@ class SplashViewController: BaseViewController {
 		let storyboard = UIStoryboard(name: StoryboardStorage.detail,
 																	bundle: nil)
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "DetailViewController")
-		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
+		let navigationViewController = UINavigationController(rootViewController: viewcontroller)
+		navigationViewController.modalPresentationStyle = .fullScreen
+		present(navigationViewController, animated: true)
 	}
 	
 	// 준현
