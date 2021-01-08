@@ -128,13 +128,13 @@ class DatePickerViewController: UIViewController {
 				.bind(onNext: {a in self.requestData.date.onNext(a)})
 			.disposed(by: disposeBag)
 		case 1:
-			dateFormatter.dateFormat = "hh:mm"
-			self.datePicker.rx.date.map{ dateFormatter.string(from: $0)}
+			dateFormatter.dateFormat = "hh"
+			self.datePicker.rx.date.map{ dateFormatter.string(from: $0) + "시"}
 				.bind(to: requestData.startTime)
 			.disposed(by: disposeBag)
 		case 2:
 			dateFormatter.dateFormat = "hh"
-			self.datePicker.rx.date.map{dateFormatter.string(from: $0)}
+			self.datePicker.rx.date.map{dateFormatter.string(from: $0) + "시"}
 				.bind(to: requestData.endTime)
 			.disposed(by: disposeBag)
 		default:

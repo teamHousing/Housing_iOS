@@ -13,7 +13,7 @@ import Then
 
 class AppointmentViewController: UIViewController {
 	var requestData = RequestDataModel.shared
-	
+	let disposeBag = DisposeBag()
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
 	private let backgroundLabel = UILabel().then{
@@ -146,7 +146,13 @@ class AppointmentViewController: UIViewController {
 		$0.backgroundColor = .primaryGray
 		
 	}
-	let timeStampTableView = UITableView(frame: .zero)
+	let timeStampTableView = UITableView(frame: .zero).then{
+		$0.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
+		$0.backgroundColor = .primaryWhite
+		$0.isScrollEnabled = false
+		$0.rowHeight = UITableView.automaticDimension
+		$0.separatorStyle = .none
+	}
 	private let registerButton = UIButton().then {
 		$0.backgroundColor = .gray01
 		$0.setTitle("등록하기", for: .normal)
@@ -291,7 +297,7 @@ class AppointmentViewController: UIViewController {
 			$0.top.equalTo(addButton.snp.bottom).offset(70)
 			$0.leading.equalTo(view)
 			$0.trailing.equalTo(view)
-			$0.height.equalTo(330)
+			$0.height.equalTo(CGFloat(70 * requestData.availableTimeList.count) + 300)
 			$0.bottom.equalToSuperview().offset(44)
 		}
 		underGrayView.adds([timeStampTableView, registerButton, page])
@@ -299,8 +305,9 @@ class AppointmentViewController: UIViewController {
 			$0.top.equalTo(underGrayView.snp.top)
 			$0.leading.equalTo(view)
 			$0.trailing.equalTo(view)
-			$0.height.equalTo(100)
+			$0.height.equalTo(CGFloat(70 * requestData.availableTimeList.count))
 		}
+		
 		registerButton.snp.makeConstraints{
 			$0.top.equalTo(timeStampTableView.snp.bottom).offset(72)
 			$0.centerX.equalTo(view)
@@ -355,6 +362,21 @@ class AppointmentViewController: UIViewController {
 	}
 	@objc func addTimeStamp(sender : UIButton) {
 		self.resetPickerLayout()
+		self.resetTableViewHeight()
+		let isTableViewEmpty = requestData.availableTimeList.isEmpty
+		self.registerButton.isEnabled = isTableViewEmpty ? false : true
+		self.registerButton.backgroundColor = isTableViewEmpty ? .gray : .black
+		self.tableViewBind()
+		self.timeStampTableView.reloadData()
+	}
+	func resetTableViewHeight() {
+		self.timeStampTableView.snp.updateConstraints{
+			$0.height.equalTo(CGFloat(70 * self.requestData.availableTimeList.count))
+		}
+		self.underGrayView.snp.updateConstraints{
+			$0.height.equalTo(CGFloat(70 * requestData.availableTimeList.count) + 300)
+		}
+
 	}
 	func resetPickerLayout() {
 		datePickerLabel.textColor = .textGrayBlank
@@ -389,47 +411,94 @@ class AppointmentViewController: UIViewController {
 			}
 		}
 		//DispatchQueue.global().async(execute: requestDatamonitor)
+		self.timeStampTableView.register(TimeStampTableViewCell.self, forCellReuseIdentifier: TimeStampTableViewCell.registterId)
+		self.timeStampTableView.delegate = self
+		self.timeStampTableView.dataSource = self
 		
 		layout()
+		tableViewBind()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.contentView.addGestureRecognizer(tap)
 		// Do any additional setup after loading the view.
 	}
-	
+	func tableViewBind() {
+
+		timeStampTableView.estimatedRowHeight = CGFloat(70 * requestData.availableTimeList.count)
+		
+	}
 	func bind() {
 		let _ = self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
 			print(str)
 			self.datePickerLabel.textColor = .black
 			self.underBar.backgroundColor = .black
 			self.datePickerLabel.text = str
-		})
+
+		}).disposed(by: disposeBag)
 		let _ = self.requestData.startTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
 			print(str)
 			self.startHour.textColor = .black
 			self.startHourUnderBar.backgroundColor = .black
 			self.startHour.text = str
-		})
+
+		}).disposed(by: disposeBag)
 		let _ = self.requestData.endTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
 			print(str)
+
 			self.endHour.textColor = .black
 			self.endHourUnderBar.backgroundColor = .black
 			self.endHour.text = str
-		})
-		let isDateEmpty: Observable<Bool> = requestData.date.map{$0.isEmpty}.asObservable()
-		let isStartTimeEmpty: Observable<Bool> = requestData.startTime.map{$0.isEmpty}.asObservable()
-		let isEndTimeEmpty: Observable<Bool> = requestData.endTime.map{$0.isEmpty}.asObservable()
-		Observable.combineLatest(
+		}).disposed(by: disposeBag)
+		bindAddButton()
+	}
+	func bindAddButton() {
+		let isDateEmpty = requestData.date.map{$0.isEmpty}.asObservable()
+		let isStartTimeEmpty = requestData.startTime.map{$0.isEmpty}.asObservable()
+		let isEndTimeEmpty = requestData.endTime.map{$0.isEmpty}.asObservable()
+		let _ = Observable.combineLatest(
 			isDateEmpty,
 			isStartTimeEmpty,
 			isEndTimeEmpty,
-			resultSelector: {!$0 && !$1 && !$2})
+			resultSelector: {$0 || $1 || $2})
 			.subscribe{ result in
-				print(result)
-				self.addButton.isEnabled = result.element!
-				self.addButton.backgroundColor = result.element! ? .black : .white
-			}.disposed(by: DisposeBag())
+				self.addButton.isEnabled = !result.element!
+				self.addButton.backgroundColor = !result.element! ? .black : .white
+			}.disposed(by: disposeBag)
 	}
 	@objc func handleTap(recognizer: UITapGestureRecognizer){
 		self.view.endEditing(true)
+	}
+}
+extension AppointmentViewController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 70
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: TimeStampTableViewCell.registterId, for: indexPath) as? TimeStampTableViewCell else {
+			return UITableViewCell()
+		}
+		cell.awakeFromNib()
+		cell.dateLabel.text = self.requestData.availableTimeList[indexPath.row].date
+		cell.timeLabel.text = self.requestData.availableTimeList[indexPath.row].date
+		cell.methodLabel.text = self.requestData.availableTimeList[indexPath.row].date
+		cell.selectionStyle = .none
+		cell.deleteButton.tag = indexPath.row
+		cell.deleteButton.addTarget(self, action: #selector(deleteCell), for: .touchUpInside)
+		return cell
+	}
+	@objc func deleteCell(sender:UIButton) {
+		requestData.availableTimeList.remove(at: sender.tag)
+		timeStampTableView.reloadData()
+		if requestData.availableTimeList.isEmpty {
+			self.registerButton.isEnabled = false
+			self.registerButton.backgroundColor = .gray
+		}
+		self.resetTableViewHeight()
+	}
+}
+
+extension AppointmentViewController: UITableViewDataSource{
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.requestData.availableTimeList.count
 	}
 }
