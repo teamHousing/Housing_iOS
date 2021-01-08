@@ -175,31 +175,31 @@ class AppointmentViewController: UIViewController {
 	private func layout() {
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .white
-		//		self.view.addSubview(appointmentScroll)
-		//		appointmentScroll.snp.makeConstraints{
-		//			$0.edges.equalToSuperview()
-		//		}
-		//		self.appointmentScroll.addSubview(contentView)
-		//		contentView.snp.makeConstraints{
-		//			$0.width.equalToSuperview().priority(1000)
-		//			$0.centerX.top.bottom.equalToSuperview()
-		//		}
-		//		self.contentView
-		self.view.adds([
-										backgroundLabel,
-										lineImage,
-										comunicationType,
-										visitView,
-										phoneCallView,
-										pickDateLabel,
-										datePickerLabel,
-										underBar,
-										timeSelectLabel,
-										startHour,
-										startHourUnderBar,
-										endHour,
-										endHourUnderBar,
-										addButton])
+		self.view.addSubview(appointmentScroll)
+		appointmentScroll.snp.makeConstraints{
+			$0.edges.equalToSuperview()
+		}
+		self.appointmentScroll.addSubview(contentView)
+		contentView.snp.makeConstraints{
+			$0.width.equalToSuperview().priority(1000)
+			$0.centerX.top.bottom.equalToSuperview()
+		}
+		self.contentView.adds([
+														backgroundLabel,
+														lineImage,
+														comunicationType,
+														visitView,
+														phoneCallView,
+														pickDateLabel,
+														datePickerLabel,
+														underBar,
+														timeSelectLabel,
+														startHour,
+														startHourUnderBar,
+														endHour,
+														endHourUnderBar,
+														addButton,
+														underGrayView])
 		backgroundLabel.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(0)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
@@ -287,8 +287,31 @@ class AppointmentViewController: UIViewController {
 			$0.width.equalTo(widthConstraintAmount(value: 255))
 			$0.height.equalTo(addButton.snp.width).multipliedBy(1 / 5.3215)
 		}
-		
-		
+		underGrayView.snp.makeConstraints{
+			$0.top.equalTo(addButton.snp.bottom).offset(70)
+			$0.leading.equalTo(view)
+			$0.trailing.equalTo(view)
+			$0.height.equalTo(330)
+			$0.bottom.equalToSuperview().offset(44)
+		}
+		underGrayView.adds([timeStampTableView, registerButton, page])
+		timeStampTableView.snp.makeConstraints{
+			$0.top.equalTo(underGrayView.snp.top)
+			$0.leading.equalTo(view)
+			$0.trailing.equalTo(view)
+			$0.height.equalTo(100)
+		}
+		registerButton.snp.makeConstraints{
+			$0.top.equalTo(timeStampTableView.snp.bottom).offset(72)
+			$0.centerX.equalTo(view)
+			$0.width.equalTo(widthConstraintAmount(value: 255))
+			$0.height.equalTo(addButton.snp.width).multipliedBy(1 / 5.3215)
+		}
+		page.snp.makeConstraints{
+			$0.top.equalTo(registerButton.snp.bottom).offset(24)
+			$0.height.equalTo(20)
+			$0.centerX.equalToSuperview()
+		}
 		let visitTapped = UITapGestureRecognizer(target: self, action: #selector(visitGesture(recognizer:)))
 		let phoneCallTapped = UITapGestureRecognizer(target: self, action: #selector(phoneCallGesture(recognizer:)))
 		visitView.addGestureRecognizer(visitTapped)
@@ -337,7 +360,7 @@ class AppointmentViewController: UIViewController {
 		datePickerLabel.textColor = .textGrayBlank
 		underBar.backgroundColor = .textGrayBlank
 		datePickerLabel.text = "YYYY.MM.DD"
-
+		
 		startHour.textColor = .textGrayBlank
 		startHourUnderBar.backgroundColor = .textGrayBlank
 		startHour.text = "07시"
@@ -350,12 +373,12 @@ class AppointmentViewController: UIViewController {
 				let date = String(str.split(separator: " ")[1])
 				self.requestData.availableTimeList.append(VisitDate(day: day, date: date, startTime: "", endTime: ""))
 			}).dispose()
-
+		
 		requestData.date.onNext("")
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
 	}
-		
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		bind()
@@ -365,8 +388,8 @@ class AppointmentViewController: UIViewController {
 				sleep(10)
 			}
 		}
-		DispatchQueue.global().async(execute: requestDatamonitor)
-
+		//DispatchQueue.global().async(execute: requestDatamonitor)
+		
 		layout()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.contentView.addGestureRecognizer(tap)
@@ -401,10 +424,10 @@ class AppointmentViewController: UIViewController {
 			isEndTimeEmpty,
 			resultSelector: {!$0 && !$1 && !$2})
 			.subscribe{ result in
-			print(result)
-			self.addButton.isEnabled = result.element!
-			self.addButton.backgroundColor = result.element! ? .black : .white
-		}.disposed(by: DisposeBag())
+				print(result)
+				self.addButton.isEnabled = result.element!
+				self.addButton.backgroundColor = result.element! ? .black : .white
+			}.disposed(by: DisposeBag())
 	}
 	@objc func handleTap(recognizer: UITapGestureRecognizer){
 		self.view.endEditing(true)
