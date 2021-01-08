@@ -3,17 +3,17 @@
     {
       "scale" : "1x",
       "idiom" : "universal",
-      "filename" : "btnDelete.png"
+      "filename" : "btnPlus.png"
     },
     {
-      "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "btnDelete@2x.png"
+      "idiom" : "universal",
+      "filename" : "btnPlus@2x.png"
     },
     {
-      "idiom" : "universal",
-      "filename" : "btnDelete@3x.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "btnPlus@3x.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {
