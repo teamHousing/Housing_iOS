@@ -1,0 +1,34 @@
+//
+//  AddedImageCollectionViewCell.swift
+//  Housing
+//
+//  Created by 노한솔 on 2021/01/06.
+//
+
+import UIKit
+
+import Kingfisher
+import SnapKit
+import Then
+
+class AddedImageCollectionViewCell: UICollectionViewCell {
+	
+	let addedImageView = UIImageView()
+	
+	func layout() {
+		contentView.backgroundColor = .white
+		self.contentView.add(addedImageView) {
+			$0.setBorder(borderColor: .red, borderWidth: 1)
+			$0.layer.cornerRadius = 15
+			$0.snp.makeConstraints {
+				$0.top.trailing.equalTo(self.contentView)
+				$0.edges.equalTo(self.contentView)
+			}
+		}
+	}
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		layout()
+	}
+}

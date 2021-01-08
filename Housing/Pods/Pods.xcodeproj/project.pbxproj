@@ -1,0 +1,682 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04804159956F03307727801AB3B3F8FF /* SegementSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DCD2B653B83BAF5EA8985CAA52B1CC /* SegementSlideDefaultViewController.swift */; };
+		273153CA20EDE1F7B682327CA8C49EDB /* SegementSlideViewController+delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E7A79593B2FFA7162A5C5E8F141D2 /* SegementSlideViewController+delegate.swift */; };
+		39E44781F5AE0CDA33415ED770EC125A /* SegementSlideViewController+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0CAA0E6FF8462AA9C853C3F88AB73A /* SegementSlideViewController+ex.swift */; };
+		4CF6A1E2D8A6BE0E772C496102C7EAD4 /* SegementSlide-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FD809203DFA5C36966B6C39E3D4A665D /* SegementSlide-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F325CC07C3D31CA141F39335FA817A0 /* SegementSlideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8E5DCF47B1A61C1562FE429CFD0D3A /* SegementSlideHeaderView.swift */; };
+		5EB9D3A9295A6516BDBA77DCFE53CFD3 /* SegementSlide-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E60F64FA4FC396FF39A348B5E15A5E /* SegementSlide-dummy.m */; };
+		68E472E47AA87DF59FE291D8A0792A51 /* TransparentSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA830293C3CB96DCF428931AF5CFE26 /* TransparentSlideViewController.swift */; };
+		6D7B1BD2355D7DCB7C0A403376594852 /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AE2FD4ADAAFEBCA5490B7061459719 /* SegementSlideSwitcherDataSourceWeakBox.swift */; };
+		7FB05457C50253A5DDDB538A8EF71724 /* SegementSlideDefaultSwitcherConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686DED12636C444317F04086B77A29 /* SegementSlideDefaultSwitcherConfig.swift */; };
+		8FA95861BC50739E6FF715436DBDD0A6 /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A907B8A471C46F9705FA5A6948E0DF /* UIScrollView+Scroll.swift */; };
+		99246DC85898CA4847C3EB37376D7B16 /* Pods-Housing-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 610AE6E3B8E174293CDDAE6DBFE7755E /* Pods-Housing-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9E9CC8A3DA5A44CA3BB9BEE0284EFCFE /* SegementSlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DEEEF59BE0E73941C28B3459F2CAB9 /* SegementSlideScrollView.swift */; };
+		A30B8BE0C607551D824E2BEE6D54C971 /* SegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4624D6596A90C26B9E42E683216D /* SegementSlideViewController.swift */; };
+		A39C3DECE488CDF9045F6C630CC14814 /* SegementSlideContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479C807F7B09291FC15BCD44005FBEDF /* SegementSlideContentView.swift */; };
+		B24D2C57BF4FB7BD250FD0B7DA1BBBE7 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAC0D7079C0D58704C582C34F9FE11D /* BadgeView.swift */; };
+		B7A9A9AA09CAF1F40A6FFEC184BA99AB /* SegementSlideViewController+scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B1D3DE096623969CF504765F06C6D6 /* SegementSlideViewController+scroll.swift */; };
+		BD90766817AB012E23A5FB694E1F2C06 /* Pods-Housing-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F19B1896622386FFF4CAD47CB7A9CD4B /* Pods-Housing-dummy.m */; };
+		BE2C94F88C4D09BE8725F4E4DAC62565 /* SegementSlideSwitcherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C47C0D65195D1E30C6D04A0D362BA2 /* SegementSlideSwitcherDelegate.swift */; };
+		C50F9068AE67E07345D17ED1EE78A3D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		C778AFB9C4EAE99A909E1AA2EEC42697 /* SegementSlideDefaultSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E4E9A14AE247C6F8537392B0D0F485 /* SegementSlideDefaultSwitcherView.swift */; };
+		CA561FB9A42713B9C8A1E9EC9BD8ED46 /* SegementSlideViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DFB597E66BCF21039B3251AECCE2FE /* SegementSlideViewController+setup.swift */; };
+		D95A6C80B0547454D6147C164E56C309 /* SegementSlideDefaultSwitcherView+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA02EA5435DAA25D264FEA38D5437AD /* SegementSlideDefaultSwitcherView+ex.swift */; };
+		DB2F2285D9A792B26D520FEB63483052 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		E1723B8F79EC31857B7B5F5C17C135E8 /* TransparentSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F57DA1F24E5953CE3B8E5303921B9 /* TransparentSlideDefaultViewController.swift */; };
+		E2360E795ED81BABECB86F2683E03697 /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBBE9E20BD4773F2B5A9681ED394766 /* String+Bounding.swift */; };
+		E2E7D3ADF136AC7F5F1DD2A218796F75 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A282257228E1A93DDA70FF635E31F3CA /* UIView+Constraint.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C06BDBE25CD55DE33AC54CD623D83633 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 055411E7F4239B4CB7D549A671F771E0;
+			remoteInfo = SegementSlide;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02DFB597E66BCF21039B3251AECCE2FE /* SegementSlideViewController+setup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+setup.swift"; path = "Source/General/SegementSlideViewController+setup.swift"; sourceTree = "<group>"; };
+		0AA02EA5435DAA25D264FEA38D5437AD /* SegementSlideDefaultSwitcherView+ex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideDefaultSwitcherView+ex.swift"; path = "Source/Switcher/SegementSlideDefaultSwitcherView+ex.swift"; sourceTree = "<group>"; };
+		0B3C107B5B924B9DC40F622DCF3D8AC0 /* Pods_Housing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Housing.framework; path = "Pods-Housing.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11A907B8A471C46F9705FA5A6948E0DF /* UIScrollView+Scroll.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Scroll.swift"; path = "Source/Utility/UIScrollView+Scroll.swift"; sourceTree = "<group>"; };
+		262F57DA1F24E5953CE3B8E5303921B9 /* TransparentSlideDefaultViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransparentSlideDefaultViewController.swift; path = Source/General/TransparentSlideDefaultViewController.swift; sourceTree = "<group>"; };
+		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		39B1D3DE096623969CF504765F06C6D6 /* SegementSlideViewController+scroll.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+scroll.swift"; path = "Source/General/SegementSlideViewController+scroll.swift"; sourceTree = "<group>"; };
+		3B0CAA0E6FF8462AA9C853C3F88AB73A /* SegementSlideViewController+ex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+ex.swift"; path = "Source/General/SegementSlideViewController+ex.swift"; sourceTree = "<group>"; };
+		3EAC0D7079C0D58704C582C34F9FE11D /* BadgeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BadgeView.swift; path = Source/Switcher/BadgeView.swift; sourceTree = "<group>"; };
+		42680C948568347510E3E5881F7FDB51 /* SegementSlide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SegementSlide.framework; path = SegementSlide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		479C807F7B09291FC15BCD44005FBEDF /* SegementSlideContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideContentView.swift; path = Source/Content/SegementSlideContentView.swift; sourceTree = "<group>"; };
+		4E51CDE2C8974283611A915CD6262DE1 /* SegementSlide-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SegementSlide-prefix.pch"; sourceTree = "<group>"; };
+		58E60F64FA4FC396FF39A348B5E15A5E /* SegementSlide-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SegementSlide-dummy.m"; sourceTree = "<group>"; };
+		5EC8DED5238ABC21CEA36D90101A2980 /* SegementSlide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SegementSlide.debug.xcconfig; sourceTree = "<group>"; };
+		610AE6E3B8E174293CDDAE6DBFE7755E /* Pods-Housing-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Housing-umbrella.h"; sourceTree = "<group>"; };
+		642094525327EDBDFEA23A8B3DCD071D /* Pods-Housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Housing.debug.xcconfig"; sourceTree = "<group>"; };
+		79686DED12636C444317F04086B77A29 /* SegementSlideDefaultSwitcherConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultSwitcherConfig.swift; path = Source/Switcher/SegementSlideDefaultSwitcherConfig.swift; sourceTree = "<group>"; };
+		7BBBE9E20BD4773F2B5A9681ED394766 /* String+Bounding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Bounding.swift"; path = "Source/Utility/String+Bounding.swift"; sourceTree = "<group>"; };
+		7FA830293C3CB96DCF428931AF5CFE26 /* TransparentSlideViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransparentSlideViewController.swift; path = Source/General/TransparentSlideViewController.swift; sourceTree = "<group>"; };
+		8BA2153C0AE4B880C268F1980C52F9BA /* Pods-Housing.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Housing.modulemap"; sourceTree = "<group>"; };
+		8C646ADD8C8E68EC434609E1D4303D70 /* SegementSlide-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SegementSlide-Info.plist"; sourceTree = "<group>"; };
+		8E3C4624D6596A90C26B9E42E683216D /* SegementSlideViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideViewController.swift; path = Source/General/SegementSlideViewController.swift; sourceTree = "<group>"; };
+		8E5EE3E9F8C08F9445D890C4C12F8151 /* Pods-Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Housing.release.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A282257228E1A93DDA70FF635E31F3CA /* UIView+Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Constraint.swift"; path = "Source/Utility/UIView+Constraint.swift"; sourceTree = "<group>"; };
+		A7E4E9A14AE247C6F8537392B0D0F485 /* SegementSlideDefaultSwitcherView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultSwitcherView.swift; path = Source/Switcher/SegementSlideDefaultSwitcherView.swift; sourceTree = "<group>"; };
+		AF75BAEE042F10BEC279F8C167E535F8 /* Pods-Housing-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Housing-Info.plist"; sourceTree = "<group>"; };
+		B9AE2FD4ADAAFEBCA5490B7061459719 /* SegementSlideSwitcherDataSourceWeakBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideSwitcherDataSourceWeakBox.swift; path = Source/Switcher/SegementSlideSwitcherDataSourceWeakBox.swift; sourceTree = "<group>"; };
+		BD8E5DCF47B1A61C1562FE429CFD0D3A /* SegementSlideHeaderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideHeaderView.swift; path = Source/Header/SegementSlideHeaderView.swift; sourceTree = "<group>"; };
+		BF8E7A79593B2FFA7162A5C5E8F141D2 /* SegementSlideViewController+delegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+delegate.swift"; path = "Source/General/SegementSlideViewController+delegate.swift"; sourceTree = "<group>"; };
+		C01752D18D3C9DEA52728CB5FC02B3A9 /* Pods-Housing-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Housing-acknowledgements.plist"; sourceTree = "<group>"; };
+		C6DEEEF59BE0E73941C28B3459F2CAB9 /* SegementSlideScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideScrollView.swift; path = Source/General/SegementSlideScrollView.swift; sourceTree = "<group>"; };
+		C7334F86885E3D8F242D0724530758A1 /* SegementSlide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SegementSlide.release.xcconfig; sourceTree = "<group>"; };
+		D4C47C0D65195D1E30C6D04A0D362BA2 /* SegementSlideSwitcherDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideSwitcherDelegate.swift; path = Source/Switcher/SegementSlideSwitcherDelegate.swift; sourceTree = "<group>"; };
+		E55FD351C7772EC6D3B42399E9FF6DFD /* SegementSlide.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SegementSlide.modulemap; sourceTree = "<group>"; };
+		E6DCD2B653B83BAF5EA8985CAA52B1CC /* SegementSlideDefaultViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultViewController.swift; path = Source/General/SegementSlideDefaultViewController.swift; sourceTree = "<group>"; };
+		ECF597FAF725EA9AA3831F3E2929B048 /* Pods-Housing-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Housing-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F19B1896622386FFF4CAD47CB7A9CD4B /* Pods-Housing-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Housing-dummy.m"; sourceTree = "<group>"; };
+		FD809203DFA5C36966B6C39E3D4A665D /* SegementSlide-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SegementSlide-umbrella.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D22B4EC7FFB4340D4DB2F32D66ECA990 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB2F2285D9A792B26D520FEB63483052 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4DAA629C2F72C3CB102CACC20DF7B3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C50F9068AE67E07345D17ED1EE78A3D3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		149634B7B45F135A420CF687323E4284 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E55FD351C7772EC6D3B42399E9FF6DFD /* SegementSlide.modulemap */,
+				58E60F64FA4FC396FF39A348B5E15A5E /* SegementSlide-dummy.m */,
+				8C646ADD8C8E68EC434609E1D4303D70 /* SegementSlide-Info.plist */,
+				4E51CDE2C8974283611A915CD6262DE1 /* SegementSlide-prefix.pch */,
+				FD809203DFA5C36966B6C39E3D4A665D /* SegementSlide-umbrella.h */,
+				5EC8DED5238ABC21CEA36D90101A2980 /* SegementSlide.debug.xcconfig */,
+				C7334F86885E3D8F242D0724530758A1 /* SegementSlide.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SegementSlide";
+			sourceTree = "<group>";
+		};
+		1D97FD8C5BE6A39826C31A986C27E916 /* SegementSlide */ = {
+			isa = PBXGroup;
+			children = (
+				3EAC0D7079C0D58704C582C34F9FE11D /* BadgeView.swift */,
+				479C807F7B09291FC15BCD44005FBEDF /* SegementSlideContentView.swift */,
+				79686DED12636C444317F04086B77A29 /* SegementSlideDefaultSwitcherConfig.swift */,
+				A7E4E9A14AE247C6F8537392B0D0F485 /* SegementSlideDefaultSwitcherView.swift */,
+				0AA02EA5435DAA25D264FEA38D5437AD /* SegementSlideDefaultSwitcherView+ex.swift */,
+				E6DCD2B653B83BAF5EA8985CAA52B1CC /* SegementSlideDefaultViewController.swift */,
+				BD8E5DCF47B1A61C1562FE429CFD0D3A /* SegementSlideHeaderView.swift */,
+				C6DEEEF59BE0E73941C28B3459F2CAB9 /* SegementSlideScrollView.swift */,
+				B9AE2FD4ADAAFEBCA5490B7061459719 /* SegementSlideSwitcherDataSourceWeakBox.swift */,
+				D4C47C0D65195D1E30C6D04A0D362BA2 /* SegementSlideSwitcherDelegate.swift */,
+				8E3C4624D6596A90C26B9E42E683216D /* SegementSlideViewController.swift */,
+				BF8E7A79593B2FFA7162A5C5E8F141D2 /* SegementSlideViewController+delegate.swift */,
+				3B0CAA0E6FF8462AA9C853C3F88AB73A /* SegementSlideViewController+ex.swift */,
+				39B1D3DE096623969CF504765F06C6D6 /* SegementSlideViewController+scroll.swift */,
+				02DFB597E66BCF21039B3251AECCE2FE /* SegementSlideViewController+setup.swift */,
+				7BBBE9E20BD4773F2B5A9681ED394766 /* String+Bounding.swift */,
+				262F57DA1F24E5953CE3B8E5303921B9 /* TransparentSlideDefaultViewController.swift */,
+				7FA830293C3CB96DCF428931AF5CFE26 /* TransparentSlideViewController.swift */,
+				11A907B8A471C46F9705FA5A6948E0DF /* UIScrollView+Scroll.swift */,
+				A282257228E1A93DDA70FF635E31F3CA /* UIView+Constraint.swift */,
+				149634B7B45F135A420CF687323E4284 /* Support Files */,
+			);
+			name = SegementSlide;
+			path = SegementSlide;
+			sourceTree = "<group>";
+		};
+		2A8A2823FD6F819BF13D2C981C297FC4 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E4138F4DC2559DD19224314CE0C50F8B /* Pods-Housing */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		CA48073C523ED1B11EE11EA3A3B096DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B3C107B5B924B9DC40F622DCF3D8AC0 /* Pods_Housing.framework */,
+				42680C948568347510E3E5881F7FDB51 /* SegementSlide.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				FB06C510B755436C196CAE908CBBED69 /* Pods */,
+				CA48073C523ED1B11EE11EA3A3B096DA /* Products */,
+				2A8A2823FD6F819BF13D2C981C297FC4 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4138F4DC2559DD19224314CE0C50F8B /* Pods-Housing */ = {
+			isa = PBXGroup;
+			children = (
+				8BA2153C0AE4B880C268F1980C52F9BA /* Pods-Housing.modulemap */,
+				ECF597FAF725EA9AA3831F3E2929B048 /* Pods-Housing-acknowledgements.markdown */,
+				C01752D18D3C9DEA52728CB5FC02B3A9 /* Pods-Housing-acknowledgements.plist */,
+				F19B1896622386FFF4CAD47CB7A9CD4B /* Pods-Housing-dummy.m */,
+				AF75BAEE042F10BEC279F8C167E535F8 /* Pods-Housing-Info.plist */,
+				610AE6E3B8E174293CDDAE6DBFE7755E /* Pods-Housing-umbrella.h */,
+				642094525327EDBDFEA23A8B3DCD071D /* Pods-Housing.debug.xcconfig */,
+				8E5EE3E9F8C08F9445D890C4C12F8151 /* Pods-Housing.release.xcconfig */,
+			);
+			name = "Pods-Housing";
+			path = "Target Support Files/Pods-Housing";
+			sourceTree = "<group>";
+		};
+		FB06C510B755436C196CAE908CBBED69 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1D97FD8C5BE6A39826C31A986C27E916 /* SegementSlide */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3826B3DDBE80F832889D8AFDD9FA3B26 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CF6A1E2D8A6BE0E772C496102C7EAD4 /* SegementSlide-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5DE2029A2C6FB4DD93E2B2F5A7B9948 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99246DC85898CA4847C3EB37376D7B16 /* Pods-Housing-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		055411E7F4239B4CB7D549A671F771E0 /* SegementSlide */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61D7E0478619C82C839EA79B6618CF50 /* Build configuration list for PBXNativeTarget "SegementSlide" */;
+			buildPhases = (
+				3826B3DDBE80F832889D8AFDD9FA3B26 /* Headers */,
+				8BE765DAD2316EF50B31AA7F590CE0B7 /* Sources */,
+				F4DAA629C2F72C3CB102CACC20DF7B3C /* Frameworks */,
+				A6DC347529E5DD39F882D950395994A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SegementSlide;
+			productName = SegementSlide;
+			productReference = 42680C948568347510E3E5881F7FDB51 /* SegementSlide.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		2D4FDD3BA9D082B8E1D7AA8EA4716087 /* Pods-Housing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 629B28EB99DE8B00426583F85FA15BF6 /* Build configuration list for PBXNativeTarget "Pods-Housing" */;
+			buildPhases = (
+				E5DE2029A2C6FB4DD93E2B2F5A7B9948 /* Headers */,
+				6222CEC3AB0904A5B3FF50695A36D2CF /* Sources */,
+				D22B4EC7FFB4340D4DB2F32D66ECA990 /* Frameworks */,
+				399F868F09C877F5B8B4BFF5D43676F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2046A38CA105A4C50E4CEC8E77C90807 /* PBXTargetDependency */,
+			);
+			name = "Pods-Housing";
+			productName = "Pods-Housing";
+			productReference = 0B3C107B5B924B9DC40F622DCF3D8AC0 /* Pods_Housing.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 11.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = CA48073C523ED1B11EE11EA3A3B096DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2D4FDD3BA9D082B8E1D7AA8EA4716087 /* Pods-Housing */,
+				055411E7F4239B4CB7D549A671F771E0 /* SegementSlide */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		399F868F09C877F5B8B4BFF5D43676F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6DC347529E5DD39F882D950395994A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6222CEC3AB0904A5B3FF50695A36D2CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD90766817AB012E23A5FB694E1F2C06 /* Pods-Housing-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BE765DAD2316EF50B31AA7F590CE0B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24D2C57BF4FB7BD250FD0B7DA1BBBE7 /* BadgeView.swift in Sources */,
+				5EB9D3A9295A6516BDBA77DCFE53CFD3 /* SegementSlide-dummy.m in Sources */,
+				A39C3DECE488CDF9045F6C630CC14814 /* SegementSlideContentView.swift in Sources */,
+				7FB05457C50253A5DDDB538A8EF71724 /* SegementSlideDefaultSwitcherConfig.swift in Sources */,
+				D95A6C80B0547454D6147C164E56C309 /* SegementSlideDefaultSwitcherView+ex.swift in Sources */,
+				C778AFB9C4EAE99A909E1AA2EEC42697 /* SegementSlideDefaultSwitcherView.swift in Sources */,
+				04804159956F03307727801AB3B3F8FF /* SegementSlideDefaultViewController.swift in Sources */,
+				4F325CC07C3D31CA141F39335FA817A0 /* SegementSlideHeaderView.swift in Sources */,
+				9E9CC8A3DA5A44CA3BB9BEE0284EFCFE /* SegementSlideScrollView.swift in Sources */,
+				6D7B1BD2355D7DCB7C0A403376594852 /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */,
+				BE2C94F88C4D09BE8725F4E4DAC62565 /* SegementSlideSwitcherDelegate.swift in Sources */,
+				273153CA20EDE1F7B682327CA8C49EDB /* SegementSlideViewController+delegate.swift in Sources */,
+				39E44781F5AE0CDA33415ED770EC125A /* SegementSlideViewController+ex.swift in Sources */,
+				B7A9A9AA09CAF1F40A6FFEC184BA99AB /* SegementSlideViewController+scroll.swift in Sources */,
+				CA561FB9A42713B9C8A1E9EC9BD8ED46 /* SegementSlideViewController+setup.swift in Sources */,
+				A30B8BE0C607551D824E2BEE6D54C971 /* SegementSlideViewController.swift in Sources */,
+				E2360E795ED81BABECB86F2683E03697 /* String+Bounding.swift in Sources */,
+				E1723B8F79EC31857B7B5F5C17C135E8 /* TransparentSlideDefaultViewController.swift in Sources */,
+				68E472E47AA87DF59FE291D8A0792A51 /* TransparentSlideViewController.swift in Sources */,
+				8FA95861BC50739E6FF715436DBDD0A6 /* UIScrollView+Scroll.swift in Sources */,
+				E2E7D3ADF136AC7F5F1DD2A218796F75 /* UIView+Constraint.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2046A38CA105A4C50E4CEC8E77C90807 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SegementSlide;
+			target = 055411E7F4239B4CB7D549A671F771E0 /* SegementSlide */;
+			targetProxy = C06BDBE25CD55DE33AC54CD623D83633 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1422B121EAEAEA11307496903FA623C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		5083AD2881E13341A7A4E003C9D7C65D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7334F86885E3D8F242D0724530758A1 /* SegementSlide.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SegementSlide/SegementSlide-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SegementSlide/SegementSlide-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/SegementSlide/SegementSlide.modulemap";
+				PRODUCT_MODULE_NAME = SegementSlide;
+				PRODUCT_NAME = SegementSlide;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.2.4;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6BEF0C59CA5A34F7B160935AD891020B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 642094525327EDBDFEA23A8B3DCD071D /* Pods-Housing.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Housing/Pods-Housing-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Housing/Pods-Housing.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ACE33DEE68DDB1F0D325589E4FB3A2A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E5EE3E9F8C08F9445D890C4C12F8151 /* Pods-Housing.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Housing/Pods-Housing-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Housing/Pods-Housing.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E2B7A43FF93002D4489355F02E7C3FC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EC8DED5238ABC21CEA36D90101A2980 /* SegementSlide.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SegementSlide/SegementSlide-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SegementSlide/SegementSlide-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/SegementSlide/SegementSlide.modulemap";
+				PRODUCT_MODULE_NAME = SegementSlide;
+				PRODUCT_NAME = SegementSlide;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.2.4;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ED7888FA6713EABBF66D26A8003AD1CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7888FA6713EABBF66D26A8003AD1CA /* Debug */,
+				1422B121EAEAEA11307496903FA623C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61D7E0478619C82C839EA79B6618CF50 /* Build configuration list for PBXNativeTarget "SegementSlide" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2B7A43FF93002D4489355F02E7C3FC6 /* Debug */,
+				5083AD2881E13341A7A4E003C9D7C65D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		629B28EB99DE8B00426583F85FA15BF6 /* Build configuration list for PBXNativeTarget "Pods-Housing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BEF0C59CA5A34F7B160935AD891020B /* Debug */,
+				ACE33DEE68DDB1F0D325589E4FB3A2A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
