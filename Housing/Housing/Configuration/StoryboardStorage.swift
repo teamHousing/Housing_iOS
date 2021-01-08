@@ -29,4 +29,7 @@ enum StoryboardStorage {
 		return "Home"
 	}
 	
+	static var notice: String {
+		return "Notice"
+	}
 }

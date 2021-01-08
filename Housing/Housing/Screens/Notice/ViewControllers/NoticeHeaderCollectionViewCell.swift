@@ -10,4 +10,9 @@ import UIKit
 class NoticeHeaderCollectionViewCell: UICollectionViewCell {
     
 	@IBOutlet weak var headerBackgroundView: UIView!
+    @IBOutlet weak var profileMessageView: UIView!
+    
+    func headerlayout() {
+        self.headerBackgroundView.layer.applyShadow()
+    }
 }

@@ -99,9 +99,9 @@ class SplashViewController: BaseViewController {
 	// 민제
 	@objc
 	func loginButtonDidTap() {
-		let storyboard = UIStoryboard(name: StoryboardStorage.login,
+		let storyboard = UIStoryboard(name: StoryboardStorage.notice,
 																	bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "NoticeViewController")
 		let navigationViewController = UINavigationController(rootViewController: viewcontroller)
 		navigationViewController.modalPresentationStyle = .fullScreen
 		present(navigationViewController, animated: true)
