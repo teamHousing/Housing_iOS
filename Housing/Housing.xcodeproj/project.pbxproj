@@ -16,6 +16,8 @@
 		1FA03DE325A8471300AF0326 /* NoticeInformationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DE225A8471300AF0326 /* NoticeInformationCollectionViewCell.swift */; };
 		1FA03DE625A8472200AF0326 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DE525A8472200AF0326 /* NoticeViewController.swift */; };
 		1FA03DE925A8473000AF0326 /* Notice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA03DE825A8473000AF0326 /* Notice.storyboard */; };
+		1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */; };
+		1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */; };
 		37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */; };
 		7D82BD0A7BDB673C00E7A6B8 /* Pods_Housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE989042B75B926FB7CC268C /* Pods_Housing.framework */; };
 		CC096D5525A2415E00E07017 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC096D5425A2415E00E07017 /* ContentViewController.swift */; };
@@ -96,6 +98,8 @@
 		1FA03DE225A8471300AF0326 /* NoticeInformationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeInformationCollectionViewCell.swift; sourceTree = "<group>"; };
 		1FA03DE525A8472200AF0326 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		1FA03DE825A8473000AF0326 /* Notice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notice.storyboard; sourceTree = "<group>"; };
+		1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewController.swift; sourceTree = "<group>"; };
+		1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeViewController.swift; sourceTree = "<group>"; };
 		340DE7B3E8247CCAEA231AB4 /* Pods-Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.release.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.release.xcconfig"; sourceTree = "<group>"; };
 		37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommunmicationTableViewCell.swift; path = Housing/Screens/Communication/ViewControllers/CommunmicationTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		3C93D2349047CC7DE6C0CE9C /* Pods-Housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.debug.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.debug.xcconfig"; sourceTree = "<group>"; };
@@ -212,10 +216,10 @@
 		1FA03DD725A846B300AF0326 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1FA03DD925A846F100AF0326 /* NoticeFooterCollectionViewCell.swift */,
-				1FA03DDF25A8470700AF0326 /* NoticeHeaderCollectionViewCell.swift */,
-				1FA03DE225A8471300AF0326 /* NoticeInformationCollectionViewCell.swift */,
+				1FA03DEB25A86E0500AF0326 /* Cells */,
 				1FA03DE525A8472200AF0326 /* NoticeViewController.swift */,
+				1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */,
+				1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -226,6 +230,16 @@
 				1FA03DE825A8473000AF0326 /* Notice.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		1FA03DEB25A86E0500AF0326 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1FA03DD925A846F100AF0326 /* NoticeFooterCollectionViewCell.swift */,
+				1FA03DDF25A8470700AF0326 /* NoticeHeaderCollectionViewCell.swift */,
+				1FA03DE225A8471300AF0326 /* NoticeInformationCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		CC0C715E25A1BC5E00DEF0FA /* Cells */ = {
@@ -714,6 +728,7 @@
 				D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */,
 				D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */,
 				D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */,
+				1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */,
 				1F8ECE8C25A7138100C0E0FA /* SignupCompleteViewController.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
 				DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */,
@@ -722,6 +737,7 @@
 				1FA03DE325A8471300AF0326 /* NoticeInformationCollectionViewCell.swift in Sources */,
 				37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,
+				1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */,
 				D19179E6259890A40035AF74 /* AppDelegate.swift in Sources */,
 				D131189E259B6BE300897DF4 /* UIViewController+.swift in Sources */,
 				D1B44505259F0FCE005C2C68 /* StoryboardStorage.swift in Sources */,

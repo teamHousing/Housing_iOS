@@ -31,7 +31,7 @@ class NoticeViewController: UIViewController {
     }
     func setNoticeList() {
         noticeList.append(contentsOf: [
-            NoticeData.init(title: "11월 관리비 입금 안내", context: "입금계좌 : 1002455115135(우리은행/김미정) 용돈 환영~! 카카오페이도 가능~!~!~!~! 이것도 최대 2줄~~~~~~"),
+            NoticeData.init(title: "11월 관리비 입금 안내", context: "입금 계좌 : 1002455115135 (우리은행/김미정) 용돈 대 환영 카카오 페이도 가능 룰루랄라 미정이 용돈 줄 사람~!? 현정이 ? \n \n 입금 계좌 : 1002455115135 (우리은행/김미정) 용돈 대 환영 카카오 페이도 가능 룰루랄라 미정이 용돈 줄 사람~!? 현정이 ?"),
             NoticeData.init(title: "22월 관리비 입금 안내", context: "입금계좌 : 1002455115135(우리은행/김미정) 용돈 환영~! 카카오페이도 가능~!~!~!~! 이것도 최대 2줄~~~~~~"),
             NoticeData.init(title: "33월 관리비 입금 안내", context: "입금계좌 : 1002455115135(우리은행/김미정) 용돈 환영~! 카카오페이도 가능~!~!~!~! 이것도 최대 2줄~~~~~~")
         ])
@@ -39,7 +39,9 @@ class NoticeViewController: UIViewController {
     
     //MARK:- Component(Action)
     @IBAction func makeVerifyCode(_ sender: Any) {
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "VerifyCodeViewController") as! VerifyCodeViewController
         
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -93,22 +95,10 @@ extension NoticeViewController: UICollectionViewDelegate {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "NoticeHeaderCollectionViewCell", for: indexPath) as? NoticeHeaderCollectionViewCell {
-                
-                headerView.contentView.layer.cornerRadius = 16 / 2
-                headerView.contentView.layer.backgroundColor = UIColor.clear.cgColor
-                headerView.contentView.layer.masksToBounds = true
-                
-                headerView.headerBackgroundView.layer.shadowColor = CGColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.10000000149011612)
-                headerView.headerBackgroundView.layer.shadowOffset = .zero
-                headerView.headerBackgroundView.layer.shadowRadius = 16 / 2
-                headerView.headerBackgroundView.layer.shadowOpacity = 1
-                headerView.headerBackgroundView.layer.masksToBounds = false
-                headerView.headerBackgroundView.layer.shadowPath = nil
-                headerView.headerBackgroundView.layer.shadowPath = UIBezierPath(roundedRect:headerView.bounds, cornerRadius:headerView.contentView.layer.cornerRadius).cgPath
-                
-                
+                headerView.layer.applyShadow(color: .black, alpha: 0.10000000149011612, x: 0, y: 0, blur: 16)
+
                 headerView.headerBackgroundView.clipsToBounds = true
-                headerView.headerBackgroundView.layer.cornerRadius = 16 / 2
+                headerView.headerBackgroundView.layer.cornerRadius = 16
                 headerView.headerBackgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
                 
                 return headerView
@@ -122,5 +112,16 @@ extension NoticeViewController: UICollectionViewDelegate {
             return UICollectionReusableView()
         }
         return UICollectionReusableView()
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Notice", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailNoticeViewController") as? DetailNoticeViewController else {
+            return
+        }
+        
+        viewController.titleData = noticeList[indexPath.row].title
+        viewController.contextData = noticeList[indexPath.row].context
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
