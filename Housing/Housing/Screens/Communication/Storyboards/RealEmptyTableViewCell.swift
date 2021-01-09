@@ -1,16 +1,15 @@
 //
-//  emptyComTableViewCell.swift
+//  RealEmptyTableViewCell.swift
 //  Housing
 //
-//  Created by JUEUN KIM on 2021/01/08.
+//  Created by JUEUN KIM on 2021/01/10.
 //
 
 import UIKit
 
-class emptyComTableViewCell: UITableViewCell {
+class RealEmptyTableViewCell: UITableViewCell {
 
-	@IBOutlet var emptyLabel: UILabel!
-	override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
