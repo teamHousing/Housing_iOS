@@ -17,6 +17,8 @@
 		371878AC25A4A77500803944 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878AB25A4A77500803944 /* EmptyTableViewCell.swift */; };
 		37259E8D25A829EF006550AF /* emptyComTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */; };
 		37259E9025A82A22006550AF /* emptyIncomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */; };
+<<<<<<< HEAD
+=======
 		1F8ECE5425A5A6FF00C0E0FA /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5325A5A6FF00C0E0FA /* Signup.storyboard */; };
 		1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5625A5A71300C0E0FA /* SignupViewController.swift */; };
 		1F8ECE8925A700B900C0E0FA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE8825A700B900C0E0FA /* AddressViewController.swift */; };
@@ -29,6 +31,7 @@
 		1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */; };
 		1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */; };
 		37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */; };
+>>>>>>> develop
 		7D82BD0A7BDB673C00E7A6B8 /* Pods_Housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE989042B75B926FB7CC268C /* Pods_Housing.framework */; };
 		CC096D5525A2415E00E07017 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC096D5425A2415E00E07017 /* ContentViewController.swift */; };
 		CC42D05F25A74D21002A461D /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */; };

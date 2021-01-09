@@ -37,8 +37,8 @@ class TimeStampTableViewCell: UITableViewCell {
 		$0.layer.cornerRadius = 6
 	}
 	let deleteButton = UIButton().then{
-		$0.backgroundColor = .primaryOrange
-		$0.layer.cornerRadius = 6
+		$0.backgroundColor = .white
+		$0.setImage(UIImage(named: "btnClose"), for: .normal)
 	}
 	let firstSeperatorView = UIView().then {
 		$0.backgroundColor = .gray01
@@ -68,8 +68,8 @@ class TimeStampTableViewCell: UITableViewCell {
 			
 		}
 		deleteButton.snp.makeConstraints{
-			$0.width.height.equalTo(12)
-			$0.trailing.equalTo(self.contentView.snp.trailing).offset(-20)
+			$0.width.height.equalTo(44)
+			$0.trailing.equalTo(self.contentView.snp.trailing).offset(-6)
 			$0.centerY.equalTo(self.containerView.snp.centerY)
 		}
 		containerView.adds([timeLabel,dateLabel,methodLabel,firstSeperatorView,secondSeperatorView])

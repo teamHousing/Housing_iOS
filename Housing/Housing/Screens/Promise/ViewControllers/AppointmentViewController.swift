@@ -38,7 +38,9 @@ class AppointmentViewController: UIViewController {
 		$0.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		$0.isUserInteractionEnabled = true
 		$0.isMultipleTouchEnabled = true
-		let icon = UIImageView()
+		let icon = UIImageView().then{
+			$0.image = UIImage(named: "img4")
+		}
 		let description = UILabel().then {
 			$0.text = "만나서 해결하고 싶어요"
 			$0.textColor = .black
@@ -65,7 +67,9 @@ class AppointmentViewController: UIViewController {
 		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
 		$0.isUserInteractionEnabled = true
 		$0.isMultipleTouchEnabled = true
-		let icon = UIImageView()
+		let icon = UIImageView().then{
+			$0.image = UIImage(named: "img5")
+		}
 		let description = UILabel().then {
 			
 			$0.text = "전화로 해결하고 싶어요!"
