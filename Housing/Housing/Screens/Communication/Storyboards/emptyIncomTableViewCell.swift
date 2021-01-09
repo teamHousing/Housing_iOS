@@ -8,10 +8,12 @@
 import UIKit
 
 class emptyIncomTableViewCell: UITableViewCell {
+	
+	@IBOutlet var emptyLabel: UILabel!
 	@IBOutlet var inquiryButton: UIButton!
+	
 	func makeButtonRounded(){
 		inquiryButton.setRounded(radius: 15)
-		
 	}
 	
     override func awakeFromNib() {

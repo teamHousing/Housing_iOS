@@ -30,8 +30,9 @@ class CommunicationViewController: UIViewController {
 	//MARK: Property
 	static var determineHeader = 175.0
 	static var thecell = "cell"
-	static var incompleteLength = 3
-	static var completeLength = 0
+	static var incompleteLength = 2
+	static var completeLength = 3
+	static var mode = 1 //집주인이 0, 자취생이 1
 	var tableViewData = [cellData]()
 	var incomDetailCellData = [
 		DetailData(category: "고장/수리1", issueTitle: "incom111", progress: 1, issueContents: "집도 좋고 늘 빠르게 소통해주셔서 2년간 굉장히 만족하면서 생활했어요. 계약 만료 기간이 끝나 가는데 다시 재계..."),
@@ -94,7 +95,6 @@ class CommunicationViewController: UIViewController {
 		}
 		return String()
 	}
-	
 }
 extension CommunicationViewController: UITableViewDelegate{ // 이게 cell이 아니라 button에 반응하도록 해야함.
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -114,28 +114,38 @@ extension CommunicationViewController: UITableViewDelegate{ // 이게 cell이 �
 }
 
 extension CommunicationViewController: UITableViewDataSource{
-	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		tableViewData.count
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if indexPath.row == 0{ // title의 높이 지정.
-			return 70
+			if indexPath.section == 0 {
+				if CommunicationViewController.mode == 0{
+					return 90
+				}else if CommunicationViewController.mode == 1{
+					return 70
+				}
+			}else if indexPath.section == 1{
+				return 70
+			}
 		}
-		else { //cell의 높이 지정
-			if CommunicationViewController.incompleteLength == 0 && indexPath.section == 0{
-				return 250 // 수리중 emptyCell의 높이 지정.
-			}
-			else if CommunicationViewController.incompleteLength != 0 && indexPath.section == 0 || CommunicationViewController.completeLength != 0 && indexPath.section == 1{
-				return 169 // 수리중 contentCell의 높이 지정.
-			}
-			else if CommunicationViewController.completeLength == 0 && indexPath.section == 1{
-				return 200 // 수리완료 emptyCell의 높이 지정.
+			else if indexPath.row == 1 { //cell의 높이 지정
+				if CommunicationViewController.incompleteLength == 0 && indexPath.section == 0{
+					if CommunicationViewController.completeLength > 0 {
+						return 180
+					}
+					return 230 // 수리중 emptyCell의 높이 지정.
+				}
+				else if CommunicationViewController.incompleteLength != 0 && indexPath.section == 0 || CommunicationViewController.completeLength != 0 && indexPath.section == 1{
+					return 180 // 수리중 contentCell의 높이 지정.
+				}
+				else if CommunicationViewController.completeLength == 0 && indexPath.section == 1{
+					return 180 // 수리완료 emptyCell의 높이 지정.
+				}
 			}
 			return 150
 		}
-	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if tableViewData[section].opened == true {
@@ -158,8 +168,14 @@ extension CommunicationViewController: UITableViewDataSource{
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { //title부분에 쓸 cell
 		guard let incomCell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTableViewCell") as? IncompleteTableViewCell
 		else { return UITableViewCell()}
+		incomCell.makeViewRounded()
 		incomCell.countOfIncomplete.text = "(" + String(CommunicationViewController.incompleteLength) + ")"
 		//incomCell.incomButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+		if CommunicationViewController.mode == 1 {
+			incomCell.roomNumberView.isHidden = true
+		} else {
+			incomCell.roomNumberView.isHidden = false
+		}
 		
 		guard let comCell = tableView.dequeueReusableCell(withIdentifier: "CompleteTableViewCell") as? CompleteTableViewCell
 		else { return UITableViewCell()}
@@ -176,16 +192,18 @@ extension CommunicationViewController: UITableViewDataSource{
 		guard let contentCell = tableView.dequeueReusableCell(withIdentifier: "ContentTableViewCell") as? ContentTableViewCell else { return UITableViewCell() }
 		contentCell.makeViewRounded()
 		
+		guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: "RealEmptyTableViewCell") as? RealEmptyTableViewCell else { return UITableViewCell() }
 		//let incomcell : IncompleteTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
 		//let comcell : CompleteTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
 		
 		if indexPath.row == 0 { //여기가 title 부분. // 완료된 것이 없을 때는 title이 뜨지 않도록 했음.
 			if CommunicationViewController.incompleteLength == 0 && CommunicationViewController.completeLength == 0{
 				if indexPath.section == 0{
+					incomCell.roomNumberView.isHidden = true
 					return incomCell
 				}
 				if indexPath.section == 1{
-					return UITableViewCell()
+					return emptyCell
 				}
 			}
 			else {
@@ -200,6 +218,15 @@ extension CommunicationViewController: UITableViewDataSource{
 		else { //여기가 내부 cell 부분.
 			if CommunicationViewController.incompleteLength == 0 && CommunicationViewController.completeLength == 0{
 				if indexPath.section == 0{
+					print("1")
+					if CommunicationViewController.mode == 0 {
+						emptyIncomCell.emptyLabel.text = "자취생을 초대해 볼까요?" // 이거 왜 안되지? newline이 들어가면 안되네.. 왜지
+						emptyIncomCell.inquiryButton.titleLabel?.text = "초대하기"
+					}else{
+						emptyIncomCell.emptyLabel.text = "집주인과 소통을 시작해볼까요?"
+						emptyIncomCell.inquiryButton.titleLabel?.text = "문의하기"
+					}
+					
 					return emptyIncomCell
 				}
 				if indexPath.section == 1{
@@ -208,6 +235,9 @@ extension CommunicationViewController: UITableViewDataSource{
 			}
 			else if CommunicationViewController.incompleteLength == 0 && CommunicationViewController.completeLength > 0{
 				if indexPath.section == 0{
+					print("2")
+						emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!" // 이거 왜 안되지? newline이 들어가면 안되네.. 왜지
+						emptyIncomCell.inquiryButton.isHidden = true
 					return emptyIncomCell
 				}
 				if indexPath.section == 1{
@@ -217,6 +247,7 @@ extension CommunicationViewController: UITableViewDataSource{
 			}
 			else if CommunicationViewController.incompleteLength > 0 && CommunicationViewController.completeLength == 0{
 				if indexPath.section == 0{
+					print("3")
 					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
 					contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
 					contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
@@ -224,11 +255,13 @@ extension CommunicationViewController: UITableViewDataSource{
 					return contentCell
 				}
 				if indexPath.section == 1{
+					emptyComCell.emptyLabel.text = "아직 해결 완료된 문의가 없어요!"
 					return emptyComCell
 				}
 			}
 			else if CommunicationViewController.incompleteLength > 0 && CommunicationViewController.completeLength > 0{
 				if indexPath.section == 0{
+					print("4")
 					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
 					contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
 					contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
@@ -248,4 +281,3 @@ extension CommunicationViewController: UITableViewDataSource{
 		return UITableViewCell()
 	}
 }
-

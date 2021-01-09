@@ -9,6 +9,7 @@ import UIKit
 
 class IncompleteTableViewCell: UITableViewCell {
 
+	@IBOutlet var roomNumberView: UIView!
 	@IBOutlet var countOfIncomplete: UILabel!
 	@IBOutlet var incomButton: UIButton!
 	
@@ -16,6 +17,10 @@ class IncompleteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+	
+	func makeViewRounded(){
+		roomNumberView.setRounded(radius: 15)
+	}
 //	@IBAction func touchUpIncomButton(_ sender: Any) {
 //		incomButton.addTarget(CommunicationViewController(), action: #selector(CommunicationViewController.handleExpandAndClose), for: .touchUpInside)
 //	}
