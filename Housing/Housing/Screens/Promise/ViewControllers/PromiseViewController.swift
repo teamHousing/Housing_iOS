@@ -52,6 +52,7 @@ class PromiseViewController: UIViewController {
 			$0.textColor = .black
 			$0.numberOfLines = 2
 			$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
+			
 		}
 		$0.adds([icon,description])
 		icon.snp.makeConstraints{
@@ -60,6 +61,7 @@ class PromiseViewController: UIViewController {
 			$0.leading.equalToSuperview().offset(74)
 			$0.bottom.equalToSuperview().offset(-60)
 		}
+		icon.image = UIImage(named: "img1")
 		description.snp.makeConstraints{
 			$0.trailing.equalToSuperview().offset(-23)
 			$0.top.equalToSuperview().offset(88)
@@ -75,8 +77,9 @@ class PromiseViewController: UIViewController {
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.white, for: .normal)
 		$0.backgroundColor = .primaryOrange
-		$0.setBorder(borderColor: .gray01, borderWidth: 1)
-		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+		
+		$0.tag = 1
+		$0.addTarget(self, action: #selector(problemTypeSelection), for: .touchUpInside)
 		
 	}
 	private let contractButton = UIButton().then{
@@ -87,7 +90,8 @@ class PromiseViewController: UIViewController {
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
-		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+		$0.tag = 2
+		$0.addTarget(self, action: #selector(problemTypeSelection), for: .touchUpInside)
 		
 	}
 	private let rentalFeeButton = UIButton().then{
@@ -98,7 +102,8 @@ class PromiseViewController: UIViewController {
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
-		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+		$0.tag = 3
+		$0.addTarget(self, action: #selector(problemTypeSelection), for: .touchUpInside)
 		
 	}
 	private let noiseButton = UIButton().then{
@@ -109,7 +114,8 @@ class PromiseViewController: UIViewController {
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
-		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+		$0.tag = 4
+    $0.addTarget(self, action: #selector(problemTypeSelection), for: .touchUpInside)
 		
 	}
 	private let questionButton = UIButton().then{
@@ -120,7 +126,8 @@ class PromiseViewController: UIViewController {
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
-		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+		$0.tag = 5
+		$0.addTarget(self, action: #selector(problemTypeSelection), for: .touchUpInside)
 		
 	}
 	private let etcButton = UIButton().then{
@@ -131,7 +138,8 @@ class PromiseViewController: UIViewController {
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
-		$0.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+		$0.tag = 6
+		$0.addTarget(self, action: #selector(problemTypeSelection), for: .touchUpInside)
 	}
 	
 	private var questionTitle = UITextField().then{
@@ -174,11 +182,27 @@ class PromiseViewController: UIViewController {
 		self.navigationController?.pushViewController(cameraView, animated: true)
 	}
 	
-	@objc func buttonClicked(sender : UIButton) {
+	@objc func problemTypeSelection(sender : UIButton) {
 		buttonBackgroundRefresher()
 		sender.backgroundColor = .primaryOrange
 		sender.setTitleColor(.white, for: .normal)
 		sender.setBorder(borderColor: .primaryOrange, borderWidth: 1)
+		switch sender.tag {
+		case 1:
+			requestData.cartegory = .repair
+		case 2:
+			requestData.cartegory = .contract
+		case 3:
+			requestData.cartegory = .rent
+		case 4:
+			requestData.cartegory = .noise
+		case 5:
+			requestData.cartegory = .question
+		case 6:
+			requestData.cartegory = .etc
+		default:
+			requestData.cartegory = .etc
+		}
 		//		self.requestData.cartegory = sender.titleLabel.text
 	}
 	func buttonBackgroundRefresher() {
@@ -230,6 +254,7 @@ class PromiseViewController: UIViewController {
 			$0.leading.equalToSuperview().offset(74)
 			$0.bottom.equalToSuperview().offset(-60)
 		}
+		icon.image = UIImage(named: "img2")
 		description.snp.makeConstraints{
 			$0.trailing.equalToSuperview().offset(-23)
 			$0.top.equalToSuperview().offset(88)

@@ -206,20 +206,31 @@ extension CameraWorkViewController: UICollectionViewDataSource {
 		else {
 			return UICollectionViewCell()
 		}
-		
 //		cell.cellHeight.constant = self.view.frame.height * (162/677)
 		print(cell.frame.size)
-		cell.evidenceImages.contentMode = .scaleAspectFit
 		if evidencePictures.count == 0 {
-			cell.evidenceImages.image = UIImage(systemName: "camera.fill")
+			cell.cameraAsset()
+			cell.cameraView.isHidden = false
+			cell.evidenceImages.isHidden = true
+			cell.addbuttonView.isHidden = true
+			cell.evidenceImages.image = UIImage(named: "img3")
 			cell.deleteBtn.isHidden = true
 		}
 		else {
 			if indexPath.row == 0 {
-				cell.evidenceImages.image = UIImage(systemName: "plus.app.fill")
+				cell.cameraView.isHidden = true
+				cell.addFromCameraRoll()
 				cell.deleteBtn.isHidden = true
+				cell.evidenceImages.isHidden = true
+				cell.addbuttonView.isHidden = false
 			}
 			else {
+				cell.bindConstraints()
+				cell.cameraView.isHidden = true
+				cell.evidenceImages.isHidden = false
+				cell.addbuttonView.isHidden = true
+				cell.evidenceImages.contentMode = .scaleAspectFit
+
 				let uiimage = evidencePictures[indexPath.row - 1]
 				
 				cell.evidenceImages.image = uiimage.resizeImage(newSize: CGSize(width: self.view.frame.height * (162/677), height: self.view.frame.height * (162/677)))
