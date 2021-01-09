@@ -103,6 +103,8 @@ class AdditionalRequestViewController: UIViewController {
 		self.navigationController?.pushViewController(appointmentview, animated: true)
 	}
 	@objc func popToRootController() {
+		//requestData 싱글톤객체 값 초기화
+		//서버에 통신
 		self.navigationController?.popToRootViewController(animated: true)
 	}
 	@objc func presetMessageSelected(sender : UIButton) {
