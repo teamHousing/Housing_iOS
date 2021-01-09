@@ -11,16 +11,6 @@
 		1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5625A5A71300C0E0FA /* SignupViewController.swift */; };
 		1F8ECE8925A700B900C0E0FA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE8825A700B900C0E0FA /* AddressViewController.swift */; };
 		1F8ECE8C25A7138100C0E0FA /* SignupCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE8B25A7138100C0E0FA /* SignupCompleteViewController.swift */; };
-		37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */; };
-		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
-		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
-		371878AC25A4A77500803944 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878AB25A4A77500803944 /* EmptyTableViewCell.swift */; };
-		37259E8D25A829EF006550AF /* emptyComTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */; };
-		37259E9025A82A22006550AF /* emptyIncomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */; };
-		1F8ECE5425A5A6FF00C0E0FA /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5325A5A6FF00C0E0FA /* Signup.storyboard */; };
-		1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE5625A5A71300C0E0FA /* SignupViewController.swift */; };
-		1F8ECE8925A700B900C0E0FA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE8825A700B900C0E0FA /* AddressViewController.swift */; };
-		1F8ECE8C25A7138100C0E0FA /* SignupCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECE8B25A7138100C0E0FA /* SignupCompleteViewController.swift */; };
 		1FA03DDA25A846F100AF0326 /* NoticeFooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DD925A846F100AF0326 /* NoticeFooterCollectionViewCell.swift */; };
 		1FA03DE025A8470700AF0326 /* NoticeHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DDF25A8470700AF0326 /* NoticeHeaderCollectionViewCell.swift */; };
 		1FA03DE325A8471300AF0326 /* NoticeInformationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DE225A8471300AF0326 /* NoticeInformationCollectionViewCell.swift */; };
@@ -28,7 +18,12 @@
 		1FA03DE925A8473000AF0326 /* Notice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA03DE825A8473000AF0326 /* Notice.storyboard */; };
 		1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */; };
 		1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */; };
-		37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */; };
+		37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */; };
+		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
+		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
+		371878AC25A4A77500803944 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878AB25A4A77500803944 /* EmptyTableViewCell.swift */; };
+		37259E8D25A829EF006550AF /* emptyComTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */; };
+		37259E9025A82A22006550AF /* emptyIncomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */; };
 		7D82BD0A7BDB673C00E7A6B8 /* Pods_Housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE989042B75B926FB7CC268C /* Pods_Housing.framework */; };
 		CC096D5525A2415E00E07017 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC096D5425A2415E00E07017 /* ContentViewController.swift */; };
 		CC42D05F25A74D21002A461D /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */; };
@@ -66,7 +61,7 @@
 		D19179EF259890A70035AF74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D19179EE259890A70035AF74 /* Assets.xcassets */; };
 		D19179F2259890A70035AF74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19179F0259890A70035AF74 /* LaunchScreen.storyboard */; };
 		D1B0387125A8D3BF0092CE4F /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0387025A8D3BF0092CE4F /* InfoViewController.swift */; };
-		D1B0387525A8E65A0092CE4F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D1B0387425A8E65A0092CE4F /* SwiftPackageProductDependency */; };
+		D1B0387525A8E65A0092CE4F /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = D1B0387425A8E65A0092CE4F /* RxKeyboard */; };
 		D1B444D9259F095F005C2C68 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B444D8259F095F005C2C68 /* CalendarViewController.swift */; };
 		D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B444DC259F096C005C2C68 /* PromiseViewController.swift */; };
 		D1B444E4259F09C5005C2C68 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B444E3259F09C5005C2C68 /* DetailViewController.swift */; };
@@ -81,20 +76,20 @@
 		D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B44510259F1D5A005C2C68 /* LoginViewController.swift */; };
 		D1B65A112598CE5C00A9A7CB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B65A102598CE5C00A9A7CB /* Network.swift */; };
 		D1B65A142598CE6400A9A7CB /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B65A132598CE6400A9A7CB /* Util.swift */; };
-		D1B65A182598D16600A9A7CB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A172598D16600A9A7CB /* SwiftPackageProductDependency */; };
-		D1B65A1A2598D16600A9A7CB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A192598D16600A9A7CB /* SwiftPackageProductDependency */; };
-		D1B65A1C2598D16600A9A7CB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A1B2598D16600A9A7CB /* SwiftPackageProductDependency */; };
-		D1B65A202598D1FF00A9A7CB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A1F2598D1FF00A9A7CB /* SwiftPackageProductDependency */; };
-		D1B65A242598D21F00A9A7CB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A232598D21F00A9A7CB /* SwiftPackageProductDependency */; };
-		D1B65A282598D24D00A9A7CB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A272598D24D00A9A7CB /* SwiftPackageProductDependency */; };
-		D1B65A2C2598D27D00A9A7CB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A2B2598D27D00A9A7CB /* SwiftPackageProductDependency */; };
+		D1B65A182598D16600A9A7CB /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A172598D16600A9A7CB /* RxSwift */; };
+		D1B65A1A2598D16600A9A7CB /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A192598D16600A9A7CB /* RxCocoa */; };
+		D1B65A1C2598D16600A9A7CB /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A1B2598D16600A9A7CB /* RxRelay */; };
+		D1B65A202598D1FF00A9A7CB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A1F2598D1FF00A9A7CB /* Kingfisher */; };
+		D1B65A242598D21F00A9A7CB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A232598D21F00A9A7CB /* SnapKit */; };
+		D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A272598D24D00A9A7CB /* Alamofire */; };
+		D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A2B2598D27D00A9A7CB /* Then */; };
 		DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050945259F343E00DDB916 /* CameraWorkViewController.swift */; };
 		DA050956259F692E00DDB916 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050955259F692E00DDB916 /* UIImage+.swift */; };
-		DA050965259F801A00DDB916 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DA050964259F801A00DDB916 /* SwiftPackageProductDependency */; };
+		DA050965259F801A00DDB916 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DA050964259F801A00DDB916 /* SwiftKeychainWrapper */; };
 		DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05096B25A05A6100DDB916 /* RequestDataModel.swift */; };
-		DA05097225A0722000DDB916 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DA05097125A0722000DDB916 /* SwiftPackageProductDependency */; };
+		DA05097225A0722000DDB916 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = DA05097125A0722000DDB916 /* YPImagePicker */; };
 		DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */; };
-		DA10C689259B3C3F00AC91D9 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* SwiftPackageProductDependency */; };
+		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 		DA6D898525A5A98E00CF47C4 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D898425A5A98E00CF47C4 /* AppointmentViewController.swift */; };
 		DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA813FBE25A475E500D33AD2 /* AdditionalRequestViewController.swift */; };
 		DAB3225925A72A520098175E /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225825A72A510098175E /* DatePickerViewController.swift */; };
@@ -118,7 +113,6 @@
 		340DE7B3E8247CCAEA231AB4 /* Pods-Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.release.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.release.xcconfig"; sourceTree = "<group>"; };
 		37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
 		37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTableViewCell.swift; sourceTree = "<group>"; };
-		37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommunmicationTableViewCell.swift; path = Housing/Screens/Communication/ViewControllers/CommunmicationTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		371878A625A4A6E200803944 /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
 		371878AB25A4A77500803944 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = emptyComTableViewCell.swift; path = Housing/Screens/Communication/Storyboards/emptyComTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -195,17 +189,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1B65A202598D1FF00A9A7CB /* BuildFile in Frameworks */,
-				D1B0387525A8E65A0092CE4F /* BuildFile in Frameworks */,
-				DA05097225A0722000DDB916 /* BuildFile in Frameworks */,
-				D1B65A1C2598D16600A9A7CB /* BuildFile in Frameworks */,
-				D1B65A1A2598D16600A9A7CB /* BuildFile in Frameworks */,
-				D1B65A2C2598D27D00A9A7CB /* BuildFile in Frameworks */,
-				D1B65A282598D24D00A9A7CB /* BuildFile in Frameworks */,
-				DA10C689259B3C3F00AC91D9 /* BuildFile in Frameworks */,
-				D1B65A182598D16600A9A7CB /* BuildFile in Frameworks */,
-				DA050965259F801A00DDB916 /* BuildFile in Frameworks */,
-				D1B65A242598D21F00A9A7CB /* BuildFile in Frameworks */,
+				D1B65A202598D1FF00A9A7CB /* Kingfisher in Frameworks */,
+				D1B0387525A8E65A0092CE4F /* RxKeyboard in Frameworks */,
+				DA05097225A0722000DDB916 /* YPImagePicker in Frameworks */,
+				D1B65A1C2598D16600A9A7CB /* RxRelay in Frameworks */,
+				D1B65A1A2598D16600A9A7CB /* RxCocoa in Frameworks */,
+				D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */,
+				D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */,
+				DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */,
+				D1B65A182598D16600A9A7CB /* RxSwift in Frameworks */,
+				DA050965259F801A00DDB916 /* SwiftKeychainWrapper in Frameworks */,
+				D1B65A242598D21F00A9A7CB /* SnapKit in Frameworks */,
 				7D82BD0A7BDB673C00E7A6B8 /* Pods_Housing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,7 +470,6 @@
 			isa = PBXGroup;
 			children = (
 				D1B444ED259F0A10005C2C68 /* CommunicationViewController.swift */,
-				37142BFE25A23D6800967F23 /* CommunmicationTableViewCell.swift */,
 				DAB322BE25A865350098175E /* AddNoticeViewController.swift */,
 				37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */,
 				37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */,
@@ -651,17 +644,17 @@
 			);
 			name = Housing;
 			packageProductDependencies = (
-				D1B65A172598D16600A9A7CB /* SwiftPackageProductDependency */,
-				D1B65A192598D16600A9A7CB /* SwiftPackageProductDependency */,
-				D1B65A1B2598D16600A9A7CB /* SwiftPackageProductDependency */,
-				D1B65A1F2598D1FF00A9A7CB /* SwiftPackageProductDependency */,
-				D1B65A232598D21F00A9A7CB /* SwiftPackageProductDependency */,
-				D1B65A272598D24D00A9A7CB /* SwiftPackageProductDependency */,
-				D1B65A2B2598D27D00A9A7CB /* SwiftPackageProductDependency */,
-				DA10C688259B3C3F00AC91D9 /* SwiftPackageProductDependency */,
-				DA050964259F801A00DDB916 /* SwiftPackageProductDependency */,
-				DA05097125A0722000DDB916 /* SwiftPackageProductDependency */,
-				D1B0387425A8E65A0092CE4F /* SwiftPackageProductDependency */,
+				D1B65A172598D16600A9A7CB /* RxSwift */,
+				D1B65A192598D16600A9A7CB /* RxCocoa */,
+				D1B65A1B2598D16600A9A7CB /* RxRelay */,
+				D1B65A1F2598D1FF00A9A7CB /* Kingfisher */,
+				D1B65A232598D21F00A9A7CB /* SnapKit */,
+				D1B65A272598D24D00A9A7CB /* Alamofire */,
+				D1B65A2B2598D27D00A9A7CB /* Then */,
+				DA10C688259B3C3F00AC91D9 /* FSCalendar */,
+				DA050964259F801A00DDB916 /* SwiftKeychainWrapper */,
+				DA05097125A0722000DDB916 /* YPImagePicker */,
+				D1B0387425A8E65A0092CE4F /* RxKeyboard */,
 			);
 			productName = Housing;
 			productReference = D19179E2259890A40035AF74 /* Housing.app */;
@@ -691,15 +684,15 @@
 			);
 			mainGroup = D19179D9259890A40035AF74;
 			packageReferences = (
-				D1B65A162598D16600A9A7CB /* RemoteSwiftPackageReference */,
-				D1B65A1E2598D1FF00A9A7CB /* RemoteSwiftPackageReference */,
-				D1B65A222598D21F00A9A7CB /* RemoteSwiftPackageReference */,
-				D1B65A262598D24C00A9A7CB /* RemoteSwiftPackageReference */,
-				D1B65A2A2598D27D00A9A7CB /* RemoteSwiftPackageReference */,
-				DA10C687259B3C3F00AC91D9 /* RemoteSwiftPackageReference */,
-				DA050963259F801A00DDB916 /* RemoteSwiftPackageReference */,
-				DA05097025A0722000DDB916 /* RemoteSwiftPackageReference */,
-				D1B0387325A8E65A0092CE4F /* RemoteSwiftPackageReference */,
+				D1B65A162598D16600A9A7CB /* XCRemoteSwiftPackageReference "RxSwift" */,
+				D1B65A1E2598D1FF00A9A7CB /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D1B65A222598D21F00A9A7CB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D1B65A262598D24C00A9A7CB /* XCRemoteSwiftPackageReference "Alamofire" */,
+				D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */,
+				DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				DA050963259F801A00DDB916 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				DA05097025A0722000DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
+				D1B0387325A8E65A0092CE4F /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = D19179E3259890A40035AF74 /* Products */;
 			projectDirPath = "";
@@ -776,7 +769,6 @@
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
 				1FA03DE325A8471300AF0326 /* NoticeInformationCollectionViewCell.swift in Sources */,
-				37142BFF25A23D6800967F23 /* CommunmicationTableViewCell.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,
 				1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */,
 				D19179E6259890A40035AF74 /* AppDelegate.swift in Sources */,
@@ -1028,7 +1020,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D1B0387325A8E65A0092CE4F /* RemoteSwiftPackageReference */ = {
+		D1B0387325A8E65A0092CE4F /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
 			requirement = {
@@ -1036,7 +1028,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		D1B65A162598D16600A9A7CB /* RemoteSwiftPackageReference */ = {
+		D1B65A162598D16600A9A7CB /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
 			requirement = {
@@ -1044,7 +1036,7 @@
 				minimumVersion = 5.1.1;
 			};
 		};
-		D1B65A1E2598D1FF00A9A7CB /* RemoteSwiftPackageReference */ = {
+		D1B65A1E2598D1FF00A9A7CB /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
@@ -1052,7 +1044,7 @@
 				minimumVersion = 5.15.8;
 			};
 		};
-		D1B65A222598D21F00A9A7CB /* RemoteSwiftPackageReference */ = {
+		D1B65A222598D21F00A9A7CB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -1060,7 +1052,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		D1B65A262598D24C00A9A7CB /* RemoteSwiftPackageReference */ = {
+		D1B65A262598D24C00A9A7CB /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
@@ -1068,7 +1060,7 @@
 				minimumVersion = 5.2.0;
 			};
 		};
-		D1B65A2A2598D27D00A9A7CB /* RemoteSwiftPackageReference */ = {
+		D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then";
 			requirement = {
@@ -1076,7 +1068,7 @@
 				minimumVersion = 2.7.0;
 			};
 		};
-		DA050963259F801A00DDB916 /* RemoteSwiftPackageReference */ = {
+		DA050963259F801A00DDB916 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
 			requirement = {
@@ -1084,7 +1076,7 @@
 				minimumVersion = 4.0.1;
 			};
 		};
-		DA05097025A0722000DDB916 /* RemoteSwiftPackageReference */ = {
+		DA05097025A0722000DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Yummypets/YPImagePicker";
 			requirement = {
@@ -1092,7 +1084,7 @@
 				kind = branch;
 			};
 		};
-		DA10C687259B3C3F00AC91D9 /* RemoteSwiftPackageReference */ = {
+		DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
 			requirement = {
@@ -1103,59 +1095,59 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D1B0387425A8E65A0092CE4F /* SwiftPackageProductDependency */ = {
+		D1B0387425A8E65A0092CE4F /* RxKeyboard */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D1B0387325A8E65A0092CE4F /* RemoteSwiftPackageReference */;
+			package = D1B0387325A8E65A0092CE4F /* XCRemoteSwiftPackageReference "RxKeyboard" */;
 			productName = RxKeyboard;
 		};
-		D1B65A172598D16600A9A7CB /* SwiftPackageProductDependency */ = {
+		D1B65A172598D16600A9A7CB /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D1B65A162598D16600A9A7CB /* RemoteSwiftPackageReference */;
+			package = D1B65A162598D16600A9A7CB /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		D1B65A192598D16600A9A7CB /* SwiftPackageProductDependency */ = {
+		D1B65A192598D16600A9A7CB /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D1B65A162598D16600A9A7CB /* RemoteSwiftPackageReference */;
+			package = D1B65A162598D16600A9A7CB /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		D1B65A1B2598D16600A9A7CB /* SwiftPackageProductDependency */ = {
+		D1B65A1B2598D16600A9A7CB /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D1B65A162598D16600A9A7CB /* RemoteSwiftPackageReference */;
+			package = D1B65A162598D16600A9A7CB /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
 		};
-		D1B65A1F2598D1FF00A9A7CB /* SwiftPackageProductDependency */ = {
+		D1B65A1F2598D1FF00A9A7CB /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D1B65A1E2598D1FF00A9A7CB /* RemoteSwiftPackageReference */;
+			package = D1B65A1E2598D1FF00A9A7CB /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		D1B65A232598D21F00A9A7CB /* SwiftPackageProductDependency */ = {
+		D1B65A232598D21F00A9A7CB /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D1B65A222598D21F00A9A7CB /* RemoteSwiftPackageReference */;
+			package = D1B65A222598D21F00A9A7CB /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		D1B65A272598D24D00A9A7CB /* SwiftPackageProductDependency */ = {
+		D1B65A272598D24D00A9A7CB /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D1B65A262598D24C00A9A7CB /* RemoteSwiftPackageReference */;
+			package = D1B65A262598D24C00A9A7CB /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		D1B65A2B2598D27D00A9A7CB /* SwiftPackageProductDependency */ = {
+		D1B65A2B2598D27D00A9A7CB /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D1B65A2A2598D27D00A9A7CB /* RemoteSwiftPackageReference */;
+			package = D1B65A2A2598D27D00A9A7CB /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
 		};
-		DA050964259F801A00DDB916 /* SwiftPackageProductDependency */ = {
+		DA050964259F801A00DDB916 /* SwiftKeychainWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DA050963259F801A00DDB916 /* RemoteSwiftPackageReference */;
+			package = DA050963259F801A00DDB916 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
 		};
-		DA05097125A0722000DDB916 /* SwiftPackageProductDependency */ = {
+		DA05097125A0722000DDB916 /* YPImagePicker */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DA05097025A0722000DDB916 /* RemoteSwiftPackageReference */;
+			package = DA05097025A0722000DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
 			productName = YPImagePicker;
 		};
-		DA10C688259B3C3F00AC91D9 /* SwiftPackageProductDependency */ = {
+		DA10C688259B3C3F00AC91D9 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DA10C687259B3C3F00AC91D9 /* RemoteSwiftPackageReference */;
+			package = DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
