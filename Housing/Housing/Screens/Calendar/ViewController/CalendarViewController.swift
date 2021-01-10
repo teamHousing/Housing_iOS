@@ -67,12 +67,12 @@ final class CalendarViewController: BaseViewController {
 		$0.appearance.headerDateFormat = "YYYY년 M월"
 		$0.locale = Locale(identifier: "ko_KR")
 		$0.appearance.caseOptions = [.headerUsesUpperCase,.weekdayUsesSingleUpperCase]
-		$0.appearance.selectionColor = .primaryBlack
+		$0.appearance.selectionColor = .textGrayBlank
 		$0.appearance.headerTitleColor = .primaryBlack
 		$0.appearance.headerMinimumDissolvedAlpha = 0.0
 		$0.appearance.weekdayFont = .systemFont(ofSize: 14, weight: .light)
 		$0.appearance.todayColor = .black
-		$0.appearance.todaySelectionColor = .black
+		$0.appearance.todaySelectionColor = .textGrayBlank
 		$0.placeholderType = .none
 		$0.appearance.headerTitleFont = .systemFont(ofSize: 14, weight: .regular)
 	}
@@ -114,8 +114,27 @@ final class CalendarViewController: BaseViewController {
 	
 }
 
+// MARK: - Scroll
+
+extension CalendarViewController: UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		if scrollView.contentOffset.y > 100 {
+			collectionView.backgroundColor = .primaryGray
+		} else {
+			collectionView.backgroundColor = .white
+		}
+	}
+}
+
 // MARK: - CollectionView
+
 extension CalendarViewController: UICollectionViewDelegate {
+	func collectionView(_ collectionView: UICollectionView,
+											didSelectItemAt indexPath: IndexPath) {
+		let viewController = DetailViewController()
+		navigationController?.pushViewController(viewController, animated: true)
+	}
+	
 	func collectionView(_ collectionView: UICollectionView,
 											viewForSupplementaryElementOfKind kind: String,
 											at indexPath: IndexPath) -> UICollectionReusableView {

@@ -32,4 +32,8 @@ enum StoryboardStorage {
 	static var notice: String {
 		return "Notice"
 	}
+	
+	static var signup: String {
+		return "Signup"
+	}
 }

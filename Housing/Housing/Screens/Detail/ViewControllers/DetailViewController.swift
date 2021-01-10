@@ -32,6 +32,10 @@ class DetailViewController: SegementSlideDefaultViewController {
 		$0.backgroundColor = .gray01
 	}
 	
+	private let coverSafeAreaView = UIView().then {
+			$0.backgroundColor = .white
+	}
+	
 	func contextHeight() -> Int {
 		let myText = self.contextLabel.text! as NSString
 		let rect = CGSize(width: self.contextLabel.bounds.width, height: CGFloat.greatestFiniteMagnitude)
@@ -111,6 +115,17 @@ class DetailViewController: SegementSlideDefaultViewController {
 		}
 	}
 	
+	private func setSafeArea() {
+			view.add(coverSafeAreaView){
+					$0.snp.makeConstraints {
+							$0.top.equalToSuperview()
+							$0.leading.equalToSuperview()
+							$0.trailing.equalToSuperview()
+							$0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+					}
+			}
+	}
+
 	override func segementSlideHeaderView() -> UIView? {
 		self.headerViewLayout()
 		self.detailHeaderView.snp.makeConstraints{
@@ -143,14 +158,18 @@ class DetailViewController: SegementSlideDefaultViewController {
 		}
 	}
 	
+
 	
-	// MARK : - Lifecycle
+	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		defaultSelectedIndex = 0
 		layout()
 		reloadData()
+		setSafeArea()
 	}
+	
+	
 }
 
 

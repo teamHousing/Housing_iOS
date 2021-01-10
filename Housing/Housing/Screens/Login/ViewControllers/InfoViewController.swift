@@ -86,6 +86,7 @@ class InfoViewController: BaseViewController {
 		$0.layer.cornerRadius = 24
 		$0.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
 		$0.setTitle("다음", for: .normal)
+		$0.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
 	}
 	
 	
@@ -129,7 +130,7 @@ class InfoViewController: BaseViewController {
 			nextButton
 		])
 		guideLabel.snp.makeConstraints {
-			$0.top.equalTo(containerView)
+			$0.top.equalTo(containerView).offset(-10)
 			$0.leading.equalTo(containerView).offset(26)
 		}
 		nameGuideLabel.snp.makeConstraints {
@@ -151,7 +152,7 @@ class InfoViewController: BaseViewController {
 		certificationGuideLabel.snp.makeConstraints  {
 			$0.top.equalTo(passwordGuideLabel.snp.bottom).offset(68)
 			$0.leading.equalTo(containerView).offset(32)
-			$0.bottom.equalTo(containerView).offset(-210)
+			$0.bottom.equalTo(containerView).offset(-300)
 		}
 		nameTextField.snp.makeConstraints {
 			$0.bottom.equalTo(nameUnderBarView.snp.top).offset(-6)
@@ -250,31 +251,68 @@ class InfoViewController: BaseViewController {
 																							 y: self.passwordTextField.frame.origin.y-200),
 																			 animated: true)
 		}).disposed(by: disposeBag)
-		
 		certificationTextField.rx.controlEvent(.editingDidBegin).subscribe(onNext: { next in
 			self.scrollView.setContentOffset(CGPoint(x: 0,
 																							 y: self.certificationTextField.frame.origin.y-150),
 																			 animated: true)
 		}).disposed(by: disposeBag)
-		
+		nameTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {
+			self.detectIsEmpty()
+		}).disposed(by: disposeBag)
+		ageTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {
+			self.detectIsEmpty()
+		}).disposed(by: disposeBag)
+		idTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {
+			self.detectIsEmpty()
+		}).disposed(by: disposeBag)
+		passwordTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {
+			self.detectIsEmpty()
+		}).disposed(by: disposeBag)
+		certificationTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {
+			self.detectIsEmpty()
+		}).disposed(by: disposeBag)
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
 		containerView.addGestureRecognizer(tapGesture)
-		
-
+		scrollView.addGestureRecognizer(tapGesture)
 	}
 	
 	@objc
-	func handleTap(sender: UIGestureRecognizer) {
+	private func handleTap(sender: UIGestureRecognizer) {
 		view.endEditing(true)
 		scrollView.setContentOffset(CGPoint(x: 0,
 																				y: 0),
 																animated: true)
 	}
 	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+	override func touchesBegan(_ touches: Set<UITouch>,
+														 with event: UIEvent?){
 		view.endEditing(true)
 	}
 	
+	private func detectIsEmpty() {
+		guard let name = nameTextField.text?.isEmpty,
+					let age = ageTextField.text?.isEmpty,
+					let id = idTextField.text?.isEmpty,
+					let password = passwordTextField.text?.isEmpty,
+					let certification = certificationTextField.text?.isEmpty else {
+			return
+		}
+		if !name && !age && !id && !password && !certification {
+			nextButton.isEnabled = true
+			nextButton.backgroundColor = .primaryBlack
+		} else {
+			nextButton.isEnabled = false
+			nextButton.backgroundColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1)
+		}
+	}
+	
+	@objc
+	private func nextButtonDidTap() {
+		let storyboard = UIStoryboard(name: StoryboardStorage.signup,
+																	bundle: nil)
+		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AddressViewController")
+		navigationController?.pushViewController(viewcontroller, animated: false)
+	}
 }
 
 extension InfoViewController: UIScrollViewDelegate {

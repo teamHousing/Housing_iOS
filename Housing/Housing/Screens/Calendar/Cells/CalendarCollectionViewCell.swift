@@ -12,6 +12,7 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
 	private let containerView = UIView().then {
 		$0.backgroundColor = .white
 		$0.layer.cornerRadius = 10
+		$0.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 8)
 	}
 	private let pointView = UIView().then {
 		$0.backgroundColor = .primaryOrange
@@ -51,6 +52,7 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
 		$0.textColor = .gray02
 		$0.font = .systemFont(ofSize: 12, weight: .regular)
 	}
+	private let shadowView = UIView()
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -75,6 +77,12 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
 			promiseLabel,
 			timeLabel
 		])
+		
+		containerView.add(shadowView) {
+			$0.snp.makeConstraints {
+				$0.edges.equalTo(self.containerView)
+			}
+		}
 		
 		containerView.snp.makeConstraints {
 			$0.leading.equalTo(contentView).offset(20)
