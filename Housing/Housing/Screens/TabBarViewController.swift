@@ -13,8 +13,19 @@ class TabBarViewController: UITabBarController {
 		super.viewDidLoad()
 		
 		tabbar()
+		tabBarLayout()
 	}
 
+	private func tabBarLayout() {
+		UITabBar.appearance().shadowImage = UIImage()
+		UITabBar.appearance().backgroundImage = UIImage()
+		UITabBar.appearance().backgroundColor = UIColor.white
+		UITabBar.appearance().layer.borderWidth = 0.0
+		tabBar.layer.applyShadow(color: .black, alpha: 0.2, x: 0, y: 5, blur: 5)
+		tabBar.layer.applyShadow(color: .black, alpha: 0.12, x: 0, y: 3, blur: 14)
+		tabBar.layer.applyShadow(color: .black, alpha: 0.14, x: 0, y: 8, blur: 10)
+	}
+	
 	private func tabbar() {
 		var navigationController: UINavigationController
 		
@@ -39,9 +50,9 @@ class TabBarViewController: UITabBarController {
 
 		let calendarTab = navigationController
 		
-		let homestoryboard = UIStoryboard(name: StoryboardStorage.home,
+		let homestoryboard = UIStoryboard(name: StoryboardStorage.notice,
 																	bundle: nil)
-		let homeVC = homestoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+		let homeVC = homestoryboard.instantiateViewController(withIdentifier: "NoticeViewController")
 		let homeTabItem = UITabBarItem(title: "우리집 소식",
 																	 image: UIImage(systemName: "house.fill"),
 																	 tag: 1)

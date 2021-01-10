@@ -121,7 +121,7 @@ class VerifyNumberViewController: UIViewController {
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .primaryGray
 		self.navigationController?.navigationBar
-
+		
 		self.view.adds([upperView,
 										noticeLabel,
 										noticeDescription,sideLine])
@@ -293,7 +293,7 @@ class VerifyNumberViewController: UIViewController {
 				$0.height.equalTo(b.element! ? 1 : 2)
 			}
 			self.deleteButton2.isHidden = b.element!
-
+			
 		}.disposed(by: disposeBag)
 		Observable.combineLatest(buildingObservable, houseObserverable ,resultSelector: {!$0 && !$1 })
 			.subscribe{self.setButtonLayout(b: $0)}.disposed(by: disposeBag)

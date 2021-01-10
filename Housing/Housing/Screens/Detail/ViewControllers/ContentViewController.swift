@@ -26,6 +26,7 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		view.backgroundColor = .white
 		tableView.isUserInteractionEnabled = true
 		tableView.separatorStyle = .none
 		tableView.showsVerticalScrollIndicator = false
