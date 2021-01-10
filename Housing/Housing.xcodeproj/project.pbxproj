@@ -24,6 +24,7 @@
 		37259E8D25A829EF006550AF /* emptyComTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */; };
 		37259E9025A82A22006550AF /* emptyIncomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */; };
 		3799A14C25AA342200A8E03E /* RealEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3799A14B25AA342200A8E03E /* RealEmptyTableViewCell.swift */; };
+		37FB8AB725AACBAD00CEC713 /* AddNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FB8AB625AACBAD00CEC713 /* AddNoticeViewController.swift */; };
 		7D82BD0A7BDB673C00E7A6B8 /* Pods_Housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE989042B75B926FB7CC268C /* Pods_Housing.framework */; };
 		CC096D5525A2415E00E07017 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC096D5425A2415E00E07017 /* ContentViewController.swift */; };
 		CC42D05F25A74D21002A461D /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */; };
@@ -117,6 +118,7 @@
 		37259E8C25A829EF006550AF /* emptyComTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = emptyComTableViewCell.swift; path = Housing/Screens/Communication/Storyboards/emptyComTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		37259E8F25A82A22006550AF /* emptyIncomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = emptyIncomTableViewCell.swift; path = Housing/Screens/Communication/Storyboards/emptyIncomTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		3799A14B25AA342200A8E03E /* RealEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealEmptyTableViewCell.swift; path = Housing/Screens/Communication/Storyboards/RealEmptyTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		37FB8AB625AACBAD00CEC713 /* AddNoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNoticeViewController.swift; path = "../../../../../../../Housing_iOS-develop/Housing/Housing/Screens/Notice/ViewControllers/AddNoticeViewController.swift"; sourceTree = "<group>"; };
 		3C93D2349047CC7DE6C0CE9C /* Pods-Housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.debug.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.debug.xcconfig"; sourceTree = "<group>"; };
 		CC096D5425A2415E00E07017 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				1FA03DE525A8472200AF0326 /* NoticeViewController.swift */,
 				1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */,
 				1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */,
+				37FB8AB625AACBAD00CEC713 /* AddNoticeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -781,6 +784,7 @@
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */,
 				CC8B595325A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift in Sources */,
+				37FB8AB725AACBAD00CEC713 /* AddNoticeViewController.swift in Sources */,
 				CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				CC42D05F25A74D21002A461D /* MessageTableViewCell.swift in Sources */,
