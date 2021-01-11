@@ -26,6 +26,10 @@ final class CommunicationViewController: UIViewController {
 	
 	@IBOutlet var communicationTableView: UITableView!
 	@IBOutlet var headerView: UIView!
+	lazy var shareButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
+																							style: .done,
+																							target: self,
+																							action: #selector(settingButtonDidTap))
 
 	//MARK: - Property
 	
@@ -72,7 +76,7 @@ final class CommunicationViewController: UIViewController {
 
 		configTableView()
 		configHeaderView()
-		
+		layoutNavigationBar()
 	}
 	
 	private func configTableView() {
@@ -85,6 +89,12 @@ final class CommunicationViewController: UIViewController {
 		headerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 	}
 
+	private func layoutNavigationBar() {
+		navigationItem.rightBarButtonItem = shareButton
+		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.isTranslucent = false
+		navigationController?.navigationBar.tintColor = .black
+	}
 //	@objc func handleExpandClose() {
 //		print("trying") //여기서 막 열리고 닫히고 관련한 action을 넣으면 됨.
 //		let section = incomButton.tag
@@ -108,7 +118,11 @@ final class CommunicationViewController: UIViewController {
 //			communicationTableView.insertRows(at: indexPaths, with: .fade)
 //		}
 //	}
-	
+	@objc
+	private func settingButtonDidTap() {
+		print(#function)
+	}
+
 	func determineProgress(progress: Int) -> String {
 		if progress == 0{
 			return "확인전"
