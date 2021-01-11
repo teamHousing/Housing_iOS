@@ -19,7 +19,6 @@ class DetailNoticeViewController: UIViewController {
 	
 	//캘린더 추가 공지 컴포넌트를 담은 뷰
 	@IBOutlet weak var entireComponents: UIView!
-	
 	@IBOutlet weak var circleView: UIView!
 	@IBOutlet weak var addedNoticeView: UIView!
 	
@@ -46,20 +45,20 @@ class DetailNoticeViewController: UIViewController {
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		
-		navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btnBack"), style: .plain, target: self, action: #selector(toNotice))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(toNotice))
 		navigationItem.leftBarButtonItem?.tintColor = .black
 		
 		circleView.cornerRadius = circleView.frame.height / 2
 		
 		addedNoticeView.layer.cornerRadius = 12
 	}
+	
 	func initData() {
 		detailTitle.text = titleData
 		detailContext.text = contextData
 	}
+	
 	@objc func toNotice() {
 		navigationController?.popViewController(animated: true)
 	}
-	
-	//MARK:- Component(Action)
 }

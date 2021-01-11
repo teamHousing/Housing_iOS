@@ -12,6 +12,7 @@ import SnapKit
 import Then
 
 class AppointmentViewController: UIViewController {
+	// MARK: - Component
 	var requestData = RequestDataModel.shared
 	let disposeBag = DisposeBag()
 	private let appointmentScroll = UIScrollView()
@@ -171,6 +172,8 @@ class AppointmentViewController: UIViewController {
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
+	
+	// MARK: - Helper
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
 		let superViewWidth = self.view.frame.width
 		
@@ -416,27 +419,7 @@ class AppointmentViewController: UIViewController {
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
 	}
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		bind()
-		let requestDatamonitor = DispatchWorkItem{
-			while(true){
-				dump(self.requestData)
-				sleep(10)
-			}
-		}
-		//DispatchQueue.global().async(execute: requestDatamonitor)
-		self.timeStampTableView.register(TimeStampTableViewCell.self, forCellReuseIdentifier: TimeStampTableViewCell.registterId)
-		self.timeStampTableView.delegate = self
-		self.timeStampTableView.dataSource = self
-		
-		layout()
-		tableViewBind()
-		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-		self.contentView.addGestureRecognizer(tap)
-		// Do any additional setup after loading the view.
-	}
+
 	func tableViewBind() {
 		
 		timeStampTableView.estimatedRowHeight = CGFloat(70 * requestData.availableTimeList.count)
@@ -511,7 +494,22 @@ extension AppointmentViewController: UITableViewDelegate {
 		}
 		self.resetTableViewHeight()
 	}
+	// MARK: - Life Cycle
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		bind()
+		self.timeStampTableView.register(TimeStampTableViewCell.self, forCellReuseIdentifier: TimeStampTableViewCell.registterId)
+		self.timeStampTableView.delegate = self
+		self.timeStampTableView.dataSource = self
+		
+		layout()
+		tableViewBind()
+		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+		self.contentView.addGestureRecognizer(tap)
+		// Do any additional setup after loading the view.
+	}
 }
+// MARK: - TableviewDelegate
 
 extension AppointmentViewController: UITableViewDataSource{
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

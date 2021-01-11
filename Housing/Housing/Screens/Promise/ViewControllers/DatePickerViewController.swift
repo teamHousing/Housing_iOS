@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 class DatePickerViewController: UIViewController {
+	// MARK: - Component
 	var requestData = RequestDataModel.shared
 	var disposeBag = DisposeBag()
 	let grayImage = UIImageView()
@@ -39,6 +40,8 @@ class DatePickerViewController: UIViewController {
 		$0.setTitleColor(.primaryOrange, for: .normal)
 		$0.addTarget(self, action: #selector(confirmButtonClicked), for: .touchUpInside)
 	}
+	// MARK: - Helper
+
 	@objc func datePickerValueChanged(_ sender: UIDatePicker){
 		
 		let dateFormatter: DateFormatter = DateFormatter()
@@ -125,13 +128,7 @@ class DatePickerViewController: UIViewController {
 		})
 		showCard.startAnimation()
 	}
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		bind()
-		layout()
-		// Do any additional setup after loading the view.
-	}
+
 	func bind() {
 		let dateFormatter: DateFormatter = DateFormatter()
 		switch pickerMode {
@@ -179,5 +176,12 @@ class DatePickerViewController: UIViewController {
 			}
 		})
 		hideCard.startAnimation()
+	}
+	// MARK: - Life Cycle
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		bind()
+		layout()
+		// Do any additional setup after loading the view.
 	}
 }

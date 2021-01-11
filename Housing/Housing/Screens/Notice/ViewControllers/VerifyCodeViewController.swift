@@ -8,13 +8,13 @@
 import UIKit
 
 class VerifyCodeViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-    @IBAction func toNoticeButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+	}
+	
+	@IBAction func toNoticeButton(_ sender: Any) {
+		navigationController?.popViewController(animated: true)
+	}
 }

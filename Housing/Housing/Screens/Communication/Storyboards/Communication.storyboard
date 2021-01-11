@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Me2-m7-2p2">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -93,6 +95,9 @@
                                                         <constraint firstAttribute="height" constant="15" id="DWr-Qq-yts"/>
                                                         <constraint firstAttribute="width" secondItem="svB-tw-Vbu" secondAttribute="height" multiplier="1:1" id="FW7-vV-IM7"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="touchUpInComButton:" destination="sF9-lR-7mW" eventType="touchUpInside" id="gvb-fg-mPX"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D8z-Kv-QIu">
                                                     <rect key="frame" x="347" y="10" width="57" height="23"/>
@@ -371,11 +376,11 @@
                                             <outlet property="emptyLabel" destination="tov-vZ-lNQ" id="oU5-gJ-zs5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RealEmptyTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RealEmptyTableViewCell" rowHeight="79" id="SrD-5E-BMM" customClass="RealEmptyTableViewCell" customModule="Housing" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="962" width="414" height="79"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RealEmptyTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RealEmptyTableViewCell" rowHeight="77" id="SrD-5E-BMM" customClass="RealEmptyTableViewCell" customModule="Housing" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="962" width="414" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SrD-5E-BMM" id="IAC-W3-cIB">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="paleGrey"/>

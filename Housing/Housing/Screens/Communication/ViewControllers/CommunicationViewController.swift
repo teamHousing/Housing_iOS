@@ -26,7 +26,6 @@ final class CommunicationViewController: UIViewController {
 	
 	@IBOutlet var communicationTableView: UITableView!
 	@IBOutlet var headerView: UIView!
-	
 
 	//MARK: - Property
 	
@@ -111,11 +110,13 @@ final class CommunicationViewController: UIViewController {
 extension CommunicationViewController: UITableViewDelegate { // 이게 cell이 아니라 button에 반응하도록 해야함.
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		//let selectedIndexPath = tableView.indexPathForSelectedRow
+		
 		if indexPath.row == 0 {
 			if tableViewData[indexPath.section].opened == true{
 				tableViewData[indexPath.section].opened = false
 				let sections = IndexSet(integer: indexPath.section)
 				tableView.reloadSections(sections, with: .none) //animaion
+				
 			}else {
 				tableViewData[indexPath.section].opened = true
 				let sections = IndexSet(integer: indexPath.section)
@@ -155,7 +156,7 @@ extension CommunicationViewController: UITableViewDataSource{
 					return 180 // 수리완료 emptyCell의 높이 지정.
 				}
 			}
-			return 150
+			return 180
 		}
 	
 	func tableView(_ tableView: UITableView,
@@ -182,6 +183,7 @@ extension CommunicationViewController: UITableViewDataSource{
 								 cellForRowAt indexPath: IndexPath) -> UITableViewCell { //title부분에 쓸 cell
 		guard let incomCell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTableViewCell") as? IncompleteTableViewCell
 		else { return UITableViewCell() }
+		incomCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		incomCell.makeViewRounded()
 		incomCell.countOfIncomplete.text = "(\(CommunicationViewController.incompleteLength))"
 		//incomCell.incomButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
@@ -195,24 +197,29 @@ extension CommunicationViewController: UITableViewDataSource{
 		guard let comCell = tableView.dequeueReusableCell(withIdentifier: "CompleteTableViewCell") as? CompleteTableViewCell
 		else { return UITableViewCell()}
 		comCell.countOfComplete.text = "(\(CommunicationViewController.completeLength))"
+		comCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		
 		//row부분에 쓸 cell
 		guard let emptyIncomCell = tableView.dequeueReusableCell(withIdentifier: "emptyIncomTableViewCell") as? EmptyIncomTableViewCell
 		else { return UITableViewCell()}
+		emptyIncomCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		emptyIncomCell.makeButtonRounded()
 		
 		guard let emptyComCell = tableView.dequeueReusableCell(withIdentifier: "emptyComTableViewCell") as? EmptyComTableViewCell
 		else { return UITableViewCell()}
+		emptyComCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		
 		guard let contentCell = tableView.dequeueReusableCell(withIdentifier: "ContentTableViewCell") as? ContentTableViewCell
 		else { return UITableViewCell() }
 		
 		contentCell.makeViewRounded()
+		contentCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		
 		guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: "RealEmptyTableViewCell") as? RealEmptyTableViewCell
 		else { return UITableViewCell() }
 		//let incomcell : IncompleteTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
 		//let comcell : CompleteTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+		emptyCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		
 		if indexPath.row == 0 { //여기가 title 부분. // 완료된 것이 없을 때는 title이 뜨지 않도록 했음.
 			if CommunicationViewController.incompleteLength == 0 && CommunicationViewController.completeLength == 0 {
@@ -234,7 +241,6 @@ extension CommunicationViewController: UITableViewDataSource{
 		} else { //여기가 내부 cell 부분.
 			if CommunicationViewController.incompleteLength == 0 && CommunicationViewController.completeLength == 0 {
 				if indexPath.section == 0 {
-					print("1")
 					if CommunicationViewController.mode == 0 {
 						emptyIncomCell.emptyLabel.text = "자취생을 초대해 볼까요?" // 이거 왜 안되지? newline이 들어가면 안되네.. 왜지
 						emptyIncomCell.inquiryButton.titleLabel?.text = "초대하기"
@@ -249,9 +255,9 @@ extension CommunicationViewController: UITableViewDataSource{
 					return UITableViewCell()
 				}
 			}
+
 			else if CommunicationViewController.incompleteLength == 0 && CommunicationViewController.completeLength > 0 {
 				if indexPath.section == 0 {
-					print("2")
 						emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!" // 이거 왜 안되지? newline이 들어가면 안되네.. 왜지
 						emptyIncomCell.inquiryButton.isHidden = true
 					return emptyIncomCell
@@ -262,7 +268,6 @@ extension CommunicationViewController: UITableViewDataSource{
 			}
 			else if CommunicationViewController.incompleteLength > 0 && CommunicationViewController.completeLength == 0 {
 				if indexPath.section == 0 {
-					print("3")
 					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
 					contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
 					contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
@@ -276,7 +281,6 @@ extension CommunicationViewController: UITableViewDataSource{
 			}
 			else if CommunicationViewController.incompleteLength > 0 && CommunicationViewController.completeLength > 0 {
 				if indexPath.section == 0 {
-					print("4")
 					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
 					contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
 					contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
@@ -284,7 +288,6 @@ extension CommunicationViewController: UITableViewDataSource{
 					return contentCell
 				}
 				if indexPath.section == 1 {
-					print("hereheree", indexPath.row)
 					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
 					contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
 					contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
@@ -294,5 +297,15 @@ extension CommunicationViewController: UITableViewDataSource{
 			}
 		}
 		return UITableViewCell()
+	}
+}
+
+extension CommunicationViewController: UIScrollViewDelegate{
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		if scrollView.contentOffset.y > 100 {
+			communicationTableView.backgroundColor = .primaryGray
+		} else {
+			communicationTableView.backgroundColor = .white
+		}
 	}
 }

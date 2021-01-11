@@ -12,6 +12,7 @@ import RxCocoa
 import Then
 import SnapKit
 class PromiseViewController: UIViewController {
+	// MARK: - Component
 	var requestData = RequestDataModel.shared
 	var disposeBag = DisposeBag()
 	private let totalScroll = UIScrollView()
@@ -70,6 +71,53 @@ class PromiseViewController: UIViewController {
 		}
 		
 	}
+	private let promiseNotRequiredView = UIView().then{
+		$0.backgroundColor = .white
+		$0.setRounded(radius: 16)
+		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
+		$0.isUserInteractionEnabled = true
+		$0.isMultipleTouchEnabled = true
+		let icon = UIImageView()
+		let description = UILabel().then {
+			$0.text = """
+				약속이 필요없는
+				문의에요!
+				"""
+			$0.numberOfLines = 2
+			$0.textColor = .black
+			
+			$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
+		}
+		$0.adds([icon,description])
+		icon.snp.makeConstraints{
+			$0.trailing.equalToSuperview().offset(-8)
+			$0.top.equalToSuperview().offset(4)
+			$0.leading.equalToSuperview().offset(74)
+			$0.bottom.equalToSuperview().offset(-60)
+		}
+		icon.image = UIImage(named: "img2")
+		description.snp.makeConstraints{
+			$0.trailing.equalToSuperview().offset(-23)
+			$0.top.equalToSuperview().offset(88)
+			$0.leading.equalToSuperview().offset(16)
+			$0.bottom.equalToSuperview().offset(-24)
+		}
+		
+	}
+	
+	private let requestTypeLabel = UILabel().then{
+		$0.text = "어떤 종류의 문제인가요?"
+		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
+		$0.textColor = .black
+		
+	}
+	private let message = UILabel().then{
+		$0.text = "집주인께 문의를 남겨주세요"
+		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
+		$0.textColor = .black
+		
+	}
+	
 	private let fixRepairButton = UIButton().then{
 		$0.setTitle("고장 / 수리", for: .normal)
 		$0.titleLabel?.textAlignment = .center
@@ -175,6 +223,10 @@ class PromiseViewController: UIViewController {
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
+	
+	
+	// MARK: - Helper
+
 	@objc func nextButtonDidTapped() {
 		print("싱글톤데이터")
 		print(requestData)
@@ -229,57 +281,6 @@ class PromiseViewController: UIViewController {
 		etcButton.setBorder(borderColor: .gray01, borderWidth: 1)
 		
 	}
-	
-	private let promiseNotRequiredView = UIView().then{
-		$0.backgroundColor = .white
-		$0.setRounded(radius: 16)
-		$0.setBorder(borderColor: .systemGray6, borderWidth: 1)
-		$0.isUserInteractionEnabled = true
-		$0.isMultipleTouchEnabled = true
-		let icon = UIImageView()
-		let description = UILabel().then {
-			$0.text = """
-				약속이 필요없는
-				문의에요!
-				"""
-			$0.numberOfLines = 2
-			$0.textColor = .black
-			
-			$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
-		}
-		$0.adds([icon,description])
-		icon.snp.makeConstraints{
-			$0.trailing.equalToSuperview().offset(-8)
-			$0.top.equalToSuperview().offset(4)
-			$0.leading.equalToSuperview().offset(74)
-			$0.bottom.equalToSuperview().offset(-60)
-		}
-		icon.image = UIImage(named: "img2")
-		description.snp.makeConstraints{
-			$0.trailing.equalToSuperview().offset(-23)
-			$0.top.equalToSuperview().offset(88)
-			$0.leading.equalToSuperview().offset(16)
-			$0.bottom.equalToSuperview().offset(-24)
-		}
-		
-	}
-	
-	private let requestTypeLabel = UILabel().then{
-		$0.text = "어떤 종류의 문제인가요?"
-		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
-		$0.textColor = .black
-		
-	}
-	private let message = UILabel().then{
-		$0.text = "집주인께 문의를 남겨주세요"
-		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
-		$0.textColor = .black
-		
-	}
-	
-	
-	
-	
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
 		let superViewWidth = self.view.frame.width
 		
@@ -498,6 +499,16 @@ class PromiseViewController: UIViewController {
 		self.view.frame.origin.y = 0 // Move view to original position
 	}
 	
+	@objc func handleTap(recognizer: UITapGestureRecognizer){
+		
+		self.view.endEditing(true)
+	}
+	@objc
+	func backButtonDidTab() {
+		self.dismiss(animated: true, completion: nil)
+	}
+	// MARK: - Life Cycle
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		bind()
@@ -507,16 +518,9 @@ class PromiseViewController: UIViewController {
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.contentView.addGestureRecognizer(tap)
 	}
-	@objc func handleTap(recognizer: UITapGestureRecognizer){
-		
-		self.view.endEditing(true)
-	}
-	@objc
-	func backButtonDidTab() {
-		self.dismiss(animated: true, completion: nil)
-	}
 }
 
+// MARK: - TextViewDelegate
 extension PromiseViewController : UITextViewDelegate {
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		if textView.textColor == UIColor.gray01 {
@@ -536,6 +540,8 @@ extension PromiseViewController : UITextViewDelegate {
 		}
 	}
 }
+
+// MARK: - TextFeildDelegate
 extension PromiseViewController : UITextFieldDelegate{
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()

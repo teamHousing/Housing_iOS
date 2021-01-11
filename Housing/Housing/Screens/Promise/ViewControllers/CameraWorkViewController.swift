@@ -13,6 +13,23 @@ import SnapKit
 import YPImagePicker
 
 class CameraWorkViewController: UIViewController{
+	// MARK: - Component
+
+	var evidencePictures : [UIImage] = []
+	var requestData = RequestDataModel.shared
+	var config : YPImagePickerConfiguration {
+		var temp = YPImagePickerConfiguration()
+		temp.usesFrontCamera = false
+		temp.screens = [.library, .photo]
+		temp.library.maxNumberOfItems = 10
+		temp.library.defaultMultipleSelection = true
+		temp.showsPhotoFilters = false
+		temp.onlySquareImagesFromCamera = false
+		temp.hidesBottomBar = false
+		temp.hidesCancelButton = false
+		temp.library.skipSelectionsGallery = true
+		return temp
+	}
 	private let mainLabel = UILabel().then {
 		$0.numberOfLines = 2
 		$0.text = """
@@ -51,6 +68,7 @@ class CameraWorkViewController: UIViewController{
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
+	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
 		let additionalRequestViewController = AdditionalRequestViewController()
 		self.navigationController?.pushViewController(additionalRequestViewController, animated: true)
@@ -115,27 +133,6 @@ class CameraWorkViewController: UIViewController{
 		}
 	}
 	
-	
-	
-	var evidencePictures : [UIImage] = []
-	var requestData = RequestDataModel.shared
-	var config : YPImagePickerConfiguration {
-		var temp = YPImagePickerConfiguration()
-		temp.usesFrontCamera = false
-		temp.screens = [.library, .photo]
-		temp.library.maxNumberOfItems = 10
-		temp.library.defaultMultipleSelection = true
-		temp.showsPhotoFilters = false
-		temp.onlySquareImagesFromCamera = false
-		temp.hidesBottomBar = false
-		temp.hidesCancelButton = false
-		temp.library.skipSelectionsGallery = true
-		return temp
-	}
-	
-	
-	//@IBOutlet weak var photoSelectCollectionView: UICollectionView!
-	
 	func collectionViewConfig() {
 		self.photoSelectCollectionView.register(photoCollectionViewCell.self, forCellWithReuseIdentifier: photoCollectionViewCell.registerId)
 		self.photoSelectCollectionView.delegate = self
@@ -143,7 +140,6 @@ class CameraWorkViewController: UIViewController{
 	}
 	
 	
-	//MARK: Function - 카메라 켜는 함수
 	func cameraWork() {
 		let picker = YPImagePicker(configuration: self.config)
 		picker.didFinishPicking{ [unowned picker] items, _ in
@@ -158,7 +154,6 @@ class CameraWorkViewController: UIViewController{
 		}
 		present(picker, animated: true, completion: nil)
 	}
-	//MARK: Function - 사진 보관함 켜는 함수
 	func photoLibraryWork() {
 		let picker = YPImagePicker(configuration: config)
 		picker.didFinishPicking{ [unowned picker] items, cancelled in
@@ -179,6 +174,7 @@ class CameraWorkViewController: UIViewController{
 		present(picker, animated: true, completion: nil)
 	}
 	
+	// MARK: - Life Cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		print(requestData)
@@ -188,7 +184,7 @@ class CameraWorkViewController: UIViewController{
 	}
 }
 
-
+// MARK: - CollectionView
 extension CameraWorkViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if indexPath.row == 0 {
