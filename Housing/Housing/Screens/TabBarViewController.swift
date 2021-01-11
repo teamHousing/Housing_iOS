@@ -24,6 +24,7 @@ class TabBarViewController: UITabBarController {
 		tabBar.layer.applyShadow(color: .black, alpha: 0.2, x: 0, y: 5, blur: 5)
 		tabBar.layer.applyShadow(color: .black, alpha: 0.12, x: 0, y: 3, blur: 14)
 		tabBar.layer.applyShadow(color: .black, alpha: 0.14, x: 0, y: 8, blur: 10)
+		UITabBar.appearance().tintColor = .primaryBlack
 	}
 	
 	private func tabbar() {
@@ -32,7 +33,7 @@ class TabBarViewController: UITabBarController {
 		let storyboard = UIStoryboard(name: StoryboardStorage.communication,
 																	bundle: nil)
 		let communicationVC = storyboard.instantiateViewController(withIdentifier: "CommunicationViewController")
-		let communicationTabItem = UITabBarItem(title: "홈",
+		let communicationTabItem = UITabBarItem(title: "",
 																	 image: UIImage(systemName: "house"),
 																	 tag: 0)
 		communicationVC.tabBarItem = communicationTabItem
@@ -41,7 +42,7 @@ class TabBarViewController: UITabBarController {
 		let communicationTab = navigationController
 		
 		let calendarViewController = CalendarViewController()
-		let calendarTabItem = UITabBarItem(title: "캘린더",
+		let calendarTabItem = UITabBarItem(title: "",
 																	 image: UIImage(systemName: "eyes"),
 																	 tag: 1)
 		calendarViewController.tabBarItem = calendarTabItem
@@ -53,7 +54,7 @@ class TabBarViewController: UITabBarController {
 		let homestoryboard = UIStoryboard(name: StoryboardStorage.notice,
 																	bundle: nil)
 		let homeVC = homestoryboard.instantiateViewController(withIdentifier: "NoticeViewController")
-		let homeTabItem = UITabBarItem(title: "우리집 소식",
+		let homeTabItem = UITabBarItem(title: "",
 																	 image: UIImage(systemName: "house.fill"),
 																	 tag: 1)
 		homeVC.tabBarItem = homeTabItem

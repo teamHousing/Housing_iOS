@@ -25,7 +25,7 @@ class AdditionalRequestViewController: UIViewController {
 	private let lineImage = UIView().then {
 		$0.backgroundColor = UIColor.primaryBlack
 		$0.tintColor = UIColor.primaryBlack
-		}
+	}
 	private let presetButton1 = UIButton().then {
 		$0.setTitle("늘 감사합니다 :)", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
@@ -81,7 +81,7 @@ class AdditionalRequestViewController: UIViewController {
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.backgroundColor = .black
 		$0.setRounded(radius: 25)
-		}
+	}
 	private let page = UIPageControl().then{
 		$0.numberOfPages = 4
 		$0.currentPage = 2
@@ -105,6 +105,7 @@ class AdditionalRequestViewController: UIViewController {
 		sender.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		//sender.layer.applyShadow()
 		requestData.editionalRequest = sender.titleLabel?.text ?? ""
+		presetButton5.resignFirstResponder()
 	}
 	
 	func dataPreset() {
@@ -116,7 +117,7 @@ class AdditionalRequestViewController: UIViewController {
 		self.presetButton3.setBorder(borderColor: .gray01, borderWidth: 1)
 		self.presetButton4.setBorder(borderColor: .gray01, borderWidth: 1)
 		self.presetButton5.setBorder(borderColor: .gray01, borderWidth: 1)
-
+		
 	}
 	
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
@@ -133,8 +134,8 @@ class AdditionalRequestViewController: UIViewController {
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .white
 		self.view.adds([
-		mainLabel,
-		lineImage,
+			mainLabel,
+			lineImage,
 			presetButton1,
 			presetButton2,
 			presetButton3,
@@ -143,7 +144,7 @@ class AdditionalRequestViewController: UIViewController {
 			nextStep,
 			page
 		])
-		 mainLabel.snp.makeConstraints{
+		mainLabel.snp.makeConstraints{
 			$0.top.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
 			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -101))
@@ -209,21 +210,34 @@ class AdditionalRequestViewController: UIViewController {
 		presetButton5.delegate = self
 		
 	}
+	@objc func handleTap(recognizer: UITapGestureRecognizer){
+		
+		self.view.endEditing(true)
+	}
+	@objc
+	func keyboardWillShow(_ sender: Notification) {
+		self.view.frame.origin.y = -150 // Move view 150 points upward
+	}
+	@objc
+	func keyboardWillHide(_ sender: Notification) {
+		self.view.frame.origin.y = 0 // Move view to original position
+	}
 	// MARK: - Life Cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-			dataPreset()
-			layout()
-        // Do any additional setup after loading the view.
-			let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-			self.view.addGestureRecognizer(tap)
-		}
-		@objc func handleTap(recognizer: UITapGestureRecognizer){
-			
-			self.view.endEditing(true)
-		}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		dataPreset()
+		layout()
+		// Do any additional setup after loading the view.
+		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+		self.view.addGestureRecognizer(tap)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+		
+	}
+	
 }
+
 
 // MARK: - TextFieldDelegate
 extension AdditionalRequestViewController : UITextFieldDelegate {
@@ -246,5 +260,5 @@ extension AdditionalRequestViewController : UITextFieldDelegate {
 		return true
 	}
 	
-
+	
 }
