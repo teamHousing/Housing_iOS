@@ -46,7 +46,7 @@ class DetailNoticeViewController: UIViewController {
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		
-		navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btnBack"), style: .plain, target: self, action: #selector(toNotice))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(toNotice))
 		navigationItem.leftBarButtonItem?.tintColor = .black
 		
 		circleView.cornerRadius = circleView.frame.height / 2
