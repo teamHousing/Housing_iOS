@@ -150,7 +150,7 @@
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z06-KG-3E1">
                                                             <rect key="frame" x="20" y="166.5" width="335" height="64"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdo-zy-8Nd">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한2줄제한" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdo-zy-8Nd">
                                                                     <rect key="frame" x="20" y="16" width="295" height="32"/>
                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                     <nil key="textColor"/>

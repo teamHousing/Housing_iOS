@@ -96,6 +96,7 @@ class SignupViewController: UIViewController {
 			nextButtonView.isEnabled = false
 		}
 	}
+	
 	@IBAction func tenantButton(_ sender: Any) {
 		if !tenantView.isSelected {
 			tenantView.layer.borderWidth = 2
@@ -124,5 +125,3 @@ class SignupViewController: UIViewController {
 		}
 	}
 }
-
-//MARK:- Extension Object

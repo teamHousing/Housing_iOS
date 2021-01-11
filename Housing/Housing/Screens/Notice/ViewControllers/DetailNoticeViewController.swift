@@ -19,7 +19,6 @@ class DetailNoticeViewController: UIViewController {
 	
 	//캘린더 추가 공지 컴포넌트를 담은 뷰
 	@IBOutlet weak var entireComponents: UIView!
-	
 	@IBOutlet weak var circleView: UIView!
 	@IBOutlet weak var addedNoticeView: UIView!
 	
@@ -53,13 +52,13 @@ class DetailNoticeViewController: UIViewController {
 		
 		addedNoticeView.layer.cornerRadius = 12
 	}
+	
 	func initData() {
 		detailTitle.text = titleData
 		detailContext.text = contextData
 	}
+	
 	@objc func toNotice() {
 		navigationController?.popViewController(animated: true)
 	}
-	
-	//MARK:- Component(Action)
 }
