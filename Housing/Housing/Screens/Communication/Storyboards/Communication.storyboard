@@ -164,7 +164,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYB-kI-bjU">
-                                                    <rect key="frame" x="110" y="213" width="194" height="29"/>
+                                                    <rect key="frame" x="110" y="197" width="194" height="29"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="14"/>
                                                     <state key="normal" title="문의하기">
@@ -175,8 +175,8 @@
                                                         <action selector="TouchUpInquiryButton:" destination="N1K-SO-Vky" eventType="touchUpInside" id="W3L-v4-77m"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="모든 문의가 해결되었어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f3-Zg-JlK">
-                                                    <rect key="frame" x="135" y="158" width="144.5" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모든 문의가 해결되었어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f3-Zg-JlK">
+                                                    <rect key="frame" x="135" y="160" width="144.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -186,11 +186,11 @@
                                                 <constraint firstItem="5f3-Zg-JlK" firstAttribute="top" secondItem="nD8-tz-IBH" secondAttribute="bottom" constant="20" id="07J-QK-Tyl"/>
                                                 <constraint firstItem="nD8-tz-IBH" firstAttribute="centerX" secondItem="CCC-dn-kac" secondAttribute="centerX" id="5GF-4S-OiF"/>
                                                 <constraint firstItem="5f3-Zg-JlK" firstAttribute="centerX" secondItem="nD8-tz-IBH" secondAttribute="centerX" id="QzS-Xj-73Y"/>
-                                                <constraint firstItem="dYB-kI-bjU" firstAttribute="top" secondItem="5f3-Zg-JlK" secondAttribute="bottom" constant="36" id="TJT-kW-89s"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dYB-kI-bjU" secondAttribute="trailing" constant="90" id="YVg-MQ-pVo"/>
                                                 <constraint firstItem="nD8-tz-IBH" firstAttribute="leading" secondItem="CCC-dn-kac" secondAttribute="leadingMargin" constant="128" id="ZLg-kU-Y8a"/>
                                                 <constraint firstItem="dYB-kI-bjU" firstAttribute="centerX" secondItem="nD8-tz-IBH" secondAttribute="centerX" id="ccX-UF-zKp"/>
                                                 <constraint firstItem="dYB-kI-bjU" firstAttribute="leading" secondItem="CCC-dn-kac" secondAttribute="leadingMargin" constant="90" id="hzJ-9Z-61f"/>
+                                                <constraint firstItem="dYB-kI-bjU" firstAttribute="top" secondItem="5f3-Zg-JlK" secondAttribute="bottom" constant="20" id="w7v-XZ-3Dm"/>
                                                 <constraint firstItem="nD8-tz-IBH" firstAttribute="top" secondItem="CCC-dn-kac" secondAttribute="topMargin" constant="11" id="x6e-22-KPl"/>
                                             </constraints>
                                         </tableViewCellContentView>

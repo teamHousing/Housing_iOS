@@ -34,7 +34,7 @@ final class CommunicationViewController: UIViewController {
 	//MARK: - Property
 	
 	var incompleteLength = 0
-	var completeLength = 3
+	var completeLength = 0
 	var mode = 1 // 집주인이 0, 자취생이 1
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData = [
@@ -65,6 +65,7 @@ final class CommunicationViewController: UIViewController {
 							 progress: 2,
 							 issueContents: "집도 좋고 늘 빠르게 소통해주셔서 2년간 굉장히 만족하면서 생활했어요. 계약 만료 기간이 끝나 가는데 다시 재계...")]
 
+	// MARK : - LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableViewData = [cellData(opened: true,
@@ -73,7 +74,6 @@ final class CommunicationViewController: UIViewController {
 										 cellData(opened: true,
 															title: "fixed",
 															sectionData: comDetailCellData)] /// complete
-
 		configTableView()
 		configHeaderView()
 		layoutNavigationBar()
@@ -243,6 +243,7 @@ extension CommunicationViewController: UITableViewDataSource{
 		else { return UITableViewCell()}
 		emptyIncomCell.emptyLabel.numberOfLines = 2
 		emptyIncomCell.contentView.backgroundColor = UIColor(named: "paleGrey")
+		emptyIncomCell.emptyLabel.textAlignment = .center
 		emptyIncomCell.makeButtonRounded()
 		
 		guard let emptyComCell = tableView.dequeueReusableCell(withIdentifier: "emptyComTableViewCell")
@@ -283,10 +284,14 @@ extension CommunicationViewController: UITableViewDataSource{
 				}
 			}
 		} else { ///여기가 내부 cell 부분.
+			print("cell시작")
 			if incompleteLength == 0 && completeLength == 0 {
+				print("여기 들어왔고")
 				if indexPath.section == 0 {
+					print("여기도 왔어")
 					if mode == 0 {
-						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n자취생을 초대해 볼까요?" /// 이거 왜 안되지? newline이 들어가면 안되네.. 왜지????????????????//"문
+						print("여기는?")
+						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n자취생을 초대해 볼까요?"
 						emptyIncomCell.inquiryButton.titleLabel?.text = "초대하기"
 					} else {
 						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n집주인과 소통을 시작해볼까요?"
@@ -302,7 +307,7 @@ extension CommunicationViewController: UITableViewDataSource{
 
 			else if incompleteLength == 0 && completeLength > 0 {
 				if indexPath.section == 0 {
-						emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!" /// 이거 왜 안되지? newline이 들어가면 안되네.. 왜지?????????????
+						emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!"
 						emptyIncomCell.inquiryButton.isHidden = true
 					return emptyIncomCell
 				}
@@ -346,6 +351,7 @@ extension CommunicationViewController: UITableViewDataSource{
 
 extension CommunicationViewController: UIScrollViewDelegate{
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+	
 		 if scrollView.contentOffset.y < -1 {
 			communicationTableView.backgroundColor = .white
 		 } else if scrollView.contentOffset.y >= -1 {
