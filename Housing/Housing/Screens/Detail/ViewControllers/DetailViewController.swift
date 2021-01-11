@@ -179,7 +179,6 @@ class DetailViewController: SegementSlideDefaultViewController {
 		navigationController?.navigationBar.isTranslucent = false
 		navigationController?.navigationBar.tintColor = .black
 		navigationController?.setNavigationBarHidden(false, animated: true)
-		tabBarController?.tabBar.isHidden = true
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
