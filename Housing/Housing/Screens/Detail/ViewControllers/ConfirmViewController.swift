@@ -140,8 +140,8 @@ class ConfirmViewController: UIViewController {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(true)
-		
+		super.viewWillAppear(animated)
+		tabBarController?.tabBar.isHidden = true
 		navigationController?.setNavigationBarHidden(false, animated: true)
 		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
@@ -149,6 +149,10 @@ class ConfirmViewController: UIViewController {
 		navigationController?.navigationBar.barTintColor = .white
 	}
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		tabBarController?.tabBar.isHidden = false
+	}
 }
 extension ConfirmViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

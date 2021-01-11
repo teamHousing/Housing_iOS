@@ -172,6 +172,9 @@ class DetailViewController: SegementSlideDefaultViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
 		
+		tabBarController?.tabBar.isHidden = true
+		edgesForExtendedLayout = .bottom
+		extendedLayoutIncludesOpaqueBars = true
 		navigationController?.navigationBar.shadowImage = UIImage()
 		navigationController?.navigationBar.isTranslucent = false
 		navigationController?.navigationBar.tintColor = .black
@@ -179,9 +182,11 @@ class DetailViewController: SegementSlideDefaultViewController {
 		tabBarController?.tabBar.isHidden = true
 	}
 	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidAppear(true)
-		
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(true)
+		tabBarController?.tabBar.isHidden = false
+		edgesForExtendedLayout = .top
+		extendedLayoutIncludesOpaqueBars = false
 	}
 	
 }

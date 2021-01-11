@@ -25,11 +25,11 @@ class NoticeViewController: UIViewController {
 	}
 	
 	//MARK:- Helper
-    func initLayout() {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-    }
-    
+	func initLayout() {
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		self.navigationController?.navigationBar.shadowImage = UIImage()
+	}
+	
 	func setNoticeList() {
 		noticeList.append(contentsOf: [
 			NoticeData.init(title: "11월 관리비 입금 안내", context: "입금 계좌 : 1002455115135 (우리은행/김미정) 용돈 대 환영 카카오 페이도 가능 룰루랄라 미정이 용돈 줄 사람~!? 현정이 ? \n \n 입금 계좌 : 1002455115135 (우리은행/김미정) 용돈 대 환영 카카오 페이도 가능 룰루랄라 미정이 용돈 줄 사람~!? 현정이 ?"),
@@ -39,14 +39,30 @@ class NoticeViewController: UIViewController {
 	}
 	
 	//MARK:- Component(Action)
-	@IBAction func makeVerifyCode(_ sender: Any) {
-		let viewController = storyboard?.instantiateViewController(withIdentifier: "VerifyCodeViewController") as! VerifyCodeViewController
+	@IBAction func writeButtonDidTap(_ sender: Any) {
+		let viewController = AddNoticeViewController()
 		
+		navigationController?.pushViewController(viewController, animated: true)
+	}
+	@IBAction func makeVerifyCode(_ sender: Any) {
+		print(#function)
+		//		let viewController = storyboard?.instantiateViewController(withIdentifier: "VerifyCodeViewController") as! VerifyCodeViewController
+		let viewController = VerifyNumberViewController()
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 }
 
-//MARK:- Extension Object
+extension NoticeViewController: UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		if scrollView.contentOffset.y > 100 {
+			noticeCollectionView.backgroundColor = .primaryGray
+		} else {
+			noticeCollectionView.backgroundColor = .white
+		}
+	}
+}
+
+//MARK:- CollectionView
 extension NoticeViewController: UICollectionViewDataSource {
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1

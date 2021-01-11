@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -248,6 +248,9 @@
                                                         <constraint firstAttribute="height" constant="34" id="uF8-CZ-60o"/>
                                                     </constraints>
                                                     <state key="normal" title="버튼"/>
+                                                    <connections>
+                                                        <action selector="writeButtonDidTap:" destination="Nh1-GQ-PFN" eventType="touchUpInside" id="fFs-lg-MIm"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
@@ -310,7 +313,6 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" id="fPq-09-HUo">
                             <connections>
                                 <action selector="makeVerifyCode:" destination="Nh1-GQ-PFN" id="vHp-Bk-tP7"/>
-                                <segue destination="MZd-kq-te7" kind="show" id="WjW-Wm-qZy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -320,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQ6-mY-wF6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="808.69565217391312" y="-143.30357142857142"/>
+            <point key="canvasLocation" x="807.20000000000005" y="-143.47826086956522"/>
         </scene>
         <!--Detail Notice View Controller-->
         <scene sceneID="0ar-A6-txB">
@@ -486,7 +488,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHA-bQ-tsu">
-                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MNH-wJ-put"/>
