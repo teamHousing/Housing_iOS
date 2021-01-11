@@ -29,6 +29,11 @@
 		CC42D05F25A74D21002A461D /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */; };
 		CC42D06225A74E54002A461D /* MessageDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42D06125A74E54002A461D /* MessageDetailTableViewCell.swift */; };
 		CC42D06525A7551C002A461D /* MessageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42D06425A7551C002A461D /* MessageCard.swift */; };
+		CC6740E425ACADE500EAE4C0 /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6740E325ACADE500EAE4C0 /* CommunicationService.swift */; };
+		CC6740E725ACADEE00EAE4C0 /* DetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6740E625ACADEE00EAE4C0 /* DetailService.swift */; };
+		CC6740EA25ACADF900EAE4C0 /* PromiseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6740E925ACADF900EAE4C0 /* PromiseService.swift */; };
+		CC6740EE25ACAFB300EAE4C0 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6740ED25ACAFB300EAE4C0 /* CalendarService.swift */; };
+		CC6740F225ACB03F00EAE4C0 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6740F125ACB03F00EAE4C0 /* NoticeService.swift */; };
 		CC6A1DF825A58C6C00C86865 /* AddedImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6A1DF725A58C6C00C86865 /* AddedImageCollectionViewCell.swift */; };
 		CC6A1E0425A5A2A800C86865 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6A1E0325A5A2A800C86865 /* UIImageView+.swift */; };
 		CC6A1E0E25A5AE6C00C86865 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */; };
@@ -127,6 +132,11 @@
 		CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		CC42D06125A74E54002A461D /* MessageDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailTableViewCell.swift; sourceTree = "<group>"; };
 		CC42D06425A7551C002A461D /* MessageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCard.swift; sourceTree = "<group>"; };
+		CC6740E325ACADE500EAE4C0 /* CommunicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationService.swift; sourceTree = "<group>"; };
+		CC6740E625ACADEE00EAE4C0 /* DetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailService.swift; sourceTree = "<group>"; };
+		CC6740E925ACADF900EAE4C0 /* PromiseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseService.swift; sourceTree = "<group>"; };
+		CC6740ED25ACAFB300EAE4C0 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		CC6740F125ACB03F00EAE4C0 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
 		CC6A1DF725A58C6C00C86865 /* AddedImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC6A1E0325A5A2A800C86865 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -617,6 +627,11 @@
 			isa = PBXGroup;
 			children = (
 				D1CF647625AC2464009A39EC /* UserService.swift */,
+				CC6740E325ACADE500EAE4C0 /* CommunicationService.swift */,
+				CC6740E625ACADEE00EAE4C0 /* DetailService.swift */,
+				CC6740E925ACADF900EAE4C0 /* PromiseService.swift */,
+				CC6740ED25ACAFB300EAE4C0 /* CalendarService.swift */,
+				CC6740F125ACB03F00EAE4C0 /* NoticeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -770,7 +785,9 @@
 				1FA03DE025A8470700AF0326 /* NoticeHeaderCollectionViewCell.swift in Sources */,
 				D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */,
 				D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */,
+				CC6740EA25ACADF900EAE4C0 /* PromiseService.swift in Sources */,
 				D11C1BEF25A2083B002606B2 /* NoticeCollectionViewCell.swift in Sources */,
+				CC6740E725ACADEE00EAE4C0 /* DetailService.swift in Sources */,
 				D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */,
 				CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */,
 				D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */,
@@ -780,6 +797,7 @@
 				1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */,
 				37259E9025A82A22006550AF /* EmptyIncomTableViewCell.swift in Sources */,
 				1F8ECE8C25A7138100C0E0FA /* SignupCompleteViewController.swift in Sources */,
+				CC6740EE25ACAFB300EAE4C0 /* CalendarService.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
 				DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
@@ -823,6 +841,7 @@
 				DA6D898525A5A98E00CF47C4 /* AppointmentViewController.swift in Sources */,
 				CC8B595625A496B300EC3AC7 /* MethodDetailTableViewCell.swift in Sources */,
 				DA928D2525A98ED200DA8466 /* VerifyNumberViewController.swift in Sources */,
+				CC6740F225ACB03F00EAE4C0 /* NoticeService.swift in Sources */,
 				D13118A3259B70EF00897DF4 /* KeychainStorage.swift in Sources */,
 				D1B444EE259F0A10005C2C68 /* CommunicationViewController.swift in Sources */,
 				DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */,
@@ -830,6 +849,7 @@
 				CC8B595025A4964200EC3AC7 /* RequestTableViewCell.swift in Sources */,
 				D1311898259B6BD100897DF4 /* UIColor+.swift in Sources */,
 				1FA03DDA25A846F100AF0326 /* NoticeFooterCollectionViewCell.swift in Sources */,
+				CC6740E425ACADE500EAE4C0 /* CommunicationService.swift in Sources */,
 				1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */,
 				D13118A6259B718900897DF4 /* CALayer+.swift in Sources */,
 				CC6A1E0E25A5AE6C00C86865 /* MessageViewController.swift in Sources */,

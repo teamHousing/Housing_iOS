@@ -18,13 +18,6 @@ class ContentTableViewCell: UITableViewCell {
 	
 	var cellData:DetailData?
 	
-	func makeCell(){
-//		categoryLabel?.text = cellData?.category
-//		titleLabel?.text = cellData?.issueTitle
-//		statusLabel?.text = cellData?.
-//		contentLabel?.text = cellData?.content
-	}
-	
 	func makeViewRounded(){
 		whiteUIView.setRounded(radius: 16)
 		labelBackView.setRounded(radius: 10)
