@@ -131,11 +131,13 @@ extension CommunicationViewController: UITableViewDelegate { // 이게 cell이 �
 		if indexPath.row == 0 {
 			if tableViewData[indexPath.section].opened == true{
 				tableViewData[indexPath.section].opened = false
+				communicationTableView.backgroundColor = .primaryGray
 				let sections = IndexSet(integer: indexPath.section)
 				tableView.reloadSections(sections, with: .none) //animaion
 				
 			}else {
 				tableViewData[indexPath.section].opened = true
+				communicationTableView.backgroundColor = .primaryGray
 				let sections = IndexSet(integer: indexPath.section)
 				tableView.reloadSections(sections, with: .none) //animaion
 			}
@@ -323,10 +325,10 @@ extension CommunicationViewController: UITableViewDataSource{
 
 extension CommunicationViewController: UIScrollViewDelegate{
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if scrollView.contentOffset.y > 100 {
-			communicationTableView.backgroundColor = .primaryGray
-		} else {
+		if scrollView.contentOffset.y < -1 {
 			communicationTableView.backgroundColor = .white
-		}
+			
+		} else if scrollView.contentOffset.y >= -1 {
+			communicationTableView.backgroundColor = .primaryGray }
 	}
 }
