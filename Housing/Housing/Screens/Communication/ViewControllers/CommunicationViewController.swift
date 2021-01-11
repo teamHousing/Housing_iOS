@@ -332,9 +332,10 @@ extension CommunicationViewController: UITableViewDataSource{
 
 extension CommunicationViewController: UIScrollViewDelegate{
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if scrollView.contentOffset.y < -1 {
+	
+		 if scrollView.contentOffset.y < -1 {
 			communicationTableView.backgroundColor = .white
-		} else if scrollView.contentOffset.y >= -1 {
+		 } else if scrollView.contentOffset.y >= -1 {
 			communicationTableView.backgroundColor = .primaryGray }
 	}
 }
