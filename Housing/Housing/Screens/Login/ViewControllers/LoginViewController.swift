@@ -7,7 +7,13 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+import RxMoya
+import Moya
+import RxCocoa
+import RxSwift
+
+
+class LoginViewController: BaseViewController {
 	
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var idTextField: UITextField!
@@ -16,6 +22,11 @@ class LoginViewController: UIViewController {
 	@IBOutlet weak var idBottomView: UIView!
 	@IBOutlet weak var passwordBottomView: UIView!
 	@IBOutlet weak var warningLabel: UILabel!
+	
+	// MARK: - Service
+	
+	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
 	
 	//MARK:- Lifecycle
 	override func viewDidLoad() {
@@ -70,9 +81,19 @@ class LoginViewController: UIViewController {
 	//MARK:- Component(Action)
 	
 	@IBAction func signinButtonDidTap(_ sender: Any) {
-		let viewcontroller = TabBarViewController()
-		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
+		
+		userProvider.rx.request(.signin(email: idTextField.text ?? "",
+																		password: passwordTextField.text ?? ""))
+			.asObservable()
+			.subscribe { (next) in
+				print(next.statusCode)
+				let viewcontroller = TabBarViewController()
+				viewcontroller.modalPresentationStyle = .fullScreen
+				self.present(viewcontroller, animated: true)
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+
 		
 	}
 	

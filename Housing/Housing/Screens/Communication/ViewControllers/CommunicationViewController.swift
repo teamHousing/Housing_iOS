@@ -122,6 +122,9 @@ extension CommunicationViewController: UITableViewDelegate { // 이게 cell이 �
 				let sections = IndexSet(integer: indexPath.section)
 				tableView.reloadSections(sections, with: .none) //animaion
 			}
+		} else {
+			let viewController = DetailViewController()
+			navigationController?.pushViewController(viewController, animated: true)
 		}
 	}
 }

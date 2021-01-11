@@ -138,6 +138,17 @@ class ConfirmViewController: UIViewController {
 			self.determineButtonState.append(false)
 		}
 	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+		
+		navigationController?.setNavigationBarHidden(false, animated: true)
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.tintColor = .black
+		navigationController?.navigationBar.barTintColor = .white
+	}
+	
 }
 extension ConfirmViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

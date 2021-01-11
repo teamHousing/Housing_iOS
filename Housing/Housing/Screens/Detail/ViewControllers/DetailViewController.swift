@@ -169,6 +169,20 @@ class DetailViewController: SegementSlideDefaultViewController {
 		setSafeArea()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+		
+		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.isTranslucent = false
+		navigationController?.navigationBar.tintColor = .black
+		navigationController?.setNavigationBarHidden(false, animated: true)
+		tabBarController?.tabBar.isHidden = true
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidAppear(true)
+		
+	}
 	
 }
 

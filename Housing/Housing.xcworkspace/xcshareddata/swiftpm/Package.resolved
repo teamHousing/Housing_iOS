@@ -29,12 +29,30 @@
         }
       },
       {
+        "package": "Moya",
+        "repositoryURL": "https://github.com/Moya/Moya",
+        "state": {
+          "branch": null,
+          "revision": "b3e5a233e0d85fd4d69f561c80988590859c7dee",
+          "version": "14.0.0"
+        }
+      },
+      {
         "package": "PryntTrimmerView",
         "repositoryURL": "https://github.com/HHK1/PryntTrimmerView",
         "state": {
           "branch": null,
           "revision": "ac1b60a22c7e6a6514de7a66d2f3d5b537c956d5",
           "version": "4.0.2"
+        }
+      },
+      {
+        "package": "ReactiveSwift",
+        "repositoryURL": "https://github.com/Moya/ReactiveSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "f195d82bb30e412e70446e2b4a77e1b514099e88",
+          "version": "6.1.0"
         }
       },
       {
