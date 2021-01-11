@@ -10,11 +10,8 @@ import SnapKit
 import UIKit
 
 class AdditionalRequestViewController: UIViewController {
-
+	// MARK: - Component
 	var requestData = RequestDataModel.shared
-	func dataPreset() {
-		requestData.editionalRequest = "늘 감사합니다 :)"
-	}
 	private let mainLabel = UILabel().then {
 		$0.numberOfLines = 2
 		$0.text = """
@@ -25,12 +22,10 @@ class AdditionalRequestViewController: UIViewController {
 		$0.textColor = .black
 		$0.textAlignment = .left
 	}
-	
 	private let lineImage = UIView().then {
 		$0.backgroundColor = UIColor.primaryBlack
 		$0.tintColor = UIColor.primaryBlack
 		}
-	
 	private let presetButton1 = UIButton().then {
 		$0.setTitle("늘 감사합니다 :)", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
@@ -40,7 +35,6 @@ class AdditionalRequestViewController: UIViewController {
 		$0.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		$0.setTitleColor(.black, for: .normal)
 		$0.addTarget(self, action: #selector(presetMessageSelected), for: .touchUpInside)
-
 	}
 	private let presetButton2 = UIButton().then {
 		$0.setTitle("최대한 신속하게 확인 부탁드려요.", for: .normal)
@@ -51,7 +45,6 @@ class AdditionalRequestViewController: UIViewController {
 		$0.contentHorizontalAlignment = .left
 		$0.setTitleColor(.black, for: .normal)
 		$0.addTarget(self, action: #selector(presetMessageSelected), for: .touchUpInside)
-
 	}
 	private let presetButton3 = UIButton().then {
 		$0.setTitle("방문 전 사전 연락 부탁드려요.", for: .normal)
@@ -62,7 +55,6 @@ class AdditionalRequestViewController: UIViewController {
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.setTitleColor(.black, for: .normal)
 		$0.addTarget(self, action: #selector(presetMessageSelected), for: .touchUpInside)
-
 	}
 	private let presetButton4 = UIButton().then {
 		$0.setTitle("부재 시 먼저 연락드리겠습니다.", for: .normal)
@@ -90,7 +82,6 @@ class AdditionalRequestViewController: UIViewController {
 		$0.backgroundColor = .black
 		$0.setRounded(radius: 25)
 		}
-	
 	private let page = UIPageControl().then{
 		$0.numberOfPages = 4
 		$0.currentPage = 2
@@ -98,6 +89,8 @@ class AdditionalRequestViewController: UIViewController {
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
+	
+	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
 		let appointmentview = AppointmentViewController()
 		self.navigationController?.pushViewController(appointmentview, animated: true)
@@ -114,7 +107,9 @@ class AdditionalRequestViewController: UIViewController {
 		requestData.editionalRequest = sender.titleLabel?.text ?? ""
 	}
 	
-	
+	func dataPreset() {
+		requestData.editionalRequest = "늘 감사합니다 :)"
+	}
 	func clearSelection() {
 		self.presetButton1.setBorder(borderColor: .gray01, borderWidth: 1)
 		self.presetButton2.setBorder(borderColor: .gray01, borderWidth: 1)
@@ -214,7 +209,8 @@ class AdditionalRequestViewController: UIViewController {
 		presetButton5.delegate = self
 		
 	}
-	
+	// MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 			dataPreset()
@@ -227,19 +223,9 @@ class AdditionalRequestViewController: UIViewController {
 			
 			self.view.endEditing(true)
 		}
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+// MARK: - TextFieldDelegate
 extension AdditionalRequestViewController : UITextFieldDelegate {
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		clearSelection()

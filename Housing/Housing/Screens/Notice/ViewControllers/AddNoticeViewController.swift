@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 class AddNoticeViewController: UIViewController{
+	// MARK: - Component
 	var requestData = RequestDataModel.shared
 	let disposeBag = DisposeBag()
 	private let noticeScroll = UIScrollView()
@@ -109,7 +110,7 @@ class AddNoticeViewController: UIViewController{
 		$0.setTitleColor(.white, for: .normal)
 		$0.setRounded(radius: 25)
 	}
-	
+	// MARK: - Helper
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
 		let superViewWidth = self.view.frame.width
 		
@@ -249,20 +250,6 @@ class AddNoticeViewController: UIViewController{
 			$0.bottom.equalToSuperview().offset(-80)
 		}
 	}
-	
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		bindUI()
-		tabGestureInitializer() 
-		layout()
-		textInputConfig()
-		// Do any additional setup after loading the view.
-	let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-	self.contentView.addGestureRecognizer(tap)
- }
-
-	
 	private func textInputConfig(){
 		noticeDescription.delegate = self
 		noticeTitle.delegate = self
@@ -345,20 +332,22 @@ class AddNoticeViewController: UIViewController{
 		pickerView.modalPresentationStyle = .fullScreen
 		self.present(pickerView, animated: false, completion: nil)
 	}
-	
-	/*
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	// Get the new view controller using segue.destination.
-	// Pass the selected object to the new view controller.
-	}
-	*/
+	// MARK: - Life Cycle
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		bindUI()
+		tabGestureInitializer()
+		layout()
+		textInputConfig()
+		// Do any additional setup after loading the view.
+	let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+	self.contentView.addGestureRecognizer(tap)
+ }
 	
 }
 
-
+// MARK: - TextViewDelegate
 extension AddNoticeViewController : UITextViewDelegate {
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		if textView.textColor == UIColor.gray01 {
@@ -377,6 +366,8 @@ extension AddNoticeViewController : UITextViewDelegate {
 		}
 	}
 }
+// MARK: - TextFieldDelegate
+
 extension AddNoticeViewController : UITextFieldDelegate{
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
