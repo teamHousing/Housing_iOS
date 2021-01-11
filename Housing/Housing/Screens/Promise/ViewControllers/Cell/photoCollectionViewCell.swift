@@ -17,7 +17,7 @@ class photoCollectionViewCell: UICollectionViewCell {
 	}
 	let deleteBtn = UIButton().then{
 		$0.isHidden = false
-		$0.setImage(UIImage(named:"btnDelete"), for: .normal)
+		$0.setImage(UIImage(named:"btnDelete2"), for: .normal)
 	}
 	func bindConstraints() {
 		adds([evidenceImages,

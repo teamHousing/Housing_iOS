@@ -432,12 +432,11 @@ class PromiseViewController: UIViewController {
 			$0.top.equalTo(questionDescription.snp.bottom).offset(72)
 			$0.centerX.equalTo(view)
 			$0.width.equalTo(widthConstraintAmount(value: 255))
-			$0.height.equalTo(questionTitle.snp.width).multipliedBy(1 / 5.3125)
+			$0.height.equalTo(48)
 		}
 		page.snp.makeConstraints{
 			$0.top.equalTo(nextStep.snp.bottom).offset(24)
 			$0.bottom.equalToSuperview()
-			$0.height.equalTo(20)
 			$0.centerX.equalToSuperview()
 		}
 		
@@ -456,9 +455,10 @@ class PromiseViewController: UIViewController {
 		let inputOb : Observable<Bool> = questionTitle.rx.text.map{$0 == ""}.asObservable()
 		let desInputOb : Observable<Bool> = questionDescription.rx.text.orEmpty.map{$0 == "내용을 작성해주세요"}.asObservable()
 		inputOb.subscribe{ b in
-			
+			self.underBar.backgroundColor = b.element! ? .gray01 : .black
 		}.disposed(by: disposeBag)
 		desInputOb.subscribe{ b in
+			self.questionDescription.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 16)
 		}.disposed(by: disposeBag)
 		
 		Observable.combineLatest(inputOb, desInputOb, resultSelector: { !$0 && !$1})

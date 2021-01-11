@@ -153,7 +153,7 @@ class AppointmentViewController: UIViewController {
 	}
 	let timeStampTableView = UITableView(frame: .zero).then{
 		$0.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
-		$0.backgroundColor = .primaryWhite
+		$0.backgroundColor = .primaryGray
 		$0.isScrollEnabled = false
 		$0.rowHeight = UITableView.automaticDimension
 		$0.separatorStyle = .none
@@ -310,14 +310,14 @@ class AppointmentViewController: UIViewController {
 		}
 		underGrayView.adds([timeStampTableView, registerButton, page])
 		timeStampTableView.snp.makeConstraints{
-			$0.top.equalTo(underGrayView.snp.top)
+			$0.top.equalTo(underGrayView.snp.top).offset(44)
 			$0.leading.equalTo(view)
 			$0.trailing.equalTo(view)
 			$0.height.equalTo(CGFloat(70 * requestData.availableTimeList.count))
 		}
 		
 		registerButton.snp.makeConstraints{
-			$0.top.equalTo(timeStampTableView.snp.bottom).offset(72)
+			$0.top.equalTo(timeStampTableView.snp.bottom).offset(60)
 			$0.centerX.equalTo(view)
 			$0.width.equalTo(widthConstraintAmount(value: 255))
 			$0.height.equalTo(addButton.snp.width).multipliedBy(1 / 5.3215)
@@ -477,6 +477,8 @@ extension AppointmentViewController: UITableViewDelegate {
 			return UITableViewCell()
 		}
 		cell.awakeFromNib()
+		cell.backgroundColor = .primaryGray
+		cell.deleteButton.backgroundColor = .primaryGray
 		cell.dateLabel.text = self.requestData.availableTimeList[indexPath.row].day
 		cell.timeLabel.text = "\(self.requestData.availableTimeList[indexPath.row].startTime) - \(self.requestData.availableTimeList[indexPath.row].endTime)"
 		cell.methodLabel.text = self.requestData.solution
@@ -506,6 +508,7 @@ extension AppointmentViewController: UITableViewDelegate {
 		tableViewBind()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.contentView.addGestureRecognizer(tap)
+		
 		// Do any additional setup after loading the view.
 	}
 }

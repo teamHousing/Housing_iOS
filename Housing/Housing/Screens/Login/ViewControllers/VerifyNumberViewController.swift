@@ -11,13 +11,13 @@ import RxCocoa
 
 class VerifyNumberViewController: UIViewController {
 	// MARK: - Component
+	lazy var shareButton = UIBarButtonItem.init(image: UIImage(named: "iconShare"),
+																							style: .done,
+																							target: self,
+																							action: #selector(shareNumber(sender:)))
 	let disposeBag = DisposeBag()
 	private let backButton = UIButton().then{
 		$0.setImage(UIImage(named: ""), for: .normal)
-	}
-	private let shareButton = UIButton().then{
-		$0.setImage(UIImage(named: ""), for: .normal)
-		$0.addTarget(self, action: #selector(shareNumber(sender:)), for: .touchUpInside)
 	}
 	private let upperView = UIView().then {
 		$0.backgroundColor = .white
@@ -116,6 +116,7 @@ class VerifyNumberViewController: UIViewController {
 	}
 	// MARK: - Helper
 	private func layout() {
+		self.navigationItem.rightBarButtonItem = shareButton
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .primaryGray
 		self.navigationController?.navigationBar
@@ -143,7 +144,7 @@ class VerifyNumberViewController: UIViewController {
 										verifyNumber,
 										deleteButton1,
 										deleteButton2,
-										shareButton])
+										])
 		backgroundLabel.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(0)
 			$0.leading.equalTo(view).offset(20)
@@ -227,11 +228,7 @@ class VerifyNumberViewController: UIViewController {
 			$0.leading.equalTo(view).offset(20)
 			$0.trailing.equalTo(view).offset(-20)
 		}
-		shareButton.snp.makeConstraints{
-			$0.width.height.equalTo(44)
-			$0.top.equalTo(makeNumber.snp.bottom)
-			$0.centerX.equalTo(view)
-		}
+
 	}
 	private func showNumber() {
 		self.view.layoutIfNeeded()
@@ -264,6 +261,9 @@ class VerifyNumberViewController: UIViewController {
 			houseNumberUnderbar.backgroundColor = .gray01
 		}
 		sender.isHidden = true
+		self.makeNumber.setBorder(borderColor: .gray01 , borderWidth: 1)
+		self.makeNumber.setTitleColor(.gray01, for: .normal)
+		self.makeNumber.isEnabled = false
 	}
 	private func bind() {
 		let buildingObservable : Observable<Bool> = buildingNumber.rx.text.map{$0 == ""}.asObservable()

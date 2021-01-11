@@ -279,19 +279,16 @@ class AddNoticeViewController: UIViewController{
 		
 		
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
-		 print(str)
 		 self.datePickerLabel.textColor = .black
 		 self.pickDateunderBar.backgroundColor = .black
 		 self.datePickerLabel.text = str
 		}).disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
-			print(str)
 			self.startHour.textColor = .black
 			self.startHourUnderBar.backgroundColor = .black
 			self.startHour.text = str
 		}).disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
-			print(str)
 			self.endHour.textColor = .black
 			self.endHourUnderBar.backgroundColor = .black
 			self.endHour.text = str
@@ -353,6 +350,8 @@ extension AddNoticeViewController : UITextViewDelegate {
 		if textView.textColor == UIColor.gray01 {
 			textView.text = nil
 			textView.textColor = UIColor.black
+			//textView.setBorder(borderColor: .gray01, borderWidth: 0)
+			textView.layer.applyShadow(color: .black, alpha: 0.10000000149011612, x: 0, y: 0, blur: 16)
 		}
 	}
 	func textViewDidEndEditing(_ textView: UITextView) {

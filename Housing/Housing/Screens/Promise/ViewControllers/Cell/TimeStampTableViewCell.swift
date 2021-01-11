@@ -12,7 +12,7 @@ import Then
 class TimeStampTableViewCell: UITableViewCell {
 	static let registterId = "\(TimeStampTableViewCell.self)"
 	let containerView = UIView().then {
-		$0.backgroundColor = .primaryGray
+		$0.backgroundColor = .primaryWhite
 		$0.setRounded(radius: 12)
 		
 	}
@@ -51,6 +51,7 @@ class TimeStampTableViewCell: UITableViewCell {
 		return 57
 	}
 	func layout() {
+		self.containerView.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 8)
 		self.contentView.adds([containerView,circleView,deleteButton])
 		containerView.snp.makeConstraints{
 			$0.top.equalTo(self.contentView.snp.top).offset(6)
@@ -74,14 +75,13 @@ class TimeStampTableViewCell: UITableViewCell {
 		}
 		containerView.adds([timeLabel,dateLabel,methodLabel,firstSeperatorView,secondSeperatorView])
 		timeLabel.snp.makeConstraints {
-			$0.top.equalTo(containerView.snp.top).offset(20)
-			$0.leading.equalTo(containerView.snp.leading).offset(20)
-			$0.centerX.equalTo(containerView.snp.centerX)
+			$0.centerY.equalTo(self.containerView.snp.centerY)
+			$0.centerX.equalTo(containerView.snp.centerX).offset(11)
 		}
 		
 		dateLabel.snp.makeConstraints {
 			$0.centerY.equalTo(self.containerView.snp.centerY)
-			$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(-109)
+			$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(-100)
 		}
 		methodLabel.snp.makeConstraints {
 			$0.centerY.equalTo(self.containerView.snp.centerY)
