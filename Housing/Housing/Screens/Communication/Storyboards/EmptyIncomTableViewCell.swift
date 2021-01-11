@@ -1,5 +1,5 @@
 //
-//  emptyComTableViewCell.swift
+//  emptyIncomTableViewCell.swift
 //  Housing
 //
 //  Created by JUEUN KIM on 2021/01/08.
@@ -7,10 +7,16 @@
 
 import UIKit
 
-class emptyComTableViewCell: UITableViewCell {
-
+class EmptyIncomTableViewCell: UITableViewCell {
+	
 	@IBOutlet var emptyLabel: UILabel!
-	override func awakeFromNib() {
+	@IBOutlet var inquiryButton: UIButton!
+	
+	func makeButtonRounded(){
+		inquiryButton.setRounded(radius: 15)
+	}
+	
+    override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
