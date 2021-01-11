@@ -39,6 +39,14 @@ class DetailNoticeViewController: UIViewController {
 		
 		navigationController?.interactivePopGestureRecognizer?.delegate = nil
 	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tabBarController?.tabBar.isHidden = true
+	}
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		tabBarController?.tabBar.isHidden = false
+	}
 	
 	//MARK:- Helper
 	func initLayout() {

@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 									 didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		print("시작되었습니다.")
+		UINavigationBar.appearance().tintColor = .primaryBlack
 		return true
 	}
 	

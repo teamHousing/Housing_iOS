@@ -82,12 +82,9 @@ class LoginViewController: BaseViewController {
 	
 	@IBAction func signinButtonDidTap(_ sender: Any) {
 //		let viewcontroller = TabBarViewController()
-		let viewcontroller = PromiseViewController()
-		let navigationviewController = UINavigationController(rootViewController: viewcontroller)
-
+		let viewcontroller = TabBarViewController()
 		viewcontroller.modalPresentationStyle = .fullScreen
-		navigationviewController.modalPresentationStyle = .fullScreen
-		self.present(navigationviewController, animated: true)
+		present(viewcontroller, animated: true)
 
 //		userProvider.rx.request(.signin(email: idTextField.text ?? "",
 //																		password: passwordTextField.text ?? ""))
@@ -97,7 +94,6 @@ class LoginViewController: BaseViewController {
 //			} onError: { (error) in
 //				print(error.localizedDescription)
 //			}.disposed(by: disposeBag)
-
 		
 	}
 	

@@ -302,11 +302,22 @@ class VerifyNumberViewController: UIViewController {
 	}
 	// MARK: - Life Cycle
 	override func viewDidLoad() {
+		print(#file)
 		bind()
 		super.viewDidLoad()
 		layout()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.view.addGestureRecognizer(tap)
 		self.upperView.addGestureRecognizer(tap)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tabBarController?.tabBar.isHidden = true
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		tabBarController?.tabBar.isHidden = false
 	}
 }
