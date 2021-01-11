@@ -10,13 +10,14 @@ import Foundation
 import Moya
 import SwiftKeychainWrapper
 
-enum UserService {
-	case signin(email: String, password: String)
-	case hostSignup
-	case guestSignup
+enum CommunicationService {
+	case home(unit: String)
+	case homeRoomList
 }
 
-extension UserService: TargetType {
+
+
+extension CommunicationService: TargetType {
 	
 	private var token: String {
 		return KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken) ?? ""
@@ -28,21 +29,18 @@ extension UserService: TargetType {
 	
 	var path: String {
 		switch self {
-		case .signin:
-			return "/user/login"
-		case .hostSignup:
-			return "/user/registration/0"
-		case .guestSignup:
-			return "/user/registration/1"
+		case let .home(unit):
+			return "/communication/\(unit)"
+		case .homeRoomList:
+			return "/houseInfo/unit"
 		}
 	}
-	
+
 	var method: Moya.Method {
 		switch self {
-		case .signin,
-				 .hostSignup,
-				 .guestSignup:
-			return .post
+		case .home,
+				 .homeRoomList:
+		return .get
 		}
 	}
 	
@@ -52,14 +50,11 @@ extension UserService: TargetType {
 	
 	var task: Task {
 		switch self {
-
-		case .signin(email: let email, password: let password):
-			return .requestCompositeParameters(bodyParameters: ["email": email, "password": password],
+		case .home(unit: let unit):
+			return .requestCompositeParameters(bodyParameters: .init(),
 																				 bodyEncoding: JSONEncoding.default,
-																				 urlParameters: .init())
-		case .hostSignup:
-			return .requestPlain
-		case .guestSignup:
+																				 urlParameters: ["unit": unit])
+		case .homeRoomList:
 			return .requestPlain
 		}
 	}
@@ -72,3 +67,4 @@ extension UserService: TargetType {
 		}
 	}
 }
+	
