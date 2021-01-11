@@ -21,9 +21,12 @@ class IncompleteTableViewCell: UITableViewCell {
 	func makeViewRounded(){
 		roomNumberView.setRounded(radius: 15)
 	}
-//	@IBAction func touchUpIncomButton(_ sender: Any) {
+	
+	@IBAction func touchUpInComButton(_ sender: Any) {
+	}
+	//	@IBAction func touchUpIncomButton(_ sender: Any) {
 //		incomButton.addTarget(CommunicationViewController(), action: #selector(CommunicationViewController.handleExpandAndClose), for: .touchUpInside)
-//	}
+////	}
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
