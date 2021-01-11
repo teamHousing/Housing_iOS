@@ -10,8 +10,8 @@ import RxSwift
 import RxCocoa
 
 class VerifyNumberViewController: UIViewController {
+	// MARK: - Component
 	let disposeBag = DisposeBag()
-	
 	private let backButton = UIButton().then{
 		$0.setImage(UIImage(named: ""), for: .normal)
 	}
@@ -25,7 +25,6 @@ class VerifyNumberViewController: UIViewController {
 		$0.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 		$0.layer.applyCardShadow()
 	}
-	
 	private let backgroundLabel = UILabel().then{
 		$0.text = "인증번호 생성하기"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
@@ -75,7 +74,6 @@ class VerifyNumberViewController: UIViewController {
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.addTarget(self, action: #selector(makeTheNumber), for: .touchUpInside)
 	}
-	
 	private let verifyNumber = UILabel().then{
 		$0.text = "1234"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 32)
@@ -116,7 +114,7 @@ class VerifyNumberViewController: UIViewController {
 		$0.tag = 2
 		$0.addTarget(self, action: #selector(resetTextField(sender:)), for: .touchUpInside)
 	}
-	
+	// MARK: - Helper
 	private func layout() {
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .primaryGray
@@ -235,15 +233,6 @@ class VerifyNumberViewController: UIViewController {
 			$0.centerX.equalTo(view)
 		}
 	}
-	override func viewDidLoad() {
-		bind()
-		super.viewDidLoad()
-		layout()
-		
-		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-		self.view.addGestureRecognizer(tap)
-		self.upperView.addGestureRecognizer(tap)
-	}
 	private func showNumber() {
 		self.view.layoutIfNeeded()
 		let numberLabelHeight = 94
@@ -311,13 +300,13 @@ class VerifyNumberViewController: UIViewController {
 		activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.postToTwitter,UIActivity.ActivityType.mail]
 		self.present(activityViewController, animated: true, completion: nil)
 	}
-	/*
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	// Get the new view controller using segue.destination.
-	// Pass the selected object to the new view controller.
+	// MARK: - Life Cycle
+	override func viewDidLoad() {
+		bind()
+		super.viewDidLoad()
+		layout()
+		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+		self.view.addGestureRecognizer(tap)
+		self.upperView.addGestureRecognizer(tap)
 	}
-	*/
 }
