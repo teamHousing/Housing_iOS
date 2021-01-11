@@ -23,7 +23,7 @@ extension UserService: TargetType {
 	}
 	
 	public var baseURL: URL {
-		return URL(string: "")!
+		return URL(string: "3.34.74.249:3000")!
 	}
 	
 	var path: String {
