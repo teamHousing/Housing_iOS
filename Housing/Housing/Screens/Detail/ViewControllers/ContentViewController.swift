@@ -38,6 +38,11 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		tableView.reloadData()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+		navigationController?.setNavigationBarHidden(false, animated: true)
+	}
+	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if indexPath.row == 0 {
