@@ -7,45 +7,55 @@
 
 import UIKit
 
-class AddressViewController: UIViewController {
+final class AddressViewController: UIViewController {
 	
 	//MARK:- Component(Outlet)
-	@IBOutlet weak var toNextView: UIButton!
+	@IBOutlet weak var toNextButton: UIButton!
 	@IBOutlet weak var addressTextField: UITextField!
 	@IBOutlet weak var buildingTextField: UITextField!
+	
+	//MARK: - Property
 	
 	//MARK:- Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		initLayout()
 		
-		addressTextField.delegate = self
-		buildingTextField.delegate = self
+		addressTextField.addTarget(self,
+															 action: #selector(addressTextFieldChanged(_:)),
+															 for: .editingChanged)
+		buildingTextField.addTarget(self,
+																action: #selector(addressTextFieldChanged(_:)),
+																for: .editingChanged)
 	}
 	
 	//MARK:- Helper
-	func initLayout() {
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-		
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-		
-		addressTextField.tintColor = UIColor(red: 255 / 255, green: 133 / 255, blue: 119 / 255, alpha: 1)
-		buildingTextField.tintColor = UIColor(red: 255 / 255, green: 133 / 255, blue: 119 / 255, alpha: 1)
-		
-		toNextView.backgroundColor = UIColor(red: 219 / 255, green: 219 / 255, blue: 219 / 255, alpha: 1)
-		toNextView.layer.cornerRadius = 0.5 * toNextView.bounds.size.height
-		toNextView.isEnabled = false
+	@objc
+	private func addressTextFieldChanged(_ textField: UITextField) {
+		if addressTextField.text?.count == 0 || buildingTextField.text?.count == 0 {
+			toNextButton.backgroundColor = UIColor(red: 219 / 255,
+																					 green: 219 / 255,
+																					 blue: 219 / 255,
+																					 alpha: 1)
+			toNextButton.layer.cornerRadius = 0.5 * toNextButton.bounds.size.height
+			toNextButton.isEnabled = false
+		} else {
+			toNextButton.backgroundColor = .primaryBlack
+			toNextButton.layer.cornerRadius = 0.5 * toNextButton.bounds.size.height
+			toNextButton.isEnabled = true
+		}
 	}
 	
-	@objc func keyboardWillShow(_ sender: Notification) {
+	private func initLayout() {
+		addressTextField.tintColor = UIColor.primaryOrange
+		buildingTextField.tintColor = UIColor.primaryOrange
 		
-		self.view.frame.origin.y = 0
-	}
-	
-	@objc func keyboardWillHide(_ sender: Notification) {
-		
-		self.view.frame.origin.y = 0
+		toNextButton.backgroundColor = UIColor(red: 219 / 255,
+																				 green: 219 / 255,
+																				 blue: 219 / 255,
+																				 alpha: 1)
+		toNextButton.layer.cornerRadius = 0.5 * toNextButton.bounds.size.height
+		toNextButton.isEnabled = false
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -57,24 +67,11 @@ class AddressViewController: UIViewController {
 	@IBAction func toSelectButton(_ sender: Any) {
 		navigationController?.popViewController(animated: true)
 	}
+	
 	@IBAction func toNextButton(_ sender: Any) {
-		let viewController = storyboard?.instantiateViewController(withIdentifier: "SignupCompleteViewController") as! SignupCompleteViewController
+		let viewController = storyboard?.instantiateViewController(
+			withIdentifier: "SignupCompleteViewController") as! SignupCompleteViewController
 		
 		navigationController?.pushViewController(viewController, animated: true)
-	}
-}
-
-extension AddressViewController: UITextFieldDelegate {
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		if addressTextField.text != "" && buildingTextField.text != "" {
-			toNextView.backgroundColor = .primaryBlack
-			toNextView.layer.cornerRadius = 0.5 * toNextView.bounds.size.height
-			toNextView.isEnabled = true
-		}
-		else if addressTextField.text == "" || buildingTextField.text == "" {
-			toNextView.backgroundColor = UIColor(red: 219 / 255, green: 219 / 255, blue: 219 / 255, alpha: 1)
-			toNextView.layer.cornerRadius = 0.5 * toNextView.bounds.size.height
-			toNextView.isEnabled = false
-		}
 	}
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -139,17 +139,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="OUY-R2-G7E">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="rfn-iR-6Xm">
-                            <imageReference key="image" image="arrow.backward" catalog="system" renderingMode="original"/>
                             <connections>
                                 <action selector="navigationBackButton:" destination="HXP-7c-81v" id="d6q-tu-oHV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="lessorView" destination="4Pm-h2-ujb" id="AC2-HM-nQI"/>
-                        <outlet property="navigationBackButtonView" destination="rfn-iR-6Xm" id="YFl-7J-8s7"/>
-                        <outlet property="nextButtonView" destination="4zM-j5-hfc" id="vaP-uP-fPX"/>
-                        <outlet property="tenantView" destination="kSn-eM-kEV" id="fjX-M3-rjN"/>
+                        <outlet property="lessorButton" destination="4Pm-h2-ujb" id="cpN-M0-gmh"/>
+                        <outlet property="navigationBackButton" destination="rfn-iR-6Xm" id="QHK-C8-ad1"/>
+                        <outlet property="nextButton" destination="4zM-j5-hfc" id="6GU-AR-vE0"/>
+                        <outlet property="tenantButton" destination="kSn-eM-kEV" id="ift-Hr-aOD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBp-8l-Cbx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -261,7 +260,7 @@
                     <connections>
                         <outlet property="addressTextField" destination="DUc-CD-vyG" id="DlW-EK-ZhI"/>
                         <outlet property="buildingTextField" destination="02i-KP-Bqg" id="QKW-wZ-dRG"/>
-                        <outlet property="toNextView" destination="rAL-ll-Hkn" id="Btc-Jt-BjE"/>
+                        <outlet property="toNextButton" destination="rAL-ll-Hkn" id="1VW-iE-C7f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpb-Dc-ONP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

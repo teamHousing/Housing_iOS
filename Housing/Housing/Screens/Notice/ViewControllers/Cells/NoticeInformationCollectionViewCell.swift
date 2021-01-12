@@ -13,7 +13,8 @@ struct NoticeData {
 }
 
 class NoticeInformationCollectionViewCell: UICollectionViewCell {
-		@IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
 		@IBOutlet weak var contextLabel: UILabel!
 		
 		var FDF: NoticeData?

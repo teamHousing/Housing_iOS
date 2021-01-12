@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignupCompleteViewController: UIViewController {
+final class SignupCompleteViewController: UIViewController {
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var completeView: UIButton!
 	
@@ -18,7 +18,7 @@ class SignupCompleteViewController: UIViewController {
 	}
 	
 	//MARK:- Helper
-	func initLayout() {
+	private func initLayout() {
 		completeView.backgroundColor = UIColor.primaryBlack
 		completeView.layer.cornerRadius = 0.5 * completeView.bounds.size.height
 	}

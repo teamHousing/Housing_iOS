@@ -14,64 +14,69 @@ import RxSwift
 import SwiftKeychainWrapper
 import SwiftyJSON
 
-
-class LoginViewController: BaseViewController {
+final class LoginViewController: BaseViewController {
 	
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var idTextField: UITextField!
 	@IBOutlet weak var passwordTextField: UITextField!
-	@IBOutlet weak var LoginButtonView: UIButton!
+	@IBOutlet weak var LoginButton: UIButton!
 	@IBOutlet weak var idBottomView: UIView!
 	@IBOutlet weak var passwordBottomView: UIView!
 	@IBOutlet weak var warningLabel: UILabel!
 	
 	// MARK: - Service
-	
 	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-	
 	
 	//MARK:- Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initLayout()
 		
-		idTextField.delegate = self
-		passwordTextField.delegate = self
+		idTextField.addTarget(self,
+													action: #selector(idTextFieldChanged),
+													for: .editingChanged)
+		passwordTextField.addTarget(self,
+																action: #selector(idTextFieldChanged),
+																for: .editingChanged)
 	}
 	
 	//MARK:- Helper
-	func initLayout() {
+	@objc
+	private func idTextFieldChanged(_ textField: UITextField) {
+		if idTextField.text?.count == 0 || passwordTextField.text?.count == 0 {
+			LoginButton.backgroundColor = UIColor(red: 219 / 255,
+																						green: 219 / 255,
+																						blue: 219 / 255,
+																						alpha: 1)
+			LoginButton.layer.cornerRadius = 0.5 * LoginButton.bounds.size.height
+			LoginButton.isEnabled = false
+		} else {
+			LoginButton.backgroundColor = .primaryBlack
+			LoginButton.layer.cornerRadius = 0.5 * LoginButton.bounds.size.height
+			LoginButton.isEnabled = true
+		}
+	}
+	
+	private func initLayout() {
 		navigationController?.navigationBar.isHidden = true
 		
 		idTextField.borderWidth = 1
 		idTextField.borderColor = .white
-		idTextField.tintColor = UIColor(red: 255 / 255, green: 133 / 255, blue: 119 / 255, alpha: 1)
+		idTextField.tintColor = UIColor.primaryOrange
 		
 		passwordTextField.borderWidth = 1
 		passwordTextField.borderColor = .white
-		passwordTextField.tintColor = UIColor(red: 255 / 255, green: 133 / 255, blue: 119 / 255, alpha: 1)
+		passwordTextField.tintColor = UIColor.primaryOrange
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-		
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-		
-		LoginButtonView.backgroundColor = UIColor(red: 219 / 255, green: 219 / 255, blue: 219 / 255, alpha: 1)
-		LoginButtonView.layer.cornerRadius = 0.5 * LoginButtonView.bounds.size.height
-		LoginButtonView.isEnabled = false
-	}
-	
-	@objc func keyboardWillShow(_ sender: Notification) {
-		
-		self.view.frame.origin.y = 0
-	}
-	
-	@objc func keyboardWillHide(_ sender: Notification) {
-		
-		self.view.frame.origin.y = 0
+		LoginButton.backgroundColor = UIColor(red: 219 / 255,
+																					green: 219 / 255,
+																					blue: 219 / 255,
+																					alpha: 1)
+		LoginButton.layer.cornerRadius = 0.5 * LoginButton.bounds.size.height
+		LoginButton.isEnabled = false
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-		
 		self.view.endEditing(true)
 	}
 	
@@ -81,7 +86,6 @@ class LoginViewController: BaseViewController {
 	}
 	
 	//MARK:- Component(Action)
-	
 	@IBAction func signinButtonDidTap(_ sender: Any) {
 		userProvider.rx.request(.signin(email: idTextField.text ?? "",
 																		password: passwordTextField.text ?? ""))
@@ -92,8 +96,10 @@ class LoginViewController: BaseViewController {
 						return
 					}
 					var cookies: [String]? = []
+					
 					cookies = token.components(separatedBy: ";")
 					cookies = cookies?[0].components(separatedBy: "=")
+					
 					guard let cookie = cookies?[1] else {
 						return
 					}
@@ -104,8 +110,10 @@ class LoginViewController: BaseViewController {
 						guard let result = data.data?.type else {
 							return
 						}
-						KeychainWrapper.standard.set(result, forKey: KeychainStorage.isHost)
-						KeychainWrapper.standard.set(cookie, forKey: KeychainStorage.accessToken)
+						KeychainWrapper.standard.set(result,
+																				 forKey: KeychainStorage.isHost)
+						KeychainWrapper.standard.set(cookie,
+																				 forKey: KeychainStorage.accessToken)
 						
 						let viewcontroller = TabBarViewController()
 						viewcontroller.modalPresentationStyle = .fullScreen
@@ -129,21 +137,6 @@ class LoginViewController: BaseViewController {
 }
 
 //MARK:- Object Extension
-extension LoginViewController: UITextFieldDelegate {
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		if idTextField.text != "" && passwordTextField.text != "" {
-			LoginButtonView.backgroundColor = .primaryBlack
-			LoginButtonView.layer.cornerRadius = 0.5 * LoginButtonView.bounds.size.height
-			LoginButtonView.isEnabled = true
-		}
-		else if idTextField.text == "" || passwordTextField.text == "" {
-			LoginButtonView.backgroundColor = UIColor(red: 219 / 255, green: 219 / 255, blue: 219 / 255, alpha: 1)
-			LoginButtonView.layer.cornerRadius = 0.5 * LoginButtonView.bounds.size.height
-			LoginButtonView.isEnabled = false
-		}
-	}
-}
-
-struct User: Codable {
-		let id, type: Int
+private struct User: Codable {
+	let id, type: Int
 }
