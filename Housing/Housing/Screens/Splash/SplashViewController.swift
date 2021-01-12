@@ -32,9 +32,8 @@ final class SplashViewController: BaseViewController {
 	
 	private func toMain() {
 		let viewcontroller = TabBarViewController()
-		let navigationViewController = UINavigationController(rootViewController: viewcontroller)
-		navigationViewController.modalPresentationStyle = .fullScreen
-		present(navigationViewController, animated: false)
+		viewcontroller.modalPresentationStyle = .fullScreen
+		present(viewcontroller, animated: false)
 	}
 	
 	private func detectIsSignIn() {
