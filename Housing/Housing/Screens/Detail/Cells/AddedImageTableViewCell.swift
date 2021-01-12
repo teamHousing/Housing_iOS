@@ -13,7 +13,7 @@ import Then
 
 class AddedImageTableViewCell: UITableViewCell {
 	
-	let imageURL = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAD","https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fko%2Fdocs%2FWeb%2FHTML%2FElement%2Fimg&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAI","https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-photo%2Fimage-human-brain_5013322.htm&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAO"]
+	let imageURL = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAD","https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fko%2Fdocs%2FWeb%2FHTML%2FElement%2Fimg&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAI","https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-photo%2Fimage-human-brain_5013322.htm&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAO","https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAD","https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fko%2Fdocs%2FWeb%2FHTML%2FElement%2Fimg&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAI","https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-photo%2Fimage-human-brain_5013322.htm&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAO"]
 	
 	let addedImageCollectionView: UICollectionView = {
 		
@@ -47,7 +47,7 @@ class AddedImageTableViewCell: UITableViewCell {
 	}
 	
 	static func estimatedRowHeight() -> CGFloat {
-		return 500
+		return 600
 	}
 	
 	func layout() {
@@ -58,13 +58,14 @@ class AddedImageTableViewCell: UITableViewCell {
 			}
 		}
 		self.contentView.add(self.addedImageCollectionView) {
+			$0.clipsToBounds = false
 			$0.backgroundColor = .none
-			$0.contentMode = .scaleAspectFill
+			$0.contentMode = .scaleAspectFit
 			$0.snp.makeConstraints {
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(16)
 				$0.leading.equalTo(self.titleLabel.snp.leading)
-				$0.height.equalTo(127)
-				$0.width.equalTo(self.imageURL.count*135)
+				$0.height.equalTo((self.contentView.frame.width)/3)
+				$0.width.equalTo(self.contentView.frame.width)
 			}
 		}
 		self.contentView.add(self.cancelButton) {
@@ -110,7 +111,8 @@ class AddedImageTableViewCell: UITableViewCell {
 extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
 												UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 127, height: 127)
+		return CGSize(width: (self.contentView.frame.width-56)/3,
+									height: (self.contentView.frame.width-56)/3)
 	}
 	func collectionView(_ collectionView: UICollectionView,
 											layout collectionViewLayout: UICollectionViewLayout,
@@ -120,7 +122,7 @@ extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView,
 											layout collectionViewLayout: UICollectionViewLayout,
 											minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return 8
+		return 0
 	}
 	func collectionView(_ collectionView: UICollectionView,
 											layout collectionViewLayout: UICollectionViewLayout,
@@ -132,13 +134,21 @@ extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
 extension AddedImageTableViewCell: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView,
 											numberOfItemsInSection section: Int) -> Int {
-		return self.imageURL.count
+		return 3
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: AddedImageCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 		cell.awakeFromNib()
 		cell.addedImageView.image = UIImage(named: "btnBack")
+		if self.imageURL.count > 3 {
+			if indexPath.row == 2 {
+				cell.blurView.isHidden = false
+				cell.circleView.isHidden = false
+				cell.plusLabel.text = "+\(self.imageURL.count-3)"
+				cell.plusLabel.isHidden = false
+			}
+		}
 		return cell
 	}
 }

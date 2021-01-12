@@ -45,13 +45,17 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell: MessageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 		cell.awakeFromNib()
-		let cell2: MessageDetailTableViewCell = cell.messageTableView.dequeueCell(forIndexPath: indexPath)
-		cell2.transitionButton.addTarget(self, action: #selector(self.touchUpConfirm), for: .touchUpInside)
-		cell.selectionStyle = .none
+		cell.rootViewController = self
+//		let cell2: MessageDetailTableViewCell = cell.messageTableView.dequeueCell(forIndexPath: indexPath)
+//		cell2.awakeFromNib()
+//		cell2.rootViewController = self
+//		cell2.transitionButton.addTarget(self, action: #selector(self.touchUpConfirm), for: .touchUpInside)
+//		cell.selectionStyle = .none
+//		print(#function)
 		return cell
 	}
 	
-	@objc func touchUpConfirm(_sender: UIButton) {
+	@objc func touchUpConfirm(_ sender: UIButton) {
 		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "ConfirmViewController")
 		self.navigationController?.pushViewController(viewcontroller, animated: true)

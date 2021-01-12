@@ -18,6 +18,8 @@ class MessageTableViewCell: UITableViewCell {
 	
 	let messageTableView = UITableView()
 	
+	var rootViewController: UIViewController?
+	
 	static func estimatedRowHeight() -> CGFloat {
 		return 1400
 	}
@@ -78,25 +80,28 @@ class MessageTableViewCell: UITableViewCell {
 	}
 	
 }
-extension MessageTableViewCell: UITableViewDelegate{
+extension MessageTableViewCell: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 215
 	}
 }
 
-extension MessageTableViewCell: UITableViewDataSource{
+extension MessageTableViewCell: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailTableViewCell") as?
-						MessageDetailTableViewCell else {
-			return UITableViewCell()
-		}
+
+		let cell: MessageDetailTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 		cell.awakeFromNib()
 		cell.titleLabel.text = self.card[indexPath.row].title
 		cell.contextLabel.attributedText = self.makeAttributed(context: self.card[indexPath.row].context)
 		cell.transitionButton.setTitle(self.card[indexPath.row].buttonTitle, for: .normal)
 		cell.selectionStyle = .none
+		cell.rootViewController = rootViewController
 		if indexPath.row == self.status.count-1 {
 			cell.connectLineView.isHidden = true
+			if(cell.transitionButton.isHidden == false) {
+				cell.transitionButton.backgroundColor = .primaryBlack
+				cell.transitionButton.isUserInteractionEnabled = true
+			}
 		}
 		return cell
 	}

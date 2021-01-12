@@ -26,7 +26,8 @@ class MessageDetailTableViewCell: UITableViewCell {
 		$0.numberOfLines = 0
 	}
 	let transitionButton = UIButton().then {
-		$0.backgroundColor = .primaryBlack
+		$0.backgroundColor = .gray01
+		$0.isUserInteractionEnabled = false
 		$0.layer.cornerRadius = 20
 		$0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
 		$0.titleLabel?.textAlignment = .center
@@ -93,6 +94,9 @@ class MessageDetailTableViewCell: UITableViewCell {
 			}
 		}
 	}
+	
+	var rootViewController: UIViewController?
+	
 	override func layoutSubviews() {
 		super .layoutSubviews()
 		contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
@@ -102,6 +106,7 @@ class MessageDetailTableViewCell: UITableViewCell {
 		super.awakeFromNib()
 		layout()
 		self.backgroundColor = .primaryGray
+		transitionButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
 		// Initialization code
 	}
 	
@@ -109,6 +114,14 @@ class MessageDetailTableViewCell: UITableViewCell {
 		super.setSelected(selected, animated: animated)
 		
 		// Configure the view for the selected state
+	}
+	
+	@objc
+	func didTapButton(_ sender: UIButton) {
+		print(#function)
+		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
+		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "ConfirmViewController")
+		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	
 }
