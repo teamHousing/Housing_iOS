@@ -132,7 +132,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 					let data = try decoder.decode(ResponseArrayType<[Detail]>.self,
 																				from: response.data)
 					let result = data.data
-//					self.calendarDataBind(result!)
+//					self.detailDataBind(result!)
 					print(result)
 				} catch {
 					print(error)
@@ -143,6 +143,20 @@ class DetailViewController: SegementSlideDefaultViewController {
 			}).disposed(by: disposeBag)
 	}
 	
+//	private func detailDataBind(_ data: [Detail]) {
+//		print(data)
+//		for detail in data {
+//			guard let id = detail.id,
+//						let issueImages = detail.issueImages,
+//						let promiseOption = detail.promiseOption,
+//						let issueTitle = detail.issueTitle,
+//						let issueContents = detail.issueContents
+//							else {
+//				return
+//			}
+//		}
+//	}
+		
 	private func setSafeArea() {
 			view.add(coverSafeAreaView){
 					$0.snp.makeConstraints {

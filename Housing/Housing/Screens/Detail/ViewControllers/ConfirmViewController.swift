@@ -75,7 +75,7 @@ class ConfirmViewController: UIViewController {
 		}
 		headerView.add(self.titleLabel) {
 			$0.snp.makeConstraints {
-				$0.top.equalTo(headerView.snp.top)
+				$0.top.equalTo(headerView.snp.top).offset(6)
 				$0.leading.equalTo(headerView.snp.leading).offset(20)
 			}
 		}
