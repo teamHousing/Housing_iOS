@@ -253,7 +253,7 @@ class InfoViewController: BaseViewController {
 		}).disposed(by: disposeBag)
 		certificationTextField.rx.controlEvent(.editingDidBegin).subscribe(onNext: { next in
 			self.scrollView.setContentOffset(CGPoint(x: 0,
-																							 y: self.certificationTextField.frame.origin.y-150),
+																							 y: self.certificationTextField.frame.origin.y-200),
 																			 animated: true)
 		}).disposed(by: disposeBag)
 		nameTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {

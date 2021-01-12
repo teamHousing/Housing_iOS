@@ -8,6 +8,10 @@
 import UIKit
 
 import FSCalendar
+import Moya
+import RxMoya
+import RxSwift
+import RxCocoa
 
 final class CalendarViewController: BaseViewController {
 	
@@ -85,13 +89,22 @@ final class CalendarViewController: BaseViewController {
 		$0.font = .systemFont(ofSize: 13, weight: .bold)
 	}
 	
+	// MARK: - Variable
+	
+	var dic : [String : [ModelFSCalendar]] = [:]
+	
+	// MARK: - Provider
+	
+	let calendarProvider = MoyaProvider<CalendarService>()
+	
+	
 	// MARK: - Life Cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		layout()
-		
+		communication()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -112,6 +125,83 @@ final class CalendarViewController: BaseViewController {
 		}
 	}
 	
+	private func communication() {
+		print("count :", dic.count)
+		
+		calendarProvider.rx.request(.calendar(select_year: 2021, select_month: 1))
+			.asObservable()
+			.subscribe(onNext: { response in
+				//				let data = response.data
+				do{
+					let decoder = JSONDecoder()
+					let data = try decoder.decode(ResponseArrayType<[Calendar]>.self,
+																				from: response.data)
+					let result = data.data
+					self.calendarDataBind(result!)
+				} catch {
+					print(error)
+				}
+				
+			}, onError: { error in
+				print(error.localizedDescription)
+			}).disposed(by: disposeBag)
+		print("count :", dic.count)
+		
+	}
+	
+	private func calendarDataBind(_ data:[[Calendar]]) {
+		print(data)
+		for notice in data[0] {
+			guard let year = notice.noticeYear,
+						let month = notice.noticeMonth,
+						let day = notice.noticeDay,
+						let title = notice.noticeTitle,
+						let time = notice.noticeTime	else {
+				return
+			}
+			let when = "\(year).\(month).\(day)"
+			let model = ModelFSCalendar(id: notice.id,
+																	noticeTitle: title,
+																	noticeTime: time,
+																	userID: nil,
+																	category: nil,
+																	solutionMethod: nil,
+																	issueTitle: nil,
+																	issueContents: nil,
+																	promiseTime: nil)
+			dic["\(when)"] = [model]
+		}
+		
+		for promise in data[1] {
+			guard let year = promise.promiseYear,
+						let month = promise.promiseMonth,
+						let day = promise.promiseDay,
+						let userID = promise.userID,
+						let category = promise.category,
+						let method = promise.solutionMethod,
+						let title = promise.issueTitle,
+						let content = promise.issueContents,
+						let time = promise.promiseTime else {
+				return
+			}
+			let when = "\(year).\(month).\(day)"
+			let model = ModelFSCalendar(id: promise.id,
+																	noticeTitle: nil,
+																	noticeTime: nil,
+																	userID: userID,
+																	category: category,
+																	solutionMethod: method,
+																	issueTitle: title,
+																	issueContents: content,
+																	promiseTime: time)
+			dic[when]?.append(model)
+			
+		}
+		print("dic :", dic)
+		print("count :", dic.count)
+
+		print("dic :",dic)
+	}
 }
 
 // MARK: - Scroll
@@ -157,7 +247,7 @@ extension CalendarViewController: UICollectionViewDelegate {
 			calendarView.delegate = self
 			calendarView.dataSource = self
 			calendarView.appearance.weekdayTextColor = .brownishGrey
-
+			
 			guideLabel.snp.makeConstraints {
 				$0.leading.equalTo(headerView.snp.leading).offset(20)
 				$0.top.equalTo(headerView.snp.top).offset(44)

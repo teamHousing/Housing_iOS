@@ -19,11 +19,12 @@ enum CalendarService {
 extension CalendarService: TargetType {
 	
 	private var token: String {
-		return KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken) ?? ""
+//		return KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken) ?? ""
+		return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHlwZSI6MCwiaWF0IjoxNjEwMzg1Mzc5LCJleHAiOjE2MTA0NzE3NzksImlzcyI6ImN5aCJ9.EVYa22pT-LClvr8NKid6ARXEIumn2BKa6mOyCLQJAqg"
 	}
 	
 	public var baseURL: URL {
-		return URL(string: "3.34.74.249:3000")!
+		return URL(string: "http://3.34.74.249:3000")!
 	}
 	
 	var path: String {
