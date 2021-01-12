@@ -34,8 +34,8 @@ final class CommunicationViewController: UIViewController {
 	//MARK: - Property
 	
 	var incompleteLength = 0
-	var completeLength = 0
-	var mode = 1 // 집주인이 0, 자취생이 1
+	var completeLength = 1
+	var mode = 1// 집주인이 0, 자취생이 1
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData = [
 		DetailData(category: "고장/수리1",
@@ -183,29 +183,36 @@ extension CommunicationViewController: UITableViewDataSource{
 		if indexPath.row == 0{ /// title의 높이 지정.
 			if indexPath.section == 0 {
 				if mode == 0{
-					return 90 ///호수 선택하는 버튼 들어가야됨.
-				}else if mode == 1{
+					return 80 ///호수 선택하는 버튼 들어가야됨.
+				} else if mode == 1{
 					return 70
 				}
 			} else if indexPath.section == 1{
 				return 70
 			}
 		} else if indexPath.row > 0 { ///cell의 높이 지정
-			if incompleteLength == 0 && indexPath.section == 0{
-				if completeLength > 0 {
-					return 180 /// incom = 0, com > 0인 경우,
+			if incompleteLength == 0 && completeLength == 0{ ///incom에만 empty
+				if indexPath.section == 0 {
+					return 250 //with button
+				} else {
+					return 0
 				}
-				return 250 /// 수리중 emptyCell의 높이 지정.
-			} else if incompleteLength != 0 && indexPath.section == 0 ||
-									completeLength != 0 && indexPath.section == 1 {
-				return 180 /// 수리중 contentCell의 높이 지정.
-			}
-			else if completeLength == 0 && indexPath.section == 1{
-				return 250 /// 수리완료 emptyCell의 높이 지정.
-			}
-		}
-		return 180
-	}
+			}else if incompleteLength == 0 && completeLength > 0{
+				if indexPath.section == 0 {
+					return 230 // without button
+				} else {
+					return 180 //contentcell의 높이
+				}
+			} else if incompleteLength > 0 && completeLength == 0{
+				if indexPath.section == 0 {
+					return 180 //contentcell의 높이
+				} else {
+					return 230 // emptycomcell의 높이
+				}
+			} else if incompleteLength > 0 && completeLength > 0{
+				return 180 //contentcell의 높이
+			}}
+		return 180}
 	
 	func tableView(_ tableView: UITableView,
 								 numberOfRowsInSection section: Int) -> Int {
@@ -268,7 +275,6 @@ extension CommunicationViewController: UITableViewDataSource{
 		guard let contentCell = tableView.dequeueReusableCell(withIdentifier: "ContentTableViewCell")
 						as? ContentTableViewCell
 		else { return UITableViewCell() }
-		contentCell.filloutCell()
 		contentCell.makeViewRounded()
 		makeCellGrey(cell: contentCell)
 		
@@ -283,10 +289,10 @@ extension CommunicationViewController: UITableViewDataSource{
 			if incompleteLength == 0 && completeLength == 0 {
 				if indexPath.section == 0 {
 					return incomCell
-				}else if indexPath.section == 1 {
+				} else if indexPath.section == 1 {
 					return emptyCell
 				}
-			}else {
+			} else {
 				if indexPath.section == 0 {
 					return incomCell
 				}
@@ -297,43 +303,43 @@ extension CommunicationViewController: UITableViewDataSource{
 		} else{  ///여기가 내부 cell 부분.
 			if incompleteLength == 0 && completeLength == 0{
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
+					if mode == 0{
+					emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n자취생을 초대해 볼까요?"
+						emptyIncomCell.inquiryButton.setTitle("초대하기", for: .normal)
+					} else{
+						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n집주인과 소통을 시작해볼까요?"
+							emptyIncomCell.inquiryButton.setTitle("문의하기", for: .normal)
+					}
 					return emptyIncomCell
 				} else { ///cell중에서도 complete부분
 					return emptyCell
 				}
-			}else if incompleteLength == 0 && completeLength > 0{
+			} else if incompleteLength == 0 && completeLength > 0{
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
 					emptyIncomCell.inquiryButton.isHidden = true
+					emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!"
 					return emptyIncomCell
 				} else { ///cell중에서도 complete부분
-					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
-										contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
-										contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
-										contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+						contentCell.filloutCell()
 					return contentCell
 				}
-			}else if incompleteLength > 0 && completeLength == 0{
+			} else if incompleteLength > 0 && completeLength == 0{
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
-										contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
-										contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
-										contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+						contentCell.filloutCell()
 					return contentCell
 				} else { ///cell중에서도 complete부분
-					return emptyIncomCell
+					return emptyComCell
 				}
 			} else if incompleteLength > 0 && completeLength > 0{
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
-										contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
-										contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
-										contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+						contentCell.filloutCell()
 					return contentCell
 				} else { ///cell중에서도 complete부분
-					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
-										contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
-										contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
-										contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+						contentCell.filloutCell()
 					return contentCell
 				}
 			}

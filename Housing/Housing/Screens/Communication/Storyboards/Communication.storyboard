@@ -174,10 +174,6 @@
                                                     <state key="normal" title="문의하기">
                                                         <color key="titleColor" systemColor="tertiarySystemBackgroundColor"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="TouchUpInquiryButton:" destination="Me2-m7-2p2" eventType="touchUpInside" id="Eqk-VB-lTV"/>
-                                                        <action selector="TouchUpInquiryButton:" destination="N1K-SO-Vky" eventType="touchUpInside" id="W3L-v4-77m"/>
-                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모든 문의가 해결되었어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f3-Zg-JlK">
                                                     <rect key="frame" x="135" y="150" width="144.5" height="23"/>
