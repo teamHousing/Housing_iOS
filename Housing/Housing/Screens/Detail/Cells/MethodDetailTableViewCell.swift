@@ -11,6 +11,7 @@ class MethodDetailTableViewCell: UITableViewCell {
 	
 	let containerView = UIView().then {
 		$0.backgroundColor = .primaryGray
+		$0.layer.cornerRadius = 16
 	}
 	let dateLabel = UILabel().then{
 		$0.textColor = .primaryBlack
