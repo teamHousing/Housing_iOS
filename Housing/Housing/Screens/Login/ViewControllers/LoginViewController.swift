@@ -11,6 +11,8 @@ import RxMoya
 import Moya
 import RxCocoa
 import RxSwift
+import SwiftKeychainWrapper
+import SwiftyJSON
 
 
 class LoginViewController: BaseViewController {
@@ -26,7 +28,7 @@ class LoginViewController: BaseViewController {
 	// MARK: - Service
 	
 	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-
+	
 	
 	//MARK:- Lifecycle
 	override func viewDidLoad() {
@@ -81,33 +83,42 @@ class LoginViewController: BaseViewController {
 	//MARK:- Component(Action)
 	
 	@IBAction func signinButtonDidTap(_ sender: Any) {
-
-		let viewcontroller = TabBarViewController()
-		viewcontroller.modalPresentationStyle = .fullScreen
-		self.present(viewcontroller, animated: true)
-//		userProvider.rx.request(.signin(email: idTextField.text ?? "",
-//																		password: passwordTextField.text ?? ""))
-//			.asObservable()
-//			.subscribe { (next) in
-//				print(next.statusCode)
-//				
-//			} onError: { (error) in
-//				print(error.localizedDescription)
-//			}.disposed(by: disposeBag)
-
-//		let viewcontroller = TabBarViewController()
-
-//		userProvider.rx.request(.signin(email: idTextField.text ?? "",
-//																		password: passwordTextField.text ?? ""))
-//			.asObservable()
-//			.subscribe { (next) in
-//				print(next.statusCode)
-//			} onError: { (error) in
-//				print(error.localizedDescription)
-//			}.disposed(by: disposeBag)
-		
+		userProvider.rx.request(.signin(email: idTextField.text ?? "",
+																		password: passwordTextField.text ?? ""))
+			.asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					guard let token = (next.response?.allHeaderFields["Set-Cookie"] ?? "") as? String else {
+						return
+					}
+					var cookies: [String]? = []
+					cookies = token.components(separatedBy: ";")
+					cookies = cookies?[0].components(separatedBy: "=")
+					guard let cookie = cookies?[1] else {
+						return
+					}
+					do{
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<User>.self,
+																					from: next.data)
+						guard let result = data.data?.type else {
+							return
+						}
+						KeychainWrapper.standard.set(result, forKey: KeychainStorage.isHost)
+						KeychainWrapper.standard.set(cookie, forKey: KeychainStorage.accessToken)
+						
+						let viewcontroller = TabBarViewController()
+						viewcontroller.modalPresentationStyle = .fullScreen
+						self.present(viewcontroller, animated: true)
+						
+					} catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
 	}
-	
 	
 	@IBAction func signupButton(_ sender: Any) {
 		let signinStoryboard = UIStoryboard(name: "Signup", bundle: nil)
@@ -131,4 +142,8 @@ extension LoginViewController: UITextFieldDelegate {
 			LoginButtonView.isEnabled = false
 		}
 	}
+}
+
+struct User: Codable {
+		let id, type: Int
 }

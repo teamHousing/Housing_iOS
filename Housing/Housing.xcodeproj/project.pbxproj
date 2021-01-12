@@ -18,6 +18,7 @@
 		1FA03DE925A8473000AF0326 /* Notice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA03DE825A8473000AF0326 /* Notice.storyboard */; };
 		1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */; };
 		1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */; };
+		1FACC31925AD747B0072EABA /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 1FACC31825AD747B0072EABA /* SwiftyJSON */; };
 		37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */; };
 		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
 		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
@@ -218,6 +219,7 @@
 				D1CF646C25AC236E009A39EC /* Moya in Frameworks */,
 				D1CF646E25AC236E009A39EC /* ReactiveMoya in Frameworks */,
 				D1B65A282598D24D00A9A7CB /* Alamofire in Frameworks */,
+				1FACC31925AD747B0072EABA /* SwiftyJSON in Frameworks */,
 				DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */,
 				D1B65A182598D16600A9A7CB /* RxSwift in Frameworks */,
 				DA050965259F801A00DDB916 /* SwiftKeychainWrapper in Frameworks */,
@@ -688,6 +690,7 @@
 				D1CF646B25AC236E009A39EC /* Moya */,
 				D1CF646D25AC236E009A39EC /* ReactiveMoya */,
 				D1CF646F25AC236E009A39EC /* RxMoya */,
+				1FACC31825AD747B0072EABA /* SwiftyJSON */,
 			);
 			productName = Housing;
 			productReference = D19179E2259890A40035AF74 /* Housing.app */;
@@ -727,6 +730,7 @@
 				DA05097025A0722000DDB916 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 				D1B0387325A8E65A0092CE4F /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				D1CF646A25AC236E009A39EC /* XCRemoteSwiftPackageReference "Moya" */,
+				1FACC31725AD747B0072EABA /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = D19179E3259890A40035AF74 /* Products */;
 			projectDirPath = "";
@@ -1066,6 +1070,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1FACC31725AD747B0072EABA /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		D1B0387325A8E65A0092CE4F /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
@@ -1149,6 +1161,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1FACC31825AD747B0072EABA /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FACC31725AD747B0072EABA /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		D1B0387425A8E65A0092CE4F /* RxKeyboard */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D1B0387325A8E65A0092CE4F /* XCRemoteSwiftPackageReference "RxKeyboard" */;
