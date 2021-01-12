@@ -8,14 +8,14 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
-class VerifyNumberViewController: UIViewController {
+import Moya
+class VerifyNumberViewController: BaseViewController {
 	// MARK: - Component
+	private let userProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	lazy var shareButton = UIBarButtonItem.init(image: UIImage(named: "iconShare"),
 																							style: .done,
 																							target: self,
 																							action: #selector(shareNumber(sender:)))
-	let disposeBag = DisposeBag()
 	private let backButton = UIButton().then{
 		$0.setImage(UIImage(named: ""), for: .normal)
 	}
@@ -47,6 +47,7 @@ class VerifyNumberViewController: UIViewController {
 	private let houseNumber = UITextField().then {
 		$0.borderStyle = .none
 		$0.placeholder = "101"
+		$0.keyboardType = .numberPad
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 	}
 	private let houseNumberUnderbar = UIView().then {
@@ -144,7 +145,7 @@ class VerifyNumberViewController: UIViewController {
 										verifyNumber,
 										deleteButton1,
 										deleteButton2,
-										])
+		])
 		backgroundLabel.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(0)
 			$0.leading.equalTo(view).offset(20)
@@ -228,7 +229,7 @@ class VerifyNumberViewController: UIViewController {
 			$0.leading.equalTo(view).offset(20)
 			$0.trailing.equalTo(view).offset(-20)
 		}
-
+		
 	}
 	private func showNumber() {
 		self.view.layoutIfNeeded()
@@ -246,7 +247,30 @@ class VerifyNumberViewController: UIViewController {
 		showNumber.startAnimation()
 	}
 	@objc func makeTheNumber(sender : UIButton) {
-		self.showNumber()
+		let building = self.buildingNumber.text ?? ""
+		let unit = Int(self.houseNumber.text ?? "0")!
+		userProvider.rx.request(.profileAuthorization(building: building, unit: unit))
+			.asObservable()
+			.subscribe { (response) in
+				if response.statusCode == 200 {
+					do {
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<VerifyNumber>.self, from: response.data)
+						
+						guard let result = data.data?.authentication_number else { return }
+						self.verifyNumber.text = result
+						self.showNumber()
+
+					}
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+		
 	}
 	@objc func handleTap(recognizer: UITapGestureRecognizer){
 		self.view.endEditing(true)
@@ -320,4 +344,8 @@ class VerifyNumberViewController: UIViewController {
 		super.viewWillDisappear(animated)
 		tabBarController?.tabBar.isHidden = false
 	}
+}
+
+private struct VerifyNumber : Codable {
+	let authentication_number : String
 }
