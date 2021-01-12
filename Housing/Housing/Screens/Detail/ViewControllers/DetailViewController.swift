@@ -126,13 +126,21 @@ class DetailViewController: SegementSlideDefaultViewController {
 	func loader() {
 		detailProvider.rx.request(.homeDetail(id: requestId))
 			.asObservable()
-			.subscribe{ (next) in
-				print(next)
-			}onError: { (error) in
+			.subscribe(onNext: { response in
+				do{
+					let decoder = JSONDecoder()
+					let data = try decoder.decode(ResponseArrayType<[Detail]>.self,
+																				from: response.data)
+					let result = data.data
+//					self.calendarDataBind(result!)
+					print(result)
+				} catch {
+					print(error)
+				}
+				
+			}, onError: { error in
 				print(error.localizedDescription)
-			}onCompleted: {
-				print("completed")
-			}.disposed(by: disposeBag)
+			}).disposed(by: disposeBag)
 	}
 	
 	private func setSafeArea() {
