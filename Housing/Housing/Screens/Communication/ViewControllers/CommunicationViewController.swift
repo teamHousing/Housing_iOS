@@ -27,10 +27,10 @@ final class CommunicationViewController: UIViewController {
 	@IBOutlet var communicationTableView: UITableView!
 	@IBOutlet var headerView: UIView!
 	lazy var shareButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
-																							style: .done,
-																							target: self,
-																							action: #selector(settingButtonDidTap))
-
+																				 style: .done,
+																				 target: self,
+																				 action: #selector(settingButtonDidTap))
+	
 	//MARK: - Property
 	
 	var incompleteLength = 0
@@ -64,7 +64,7 @@ final class CommunicationViewController: UIViewController {
 							 issueTitle: "com333",
 							 progress: 2,
 							 issueContents: "집도 좋고 늘 빠르게 소통해주셔서 2년간 굉장히 만족하면서 생활했어요. 계약 만료 기간이 끝나 가는데 다시 재계...")]
-
+	
 	// MARK : - LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -79,6 +79,15 @@ final class CommunicationViewController: UIViewController {
 		layoutNavigationBar()
 	}
 	
+	enum cases { // case문으로 하면 좋을텐데
+		 case incom0com0
+		 case incom0com1
+		 case incom1com0
+		 case incom1com1
+ }
+	private func determineCase(){
+	}
+	
 	private func configTableView() {
 		communicationTableView.dataSource = self
 		communicationTableView.delegate = self
@@ -88,41 +97,44 @@ final class CommunicationViewController: UIViewController {
 		headerView.setRounded(radius: 15)
 		headerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 	}
-
+	
 	private func layoutNavigationBar() {
 		navigationItem.rightBarButtonItem = shareButton
 		navigationController?.navigationBar.shadowImage = UIImage()
 		navigationController?.navigationBar.isTranslucent = false
 		navigationController?.navigationBar.tintColor = .black
 	}
-//	@objc func handleExpandClose() {
-//		print("trying") //여기서 막 열리고 닫히고 관련한 action을 넣으면 됨.
-//		let section = incomButton.tag
-//
-//		// we'll try to close the section first by deleting the rows
-//		var indexPaths = [IndexPath]()
-//		for row in tableViewData[section].sectionData.indices {
-//				print(0, row)
-//				let indexPath = IndexPath(row: row, section: section)
-//				indexPaths.append(indexPath)
-//		}
-//
-//		let opened = tableViewData[section].opened
-//		tableViewData[section].opened = !opened
-//
-//		incomButton.setTitle(opened ? "Open" : "Close", for: .normal)
-//
-//		if opened {
-//			communicationTableView.deleteRows(at: indexPaths, with: .fade)
-//		} else {
-//			communicationTableView.insertRows(at: indexPaths, with: .fade)
-//		}
-//	}
+	private func makeCellGrey(cell : UITableViewCell){
+		cell.contentView.backgroundColor = UIColor(named: "paleGrey")
+	}
+	//	@objc func handleExpandClose() {
+	//		print("trying") //여기서 막 열리고 닫히고 관련한 action을 넣으면 됨.
+	//		let section = incomButton.tag
+	//
+	//		// we'll try to close the section first by deleting the rows
+	//		var indexPaths = [IndexPath]()
+	//		for row in tableViewData[section].sectionData.indices {
+	//				print(0, row)
+	//				let indexPath = IndexPath(row: row, section: section)
+	//				indexPaths.append(indexPath)
+	//		}
+	//
+	//		let opened = tableViewData[section].opened
+	//		tableViewData[section].opened = !opened
+	//
+	//		incomButton.setTitle(opened ? "Open" : "Close", for: .normal)
+	//
+	//		if opened {
+	//			communicationTableView.deleteRows(at: indexPaths, with: .fade)
+	//		} else {
+	//			communicationTableView.insertRows(at: indexPaths, with: .fade)
+	//		}
+	//	}
 	@objc
 	private func settingButtonDidTap() {
 		print(#function)
 	}
-
+	
 	func determineProgress(progress: Int) -> String {
 		if progress == 0{
 			return "확인전"
@@ -171,35 +183,35 @@ extension CommunicationViewController: UITableViewDataSource{
 		if indexPath.row == 0{ /// title의 높이 지정.
 			if indexPath.section == 0 {
 				if mode == 0{
-					return 90
+					return 90 ///호수 선택하는 버튼 들어가야됨.
 				}else if mode == 1{
 					return 70
 				}
 			} else if indexPath.section == 1{
 				return 70
 			}
-		} else if indexPath.row == 1 { ///cell의 높이 지정
-				if incompleteLength == 0 && indexPath.section == 0{
-					if completeLength > 0 {
-						return 180
-					}
-					return 230 /// 수리중 emptyCell의 높이 지정.
-				} else if incompleteLength != 0 && indexPath.section == 0 ||
-										completeLength != 0 && indexPath.section == 1 {
-					return 180 /// 수리중 contentCell의 높이 지정.
+		} else if indexPath.row > 0 { ///cell의 높이 지정
+			if incompleteLength == 0 && indexPath.section == 0{
+				if completeLength > 0 {
+					return 180 /// incom = 0, com > 0인 경우,
 				}
-				else if completeLength == 0 && indexPath.section == 1{
-					return 180 /// 수리완료 emptyCell의 높이 지정.
-				}
+				return 250 /// 수리중 emptyCell의 높이 지정.
+			} else if incompleteLength != 0 && indexPath.section == 0 ||
+									completeLength != 0 && indexPath.section == 1 {
+				return 180 /// 수리중 contentCell의 높이 지정.
 			}
-			return 180
+			else if completeLength == 0 && indexPath.section == 1{
+				return 250 /// 수리완료 emptyCell의 높이 지정.
+			}
 		}
+		return 180
+	}
 	
 	func tableView(_ tableView: UITableView,
 								 numberOfRowsInSection section: Int) -> Int {
 		if tableViewData[section].opened == true {
 			if section == 0 { ///글의 수만큼 보여주기.
-				if incompleteLength == 0 { ///incomplete부분은 아무것도 없으면 Empty보여줘야됨.
+				if incompleteLength == 0 { ///incomplete부분은 아무것도 없으면 EmptyCell보여줘야됨.
 					return 2
 				}
 				return incompleteLength + 1
@@ -216,7 +228,8 @@ extension CommunicationViewController: UITableViewDataSource{
 	
 	
 	func tableView(_ tableView: UITableView,
-								 cellForRowAt indexPath: IndexPath) -> UITableViewCell { ///title부분에 쓸 cell
+								 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		///title부분에 쓸 cell
 		guard let incomCell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTableViewCell")
 						as? IncompleteTableViewCell
 		else { return UITableViewCell() }
@@ -235,14 +248,14 @@ extension CommunicationViewController: UITableViewDataSource{
 						as? CompleteTableViewCell
 		else { return UITableViewCell()}
 		comCell.countOfComplete.text = "(\(completeLength))"
-		comCell.contentView.backgroundColor = UIColor(named: "paleGrey")
+		makeCellGrey(cell: comCell)
 		
-		///row부분에 쓸 cell
+		///cell부분에 쓸 cell
 		guard let emptyIncomCell = tableView.dequeueReusableCell(withIdentifier: "emptyIncomTableViewCell")
 						as? EmptyIncomTableViewCell
 		else { return UITableViewCell()}
 		emptyIncomCell.emptyLabel.numberOfLines = 2
-		emptyIncomCell.contentView.backgroundColor = UIColor(named: "paleGrey")
+		makeCellGrey(cell: emptyIncomCell)
 		emptyIncomCell.emptyLabel.textAlignment = .center
 		emptyIncomCell.makeButtonRounded()
 		
@@ -250,32 +263,30 @@ extension CommunicationViewController: UITableViewDataSource{
 						as? EmptyComTableViewCell
 		else { return UITableViewCell()}
 		emptyComCell.emptyLabel.numberOfLines = 2
-		emptyComCell.contentView.backgroundColor = UIColor(named: "paleGrey")
+		makeCellGrey(cell: emptyComCell)
 		
 		guard let contentCell = tableView.dequeueReusableCell(withIdentifier: "ContentTableViewCell")
 						as? ContentTableViewCell
 		else { return UITableViewCell() }
-		
+		contentCell.filloutCell()
 		contentCell.makeViewRounded()
-		contentCell.contentView.backgroundColor = UIColor(named: "paleGrey")
+		makeCellGrey(cell: contentCell)
 		
 		guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: "RealEmptyTableViewCell")
 						as? RealEmptyTableViewCell
 		else { return UITableViewCell() }
 		///let incomcell : IncompleteTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
 		///let comcell : CompleteTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-		emptyCell.contentView.backgroundColor = UIColor(named: "paleGrey")
-		
+		makeCellGrey(cell: emptyCell)
+	
 		if indexPath.row == 0 { ///여기가 title 부분. /// 완료된 것이 없을 때는 title이 뜨지 않도록 했음.
 			if incompleteLength == 0 && completeLength == 0 {
 				if indexPath.section == 0 {
-					incomCell.roomNumberView.isHidden = true
 					return incomCell
-				}
-				if indexPath.section == 1 {
+				}else if indexPath.section == 1 {
 					return emptyCell
 				}
-			} else {
+			}else {
 				if indexPath.section == 0 {
 					return incomCell
 				}
@@ -283,64 +294,46 @@ extension CommunicationViewController: UITableViewDataSource{
 					return comCell
 				}
 			}
-		} else { ///여기가 내부 cell 부분.
-			print("cell시작")
-			if incompleteLength == 0 && completeLength == 0 {
-				print("여기 들어왔고")
-				if indexPath.section == 0 {
-					print("여기도 왔어")
-					if mode == 0 {
-						print("여기는?")
-						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n자취생을 초대해 볼까요?"
-						emptyIncomCell.inquiryButton.titleLabel?.text = "초대하기"
-					} else {
-						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n집주인과 소통을 시작해볼까요?"
-						emptyIncomCell.inquiryButton.titleLabel?.text = "문의하기"
-					}
-					
+		} else{  ///여기가 내부 cell 부분.
+			if incompleteLength == 0 && completeLength == 0{
+				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
+					return emptyIncomCell
+				} else { ///cell중에서도 complete부분
+					return emptyCell
+				}
+			}else if incompleteLength == 0 && completeLength > 0{
+				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
+					emptyIncomCell.inquiryButton.isHidden = true
+					return emptyIncomCell
+				} else { ///cell중에서도 complete부분
+					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
+										contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
+										contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
+										contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
+					return contentCell
+				}
+			}else if incompleteLength > 0 && completeLength == 0{
+				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
+					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
+										contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
+										contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
+										contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
+					return contentCell
+				} else { ///cell중에서도 complete부분
 					return emptyIncomCell
 				}
-				if indexPath.section == 1 {
-					return UITableViewCell()
-				}
-			}
-
-			else if incompleteLength == 0 && completeLength > 0 {
-				if indexPath.section == 0 {
-						emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!"
-						emptyIncomCell.inquiryButton.isHidden = true
-					return emptyIncomCell
-				}
-				if indexPath.section == 1 {
-					return contentCell
-				}
-			}
-			else if incompleteLength > 0 && completeLength == 0 {
-				if indexPath.section == 0 {
+			} else if incompleteLength > 0 && completeLength > 0{
+				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
 					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
-					contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
-					contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
-					contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
+										contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
+										contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
+										contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
 					return contentCell
-				}
-				if indexPath.section == 1 {
-					emptyComCell.emptyLabel.text = "아직 해결 완료된 문의가 없어요!"
-					return emptyComCell
-				}
-			}
-			else if incompleteLength > 0 && completeLength > 0 {
-				if indexPath.section == 0 {
+				} else { ///cell중에서도 complete부분
 					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
-					contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
-					contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
-					contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
-					return contentCell
-				}
-				if indexPath.section == 1 {
-					contentCell.categoryLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].category
-					contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
-					contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
-					contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
+										contentCell.titleLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueTitle
+										contentCell.contentLabel.text = tableViewData[indexPath.section].sectionData[indexPath.row-1].issueContents
+										contentCell.statusLabel.text = determineProgress(progress: tableViewData[indexPath.section].sectionData[indexPath.row-1].progress)
 					return contentCell
 				}
 			}
@@ -351,10 +344,10 @@ extension CommunicationViewController: UITableViewDataSource{
 
 extension CommunicationViewController: UIScrollViewDelegate{
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-	
-		 if scrollView.contentOffset.y < -1 {
+		
+		if scrollView.contentOffset.y < -1 {
 			communicationTableView.backgroundColor = .white
-		 } else if scrollView.contentOffset.y >= -1 {
+		} else if scrollView.contentOffset.y >= -1 {
 			communicationTableView.backgroundColor = .primaryGray }
 	}
 }
