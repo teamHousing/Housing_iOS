@@ -13,6 +13,7 @@ import RxKeyboard
 
 class InfoViewController: BaseViewController {
 	
+	var lessorOrTenant: Int?
 	private let scrollView = UIScrollView()
 	private let containerView = UIView()
 	private let guideLabel = UILabel().then {

@@ -7,14 +7,13 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
+final class SignupViewController: UIViewController {
 	
 	// MARK: - Component(Outlet)
-	
-	@IBOutlet weak var lessorView: UIButton!
-	@IBOutlet weak var tenantView: UIButton!
-	@IBOutlet weak var navigationBackButtonView: UIBarButtonItem!
-	@IBOutlet weak var nextButtonView: UIButton!
+	@IBOutlet weak var lessorButton: UIButton!
+	@IBOutlet weak var tenantButton: UIButton!
+	@IBOutlet weak var navigationBackButton: UIBarButtonItem!
+	@IBOutlet weak var nextButton: UIButton!
 	
 	// MARK: - Property
 	
@@ -35,31 +34,34 @@ class SignupViewController: UIViewController {
 	}
 	
 	// MARK: - Helper
-	func initLayout() {
+	private func initLayout() {
 		navigationController?.navigationBar.isHidden = false
 		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
 		
-		navigationBackButtonView.tintColor = .primaryBlack
+		navigationBackButton.tintColor = .primaryBlack
 		
-		nextButtonView.backgroundColor = UIColor(red: 219 / 255, green: 219 / 255, blue: 219 / 255, alpha: 1)
-		nextButtonView.layer.cornerRadius = 0.5 * nextButtonView.bounds.size.height
+		nextButton.backgroundColor = UIColor(red: 219 / 255,
+																				 green: 219 / 255,
+																				 blue: 219 / 255,
+																				 alpha: 1)
+		nextButton.layer.cornerRadius = 0.5 * nextButton.bounds.size.height
 		
-		lessorView.layer.cornerRadius = 10
-		lessorView.layer.shadowColor = CGColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.10000000149011612)
-		lessorView.layer.shadowOpacity = 1
-		lessorView.layer.shadowOffset = .zero
-		lessorView.layer.shadowRadius = 16 / 2
-		lessorView.layer.shadowPath = nil
+		lessorButton.layer.cornerRadius = 10
+		lessorButton.layer.shadowColor = UIColor.primaryBlack.withAlphaComponent(0.1).cgColor
+		lessorButton.layer.shadowOpacity = 1
+		lessorButton.layer.shadowOffset = .zero
+		lessorButton.layer.shadowRadius = 16 / 2
+		lessorButton.layer.shadowPath = nil
 		
-		tenantView.layer.cornerRadius = 10
-		tenantView.layer.shadowColor = CGColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.10000000149011612)
-		tenantView.layer.shadowOpacity = 1
-		tenantView.layer.shadowOffset = .zero
-		tenantView.layer.shadowRadius = 16 / 2
-		tenantView.layer.shadowPath = nil
+		tenantButton.layer.cornerRadius = 10
+		tenantButton.layer.shadowColor = UIColor.primaryBlack.withAlphaComponent(0.1).cgColor
+		tenantButton.layer.shadowOpacity = 1
+		tenantButton.layer.shadowOffset = .zero
+		tenantButton.layer.shadowRadius = 16 / 2
+		tenantButton.layer.shadowPath = nil
 		
-		nextButtonView.isEnabled = false
+		nextButton.isEnabled = false
 	}
 	
 	//MARK:- Component(Action)
@@ -73,58 +75,64 @@ class SignupViewController: UIViewController {
 	}
 	
 	@IBAction func lessorButton(_ sender: Any) {
-		if !lessorView.isSelected {
-			lessorView.layer.borderWidth = 2
-			lessorView.layer.borderColor = CGColor(red: 255 / 255, green: 133 / 255, blue: 119 / 255, alpha: 1)
-			lessorView.layer.cornerRadius = 10
-			lessorView.layer.shadowColor = CGColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.10000000149011612)
-			lessorView.layer.shadowOpacity = 1
-			lessorView.layer.shadowOffset = .zero
-			lessorView.layer.shadowRadius = 16 / 2
-			lessorView.layer.shadowPath = nil
-			lessorView.isSelected = true
+		if !lessorButton.isSelected {
+			lessorButton.layer.borderWidth = 2
+			lessorButton.layer.borderColor = UIColor.primaryOrange.cgColor
+			lessorButton.layer.cornerRadius = 10
+			lessorButton.layer.shadowColor = UIColor.primaryBlack.withAlphaComponent(0.1).cgColor
+			lessorButton.layer.shadowOpacity = 1
+			lessorButton.layer.shadowOffset = .zero
+			lessorButton.layer.shadowRadius = 16 / 2
+			lessorButton.layer.shadowPath = nil
+			lessorButton.isSelected = true
 			
-			tenantView.isEnabled = false
+			tenantButton.isEnabled = false
 			
-			nextButtonView.layer.backgroundColor = UIColor.primaryBlack.cgColor
-			nextButtonView.isEnabled = true
+			nextButton.layer.backgroundColor = UIColor.primaryBlack.cgColor
+			nextButton.isEnabled = true
 		}
 		else {
-			lessorView.isSelected = false
-			lessorView.layer.borderColor = UIColor.clear.cgColor
+			lessorButton.isSelected = false
+			lessorButton.layer.borderColor = UIColor.clear.cgColor
 			
-			tenantView.isEnabled = true
+			tenantButton.isEnabled = true
 			
-			nextButtonView.layer.backgroundColor = CGColor(red: 219 / 255, green: 219 / 255, blue: 219 / 255, alpha: 1)
-			nextButtonView.isEnabled = false
+			nextButton.layer.backgroundColor = CGColor(red: 219 / 255,
+																								 green: 219 / 255,
+																								 blue: 219 / 255,
+																								 alpha: 1)
+			nextButton.isEnabled = false
 		}
 	}
 	
 	@IBAction func tenantButton(_ sender: Any) {
-		if !tenantView.isSelected {
-			tenantView.layer.borderWidth = 2
-			tenantView.layer.borderColor = CGColor(red: 255 / 255, green: 133 / 255, blue: 119 / 255, alpha: 1)
-			tenantView.layer.cornerRadius = 10
-			tenantView.layer.shadowColor = CGColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.10000000149011612)
-			tenantView.layer.shadowOpacity = 1
-			tenantView.layer.shadowOffset = .zero
-			tenantView.layer.shadowRadius = 16 / 2
-			tenantView.layer.shadowPath = nil
-			tenantView.isSelected = true
+		if !tenantButton.isSelected {
+			tenantButton.layer.borderWidth = 2
+			tenantButton.layer.borderColor = UIColor.primaryOrange.cgColor
+			tenantButton.layer.cornerRadius = 10
+			tenantButton.layer.shadowColor = UIColor.primaryBlack.withAlphaComponent(0.1).cgColor
+			tenantButton.layer.shadowOpacity = 1
+			tenantButton.layer.shadowOffset = .zero
+			tenantButton.layer.shadowRadius = 16 / 2
+			tenantButton.layer.shadowPath = nil
+			tenantButton.isSelected = true
 			
-			lessorView.isEnabled = false
+			lessorButton.isEnabled = false
 			
-			nextButtonView.layer.backgroundColor = UIColor.primaryBlack.cgColor
-			nextButtonView.isEnabled = false
+			nextButton.layer.backgroundColor = UIColor.primaryBlack.cgColor
+			nextButton.isEnabled = false
 		}
 		else {
-			tenantView.isSelected = false
-			tenantView.layer.borderColor = UIColor.clear.cgColor
+			tenantButton.isSelected = false
+			tenantButton.layer.borderColor = UIColor.clear.cgColor
 			
-			lessorView.isEnabled = true
+			lessorButton.isEnabled = true
 			
-			nextButtonView.layer.backgroundColor = CGColor(red: 219 / 255, green: 219 / 255, blue: 219 / 255, alpha: 1)
-			nextButtonView.isEnabled = false
+			nextButton.layer.backgroundColor = CGColor(red: 219 / 255,
+																								 green: 219 / 255,
+																								 blue: 219 / 255,
+																								 alpha: 1)
+			nextButton.isEnabled = false
 		}
 	}
 }
