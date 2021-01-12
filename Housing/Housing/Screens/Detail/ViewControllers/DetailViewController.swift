@@ -10,18 +10,22 @@ import UIKit
 import SegementSlide
 import Then
 import SnapKit
+import RxMoya
+import Moya
+import RxCocoa
+import RxSwift
 
 class DetailViewController: SegementSlideDefaultViewController {
 	
-	var category : String = "고장/수리"
-	var status : String = "확인 전"
-	var viewTitle : String = "수도꼭지가 고장났어요ㅠ 집이 물바다"
-	var context : String = "저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n\n저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n"
+	var category: String = "고장/수리"
+	var status: String = "확인 전"
+	var viewTitle: String = "수도꼭지가 고장났어요ㅠ 집이 물바다"
+	var context: String = "저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n\n저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n"
+	var requestId: Int = 1
 	
 	let detailHeaderView = UIView().then{
 		$0.isUserInteractionEnabled = true
 		$0.contentMode = .scaleAspectFill
-		
 	}
 	let categoryLabel = UILabel()
 	let statusLabel = UILabel()
@@ -31,6 +35,10 @@ class DetailViewController: SegementSlideDefaultViewController {
 	let seperateLineView = UIView().then {
 		$0.backgroundColor = .gray01
 	}
+	let disposeBag = DisposeBag()
+	
+	private let detailProvider = MoyaProvider<DetailService>(plugins:
+																														[NetworkLoggerPlugin(verbose: true)])
 	
 	private let coverSafeAreaView = UIView().then {
 			$0.backgroundColor = .white
@@ -115,6 +123,18 @@ class DetailViewController: SegementSlideDefaultViewController {
 		}
 	}
 	
+	func loader() {
+		detailProvider.rx.request(.homeDetail(id: requestId))
+			.asObservable()
+			.subscribe{ (next) in
+				print(next)
+			}onError: { (error) in
+				print(error.localizedDescription)
+			}onCompleted: {
+				print("completed")
+			}.disposed(by: disposeBag)
+	}
+	
 	private func setSafeArea() {
 			view.add(coverSafeAreaView){
 					$0.snp.makeConstraints {
@@ -167,6 +187,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		layout()
 		reloadData()
 		setSafeArea()
+		loader()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
