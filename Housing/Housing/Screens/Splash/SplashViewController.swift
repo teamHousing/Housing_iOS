@@ -9,19 +9,19 @@ import UIKit
 
 import Then
 import SnapKit
+import SwiftKeychainWrapper
 
-class SplashViewController: BaseViewController {
+final class SplashViewController: BaseViewController {
 		
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-			self.loginButtonDidTap()
+			self.detectIsSignIn()
 		}
 	}
 	
-	@objc
-	func loginButtonDidTap() {
+	private func toLogin() {
 		let storyboard = UIStoryboard(name: StoryboardStorage.login,
 																	bundle: nil)
 		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
@@ -29,5 +29,20 @@ class SplashViewController: BaseViewController {
 		navigationViewController.modalPresentationStyle = .fullScreen
 		present(navigationViewController, animated: false)
 	}
-
+	
+	private func toMain() {
+		let viewcontroller = TabBarViewController()
+		let navigationViewController = UINavigationController(rootViewController: viewcontroller)
+		navigationViewController.modalPresentationStyle = .fullScreen
+		present(navigationViewController, animated: false)
+	}
+	
+	private func detectIsSignIn() {
+		let token = KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)
+		if token == "" || token == nil {
+			toLogin()
+		} else {
+			toMain()
+		}
+	}
 }
