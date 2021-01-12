@@ -15,14 +15,20 @@ enum NoticeService {
 	case profileNoticeDetail(id: Int)
 	case profileNoticeAdmit(house_info_id: Int,
 													notice_title: String,
-													notice_content: String,
+													notice_contents: String,
 													notice_option: [noticeOption])
 	case profileAuthorization(building: String, unit: Int)
 }
 
-struct noticeOption {
-	var date, day, time: String
+struct noticeOption : Codable {
+	private enum CodingKeys : String, CodingKey {
+		case date = "date"
+		case day = "day"
+		case time = "time"
+	}
+	let date, day, time: String?
 }
+
 
 extension NoticeService: TargetType {
 	
@@ -72,11 +78,15 @@ extension NoticeService: TargetType {
 																				 urlParameters: ["id": id])
 		case .profileNoticeAdmit(house_info_id: let house_info_id,
 														 notice_title: let notice_title,
-														 notice_content: let notice_content,
+														 notice_contents: let notice_contents,
 														 notice_option: let notice_option):
 			return .requestCompositeParameters(bodyParameters: ["notice_title": notice_title,
-																													"notice_content": notice_content,
-																													"notice_option": notice_option],
+																													"notice_contents": notice_contents,
+																													"notice_option": [[
+																														"date " : notice_option.first?.date,
+																														"day" :  notice_option.first?.day,
+																														"time" :  notice_option.first?.time
+																										]]],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["house_info_id": house_info_id])
 		case .profileAuthorization(building: let building, unit: let unit):

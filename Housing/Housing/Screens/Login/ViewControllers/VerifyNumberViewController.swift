@@ -260,14 +260,12 @@ class VerifyNumberViewController: BaseViewController {
 						guard let result = data.data?.authentication_number else { return }
 						self.verifyNumber.text = result
 						self.showNumber()
-
 					}
 					catch {
 						print(error)
 					}
 				}
 			} onError: { (error) in
-
 				print(error.localizedDescription)
 			}.disposed(by: disposeBag)
 		
