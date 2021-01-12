@@ -12,6 +12,9 @@ import SnapKit
 
 class RequestTableViewCell: UITableViewCell {
 	
+	var model = DetailModel(id: 0, issueImages: [], promiseOption: [[]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
+	var statusModel: [DetailStatus] = []
+	
 	let titleLabel = UILabel().then{
 		$0.text = "🚨 요청 사항"
 		$0.textColor = .primaryBlack
@@ -19,7 +22,6 @@ class RequestTableViewCell: UITableViewCell {
 		$0.textAlignment = .left
 	}
 	let contextLabel = UILabel().then{
-		$0.text = "요청 사항"
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
 		$0.textAlignment = .left

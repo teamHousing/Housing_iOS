@@ -17,6 +17,9 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 	@objc var scrollView: UIScrollView {
 		return tableView
 	}
+	
+	var model = DetailModel(id: 0, issueImages: [], promiseOption: [[]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
+	var statusModel: [DetailStatus] = []
 
 	func registerCell() {
 		tableView.register(RequestTableViewCell.self, forCellReuseIdentifier: RequestTableViewCell.reuseIdentifier)

@@ -13,6 +13,8 @@ import Then
 
 class MessageViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
 	
+	var model = DetailModel(id: 0, issueImages: [], promiseOption: [[]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
+	var statusModel: [DetailStatus] = []
 	@objc var scrollView: UIScrollView {
 		return tableView
 	}

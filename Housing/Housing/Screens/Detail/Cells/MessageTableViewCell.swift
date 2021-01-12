@@ -70,6 +70,7 @@ class MessageTableViewCell: UITableViewCell {
 		self.messageTableView.rowHeight = UITableView.automaticDimension
 		self.messageTableView.reloadData()
 		self.backgroundColor = .primaryGray
+
 		// Initialization code
 	}
 	

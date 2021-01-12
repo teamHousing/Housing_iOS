@@ -22,6 +22,8 @@ class DetailViewController: SegementSlideDefaultViewController {
 	var viewTitle: String = "수도꼭지가 고장났어요ㅠ 집이 물바다"
 	var context: String = "저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n\n저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n"
 	var requestId: Int = 1
+	var model = DetailModel(id: 0, issueImages: [], promiseOption: [[]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
+	var statusModel: [DetailStatus] = []
 	
 	let detailHeaderView = UIView().then{
 		$0.isUserInteractionEnabled = true
@@ -41,7 +43,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 																														[NetworkLoggerPlugin(verbose: true)])
 	
 	private let coverSafeAreaView = UIView().then {
-			$0.backgroundColor = .white
+		$0.backgroundColor = .white
 	}
 	
 	func contextHeight() -> Int {
@@ -55,13 +57,29 @@ class DetailViewController: SegementSlideDefaultViewController {
 		return 243+self.contextLabel.frame.size.height
 	}
 	
+	
 	func headerViewLayout() {
 		self.detailHeaderView.add(self.categoryContainerView) {
 			$0.backgroundColor = .primaryBlack
 			$0.layer.cornerRadius = 13
 		}
 		self.detailHeaderView.add(categoryLabel) {
-			$0.text = self.category
+			switch (self.model.category) {
+			case 0:
+				$0.text = "고장/수리"
+			case 1:
+				$0.text = "계약관련"
+			case 2:
+				$0.text = "요금납부"
+			case 3:
+				$0.text = "소음관련"
+			case 4:
+				$0.text = "문의사항"
+			case 5:
+				$0.text = "그 외"
+			default:
+				$0.text = "오류"
+			}
 			$0.backgroundColor = UIColor.primaryBlack
 			$0.textColor = UIColor.primaryWhite
 			$0.textAlignment = .center
@@ -78,7 +96,16 @@ class DetailViewController: SegementSlideDefaultViewController {
 			$0.trailing.equalTo(self.categoryLabel.snp.trailing).offset(10)
 		}
 		self.detailHeaderView.add(self.statusLabel) {
-			$0.text = self.status
+			switch (self.model.progress) {
+			case 0:
+				$0.text = "확인 전"
+			case 1:
+				$0.text = "확인 중"
+			case 2:
+				$0.text = "해결완료"
+			default:
+				$0.text = "오류"
+			}
 			$0.textColor = .primaryOrange
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -89,7 +116,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			}
 		}
 		self.detailHeaderView.add(self.titleLabel) {
-			$0.text = self.viewTitle
+			$0.text = self.model.issueTitle!
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 21, weight: .bold)
 			$0.snp.makeConstraints{
@@ -100,7 +127,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			}
 		}
 		self.detailHeaderView.add(self.contextLabel) {
-			$0.text = self.context
+			$0.text = self.model.issueContents!
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
 			$0.numberOfLines = 0
@@ -124,57 +151,76 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 	
 	func loader() {
+		
 		detailProvider.rx.request(.homeDetail(id: requestId))
 			.asObservable()
 			.subscribe(onNext: { response in
 				do{
 					let decoder = JSONDecoder()
-					let data = try decoder.decode(ResponseArrayType<[Detail]>.self,
+					let data = try decoder.decode(ResponseType<Detail>.self,
 																				from: response.data)
 					let result = data.data
-//					self.detailDataBind(result!)
-					print(result)
+					
+//					print(result)
+					self.detailDataBind(result!)
+					
 				} catch {
 					print(error)
 				}
 				
 			}, onError: { error in
 				print(error.localizedDescription)
+			}, onCompleted: {
+				self.headerViewLayout()
+				self.detailHeaderView.snp.makeConstraints{
+					$0.height.equalTo(130+self.contextHeight()*22)
+				}
+				self.detailHeaderView.reloadInputViews()
+				let viewController = ContentViewController()
+				viewController.model = self.model
+				print(viewController.model.requestedTerm)
+				viewController.statusModel = self.statusModel
 			}).disposed(by: disposeBag)
 	}
 	
-//	private func detailDataBind(_ data: [Detail]) {
-//		print(data)
-//		for detail in data {
-//			guard let id = detail.id,
-//						let issueImages = detail.issueImages,
-//						let promiseOption = detail.promiseOption,
-//						let issueTitle = detail.issueTitle,
-//						let issueContents = detail.issueContents
-//							else {
-//				return
-//			}
-//		}
-//	}
-		
-	private func setSafeArea() {
-			view.add(coverSafeAreaView){
-					$0.snp.makeConstraints {
-							$0.top.equalToSuperview()
-							$0.leading.equalToSuperview()
-							$0.trailing.equalToSuperview()
-							$0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-					}
-			}
-	}
-
-	override func segementSlideHeaderView() -> UIView? {
-		self.headerViewLayout()
-		self.detailHeaderView.snp.makeConstraints{
-			$0.height.equalTo(130+self.contextHeight()*22)
+	private func detailDataBind(_ data: Detail) {
+		let id = data.id
+		let category = data.category
+		guard let issueImages = data.issueImages,
+					let promiseOption = data.promiseOption,
+					let issueTitle = data.issueTitle,
+					let issueContents = data.issueContents,
+					let progress = data.progress,
+					let requestedTerm = data.requestedTerm,
+					let promiseYear = data.promiseYear,
+					let promiseMonth = data.promiseMonth,
+					let promiseDay = data.promiseDay,
+					let promiseTime = data.promiseTime,
+					let solutionMethod = data.solutionMethod,
+					let confirmedPromiseOption = data.confirmedPromiseOption,
+					let replies = data.replies
+		else {
+			return
 		}
-		return self.detailHeaderView
+		let model = DetailModel(id: id, issueImages: issueImages, promiseOption: promiseOption, category: category, issueTitle: issueTitle, issueContents: issueContents, progress: progress, requestedTerm: requestedTerm, promiseYear: promiseYear, promiseMonth: promiseMonth, promiseDay: promiseDay, promiseTime: promiseTime, solutionMethod: solutionMethod, confirmedPromiseOption: confirmedPromiseOption)
+		self.model = model
+		self.statusModel.append(DetailStatus(ownerStatus: replies[0].ownerStatus, id: replies[0].id))
+//		print(self.statusModel)
 	}
+	
+	
+	private func setSafeArea() {
+		view.add(coverSafeAreaView){
+			$0.snp.makeConstraints {
+				$0.top.equalToSuperview()
+				$0.leading.equalToSuperview()
+				$0.trailing.equalToSuperview()
+				$0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+			}
+		}
+	}
+	
+	
 	
 	override var titlesInSwitcher: [String] {
 		return ["상세 정보","하우징 쪽지"]
@@ -190,26 +236,34 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 	
 	override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+		loader()
 		let viewController = ContentViewController()
 		let messageViewController = MessageViewController()
 		if(contentView.selectedIndex == 0 ) {
+			messageViewController.model = self.model
+			messageViewController.statusModel = self.statusModel
 			return messageViewController
 		}
 		else {
+			viewController.model = self.model
+			viewController.statusModel = self.statusModel
 			return viewController
 		}
 	}
 	
-
+	override func segementSlideHeaderView() -> UIView? {
+		
+		return self.detailHeaderView
+	}
+	
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		defaultSelectedIndex = 0
 		layout()
-		reloadData()
 		setSafeArea()
-		loader()
+		reloadData()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
