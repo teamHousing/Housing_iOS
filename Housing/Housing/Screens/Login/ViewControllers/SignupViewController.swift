@@ -8,15 +8,18 @@
 import UIKit
 
 class SignupViewController: UIViewController {
-	//MARK:- Property
 	
-	//MARK:- Component(Outlet)
+	// MARK: - Component(Outlet)
+	
 	@IBOutlet weak var lessorView: UIButton!
 	@IBOutlet weak var tenantView: UIButton!
 	@IBOutlet weak var navigationBackButtonView: UIBarButtonItem!
 	@IBOutlet weak var nextButtonView: UIButton!
 	
-	//MARK:- Lifecycle
+	// MARK: - Property
+	
+	
+	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -31,7 +34,7 @@ class SignupViewController: UIViewController {
 		navigationController?.navigationBar.isHidden = false
 	}
 	
-	//MARK:- Helper
+	// MARK: - Helper
 	func initLayout() {
 		navigationController?.navigationBar.isHidden = false
 		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)

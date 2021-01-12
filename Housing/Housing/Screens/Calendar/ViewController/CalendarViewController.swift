@@ -118,7 +118,7 @@ final class CalendarViewController: BaseViewController {
 
 extension CalendarViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if scrollView.contentOffset.y > 100 {
+		if scrollView.contentOffset.y > 10 {
 			collectionView.backgroundColor = .primaryGray
 		} else {
 			collectionView.backgroundColor = .white

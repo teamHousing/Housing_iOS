@@ -54,7 +54,7 @@ class NoticeViewController: UIViewController {
 
 extension NoticeViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if scrollView.contentOffset.y > 100 {
+		if scrollView.contentOffset.y > 10 {
 			noticeCollectionView.backgroundColor = .primaryGray
 		} else {
 			noticeCollectionView.backgroundColor = .white

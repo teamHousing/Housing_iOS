@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -75,7 +75,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="210" id="Jvm-3M-Aif"/>
-                                    <constraint firstAttribute="width" constant="149" id="Pe8-CU-EQq"/>
                                 </constraints>
                                 <connections>
                                     <action selector="lessorButton:" destination="HXP-7c-81v" eventType="touchUpInside" id="t3q-Je-Bch"/>
@@ -115,6 +114,7 @@
                             <constraint firstItem="hrM-NU-acm" firstAttribute="trailing" secondItem="kSn-eM-kEV" secondAttribute="trailing" constant="30" id="0Yg-LY-AG8"/>
                             <constraint firstItem="1go-QI-ycN" firstAttribute="top" secondItem="4Pm-h2-ujb" secondAttribute="top" constant="9" id="0n3-Na-G7q"/>
                             <constraint firstItem="4Pm-h2-ujb" firstAttribute="centerY" secondItem="bUT-01-zUg" secondAttribute="centerY" id="DmB-fQ-nqD"/>
+                            <constraint firstItem="4Pm-h2-ujb" firstAttribute="width" secondItem="bUT-01-zUg" secondAttribute="width" multiplier="0.397333" id="GWT-at-vBH"/>
                             <constraint firstItem="T1J-UO-mqW" firstAttribute="centerY" secondItem="vcP-1T-Mvl" secondAttribute="centerY" id="Ixt-r0-Twr"/>
                             <constraint firstItem="kSn-eM-kEV" firstAttribute="centerY" secondItem="bUT-01-zUg" secondAttribute="centerY" id="KLg-c4-KHP"/>
                             <constraint firstItem="YYN-zT-O3p" firstAttribute="leading" secondItem="4an-bG-sPI" secondAttribute="trailing" constant="8" id="KWc-f3-tb6"/>
