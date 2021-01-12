@@ -24,7 +24,7 @@ extension CommunicationService: TargetType {
 	}
 	
 	public var baseURL: URL {
-		return URL(string: "3.34.74.249:3000")!
+		return URL(string: "http://3.34.74.249:3000")!
 	}
 	
 	var path: String {
@@ -63,7 +63,7 @@ extension CommunicationService: TargetType {
 		switch self {
 		default:
 			return ["Content-Type": "application/json",
-							"user_token": token]
+							"jwt": token]
 		}
 	}
 }
