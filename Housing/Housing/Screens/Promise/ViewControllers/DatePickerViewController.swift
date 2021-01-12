@@ -169,8 +169,7 @@ class DatePickerViewController: UIViewController {
 		hideCard.addCompletion({ position in
 			if position == .end {
 				if(self.presentingViewController != nil) {
-					let a = self.presentingViewController
-					a?.viewDidLoad()
+
 					self.dismiss(animated: false, completion: nil)
 				}
 			}

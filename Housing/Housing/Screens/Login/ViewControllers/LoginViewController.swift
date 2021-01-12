@@ -81,10 +81,21 @@ class LoginViewController: BaseViewController {
 	//MARK:- Component(Action)
 	
 	@IBAction func signinButtonDidTap(_ sender: Any) {
-//		let viewcontroller = TabBarViewController()
+
 		let viewcontroller = TabBarViewController()
 		viewcontroller.modalPresentationStyle = .fullScreen
-		present(viewcontroller, animated: true)
+		self.present(viewcontroller, animated: true)
+//		userProvider.rx.request(.signin(email: idTextField.text ?? "",
+//																		password: passwordTextField.text ?? ""))
+//			.asObservable()
+//			.subscribe { (next) in
+//				print(next.statusCode)
+//				
+//			} onError: { (error) in
+//				print(error.localizedDescription)
+//			}.disposed(by: disposeBag)
+
+//		let viewcontroller = TabBarViewController()
 
 //		userProvider.rx.request(.signin(email: idTextField.text ?? "",
 //																		password: passwordTextField.text ?? ""))
@@ -96,6 +107,7 @@ class LoginViewController: BaseViewController {
 //			}.disposed(by: disposeBag)
 		
 	}
+	
 	
 	@IBAction func signupButton(_ sender: Any) {
 		let signinStoryboard = UIStoryboard(name: "Signup", bundle: nil)

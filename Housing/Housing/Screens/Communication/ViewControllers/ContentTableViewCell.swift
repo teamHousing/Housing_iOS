@@ -18,6 +18,7 @@ class ContentTableViewCell: UITableViewCell {
 	
 	var contentData:DetailData?
 	
+
 	func determineProgress(progress: Int) -> String {
 		if progress == 0{
 			return "확인전"
@@ -35,7 +36,6 @@ class ContentTableViewCell: UITableViewCell {
 ////		statusLabel?.text = determineProgress(progress: contentData?.progress)
 //		contentLabel?.text = contentData?.issueContents
 	}
-	
 	func makeViewRounded(){
 		whiteUIView.setRounded(radius: 16)
 		labelBackView.setRounded(radius: 10)
