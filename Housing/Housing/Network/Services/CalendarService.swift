@@ -72,7 +72,7 @@ extension CalendarService: TargetType {
 		switch self {
 		default:
 			return ["Content-Type": "application/json",
-							"user_token": token]
+							"jwt": token]
 		}
 	}
 }

@@ -12,6 +12,7 @@ import SwiftKeychainWrapper
 
 enum UserService {
 	case signin(email: String, password: String)
+	case validation
 	case hostSignup
 	case guestSignup
 }
@@ -34,6 +35,8 @@ extension UserService: TargetType {
 			return "/user/registration/0"
 		case .guestSignup:
 			return "/user/registration/1"
+		case .validation:
+			return "/authentication/confirm"
 		}
 	}
 	
@@ -41,7 +44,8 @@ extension UserService: TargetType {
 		switch self {
 		case .signin,
 				 .hostSignup,
-				 .guestSignup:
+				 .guestSignup,
+				 .validation:
 			return .post
 		}
 	}
@@ -52,7 +56,7 @@ extension UserService: TargetType {
 	
 	var task: Task {
 		switch self {
-
+		
 		case .signin(email: let email, password: let password):
 			return .requestCompositeParameters(bodyParameters: ["email": email, "password": password],
 																				 bodyEncoding: JSONEncoding.default,
@@ -61,6 +65,8 @@ extension UserService: TargetType {
 			return .requestPlain
 		case .guestSignup:
 			return .requestPlain
+		case .validation:
+			return .requestPlain
 		}
 	}
 	
@@ -68,7 +74,7 @@ extension UserService: TargetType {
 		switch self {
 		default:
 			return ["Content-Type": "application/json",
-							"user_token": token]
+							"jwt": token]
 		}
 	}
 }

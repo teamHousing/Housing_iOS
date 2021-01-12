@@ -15,8 +15,6 @@ enum CommunicationService {
 	case homeRoomList
 }
 
-
-
 extension CommunicationService: TargetType {
 	
 	private var token: String {
@@ -63,7 +61,7 @@ extension CommunicationService: TargetType {
 		switch self {
 		default:
 			return ["Content-Type": "application/json",
-							"user_token": token]
+							"jwt": token]
 		}
 	}
 }

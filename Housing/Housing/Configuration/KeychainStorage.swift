@@ -8,12 +8,13 @@
 import Foundation
 
 enum KeychainStorage {
-		
-		static var fcmToken: String {
-				return "fcmToken"
-		}
-		
-		static var accessToken: String {
-				return "accessToken"
-		}
+	
+	static var accessToken: String {
+		return "accessToken"
+	}
+	
+	static var isHost: String {
+		return "isHost"
+	}
+	
 }

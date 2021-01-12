@@ -79,7 +79,6 @@
 		D1B44508259F1447005C2C68 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B44507259F1447005C2C68 /* BaseViewController.swift */; };
 		D1B4450E259F1D4A005C2C68 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B4450D259F1D4A005C2C68 /* Login.storyboard */; };
 		D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B44510259F1D5A005C2C68 /* LoginViewController.swift */; };
-		D1B65A112598CE5C00A9A7CB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B65A102598CE5C00A9A7CB /* Network.swift */; };
 		D1B65A182598D16600A9A7CB /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A172598D16600A9A7CB /* RxSwift */; };
 		D1B65A1A2598D16600A9A7CB /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A192598D16600A9A7CB /* RxCocoa */; };
 		D1B65A1C2598D16600A9A7CB /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D1B65A1B2598D16600A9A7CB /* RxRelay */; };
@@ -184,7 +183,6 @@
 		D1B44507259F1447005C2C68 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D1B4450D259F1D4A005C2C68 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D1B44510259F1D5A005C2C68 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D1B65A102598CE5C00A9A7CB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D1CF647625AC2464009A39EC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		D1CF647A25AC26A8009A39EC /* MoyaNetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkLogger.swift; sourceTree = "<group>"; };
 		DA050945259F343E00DDB916 /* CameraWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWorkViewController.swift; sourceTree = "<group>"; };
@@ -596,7 +594,6 @@
 			isa = PBXGroup;
 			children = (
 				D1CF647425AC244E009A39EC /* Services */,
-				D1B65A102598CE5C00A9A7CB /* Network.swift */,
 				D1CF647A25AC26A8009A39EC /* MoyaNetworkLogger.swift */,
 			);
 			path = Network;
@@ -821,7 +818,6 @@
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				CC42D05F25A74D21002A461D /* MessageTableViewCell.swift in Sources */,
 				D131188E259B6BA900897DF4 /* UICollectionViewCell+.swift in Sources */,
-				D1B65A112598CE5C00A9A7CB /* Network.swift in Sources */,
 				CC6A1E0425A5A2A800C86865 /* UIImageView+.swift in Sources */,
 				D1311888259B6B9400897DF4 /* ReusableView.swift in Sources */,
 				DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */,
@@ -999,7 +995,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1022,7 +1018,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
