@@ -460,7 +460,16 @@ class PromiseViewController: UIViewController {
 			self.underBar.backgroundColor = b.element! ? .gray01 : .black
 		}.disposed(by: disposeBag)
 		desInputOb.subscribe{ b in
-			self.questionDescription.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 16)
+			if !b.element! {
+				self.questionDescription.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 8)
+				self.questionDescription.setBorder(borderColor: .black, borderWidth: 0)
+				self.questionDescription.clipsToBounds = false
+			}
+			else {
+				self.questionDescription.layer.applyShadow(color: .black, alpha: 0, x: 0, y: 0, blur: 8)
+				self.questionDescription.setBorder(borderColor: .gray01, borderWidth: 1)
+				self.questionDescription.clipsToBounds = true
+			}
 		}.disposed(by: disposeBag)
 		
 		Observable.combineLatest(inputOb, desInputOb, resultSelector: { !$0 && !$1})

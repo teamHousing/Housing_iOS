@@ -263,7 +263,6 @@ class AddNoticeViewController: BaseViewController{
 		let desInputOb : Observable<Bool> = noticeDescription.rx.text.orEmpty.map{$0 == "내용을 작성해주세요"}.asObservable()
 		inputOb.subscribe{b in
 			self.noticeTitle.font = b.element! ? UIFont(name: "AppleSDGothicNeo-Regular", size: 21) : UIFont(name: "AppleSDGothicNeo-Bold", size: 21)
-			
 			self.underBar.backgroundColor = b.element! ? .gray01 : .black
 			self.underBar.snp.updateConstraints{
 				$0.height.equalTo(b.element! ? 1 : 2)
@@ -271,7 +270,14 @@ class AddNoticeViewController: BaseViewController{
 		}.disposed(by: disposeBag)
 		desInputOb.subscribe{ b in
 			if !b.element! {
-				self.noticeDescription.layer.applyShadow()
+				self.noticeDescription.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 8)
+				self.noticeDescription.setBorder(borderColor: .black, borderWidth: 0)
+				self.noticeDescription.clipsToBounds = false
+			}
+			else {
+				self.noticeDescription.layer.applyShadow(color: .black, alpha: 0, x: 0, y: 0, blur: 8)
+				self.noticeDescription.setBorder(borderColor: .gray01, borderWidth: 1)
+				self.noticeDescription.clipsToBounds = true
 			}
 		}.disposed(by: disposeBag)
 		Observable.combineLatest(inputOb, desInputOb, resultSelector: { !$0 && !$1})

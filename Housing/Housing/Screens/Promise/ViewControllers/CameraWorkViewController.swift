@@ -209,7 +209,8 @@ extension CameraWorkViewController: UICollectionViewDataSource {
 			cell.addbuttonView.isHidden = true
 			cell.evidenceImages.image = UIImage(named: "img3")
 			cell.deleteBtn.isHidden = true
-			cell.layer.applyShadow(color: .black, alpha: 0.10000000149011612, x: 0, y: 0, blur: 16)
+			cell.layer.applyShadow(color: .black, alpha: 0.10000000149011612, x: 0, y: 0, blur: 8)
+			cell.clipsToBounds = false
 		}
 		else {
 			if indexPath.row == 0 {
@@ -218,7 +219,8 @@ extension CameraWorkViewController: UICollectionViewDataSource {
 				cell.deleteBtn.isHidden = true
 				cell.evidenceImages.isHidden = true
 				cell.addbuttonView.isHidden = false
-				cell.layer.applyShadow(color: .black, alpha: 0.10000000149011612, x: 0, y: 0, blur: 16)
+				cell.layer.applyShadow(color: .black, alpha: 0.10000000149011612, x: 0, y: 0, blur: 8)
+				cell.clipsToBounds = false
 			}
 			else {
 				cell.bindConstraints()
