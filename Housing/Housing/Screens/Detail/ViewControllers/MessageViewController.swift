@@ -25,6 +25,7 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		print("hi")
 		view.backgroundColor = .white
 		registerCell()
 		tableView.estimatedRowHeight = MessageTableViewCell.estimatedRowHeight()
