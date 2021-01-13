@@ -48,8 +48,7 @@ final class CommunicationViewController: BaseViewController {
 	// MARK : - LifeCycle
 	override func viewDidLoad() {
 		networkForCommunication()
-		
-		
+
 		super.viewDidLoad()
 		configHeaderView()
 		
@@ -349,13 +348,14 @@ extension CommunicationViewController: UITableViewDataSource{
 					emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!"
 					return emptyIncomCell
 				} else { ///cell중에서도 complete부분
+
 					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.awakeFromNib()
 					return contentCell
 				}
 			} else if incompleteLength > 0 && completeLength == 0{
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
 					return contentCell
 				} else { ///cell중에서도 complete부분
@@ -365,13 +365,13 @@ extension CommunicationViewController: UITableViewDataSource{
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
 				
 					
-					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
 				
 					
 					return contentCell
 				} else { ///cell중에서도 complete부분
-					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
 	
 					

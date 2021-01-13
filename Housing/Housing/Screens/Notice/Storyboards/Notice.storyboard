@@ -45,7 +45,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여긴 상세" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfO-Th-QtZ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여긴 상세" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfO-Th-QtZ">
                                                     <rect key="frame" x="40" y="56" width="48" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="cjR-wN-QNS"/>
@@ -286,6 +286,7 @@
                                     <connections>
                                         <outlet property="headerBackgroundView" destination="k1Y-P8-Vmu" id="1kt-Ex-eOy"/>
                                         <outlet property="hopeTimeLabel" destination="9em-nP-NfM" id="GTh-eX-iUt"/>
+                                        <outlet property="noticeLabel" destination="g21-rn-GkS" id="bUS-Z2-b46"/>
                                         <outlet property="ownerNameLabel" destination="leM-kO-0Rc" id="bqZ-TM-ewB"/>
                                         <outlet property="profileImage" destination="mqb-tI-hoN" id="vqk-us-Eff"/>
                                         <outlet property="profileMessageLabel" destination="Hdo-zy-8Nd" id="pSH-MT-9Pa"/>
