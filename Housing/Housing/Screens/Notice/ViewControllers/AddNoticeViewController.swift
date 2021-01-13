@@ -414,7 +414,7 @@ class AddNoticeViewController: BaseViewController{
 					do {
 						let decoder = JSONDecoder()
 						let data = try decoder.decode(Response.self, from: response.data)
-						print(data.message)
+						self.navigationController?.parent?.viewDidLoad()
 						self.navigationController?.popViewController(animated: true)
 					}
 					catch {

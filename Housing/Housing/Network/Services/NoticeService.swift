@@ -81,7 +81,7 @@ extension NoticeService: TargetType {
 			return "/houseInfo"
 		case let .profileNoticeDetail(id):
 			return "/houseInfo/\(id)/notice"
-		case let .profileNoticeAdmit(house_info_id):
+		case let .profileNoticeAdmit(house_info_id,_,_,_):
 			return "/houseInfo/\(house_info_id)/notice"
 		case .profileAuthorization:
 			return "/authentication/number"

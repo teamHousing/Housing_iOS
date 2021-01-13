@@ -121,7 +121,7 @@ class PromiseViewController: UIViewController {
 	private let fixRepairButton = UIButton().then{
 		$0.setTitle("고장 / 수리", for: .normal)
 		$0.titleLabel?.textAlignment = .center
-		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)
+		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.white, for: .normal)
 		$0.backgroundColor = .primaryOrange
@@ -133,7 +133,7 @@ class PromiseViewController: UIViewController {
 	private let contractButton = UIButton().then{
 		$0.setTitle("계약 관련", for: .normal)
 		$0.titleLabel?.textAlignment = .center
-		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)
+		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
@@ -145,7 +145,7 @@ class PromiseViewController: UIViewController {
 	private let rentalFeeButton = UIButton().then{
 		$0.setTitle("요금 납부", for: .normal)
 		$0.titleLabel?.textAlignment = .center
-		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)
+		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
@@ -157,7 +157,7 @@ class PromiseViewController: UIViewController {
 	private let noiseButton = UIButton().then{
 		$0.setTitle("소음 관련", for: .normal)
 		$0.titleLabel?.textAlignment = .center
-		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)
+		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
@@ -167,9 +167,9 @@ class PromiseViewController: UIViewController {
 		
 	}
 	private let questionButton = UIButton().then{
-		$0.setTitle("문의 사항", for: .normal)
+		$0.setTitle("거주 수칙 관련", for: .normal)
 		$0.titleLabel?.textAlignment = .center
-		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)
+		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
@@ -181,7 +181,7 @@ class PromiseViewController: UIViewController {
 	private let etcButton = UIButton().then{
 		$0.setTitle("그 외", for: .normal)
 		$0.titleLabel?.textAlignment = .center
-		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)
+		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setRounded(radius: 15)
 		$0.setTitleColor(.black, for: .normal)
 		$0.backgroundColor = .white
@@ -332,7 +332,7 @@ class PromiseViewController: UIViewController {
 														questionDescription,
 														nextStep,page])
 		backgroundLabel.snp.makeConstraints{
-			$0.top.equalToSuperview().offset(0)
+			$0.top.equalToSuperview().offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
 			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -152))
 		}
