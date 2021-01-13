@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYN-zT-O3p">
-                                <rect key="frame" x="252" y="121" width="123" height="1"/>
+                                <rect key="frame" x="252" y="120" width="123" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="KL6-5j-HWc"/>
@@ -118,7 +118,7 @@
                             <constraint firstItem="T1J-UO-mqW" firstAttribute="centerY" secondItem="vcP-1T-Mvl" secondAttribute="centerY" id="Ixt-r0-Twr"/>
                             <constraint firstItem="kSn-eM-kEV" firstAttribute="centerY" secondItem="bUT-01-zUg" secondAttribute="centerY" id="KLg-c4-KHP"/>
                             <constraint firstItem="YYN-zT-O3p" firstAttribute="leading" secondItem="4an-bG-sPI" secondAttribute="trailing" constant="8" id="KWc-f3-tb6"/>
-                            <constraint firstItem="YYN-zT-O3p" firstAttribute="firstBaseline" secondItem="4an-bG-sPI" secondAttribute="firstBaseline" id="LDj-GU-NaS"/>
+                            <constraint firstItem="YYN-zT-O3p" firstAttribute="firstBaseline" secondItem="4an-bG-sPI" secondAttribute="firstBaseline" constant="-1" id="LDj-GU-NaS"/>
                             <constraint firstItem="Xqo-oM-24X" firstAttribute="leading" secondItem="kSn-eM-kEV" secondAttribute="leading" constant="9" id="NFp-0G-xps"/>
                             <constraint firstItem="4an-bG-sPI" firstAttribute="top" secondItem="6wM-wl-bmg" secondAttribute="bottom" constant="18" id="Nzg-4t-2Pr"/>
                             <constraint firstItem="1go-QI-ycN" firstAttribute="leading" secondItem="4Pm-h2-ujb" secondAttribute="leading" constant="9" id="OJ3-jN-Ddy"/>
