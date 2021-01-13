@@ -8,10 +8,11 @@
 import UIKit
 import RxSwift
 import RxCocoa
-class AddNoticeViewController: UIViewController{
+import Moya
+class AddNoticeViewController: BaseViewController{
 	// MARK: - Component
 	var requestData = RequestDataModel.shared
-	let disposeBag = DisposeBag()
+	private let userProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	private let noticeScroll = UIScrollView()
 	private let contentView = UIView()
 	private let backgroundLabel = UILabel().then{
@@ -109,6 +110,7 @@ class AddNoticeViewController: UIViewController{
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setTitleColor(.white, for: .normal)
 		$0.setRounded(radius: 25)
+		$0.addTarget(self, action: #selector(addNotice), for: .touchUpInside)
 	}
 	// MARK: - Helper
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
@@ -129,7 +131,7 @@ class AddNoticeViewController: UIViewController{
 		noticeScroll.snp.makeConstraints{
 			$0.edges.equalToSuperview()
 		}
-	  noticeScroll.addSubview(contentView)
+		noticeScroll.addSubview(contentView)
 		contentView.snp.makeConstraints{
 			$0.width.equalToSuperview()
 			$0.centerX.top.bottom.equalTo(noticeScroll)
@@ -171,7 +173,7 @@ class AddNoticeViewController: UIViewController{
 			$0.leading.equalTo(view).offset(20)
 			$0.trailing.equalTo(view).offset(-20)
 		}
-
+		
 		underBar.snp.makeConstraints{
 			$0.top.equalTo(lineImage.snp.bottom).offset(100)
 			$0.width.equalTo(noticeTitle)
@@ -259,7 +261,7 @@ class AddNoticeViewController: UIViewController{
 		let desInputOb : Observable<Bool> = noticeDescription.rx.text.orEmpty.map{$0 == "내용을 작성해주세요"}.asObservable()
 		inputOb.subscribe{b in
 			self.noticeTitle.font = b.element! ? UIFont(name: "AppleSDGothicNeo-Regular", size: 21) : UIFont(name: "AppleSDGothicNeo-Bold", size: 21)
-
+			
 			self.underBar.backgroundColor = b.element! ? .gray01 : .black
 			self.underBar.snp.updateConstraints{
 				$0.height.equalTo(b.element! ? 1 : 2)
@@ -279,9 +281,9 @@ class AddNoticeViewController: UIViewController{
 		
 		
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
-		 self.datePickerLabel.textColor = .black
-		 self.pickDateunderBar.backgroundColor = .black
-		 self.datePickerLabel.text = str
+			self.datePickerLabel.textColor = .black
+			self.pickDateunderBar.backgroundColor = .black
+			self.datePickerLabel.text = str
 		}).disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe(onNext : { str in
 			self.startHour.textColor = .black
@@ -330,7 +332,7 @@ class AddNoticeViewController: UIViewController{
 		self.present(pickerView, animated: false, completion: nil)
 	}
 	// MARK: - Life Cycle
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		bindUI()
@@ -338,9 +340,9 @@ class AddNoticeViewController: UIViewController{
 		layout()
 		textInputConfig()
 		// Do any additional setup after loading the view.
-	let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-	self.contentView.addGestureRecognizer(tap)
- }
+		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+		self.contentView.addGestureRecognizer(tap)
+	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		tabBarController?.tabBar.isHidden = true
@@ -349,6 +351,67 @@ class AddNoticeViewController: UIViewController{
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		tabBarController?.tabBar.isHidden = false
+	}
+	@objc func addNotice(sender : UIButton) {
+		print(requestData.date)
+		print(requestData.startTime)
+		print(requestData.endTime)
+		var temp = VisitDate()
+		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
+			print(str)
+			let day = String(str.element!.split(separator: " ")[0])
+			let date = String(str.element!.split(separator: " ")[1])
+			temp.date = date
+			temp.day = day
+			}.disposed(by: disposeBag)
+		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
+		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
+		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
+		temp.endTime = temp.startTime.replacingOccurrences(of: "시", with: "")
+		if temp.startTime.hasPrefix("오전") {
+			temp.startTime = temp.startTime.replacingOccurrences(of: "오전 ", with: "")
+		}
+		else if temp.startTime.hasPrefix("오후") {
+			temp.startTime = temp.startTime.replacingOccurrences(of: "오후 ", with: "")
+			temp.startTime = String(Int(temp.startTime)! + 12)
+		}
+		if temp.endTime.hasPrefix("오전") {
+			temp.endTime = temp.endTime.replacingOccurrences(of: "오전 ", with: "")
+		}
+		else if temp.endTime.hasPrefix("오후") {
+			temp.endTime = temp.endTime.replacingOccurrences(of: "오후 ", with: "")
+			temp.endTime = String(Int(temp.endTime)! + 12)
+		}
+		let a = "\(temp.startTime)-\(temp.endTime)"
+		print(temp)
+		print(a)
+		requestData.date.onNext("")
+		requestData.startTime.onNext("")
+		requestData.endTime.onNext("")
+		let decoder = JSONDecoder()
+
+		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a )
+		let noticeArr: [noticeOption] = [noticetime]
+		print(noticetime)
+		print(self.noticeTitle.text)
+		print(self.noticeDescription.text)
+		userProvider.rx.request(.profileNoticeAdmit(house_info_id: 1, notice_title: self.noticeTitle.text ?? "", notice_contents: self.noticeDescription.text ?? "" , notice_option: noticeArr)).asObservable()
+			.subscribe { (response) in
+				if response.statusCode == 200 {
+					do {
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(Response.self, from: response.data)
+						print(data.message)
+						self.navigationController?.popViewController(animated: true)
+					}
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+
 	}
 	
 }
