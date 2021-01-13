@@ -6,11 +6,14 @@
 //
 import Then
 import SnapKit
-
+import RxSwift
+import Moya
+import RxCocoa
 import UIKit
 
-class AdditionalRequestViewController: UIViewController {
+class AdditionalRequestViewController: BaseViewController {
 	// MARK: - Component
+	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	var requestData = RequestDataModel.shared
 	private let mainLabel = UILabel().then {
 		$0.numberOfLines = 2
@@ -96,9 +99,31 @@ class AdditionalRequestViewController: UIViewController {
 		self.navigationController?.pushViewController(appointmentview, animated: true)
 	}
 	@objc func popToRootController() {
+
 		//requestData 싱글톤객체 값 초기화
 		//서버에 통신
-		self.navigationController?.popToRootViewController(animated: true)
+		userProvider.rx.request(.homePromise(is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
+						self.navigationController?.popToRootViewController(animated: true)
+						print(data.data)
+						
+					}
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+		requestData.availableTimeList = []
+		requestData.title = ""
+		requestData.isPromiseNeeded = false
+		requestData.cartegory = 0
+		requestData.discription = ""
 	}
 	@objc func presetMessageSelected(sender : UIButton) {
 		clearSelection()
@@ -261,4 +286,8 @@ extension AdditionalRequestViewController : UITextFieldDelegate {
 	}
 	
 	
+}
+
+private struct IssueId : Codable{
+	let issue_id : Int
 }
