@@ -48,11 +48,13 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
 		$0.font = .systemFont(ofSize: 12, weight: .regular)
 	}
 	private let timeLabel = UILabel().then {
-		$0.text = "오후 12:00~14:00"
+		$0.text = "오후 12:00 ~ 14:00"
 		$0.textColor = .gray02
 		$0.font = .systemFont(ofSize: 12, weight: .regular)
 	}
 	private let shadowView = UIView()
+	
+	var calendar: FSCalendarModel?
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -126,4 +128,44 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
 			$0.centerY.equalTo(homeLabel)
 		}
 	}
+	func fetchCalendar() {
+		titleLabel.text = calendar?.title
+		promiseLabel.text = calendar?.solutionMethod
+	}
+	func fetchCategory() {
+		switch calendar?.category {
+		case 0:
+			categoryLabel.text = "고장 / 수리"
+		case 1:
+			categoryLabel.text = "계약"
+		case 2:
+			categoryLabel.text = "요금납부"
+		case 3:
+			categoryLabel.text = "소음"
+		case 4:
+			categoryLabel.text = "문의사항"
+		case 5:
+			categoryLabel.text = "그외"
+		case .none:
+			break
+		case .some(_):
+			break
+		}
+	}
+	func fetchTime() {
+		let times = calendar?.time.split(separator: "-")
+		guard let startTime = Int(times?[0] ?? "0") else {return}
+		guard let endTime = Int(times?[1] ?? "0") else {return}
+		if startTime > 12 && endTime > 12 {
+			timeLabel.text = "오후 \(startTime-12):00 ~ 오후 \(endTime-12):00"
+		} else if startTime > 12 && endTime <= 12 {
+			timeLabel.text = "오후 \(startTime-12):00 ~ 오전 \(endTime):00"
+		} else if startTime <= 12 && endTime > 12 {
+			timeLabel.text = "오전 \(startTime):00 ~ 오후 \(endTime-12):00"
+		} else {
+			timeLabel.text = "오전 \(startTime):00 ~ 오전 \(endTime):00"
+		}
+	}
+
+	
 }

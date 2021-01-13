@@ -131,6 +131,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 					let decoder = JSONDecoder()
 					let data = try decoder.decode(ResponseArrayType<[Detail]>.self,
 																				from: response.data)
+					
 					let result = data.data
 //					self.detailDataBind(result!)
 					print(result)
