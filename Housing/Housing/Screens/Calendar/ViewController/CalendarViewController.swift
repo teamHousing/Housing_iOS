@@ -28,7 +28,7 @@ final class CalendarViewController: BaseViewController {
 		let collectionView = UICollectionView(frame: .zero,
 																					collectionViewLayout: layout)
 		collectionView.scrollIndicatorInsets = .zero
-		collectionView.backgroundColor = .white
+		collectionView.backgroundColor = .primaryGray
 		collectionView.register(CalendarCollectionViewCell.self,
 														forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseIdentifier)
 		collectionView.register(NoticeCollectionViewCell.self,
@@ -91,18 +91,20 @@ final class CalendarViewController: BaseViewController {
 	
 	// MARK: - Variable
 	
-	var dic : [String : [ModelFSCalendar]] = [:]
-	
+	var dic: [String : [FSCalendarModel]] = [:]
+	var day: String?
+	let dateFormatter = DateFormatter()
+
 	// MARK: - Provider
 	
 	let calendarProvider = MoyaProvider<CalendarService>()
-	
 	
 	// MARK: - Life Cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		today()
 		layout()
 		communication()
 	}
@@ -115,6 +117,12 @@ final class CalendarViewController: BaseViewController {
 	
 	// MARK: - Helper
 	
+	private func today() {
+		let today = Date() //현재 시각 구하기
+		dateFormatter.dateFormat = "yyyy.M.d"
+		day = dateFormatter.string(from: today)
+	}
+	
 	private func layout() {
 		view.add(collectionView) {
 			$0.snp.makeConstraints {
@@ -126,18 +134,16 @@ final class CalendarViewController: BaseViewController {
 	}
 	
 	private func communication() {
-		print("count :", dic.count)
-		
 		calendarProvider.rx.request(.calendar(select_year: 2021, select_month: 1))
 			.asObservable()
 			.subscribe(onNext: { response in
 				//				let data = response.data
 				do{
 					let decoder = JSONDecoder()
-					let data = try decoder.decode(ResponseArrayType<[Calendar]>.self,
+					let data = try decoder.decode(ResponseType<CalendarData>.self,
 																				from: response.data)
-					let result = data.data
-					self.calendarDataBind(result!)
+					guard let result = data.data else { return }
+					self.calendarDataBind(result)
 				} catch {
 					print(error)
 				}
@@ -145,62 +151,37 @@ final class CalendarViewController: BaseViewController {
 			}, onError: { error in
 				print(error.localizedDescription)
 			}).disposed(by: disposeBag)
-		print("count :", dic.count)
-		
 	}
 	
-	private func calendarDataBind(_ data:[[Calendar]]) {
-		print(data)
-		for notice in data[0] {
-			guard let year = notice.noticeYear,
-						let month = notice.noticeMonth,
-						let day = notice.noticeDay,
-						let title = notice.noticeTitle,
-						let time = notice.noticeTime	else {
-				return
-			}
-			let when = "\(year).\(month).\(day)"
-			let model = ModelFSCalendar(id: notice.id,
-																	noticeTitle: title,
-																	noticeTime: time,
-																	userID: nil,
-																	category: nil,
-																	solutionMethod: nil,
-																	issueTitle: nil,
-																	issueContents: nil,
-																	promiseTime: nil)
+	private func calendarDataBind(_ data:CalendarData) {
+		for notice in data.notice {
+			let when = "\(notice.year).\(notice.month).\(notice.day)"
+			let model = FSCalendarModel(isNotice: notice.isNotice,
+																	id: notice.id,
+																	category: notice.category,
+																	solutionMethod: notice.solutionMethod,
+																	time: notice.time,
+																	title: notice.title,
+																	contents: notice.contents)
 			dic["\(when)"] = [model]
 		}
-		
-		for promise in data[1] {
-			guard let year = promise.promiseYear,
-						let month = promise.promiseMonth,
-						let day = promise.promiseDay,
-						let userID = promise.userID,
-						let category = promise.category,
-						let method = promise.solutionMethod,
-						let title = promise.issueTitle,
-						let content = promise.issueContents,
-						let time = promise.promiseTime else {
-				return
+		for promise in data.issue {
+			let when = "\(promise.year).\(promise.month).\(promise.day)"
+			let model = FSCalendarModel(isNotice: promise.isNotice,
+																	id: promise.id,
+																	category: promise.category,
+																	solutionMethod: promise.solutionMethod,
+																	time: promise.time,
+																	title: promise.title,
+																	contents: promise.contents)
+			if dic[when]?.count == 0 {
+				dic["\(when)"] = [model]
+			} else {
+				dic[when]?.append(model)
 			}
-			let when = "\(year).\(month).\(day)"
-			let model = ModelFSCalendar(id: promise.id,
-																	noticeTitle: nil,
-																	noticeTime: nil,
-																	userID: userID,
-																	category: category,
-																	solutionMethod: method,
-																	issueTitle: title,
-																	issueContents: content,
-																	promiseTime: time)
-			dic[when]?.append(model)
-			
+			collectionView.reloadData()
 		}
-		print("dic :", dic)
-		print("count :", dic.count)
-
-		print("dic :",dic)
+		
 	}
 }
 
@@ -303,11 +284,16 @@ extension CalendarViewController: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView,
 											numberOfItemsInSection section: Int) -> Int {
-		return 5
+		if dic[(day ?? "")]?.count == nil {
+			return 1
+		} else {
+			return dic[(day ?? "")]?.count ?? 0
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView,
 											cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		print(day ?? "", dic[day ?? ""] ?? [:], "\(indexPath.row)번째 일정")
 		if indexPath.row%2 == 0 {
 			let cell: CalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 			return cell
@@ -333,7 +319,15 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - CalendarDelegate
 
-extension CalendarViewController: FSCalendarDelegate { }
+extension CalendarViewController: FSCalendarDelegate {
+	func calendar(_ calendar: FSCalendar,
+								didSelect date: Date,
+								at monthPosition: FSCalendarMonthPosition) {
+		day = dateFormatter.string(from: date)
+		print(day)
+		collectionView.reloadData()
+	}
+}
 
 extension CalendarViewController: FSCalendarDataSource { }
 
