@@ -30,6 +30,7 @@ class AddNoticeViewController: BaseViewController{
 		$0.borderStyle = .none
 		$0.placeholder("제목을 작성해주세요")
 		$0.textColor = .black
+		$0.tintColor = .primaryOrange
 	}
 	private let underBar = UIView().then {
 		$0.backgroundColor = .gray01
@@ -41,6 +42,7 @@ class AddNoticeViewController: BaseViewController{
 		$0.text = "내용을 작성해주세요"
 		$0.backgroundColor = .white
 		$0.textColor = .gray01
+		$0.tintColor = .primaryOrange
 		$0.textContainerInset = UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
 	}
 	private let smallball = UIView().then {
@@ -310,27 +312,32 @@ class AddNoticeViewController: BaseViewController{
 		self.view.endEditing(true)
 	}
 	@objc func callDatePickerView(recognizer : UITapGestureRecognizer) {
+		
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 0
-		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
-		self.present(pickerView, animated: false, completion: nil)
+		DispatchQueue.main.asyncAfter(deadline: .now(), execute:{
+			pickerView.grayImage.image = self.view.window?.asImage()
+			self.present(pickerView, animated: false, completion: nil)
+		})
 	}
 	@objc func callStartTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
-		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
 		
 		pickerView.pickerMode = 1
-		self.present(pickerView, animated: false, completion: nil)
-	}
+		DispatchQueue.main.asyncAfter(deadline: .now(), execute:{
+			pickerView.grayImage.image = self.view.window?.asImage()
+			self.present(pickerView, animated: false, completion: nil)
+		})	}
 	@objc func callEndTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 2
-		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
-		self.present(pickerView, animated: false, completion: nil)
-	}
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute:{
+			pickerView.grayImage.image = self.view.window?.asImage()
+			self.present(pickerView, animated: false, completion: nil)
+		})	}
 	// MARK: - Life Cycle
 	
 	override func viewDidLoad() {

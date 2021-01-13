@@ -15,7 +15,7 @@ class RequestDataModel {
 	static let shared = RequestDataModel()
 	var isPromiseNeeded: Bool = true
 	var images: [UIImage]? = []
-	var cartegory: RequestCartegory = .repair
+	var cartegory: Int = 0
 	var title: String = ""
 	var discription: String = ""
 	var editionalRequest: String = ""
@@ -25,14 +25,6 @@ class RequestDataModel {
 	var endTime:  BehaviorSubject<String> = BehaviorSubject(value: "")
 	var availableTimeList : [VisitDate] = []
 	private init() {}
-}
-enum RequestCartegory {
-	case repair
-	case contract
-	case rent
-	case noise
-	case question
-	case etc
 }
 struct VisitDate {
 	var day: String = ""

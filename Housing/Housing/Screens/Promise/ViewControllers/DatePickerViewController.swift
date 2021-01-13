@@ -97,6 +97,8 @@ class DatePickerViewController: UIViewController {
 			}
 			else {
 				datePicker.datePickerMode = .time
+//				datePicker.locale = Locale(identifier: "en_GB")
+				datePicker.minuteInterval = 1
 			}
 			dimmerView.alpha = 0.0
 		}

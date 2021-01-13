@@ -228,10 +228,8 @@ class PromiseViewController: UIViewController {
 	// MARK: - Helper
 
 	@objc func nextButtonDidTapped() {
-		print("싱글톤데이터")
-		print(requestData)
 		let cameraView = CameraWorkViewController()
-		self.navigationController?.pushViewController(cameraView, animated: true)
+		navigationController?.pushViewController(cameraView, animated: true)
 	}
 	
 	@objc func problemTypeSelection(sender : UIButton) {
@@ -241,19 +239,19 @@ class PromiseViewController: UIViewController {
 		sender.setBorder(borderColor: .primaryOrange, borderWidth: 1)
 		switch sender.tag {
 		case 1:
-			requestData.cartegory = .repair
+			requestData.cartegory = 0
 		case 2:
-			requestData.cartegory = .contract
+			requestData.cartegory = 1
 		case 3:
-			requestData.cartegory = .rent
+			requestData.cartegory = 2
 		case 4:
-			requestData.cartegory = .noise
+			requestData.cartegory = 3
 		case 5:
-			requestData.cartegory = .question
+			requestData.cartegory = 4
 		case 6:
-			requestData.cartegory = .etc
+			requestData.cartegory = 5
 		default:
-			requestData.cartegory = .etc
+			requestData.cartegory = 6
 		}
 		//		self.requestData.cartegory = sender.titleLabel.text
 	}
@@ -296,7 +294,11 @@ class PromiseViewController: UIViewController {
 	}
 	func dataPreset(){
 		requestData.isPromiseNeeded = true
-		requestData.cartegory = .repair
+		requestData.cartegory = 0
+	}
+	private func initLayout() {
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		self.navigationController?.navigationBar.shadowImage = UIImage()
 	}
 	private func layout() {
 		dataPreset()
@@ -515,6 +517,7 @@ class PromiseViewController: UIViewController {
 		//		view.backgroundColor = .cyan
 		dataPreset()
 		layout()
+		initLayout()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.contentView.addGestureRecognizer(tap)
 	}
