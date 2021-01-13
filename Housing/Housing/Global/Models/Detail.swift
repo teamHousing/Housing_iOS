@@ -66,6 +66,8 @@ struct DetailStatus: Codable {
 		case ownerStatus = "owner_status"
 		case id
 	}
+	
+	
 }
 
 struct DetailModel: Codable {

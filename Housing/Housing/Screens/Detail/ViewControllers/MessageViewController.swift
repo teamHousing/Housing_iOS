@@ -46,14 +46,10 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell: MessageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
-		cell.awakeFromNib()
+		cell.status = self.statusModel[0].ownerStatus!
+		cell.confirmedPromiseOption = "\(self.model.confirmedPromiseOption![0]) / \(self.model.confirmedPromiseOption![1]) / \(self.model.confirmedPromiseOption![2]) "
 		cell.rootViewController = self
-//		let cell2: MessageDetailTableViewCell = cell.messageTableView.dequeueCell(forIndexPath: indexPath)
-//		cell2.awakeFromNib()
-//		cell2.rootViewController = self
-//		cell2.transitionButton.addTarget(self, action: #selector(self.touchUpConfirm), for: .touchUpInside)
-//		cell.selectionStyle = .none
-//		print(#function)
+		cell.awakeFromNib()
 		return cell
 	}
 	

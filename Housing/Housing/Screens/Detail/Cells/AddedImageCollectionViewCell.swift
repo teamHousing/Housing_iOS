@@ -21,8 +21,7 @@ class AddedImageCollectionViewCell: UICollectionViewCell {
 	func layout() {
 		contentView.backgroundColor = .white
 		self.contentView.add(addedImageView) {
-			$0.setBorder(borderColor: .red, borderWidth: 1)
-			$0.layer.cornerRadius = 15
+			$0.layer.cornerRadius = 16
 			$0.snp.makeConstraints {
 				$0.edges.equalTo(self.contentView)
 			}

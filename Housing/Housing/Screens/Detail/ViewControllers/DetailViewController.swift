@@ -14,16 +14,18 @@ import RxMoya
 import Moya
 import RxCocoa
 import RxSwift
+import SwiftyJSON
 
 class DetailViewController: SegementSlideDefaultViewController {
 	
-	var category: String = "고장/수리"
-	var status: String = "확인 전"
-	var viewTitle: String = "수도꼭지가 고장났어요ㅠ 집이 물바다"
-	var context: String = "저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n\n저희 집 화장실 세면대에 수도꼭지가 고장나서 물이 계속 새고 있는데 이러다 수도세가 너무 많이 나올 것 같아요ㅠ \n\n글 확인하시면 최대한 빠르게 수리 부탁드립니다..!!\n"
+	var category: String = ""
+	var status: String = ""
+	var viewTitle: String = ""
+	var context: String = ""
 	var requestId: Int = 1
-	var model = DetailModel(id: 0, issueImages: [], promiseOption: [[]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
+	var model = DetailModel(id: 0, issueImages: [], promiseOption: [["1","1","1"]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
 	var statusModel: [DetailStatus] = []
+	var optionModel: [CommunicationMethod] = []
 	
 	let detailHeaderView = UIView().then{
 		$0.isUserInteractionEnabled = true
@@ -156,13 +158,23 @@ class DetailViewController: SegementSlideDefaultViewController {
 			.asObservable()
 			.subscribe(onNext: { response in
 				do{
+					let json = JSON(response.data)
 					let decoder = JSONDecoder()
 					let data = try decoder.decode(ResponseType<Detail>.self,
 																				from: response.data)
 					let result = data.data
-					
+					self.statusModel.append(DetailStatus(ownerStatus: json["data"]["Replies"][0]["owner_status"].arrayValue.map{$0.intValue}, id: json["data"]["Replies"][0]["id"].intValue))
 //					print(result)
+					print(self.statusModel)
 					self.detailDataBind(result!)
+					
+					let viewController = ContentViewController()
+					viewController.model = self.model
+					let statusViewController = MessageViewController()
+					statusViewController.model = self.model
+					statusViewController.statusModel = self.statusModel
+					viewController.tableView.reloadData()
+					statusViewController.tableView.reloadData()
 					
 				} catch {
 					print(error)
@@ -176,10 +188,6 @@ class DetailViewController: SegementSlideDefaultViewController {
 					$0.height.equalTo(130+self.contextHeight()*22)
 				}
 				self.detailHeaderView.reloadInputViews()
-				let viewController = ContentViewController()
-				viewController.model = self.model
-				print(viewController.model.requestedTerm)
-				viewController.statusModel = self.statusModel
 			}).disposed(by: disposeBag)
 	}
 	
@@ -204,8 +212,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		}
 		let model = DetailModel(id: id, issueImages: issueImages, promiseOption: promiseOption, category: category, issueTitle: issueTitle, issueContents: issueContents, progress: progress, requestedTerm: requestedTerm, promiseYear: promiseYear, promiseMonth: promiseMonth, promiseDay: promiseDay, promiseTime: promiseTime, solutionMethod: solutionMethod, confirmedPromiseOption: confirmedPromiseOption)
 		self.model = model
-		self.statusModel.append(DetailStatus(ownerStatus: replies[0].ownerStatus, id: replies[0].id))
-//		print(self.statusModel)
+		self.reloadData()
 	}
 	
 	
@@ -235,14 +242,15 @@ class DetailViewController: SegementSlideDefaultViewController {
 		return config
 	}
 	
+	
 	override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-		loader()
 		let viewController = ContentViewController()
 		let messageViewController = MessageViewController()
 		if(contentView.selectedIndex == 0 ) {
 			messageViewController.model = self.model
 			messageViewController.statusModel = self.statusModel
 			return messageViewController
+			
 		}
 		else {
 			viewController.model = self.model
@@ -260,6 +268,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		loader()
 		defaultSelectedIndex = 0
 		layout()
 		setSafeArea()

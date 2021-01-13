@@ -10,7 +10,7 @@ import UIKit
 class MessageTableViewCell: UITableViewCell {
 	
 	var status: [Int] = [0,1,2,3]
-	
+	var confirmedPromiseOption = ""
 	var card: [MessageCard] = [MessageCard(title: "다시 한번 약속해주세요.", context: "작성하신 일정 중 가능한 일자가 없어요. 😂\n일자와 시간대를 수정 혹은 추가해주세요!", buttonTitle: "약속 수정하기"),
 														 MessageCard(title: "다시 한번 약속해주세요.", context: "작성하신 일정 중 가능한 일자가 없어요. 😂\n일자와 시간대를 수정 혹은 추가해주세요!", buttonTitle: "약속 수정하기"),
 														 MessageCard(title: "다시 한번 약속해주세요.", context: "작성하신 일정 중 가능한 일자가 없어요. 😂\n일자와 시간대를 수정 혹은 추가해주세요!", buttonTitle: "약속 수정하기"),
@@ -83,20 +83,54 @@ class MessageTableViewCell: UITableViewCell {
 }
 extension MessageTableViewCell: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if self.status[indexPath.row] == 0 || self.status[indexPath.row] == 1 || self.status[indexPath.row] == 3 {
 		return 215
+	}
+		else {
+			return 165
+			
+		}
 	}
 }
 
 extension MessageTableViewCell: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
 		let cell: MessageDetailTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
-		cell.awakeFromNib()
-		cell.titleLabel.text = self.card[indexPath.row].title
-		cell.contextLabel.attributedText = self.makeAttributed(context: self.card[indexPath.row].context)
-		cell.transitionButton.setTitle(self.card[indexPath.row].buttonTitle, for: .normal)
+		if self.status[indexPath.row] == 0 {
+			cell.titleLabel.text = "문의사항이 등록되었어요!"
+			cell.contextLabel.attributedText = self.makeAttributed(context: "아래의 버튼을 눌러\n약속시간을 정해보세요.")
+			cell.transitionButton.setTitle("약속 확정하기", for: .normal)
+		}
+		else if self.status[indexPath.row] == 1 {
+			cell.titleLabel.text = "약속이 확정되었어요!"
+			var confirmedPromise = "\(self.confirmedPromiseOption)예정이에요\n 캘린더에서 일정을 확인해보세요."
+			cell.contextLabel.attributedText = self.makeAttributed(context: confirmedPromise)
+			
+			
+			cell.transitionButton.setTitle("캘린더 보기", for: .normal)
+		}
+		else if self.status[indexPath.row] == 2 {
+			cell.titleLabel.text = "약속 수정 요청을 보냈어요!"
+			cell.contextLabel.attributedText = self.makeAttributed(context: "앞으로도 하우징과 함께\n자취생과 소통해보세요!")
+			cell.transitionButton.snp.makeConstraints {
+				$0.height.equalTo(0)
+			}
+		}
+		else if self.status[indexPath.row] == 3 {
+			cell.titleLabel.text = "약속을 확정해주세요!"
+			cell.contextLabel.attributedText = self.makeAttributed(context: "약속이 수정되었습니다.\n확인 후 약속을 확정해 주세요.")
+			cell.transitionButton.setTitle("약속 확정하기", for: .normal)
+		}
+		else {
+			cell.titleLabel.text = "문의사항이 해결되었어요!"
+			cell.contextLabel.attributedText = self.makeAttributed(context: "앞으로도 하우징과 함께\n자취생과 소통해보세요!")
+			cell.transitionButton.snp.makeConstraints {
+				$0.height.equalTo(0)
+			}
+		}
+		
 		cell.selectionStyle = .none
-		cell.rootViewController = rootViewController
+		
 		if indexPath.row == self.status.count-1 {
 			cell.connectLineView.isHidden = true
 			if(cell.transitionButton.isHidden == false) {
@@ -104,6 +138,7 @@ extension MessageTableViewCell: UITableViewDataSource {
 				cell.transitionButton.isUserInteractionEnabled = true
 			}
 		}
+		cell.awakeFromNib()
 		return cell
 	}
 	
