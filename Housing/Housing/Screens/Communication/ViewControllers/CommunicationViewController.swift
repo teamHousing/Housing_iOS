@@ -26,7 +26,6 @@ struct DetailData {
 final class CommunicationViewController: BaseViewController {
 	
 	//MARK: - Component
-	
 	@IBOutlet var communicationTableView: UITableView!
 	@IBOutlet var headerView: UIView!
 	lazy var shareButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
@@ -37,22 +36,17 @@ final class CommunicationViewController: BaseViewController {
 	//MARK: - Property
 	var incompleteLength = 7
 	var completeLength = 1
-	var mode = 0// 집주인이 0, 자취생이 1
+	var mode = 1// 집주인이 0, 자취생이 1
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData: [DetailData] = []
-		//DetailData(id: 0, issueTitle: "incom",issueContents: "incom", progress: 0, category: 0)
-	
 	private var comDetailCellData: [DetailData] = []
-		//DetailData(id: 0, issueTitle: "com",issueContents: "com", progress: 0, category: 1)
+	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	
-	// MARK : - LifeCycle
+	//MARK: - LifeCycle
 	override func viewDidLoad() {
-		networkForCommunication()
-		
-		
 		super.viewDidLoad()
+		networkForCommunication()
 		configHeaderView()
-		
 		layoutNavigationBar()
 		configTableView()
 	}
@@ -63,16 +57,6 @@ final class CommunicationViewController: BaseViewController {
 										 cellData(opened: true,
 															sectionData: comDetailCellData)] /// complete
 	}
-	
-	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-	
-	enum cases { // case문으로 하면 좋을텐데
-		case incom0com0
-		case incom0com1
-		case incom1com0
-		case incom1com1
-	}
-	
 	
 	private func configTableView() {
 		communicationTableView.dataSource = self
@@ -109,14 +93,10 @@ final class CommunicationViewController: BaseViewController {
 						guard let result = data.data else {return}
 						self.completeLength = result.completeLength
 						self.incompleteLength = result.incompleteLength
-
-						
-				
 						
 						var listdata: [DetailData] = []
 						for index in 0..<result.incompleteList.count {
 							listdata.append(DetailData(id: result.incompleteList[index].id, issueTitle: result.incompleteList[index].issueTitle, issueContents: result.incompleteList[index].issueContents, progress: result.incompleteList[index].progress, category: result.incompleteList[index].category))
-
 						}
 						self.incomDetailCellData=listdata
 						
@@ -124,7 +104,7 @@ final class CommunicationViewController: BaseViewController {
 						for index in 0..<result.completeList.count {
 							listdata2.append(DetailData(id: result.completeList[index].id, issueTitle: result.completeList[index].issueTitle, issueContents: result.completeList[index].issueContents, progress: result.completeList[index].progress, category: result.completeList[index].category))
 						}
-						self.comDetailCellData=listdata2
+						self.comDetailCellData = listdata2
 						self.reloadInputViews()
 
 						self.dataSetup()
@@ -139,12 +119,8 @@ final class CommunicationViewController: BaseViewController {
 				print(error)
 			}, onCompleted: {
 				self.communicationTableView.reloadData()
-				
 			}).disposed(by: disposeBag)
-		
 	}
-
-	
 
 	//	@objc func handleExpandClose() {
 	//		print("trying") //여기서 막 열리고 닫히고 관련한 action을 넣으면 됨.
@@ -169,6 +145,7 @@ final class CommunicationViewController: BaseViewController {
 	//			communicationTableView.insertRows(at: indexPaths, with: .fade)
 	//		}
 	//	}
+	
 	@objc
 	private func settingButtonDidTap() {
 		print(#function)
@@ -263,9 +240,7 @@ extension CommunicationViewController: UITableViewDataSource{
 	
 	func tableView(_ tableView: UITableView,
 								 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
 		///title부분에 쓸 cell
-		
 		guard let incomCell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTableViewCell")
 						as? IncompleteTableViewCell
 		else { return UITableViewCell() }
@@ -388,6 +363,8 @@ extension CommunicationViewController: UIScrollViewDelegate{
 		
 		if scrollView.contentOffset.y < -1 {
 			communicationTableView.backgroundColor = .white
+			communicationTableView.reloadData()
+			print("scroll시 reload")
 		} else if scrollView.contentOffset.y >= -1 {
 			communicationTableView.backgroundColor = .primaryGray }
 	}
