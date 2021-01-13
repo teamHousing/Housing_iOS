@@ -49,6 +49,7 @@ final class CommunicationViewController: BaseViewController {
 		configHeaderView()
 		layoutNavigationBar()
 		configTableView()
+		pullToRefresh(tableview: communicationTableView)
 	}
 	
 	func dataSetup() {

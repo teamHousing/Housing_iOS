@@ -103,5 +103,23 @@ extension UIViewController {
 		navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 		navigationBar.shadowImage = UIImage()
 	}
-	
+	func pullToRefresh(collectionview : UICollectionView) {
+		let refreshControl = UIRefreshControl()
+		collectionview.refreshControl = refreshControl
+		refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+	}
+	func pullToRefresh(tableview : UITableView) {
+		let refreshControl = UIRefreshControl()
+		tableview.refreshControl = refreshControl
+		refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+	}
+	func pullToRefresh(scrollview : UIScrollView) {
+		let refreshControl = UIRefreshControl()
+		scrollview.refreshControl = refreshControl
+		refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+	}
+	@objc private func refresh(_ sender : UIRefreshControl) {
+		self.viewDidLoad()
+		sender.endRefreshing()
+	}
 }
