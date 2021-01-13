@@ -80,13 +80,11 @@ extension NoticeService: TargetType {
 														 notice_title: let notice_title,
 														 notice_contents: let notice_contents,
 														 notice_option: let notice_option):
+			let dict = notice_option.map{["date" : $0.date, "day" : $0.day , "time" : $0.time]}
+
 			return .requestCompositeParameters(bodyParameters: ["notice_title": notice_title,
 																													"notice_contents": notice_contents,
-																													"notice_option": [[
-																														"date " : notice_option.first?.date,
-																														"day" :  notice_option.first?.day,
-																														"time" :  notice_option.first?.time
-																										]]],
+																													"notice_option": dict],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["house_info_id": house_info_id])
 		case .profileAuthorization(building: let building, unit: let unit):

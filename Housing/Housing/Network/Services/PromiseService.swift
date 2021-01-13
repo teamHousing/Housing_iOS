@@ -17,7 +17,7 @@ enum PromiseService {
 									 issue_contents: String,
 									 requested_term: String)
 	case homePromiseTimeList(id: Int)
-	case homePromiseConfirm(id: Int)
+	case homePromiseConfirm(id: Int, promise_option: [CommunicationMethod])
 	case homePromiseHostModify(id: Int)
 	case homePromiseGuestModify(id: Int, promise_option: [String])
 	case homePromiseComplete(id: Int)
@@ -82,13 +82,17 @@ extension PromiseService: TargetType {
 			return .requestCompositeParameters(bodyParameters: .init(),
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
-		case .homePromiseConfirm(id: let id):
-			return .requestPlain
-		case .homePromiseHostModify(id: let id):
-			return .requestCompositeParameters(bodyParameters: .init(),
+		case .homePromiseConfirm(id: let id, promise_option: let promise_option):
+			let dict = promise_option.map{["data" : $0.date, "time" : $0.time , "method" : $0.method]}
+
+			return .requestCompositeParameters(bodyParameters: ["promise_option": dict],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
+		case .homePromiseHostModify(id: let id):
+			return .requestPlain
+			
 		case .homePromiseGuestModify(id: let id, promise_option: let promise_option):
+			
 			return .requestCompositeParameters(bodyParameters: ["promise_option": promise_option],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])

@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct CommunicationMethod {
+struct CommunicationMethod : Codable {
 	var date: String
 	var time: String
 	var method: String
-	
+	private enum CodingKeys : String, CodingKey {
+		case date = "date"
+		case time = "time"
+		case method = "method"
+	}
 	init(date: String, time: String, method: String){
 		self.date = date
 		self.time = time
