@@ -36,6 +36,7 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 		tableView.separatorStyle = .none
 		tableView.showsVerticalScrollIndicator = false
 		tableView.backgroundColor = .primaryGray
+		pullToRefresh(scrollview: scrollView)
 	}
 	
 	// MARK: - Table view data source
