@@ -11,6 +11,7 @@ class NoticeHeaderCollectionViewCell: UICollectionViewCell {
 	
 	var id: Int?
 	var info: HouseInfo?
+    
 	@IBOutlet weak var headerBackgroundView: UIView!
 	@IBOutlet weak var profileMessageView: UIView!
 	@IBOutlet weak var hopeTimeLabel: UILabel!
@@ -18,10 +19,12 @@ class NoticeHeaderCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var profileMessageLabel: UILabel!
 	@IBOutlet weak var profileImage: UIImageView!
 	@IBOutlet weak var ownerNameLabel: UILabel!
-	
+    @IBOutlet weak var noticeLabel: UILabel!
+    
 	func headerlayout() {
 		self.headerBackgroundView.layer.applyShadow()
         profileImage.layer.cornerRadius = profileImage.frame.height / 2
+        
 	}
 	
 	func houseInfo() {

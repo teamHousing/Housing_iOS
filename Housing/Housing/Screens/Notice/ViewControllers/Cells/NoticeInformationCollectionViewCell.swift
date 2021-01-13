@@ -13,10 +13,11 @@ class NoticeInformationCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var contextLabel: UILabel!
 	
 	var noticeInfo: Notice?
+	var id: Int?
 	
 	func fetchData() {
-        titleLabel.text = noticeInfo?.noticeTitle
+		titleLabel.text = noticeInfo?.noticeTitle
 		contextLabel.text = noticeInfo?.noticeContents
-		contextLabel.numberOfLines = 0
+		self.id = noticeInfo?.id
 	}
 }

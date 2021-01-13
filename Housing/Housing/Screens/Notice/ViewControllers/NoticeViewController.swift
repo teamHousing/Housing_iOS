@@ -27,6 +27,7 @@ final class NoticeViewController: BaseViewController {
 		super.viewDidLoad()
 		initLayout()
 		ownerProfile()
+//		notice()
 		
 		noticeCollectionView.delegate = self
 		noticeCollectionView.dataSource = self
@@ -44,6 +45,7 @@ final class NoticeViewController: BaseViewController {
 						return
 					}
 					self.houseData = result.houseInfo
+					self.noticeData = result.notice
 					self.noticeCollectionView.reloadData()
 				} catch {
 					print(error)
@@ -57,8 +59,6 @@ final class NoticeViewController: BaseViewController {
 			
 		}).disposed(by: disposeBag)
 	}
-	
-	
 	
 	private func initLayout() {
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -107,7 +107,6 @@ extension NoticeViewController: UICollectionViewDataSource {
 		else {
 			return UICollectionViewCell()
 		}
-		
 		cell.noticeInfo = noticeData[indexPath.row]
 		cell.fetchData()
 		
@@ -159,6 +158,7 @@ extension NoticeViewController: UICollectionViewDelegate {
 				headerView.info = houseData
 				headerView.houseInfo()
 				headerView.headerlayout()
+                headerView.noticeLabel.text = "( \(String(noticeData.count)) )"
 				
 				return headerView
 			}
@@ -182,8 +182,6 @@ extension NoticeViewController: UICollectionViewDelegate {
 						withIdentifier: "DetailNoticeViewController") as? DetailNoticeViewController else {
 			return
 		}
-		
-		
 		viewController.id = noticeData[indexPath.row].id
 		
 		navigationController?.pushViewController(viewController, animated: true)
