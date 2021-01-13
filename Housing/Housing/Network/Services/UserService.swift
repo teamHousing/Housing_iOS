@@ -13,7 +13,8 @@ import SwiftKeychainWrapper
 enum UserService {
 	case signin(email: String, password: String)
 	case validation
-	case hostSignup
+	case hostSignup(userName: String, age: Int, email: String,
+									password: String, address: String, building: String)
 	case guestSignup
 }
 
@@ -61,8 +62,12 @@ extension UserService: TargetType {
 			return .requestCompositeParameters(bodyParameters: ["email": email, "password": password],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: .init())
-		case .hostSignup:
-			return .requestPlain
+		case .hostSignup(userName: let userName, age: let age, email: let email,
+										 password: let password, address: let address, building: let building):
+			return .requestCompositeParameters(bodyParameters: ["user_name": userName, "age": age,
+																													"email": email, "password": password,
+																													"address": address, "building": building],
+																				 bodyEncoding: JSONEncoding.default, urlParameters: .init())
 		case .guestSignup:
 			return .requestPlain
 		case .validation:

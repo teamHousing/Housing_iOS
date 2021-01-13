@@ -17,7 +17,6 @@ final class SignupViewController: UIViewController {
 	
 	// MARK: - Property
 	
-	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -121,6 +120,8 @@ final class SignupViewController: UIViewController {
 			
 			nextButton.layer.backgroundColor = UIColor.primaryBlack.cgColor
 			nextButton.isEnabled = false
+			
+			
 		}
 		else {
 			tenantButton.isSelected = false

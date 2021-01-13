@@ -12,8 +12,9 @@ import RxSwift
 import RxKeyboard
 
 class InfoViewController: BaseViewController {
+	//MARK:- Property
 	
-	var lessorOrTenant: Int?
+	
 	private let scrollView = UIScrollView()
 	private let containerView = UIView()
 	private let guideLabel = UILabel().then {
@@ -222,20 +223,26 @@ class InfoViewController: BaseViewController {
 		
 		nameTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.ageTextField.becomeFirstResponder()
+			//
 		}).disposed(by: disposeBag)
 		ageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.idTextField.becomeFirstResponder()
+			//
 		}).disposed(by: disposeBag)
 		idTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.passwordTextField.becomeFirstResponder()
+			//
 		}).disposed(by: disposeBag)
 		passwordTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.certificationTextField.becomeFirstResponder()
+			//
 		}).disposed(by: disposeBag)
 		certificationTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.scrollView.setContentOffset(CGPoint(x: 0,
 																							 y: 100),
 																			 animated: true)
+			//
+			
 		}).disposed(by: disposeBag)
 		ageTextField.rx.controlEvent(.editingDidBegin).subscribe(onNext: { next in
 			self.scrollView.setContentOffset(CGPoint(x: 0,
@@ -309,9 +316,22 @@ class InfoViewController: BaseViewController {
 	
 	@objc
 	private func nextButtonDidTap() {
+		guard let name = nameTextField.text,
+					let age = ageTextField.text,
+					let email = idTextField.text,
+					let password = passwordTextField.text
+					else {
+			return
+		}
+		
 		let storyboard = UIStoryboard(name: StoryboardStorage.signup,
 																	bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AddressViewController")
+		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AddressViewController") as! AddressViewController
+		viewcontroller.loginData = Host(userName: name,
+																		age: Int(age) ?? 0,
+																		email: email,
+																		password: password,
+																		address: nil, building: nil)
 		navigationController?.pushViewController(viewcontroller, animated: false)
 	}
 }

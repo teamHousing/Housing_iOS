@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class AddressViewController: UIViewController {
+import Moya
+import RxMoya
+import SwiftKeychainWrapper
+
+final class AddressViewController: BaseViewController {
 	
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var toNextButton: UIButton!
@@ -15,12 +19,14 @@ final class AddressViewController: UIViewController {
 	@IBOutlet weak var buildingTextField: UITextField!
 	
 	//MARK: - Property
-	
+	var loginData = Host(userName: nil, age: nil, email: nil,
+											 password: nil, address: nil, building: nil)
+	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	//MARK:- Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initLayout()
-		
+		print(loginData)
 		addressTextField.addTarget(self,
 															 action: #selector(addressTextFieldChanged(_:)),
 															 for: .editingChanged)
@@ -34,11 +40,13 @@ final class AddressViewController: UIViewController {
 	private func addressTextFieldChanged(_ textField: UITextField) {
 		if addressTextField.text?.count == 0 || buildingTextField.text?.count == 0 {
 			toNextButton.backgroundColor = UIColor(red: 219 / 255,
-																					 green: 219 / 255,
-																					 blue: 219 / 255,
-																					 alpha: 1)
+																						 green: 219 / 255,
+																						 blue: 219 / 255,
+																						 alpha: 1)
 			toNextButton.layer.cornerRadius = 0.5 * toNextButton.bounds.size.height
 			toNextButton.isEnabled = false
+			
+			
 		} else {
 			toNextButton.backgroundColor = .primaryBlack
 			toNextButton.layer.cornerRadius = 0.5 * toNextButton.bounds.size.height
@@ -51,9 +59,9 @@ final class AddressViewController: UIViewController {
 		buildingTextField.tintColor = UIColor.primaryOrange
 		
 		toNextButton.backgroundColor = UIColor(red: 219 / 255,
-																				 green: 219 / 255,
-																				 blue: 219 / 255,
-																				 alpha: 1)
+																					 green: 219 / 255,
+																					 blue: 219 / 255,
+																					 alpha: 1)
 		toNextButton.layer.cornerRadius = 0.5 * toNextButton.bounds.size.height
 		toNextButton.isEnabled = false
 	}
@@ -69,9 +77,61 @@ final class AddressViewController: UIViewController {
 	}
 	
 	@IBAction func toNextButton(_ sender: Any) {
-		let viewController = storyboard?.instantiateViewController(
-			withIdentifier: "SignupCompleteViewController") as! SignupCompleteViewController
+		guard let address = addressTextField.text,
+					let building = buildingTextField.text
+		else {
+			return
+		}
+		userProvider.rx.request(.hostSignup(userName: loginData.userName ?? "",
+																				age: loginData.age ?? 0,
+																				email: loginData.email ?? "",
+																				password: loginData.password ?? "",
+																				address: address,
+																				building: building))
+			.asObservable()
+			.subscribe( onNext: { response in
+				if response.statusCode == 200 {
+
+					guard let token = (response.response?.allHeaderFields["Set-Cookie"] ?? "") as? String else {
+						return
+					}
+					var cookies: [String]? = []
+					
+					cookies = token.components(separatedBy: ";")
+					cookies = cookies?[0].components(separatedBy: "=")
+					
+					guard let cookie = cookies?[1] else {
+						return
+					}
+					do{
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<User>.self,
+																					from: response.data)
+						guard let result = data.data?.type else {
+							return
+						}
+						KeychainWrapper.standard.set(result,
+																				 forKey: KeychainStorage.isHost)
+						KeychainWrapper.standard.set(cookie,
+																				 forKey: KeychainStorage.accessToken)
+						
+						let viewcontroller = self.storyboard?.instantiateViewController(
+							withIdentifier: "SignupCompleteViewController") as! SignupCompleteViewController
+						self.navigationController?.pushViewController(viewcontroller, animated: true)
+					} catch {
+						print(error)
+					}
+				}
+				print(response)
+			}, onError: { error in
+				print(error)
+			}).disposed(by: disposeBag)
 		
-		navigationController?.pushViewController(viewController, animated: true)
+		
 	}
+}
+
+//MARK:- Object Extension
+private struct User: Codable {
+	let id, type: Int
 }
