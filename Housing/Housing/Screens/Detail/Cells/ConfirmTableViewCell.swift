@@ -9,13 +9,12 @@ import UIKit
 
 class ConfirmTableViewCell: UITableViewCell {
 	
-	var buttonState = false
-	
+	// MARK: - Property
 	let containerView = UIView().then {
 		$0.backgroundColor = .primaryGray
 		$0.layer.cornerRadius = 12
 	}
-	let dateLabel = UILabel().then{
+	let dateLabel = UILabel().then {
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
 		$0.textAlignment = .center
@@ -30,7 +29,6 @@ class ConfirmTableViewCell: UITableViewCell {
 		$0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
 		$0.textAlignment = .center
 	}
-	
 	let circleView = UIButton().then() {
 		$0.isUserInteractionEnabled = true
 	}
@@ -41,14 +39,16 @@ class ConfirmTableViewCell: UITableViewCell {
 		$0.backgroundColor = .gray01
 	}
 	
+	var buttonState = false
+	
+	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
 		return 57
 	}
 	
-	
-	func layout() {
+	private func layout() {
 		self.contentView.add(containerView) {
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.top.equalTo(self.contentView.snp.top).offset(6)
 				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-6)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(53)
@@ -63,7 +63,7 @@ class ConfirmTableViewCell: UITableViewCell {
 				$0.setBackgroundImage(UIImage(named: "group578"), for: .normal)
 				
 			}
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.width.height.equalTo(13)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(20)
 				$0.centerY.equalTo(self.containerView.snp.centerY)
@@ -104,15 +104,10 @@ class ConfirmTableViewCell: UITableViewCell {
 			}
 		}
 	}
+	
+	// MARK: - Lifecycle
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		layout()
-		// Initialization code
 	}
-	
-	override func setSelected(_ selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: animated)
-		// Configure the view for the selected state
-	}
-
 }

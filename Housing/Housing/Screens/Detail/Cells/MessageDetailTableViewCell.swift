@@ -9,12 +9,13 @@ import UIKit
 
 class MessageDetailTableViewCell: UITableViewCell {
 	
+	// MARK: - Property
 	let containerView = UIView().then {
 		$0.backgroundColor = .primaryWhite
 		$0.layer.cornerRadius = 16
 		$0.layer.applyCardShadow()
 	}
-	let titleLabel = UILabel().then{
+	let titleLabel = UILabel().then {
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 17, weight: .bold)
 		$0.textAlignment = .center
@@ -42,13 +43,16 @@ class MessageDetailTableViewCell: UITableViewCell {
 		$0.backgroundColor = .gray01
 	}
 	
+	var rootViewController: UIViewController?
+	
+	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
 		return 300
 	}
 	
-	func layout() {
+	private func layout() {
 		self.contentView.add(containerView) {
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.top.equalTo(self.contentView.snp.top).offset(0)
 				$0.bottom.equalTo(self.contentView.snp.bottom).offset(0)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(52)
@@ -56,7 +60,7 @@ class MessageDetailTableViewCell: UITableViewCell {
 			}
 		}
 		self.contentView.add(circleView) {
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.width.height.equalTo(12)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(20)
 				$0.top.equalTo(self.containerView.snp.top).offset(20)
@@ -95,33 +99,17 @@ class MessageDetailTableViewCell: UITableViewCell {
 		}
 	}
 	
-	var rootViewController: UIViewController?
-	
 	override func layoutSubviews() {
 		super .layoutSubviews()
-		contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
+		contentView.frame = contentView.frame.inset(
+			by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+		)
 	}
 	
+	// MARK: - Lifecycle
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		layout()
 		self.backgroundColor = .primaryGray
-		transitionButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
-		// Initialization code
 	}
-	
-	override func setSelected(_ selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: animated)
-		
-		// Configure the view for the selected state
-	}
-	
-	@objc
-	func didTapButton(_ sender: UIButton) {
-		print(#function)
-		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "ConfirmViewController")
-		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
-	}
-	
 }

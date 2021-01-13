@@ -18,16 +18,8 @@ import SwiftyJSON
 
 class DetailViewController: SegementSlideDefaultViewController {
 	
-	var category: String = ""
-	var status: String = ""
-	var viewTitle: String = ""
-	var context: String = ""
-	var requestId: Int = 1
-	var model = DetailModel(id: 0, issueImages: [], promiseOption: [["1","1","1"]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
-	var statusModel: [DetailStatus] = []
-	var optionModel: [CommunicationMethod] = []
-	
-	let detailHeaderView = UIView().then{
+	// MARK: - Property
+	let detailHeaderView = UIView().then {
 		$0.isUserInteractionEnabled = true
 		$0.contentMode = .scaleAspectFill
 	}
@@ -41,26 +33,66 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 	let disposeBag = DisposeBag()
 	
-	private let detailProvider = MoyaProvider<DetailService>(plugins:
-																														[NetworkLoggerPlugin(verbose: true)])
-	
+	private let detailProvider = MoyaProvider<DetailService>(
+		plugins: [NetworkLoggerPlugin(verbose: true)]
+	)
 	private let coverSafeAreaView = UIView().then {
 		$0.backgroundColor = .white
 	}
 	
-	func contextHeight() -> Int {
-		let myText = self.contextLabel.text! as NSString
-		let rect = CGSize(width: self.contextLabel.bounds.width, height: CGFloat.greatestFiniteMagnitude)
-		let labelSize = myText.boundingRect(with: rect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self.contextLabel.font], context: nil)
-		return Int(ceil(CGFloat(labelSize.height) / self.contextLabel.font.lineHeight))
-	}
-	
+	var category: String = ""
+	var status: String = ""
+	var viewTitle: String = ""
+	var context: String = ""
+	var requestId: Int = 1
+	var model = DetailModel(id: 0,
+													issueImages: [],
+													promiseOption: [["1","1","1"]],
+													category: 0, issueTitle: "",
+													issueContents: "",
+													progress: 0,
+													requestedTerm: "",
+													promiseYear: 0,
+													promiseMonth: 0,
+													promiseDay: 0,
+													promiseTime: "",
+													solutionMethod: "",
+													confirmedPromiseOption: []
+	)
+	var statusModel: [DetailStatus] = []
+	var optionModel: [CommunicationMethod] = []
 	var heightWithSafeArea: CGFloat {
 		return 243+self.contextLabel.frame.size.height
 	}
+
+	override var titlesInSwitcher: [String] {
+		return ["상세 정보","하우징 쪽지"]
+	}
+	override var switcherConfig: SegementSlideDefaultSwitcherConfig {
+		var config = super.switcherConfig
+		config.type = .tab
+		config.indicatorColor = .primaryOrange
+		config.indicatorWidth = (self.view.frame.width/2)-40
+		config.indicatorHeight = 2
+		return config
+	}
 	
-	
-	func headerViewLayout() {
+	// MARK: - Helper
+	private func contextHeight() -> Int {
+		let myText = self.contextLabel.text! as NSString
+		let rect = CGSize(width: self.contextLabel.bounds.width,
+											height: CGFloat.greatestFiniteMagnitude
+		)
+		let labelSize = myText.boundingRect(with: rect,
+																				options: .usesLineFragmentOrigin,
+																				attributes: [NSAttributedString.Key.font:
+																											self.contextLabel.font],
+																				context: nil
+		)
+		return Int(ceil(CGFloat(labelSize.height) / self.contextLabel.font.lineHeight))
+	}
+		
+	private func headerViewLayout() {
 		self.detailHeaderView.add(self.categoryContainerView) {
 			$0.backgroundColor = .primaryBlack
 			$0.layer.cornerRadius = 13
@@ -86,12 +118,12 @@ class DetailViewController: SegementSlideDefaultViewController {
 			$0.textColor = UIColor.primaryWhite
 			$0.textAlignment = .center
 			$0.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.top.equalTo(self.detailHeaderView).offset(16)
 				$0.leading.equalTo(self.detailHeaderView).offset(20)
 			}
 		}
-		self.categoryContainerView.snp.makeConstraints{
+		self.categoryContainerView.snp.makeConstraints {
 			$0.top.equalTo(self.categoryLabel.snp.top).offset(-6)
 			$0.bottom.equalTo(self.categoryLabel.snp.bottom).offset(6)
 			$0.leading.equalTo(self.categoryLabel.snp.leading).offset(-10)
@@ -111,7 +143,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			$0.textColor = .primaryOrange
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.centerY.equalTo(self.categoryLabel.snp.centerY)
 				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
 				$0.height.equalTo(17)
@@ -121,7 +153,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			$0.text = self.model.issueTitle!
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 21, weight: .bold)
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.top.equalTo(self.categoryLabel.snp.bottom).offset(20)
 				$0.leading.equalTo(self.detailHeaderView.snp.leading).offset(20)
 				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
@@ -133,7 +165,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
 			$0.numberOfLines = 0
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.leading.equalTo(self.detailHeaderView.snp.leading).offset(20)
 				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(40)
@@ -142,7 +174,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		}
 	}
 	
-	func layout() {
+	private func layout() {
 		self.view.add(self.seperateLineView) {
 			$0.snp.makeConstraints {
 				$0.height.equalTo(1)
@@ -152,8 +184,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		}
 	}
 	
-	func loader() {
-		
+	private func loader() {
 		detailProvider.rx.request(.homeDetail(id: requestId))
 			.asObservable()
 			.subscribe(onNext: { response in
@@ -164,11 +195,13 @@ class DetailViewController: SegementSlideDefaultViewController {
 																				from: response.data)
 					
 					let result = data.data
-					self.statusModel.append(DetailStatus(ownerStatus: json["data"]["Replies"][0]["owner_status"].arrayValue.map{$0.intValue}, id: json["data"]["Replies"][0]["id"].intValue))
-//					print(result)
-					print(self.statusModel)
+					self.statusModel.append(DetailStatus(
+																		ownerStatus: json["data"]["Replies"][0]["owner_status"].arrayValue.map{$0.intValue},
+																		userStatus: json["data"]["Replies"][0]["user_status"].arrayValue.map{$0.intValue},
+																		id: json["data"]["Replies"][0]["id"].intValue
+						)
+					)
 					self.detailDataBind(result!)
-					
 					let viewController = ContentViewController()
 					viewController.model = self.model
 					let statusViewController = MessageViewController()
@@ -206,19 +239,31 @@ class DetailViewController: SegementSlideDefaultViewController {
 					let promiseDay = data.promiseDay,
 					let promiseTime = data.promiseTime,
 					let solutionMethod = data.solutionMethod,
-					let confirmedPromiseOption = data.confirmedPromiseOption,
-					let replies = data.replies
+					let confirmedPromiseOption = data.confirmedPromiseOption
 		else {
 			return
 		}
-		let model = DetailModel(id: id, issueImages: issueImages, promiseOption: promiseOption, category: category, issueTitle: issueTitle, issueContents: issueContents, progress: progress, requestedTerm: requestedTerm, promiseYear: promiseYear, promiseMonth: promiseMonth, promiseDay: promiseDay, promiseTime: promiseTime, solutionMethod: solutionMethod, confirmedPromiseOption: confirmedPromiseOption)
+		let model = DetailModel(id: id,
+														issueImages: issueImages,
+														promiseOption: promiseOption,
+														category: category,
+														issueTitle: issueTitle,
+														issueContents: issueContents,
+														progress: progress,
+														requestedTerm: requestedTerm,
+														promiseYear: promiseYear,
+														promiseMonth: promiseMonth,
+														promiseDay: promiseDay,
+														promiseTime: promiseTime,
+														solutionMethod: solutionMethod,
+														confirmedPromiseOption: confirmedPromiseOption
+		)
 		self.model = model
 		self.reloadData()
 	}
-	
-	
+		
 	private func setSafeArea() {
-		view.add(coverSafeAreaView){
+		view.add(coverSafeAreaView) {
 			$0.snp.makeConstraints {
 				$0.top.equalToSuperview()
 				$0.leading.equalToSuperview()
@@ -227,23 +272,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			}
 		}
 	}
-	
-	
-	
-	override var titlesInSwitcher: [String] {
-		return ["상세 정보","하우징 쪽지"]
-	}
-	
-	override var switcherConfig: SegementSlideDefaultSwitcherConfig {
-		var config = super.switcherConfig
-		config.type = .tab
-		config.indicatorColor = .primaryOrange
-		config.indicatorWidth = (self.view.frame.width/2)-40
-		config.indicatorHeight = 2
-		return config
-	}
-	
-	
+		
 	override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
 		let viewController = ContentViewController()
 		let messageViewController = MessageViewController()
@@ -251,7 +280,6 @@ class DetailViewController: SegementSlideDefaultViewController {
 			messageViewController.model = self.model
 			messageViewController.statusModel = self.statusModel
 			return messageViewController
-			
 		}
 		else {
 			viewController.model = self.model
@@ -261,11 +289,9 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 	
 	override func segementSlideHeaderView() -> UIView? {
-		
 		return self.detailHeaderView
 	}
-	
-	
+		
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()

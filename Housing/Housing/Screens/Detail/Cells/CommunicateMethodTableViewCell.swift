@@ -12,33 +12,32 @@ import SnapKit
 
 class CommunicateMethodTableViewCell: UITableViewCell {
 	
+	// MARK: - Property
 	var method : [CommunicationMethod] = []
 	
-	let titleLabel = UILabel().then{
+	let titleLabel = UILabel().then {
 		$0.text = "🗣 소통 방식"
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 15, weight: .bold)
 		$0.textAlignment = .left
 	}
-	let methodTableView = UITableView().then{
+	let methodTableView = UITableView().then {
 		$0.backgroundColor = .primaryWhite
 	}
 	
-	
+	// MARK: - helper
 	static func estimatedRowHeight() -> CGFloat {
 		return 300
 	}
 	
-	
-	
-	func layout() {
-		self.contentView.add(titleLabel){
+	private func layout() {
+		self.contentView.add(titleLabel) {
 			$0.snp.makeConstraints{
 				$0.top.equalTo(self.contentView.snp.top).offset(5)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(20)
 			}
 		}
-		self.contentView.add(self.methodTableView){
+		self.contentView.add(self.methodTableView) {
 			$0.isScrollEnabled = false
 			$0.isPagingEnabled = false
 			$0.isUserInteractionEnabled = false
@@ -52,31 +51,26 @@ class CommunicateMethodTableViewCell: UITableViewCell {
 		}
 	}
 	
-	func registerCell() {
+	private func registerCell() {
 		methodTableView.register(MethodDetailTableViewCell.self, forCellReuseIdentifier: MethodDetailTableViewCell.reuseIdentifier)
 	}
-
-		override func awakeFromNib() {
-			super.awakeFromNib()
-			registerCell()
-			layout()
-			self.methodTableView.isScrollEnabled = false
-			self.methodTableView.separatorStyle = .none
-			self.methodTableView.delegate = self
-			self.methodTableView.dataSource = self
-			self.methodTableView.estimatedRowHeight = CGFloat(self.method.count * 70)
-			self.methodTableView.rowHeight = UITableView.automaticDimension
-			self.methodTableView.reloadData()
-			// Initialization code
-		}
 	
-	override func setSelected(_ selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: animated)
-		
-		// Configure the view for the selected state
+	// MARK: - Lifecycle
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		registerCell()
+		layout()
+		self.methodTableView.isScrollEnabled = false
+		self.methodTableView.separatorStyle = .none
+		self.methodTableView.delegate = self
+		self.methodTableView.dataSource = self
+		self.methodTableView.estimatedRowHeight = CGFloat(self.method.count * 70)
+		self.methodTableView.rowHeight = UITableView.automaticDimension
+		self.methodTableView.reloadData()
 	}
-	
 }
+
+// MARK: - UITableView Delegate
 extension CommunicateMethodTableViewCell: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 70
@@ -94,11 +88,10 @@ extension CommunicateMethodTableViewCell: UITableViewDelegate {
 		cell.selectionStyle = .none
 		return cell
 	}
-	
-
 }
 
-extension CommunicateMethodTableViewCell: UITableViewDataSource{
+// MARK: - UITableView DataSource
+extension CommunicateMethodTableViewCell: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return self.method.count
 	}
