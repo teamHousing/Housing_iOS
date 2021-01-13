@@ -14,20 +14,37 @@ import SnapKit
 
 
 class ContentViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
+	
+	// MARK: - Property
 	@objc var scrollView: UIScrollView {
 		return tableView
 	}
 	
-	var model = DetailModel(id: 0, issueImages: [], promiseOption: [["1","1","1"]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
+	var model = DetailModel(id: 0,
+													issueImages: [],
+													promiseOption: [["1","1","1"]],
+													category: 0,
+													issueTitle: "",
+													issueContents: "",
+													progress: 0,
+													requestedTerm: "",
+													promiseYear: 0,
+													promiseMonth: 0,
+													promiseDay: 0,
+													promiseTime: "",
+													solutionMethod: "",
+													confirmedPromiseOption: []
+	)
 	var statusModel: [DetailStatus] = []
 	
-	
-	func registerCell() {
+	// MARK: - Helper
+	private func registerCell() {
 		tableView.register(RequestTableViewCell.self, forCellReuseIdentifier: RequestTableViewCell.reuseIdentifier)
 		tableView.register(CommunicateMethodTableViewCell.self, forCellReuseIdentifier: CommunicateMethodTableViewCell.reuseIdentifier)
 		tableView.register(AddedImageTableViewCell.self, forCellReuseIdentifier: AddedImageTableViewCell.reuseIdentifier)
 	}
 	
+	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = .white
@@ -47,8 +64,9 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	
-	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	// MARK: - UITableView Delegate
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+	-> UITableViewCell {
 		if indexPath.row == 0 {
 			let cell: RequestTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 			cell.awakeFromNib()
@@ -76,6 +94,8 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		return UITableViewCell()
 		
 	}
+	
+	// MARK: - UITableView DataSources
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 3
 	}

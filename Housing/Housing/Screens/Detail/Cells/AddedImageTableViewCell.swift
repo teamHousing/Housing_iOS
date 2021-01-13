@@ -13,10 +13,10 @@ import Then
 
 class AddedImageTableViewCell: UITableViewCell {
 	
+	// MARK: - Property
 	var imageURL: [String] = []
 	
 	let addedImageCollectionView: UICollectionView = {
-		
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		
@@ -27,14 +27,12 @@ class AddedImageTableViewCell: UITableViewCell {
 		
 		return collectionView
 	}()
-	
 	let titleLabel = UILabel().then() {
 		$0.text = "첨부파일"
 		$0.font = UIFont.systemFont(ofSize: 15, weight: .bold)
 		$0.textColor = .primaryBlack
 		$0.textAlignment = .left
 	}
-	
 	let cancelButton = UIButton().then() {
 		$0.backgroundColor = .none
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
@@ -46,11 +44,12 @@ class AddedImageTableViewCell: UITableViewCell {
 		$0.setTitleColor(.primaryBlack, for: .normal)
 	}
 	
+	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
 		return 600
 	}
 	
-	func layout() {
+	private func layout() {
 		self.contentView.add(self.titleLabel) {
 			$0.snp.makeConstraints {
 				$0.top.equalTo(self.contentView.snp.top).offset(56)
@@ -77,37 +76,29 @@ class AddedImageTableViewCell: UITableViewCell {
 				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-100)
 			}
 		}
-		
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		self.addedImageCollectionView.collectionViewLayout = layout
 	}
 	
-	func registerCell() {
+	private func registerCell() {
 		addedImageCollectionView.register(AddedImageCollectionViewCell.self,
 																			forCellWithReuseIdentifier:
 																				AddedImageCollectionViewCell.reuseIdentifier)
 	}
 	
+	// MARK: - Lifecycle
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		print(#file, #function)
 		layout()
 		registerCell()
 		self.addedImageCollectionView.delegate = self
 		self.addedImageCollectionView.dataSource = self
 		self.addedImageCollectionView.reloadData()
-		// Initialization code
 	}
-	
-	override func setSelected(_ selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: false)
-		
-		// Configure the view for the selected state
-	}
-	
 }
 
+// MARK: - UICollectionView DelegateFlowLayout
 extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
 												UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -131,13 +122,14 @@ extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
 	}
 }
 
+// MARK: - UICollectionView DataSource
 extension AddedImageTableViewCell: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView,
 											numberOfItemsInSection section: Int) -> Int {
 		if imageURL.count > 3 {
 			return 3
 		}
-		else{
+		else {
 			return imageURL.count
 		}
 	}
@@ -145,9 +137,11 @@ extension AddedImageTableViewCell: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: AddedImageCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 		for i in 0 ..< imageURL.count {
-			cell.addedImageView.imageFromUrl(self.imageURL[i], defaultImgPath: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMjhfMjA1%2FMDAxNjA2NTczNjQ2NDM1.fM7rkGKrlK8X2RVymtLXyWGW5RNmAgU8yKsXzK9_oXMg.N3Y8IO5aKEF68xQQvQNj0S1f73o9yGpB8-gOH_S9738g.JPEG.eduvil%2F20201128%25A3%25DF180344.jpg&type=a340")			
+			cell.addedImageView.imageFromUrl(
+				self.imageURL[i],
+				defaultImgPath: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMjhfMjA1%2FMDAxNjA2NTczNjQ2NDM1.fM7rkGKrlK8X2RVymtLXyWGW5RNmAgU8yKsXzK9_oXMg.N3Y8IO5aKEF68xQQvQNj0S1f73o9yGpB8-gOH_S9738g.JPEG.eduvil%2F20201128%25A3%25DF180344.jpg&type=a340"
+			)
 		}
-		
 		if self.imageURL.count > 3 {
 			if indexPath.row == 2 {
 				cell.blurView.isHidden = false

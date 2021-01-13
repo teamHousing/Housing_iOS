@@ -13,12 +13,14 @@ import Then
 
 class AddedImageCollectionViewCell: UICollectionViewCell {
 	
+	// MARK: - Property
 	let addedImageView = UIImageView()
 	let blurView = UIView()
 	let circleView = UIView()
 	let plusLabel = UILabel()
 	
-	func layout() {
+	// MARK: - Helper
+	private func layout() {
 		contentView.backgroundColor = .white
 		self.contentView.add(addedImageView) {
 			$0.layer.cornerRadius = 16
@@ -57,6 +59,7 @@ class AddedImageCollectionViewCell: UICollectionViewCell {
 		}
 	}
 	
+	// MARK: - Lifecycle
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		layout()

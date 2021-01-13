@@ -12,6 +12,10 @@ enum StoryboardStorage {
 	static var login: String {
 		return "Login"
 	}
+	
+	static var calendar: String {
+		return "Calendar"
+	}
 
 	static var promise: String {
 		return "Promise"

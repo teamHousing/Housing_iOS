@@ -13,19 +13,39 @@ import Then
 
 class MessageViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
 	
-	var model = DetailModel(id: 0, issueImages: [], promiseOption: [[]], category: 0, issueTitle: "", issueContents: "", progress: 0, requestedTerm: "", promiseYear: 0, promiseMonth: 0, promiseDay: 0, promiseTime: "", solutionMethod: "", confirmedPromiseOption: [])
+	// MARK: - Property
+	var model = DetailModel(id: 0,
+													issueImages: [],
+													promiseOption: [[]],
+													category: 0,
+													issueTitle: "",
+													issueContents: "",
+													progress: 0,
+													requestedTerm: "",
+													promiseYear: 0,
+													promiseMonth: 0,
+													promiseDay: 0,
+													promiseTime: "",
+													solutionMethod: "",
+													confirmedPromiseOption: []
+	)
 	var statusModel: [DetailStatus] = []
+	
 	@objc var scrollView: UIScrollView {
 		return tableView
 	}
 	
-	func registerCell() {
-		tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCell.reuseIdentifier)
-		
+	// MARK: - Helper
+	private func registerCell() {
+		tableView.register(MessageTableViewCell.self,
+											 forCellReuseIdentifier: MessageTableViewCell.reuseIdentifier)
+		tableView.register(EmptyTableViewCell.self,
+											 forCellReuseIdentifier: EmptyTableViewCell.reuseIdentifier)
 	}
+	
+	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		print("hi")
 		view.backgroundColor = .white
 		registerCell()
 		tableView.estimatedRowHeight = MessageTableViewCell.estimatedRowHeight()
@@ -38,26 +58,29 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 		tableView.backgroundColor = .primaryGray
 	}
 	
-	// MARK: - Table view data source
-	
+	// MARK: - UITableView data source
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		// #warning Incomplete implementation, return the number of rows
 		return 1
 	}
 	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+	-> UITableViewCell {
+//		let cell: EmptyTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
+//		cell.awakeFromNib()
+//		return cell
+		
 		let cell: MessageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
-		cell.status = self.statusModel[0].ownerStatus!
+		if self.statusModel[0].userStatus?.isEmpty == true {
+			cell.status = self.statusModel[0].ownerStatus!
+			cell.userOrOwner = 0
+		}
+		else if self.statusModel[0].ownerStatus?.isEmpty == true {
+			cell.status = self.statusModel[0].userStatus!
+			cell.userOrOwner = 1
+		}
 		cell.confirmedPromiseOption = "\(self.model.confirmedPromiseOption![0]) / \(self.model.confirmedPromiseOption![1]) / \(self.model.confirmedPromiseOption![2]) "
 		cell.rootViewController = self
 		cell.awakeFromNib()
 		return cell
-	}
-	
-	@objc func touchUpConfirm(_ sender: UIButton) {
-		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "ConfirmViewController")
-		self.navigationController?.pushViewController(viewcontroller, animated: true)
-	}
-	
+	}	
 }
