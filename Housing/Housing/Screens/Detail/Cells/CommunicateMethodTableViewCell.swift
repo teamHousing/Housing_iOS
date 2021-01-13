@@ -12,10 +12,7 @@ import SnapKit
 
 class CommunicateMethodTableViewCell: UITableViewCell {
 	
-	var method = [CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문")]
+	var method : [CommunicationMethod] = []
 	
 	let titleLabel = UILabel().then{
 		$0.text = "🗣 소통 방식"

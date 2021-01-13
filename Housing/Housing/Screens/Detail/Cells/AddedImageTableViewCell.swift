@@ -13,7 +13,7 @@ import Then
 
 class AddedImageTableViewCell: UITableViewCell {
 	
-	let imageURL = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAD","https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fko%2Fdocs%2FWeb%2FHTML%2FElement%2Fimg&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAI","https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-photo%2Fimage-human-brain_5013322.htm&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAO","https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAD","https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fko%2Fdocs%2FWeb%2FHTML%2FElement%2Fimg&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAI","https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-photo%2Fimage-human-brain_5013322.htm&psig=AOvVaw2rzOfnBix5dppfSHfK7HD0&ust=1610001119996000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDR-9jXhu4CFQAAAAAdAAAAABAO"]
+	var imageURL: [String] = []
 	
 	let addedImageCollectionView: UICollectionView = {
 		
@@ -134,13 +134,20 @@ extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
 extension AddedImageTableViewCell: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView,
 											numberOfItemsInSection section: Int) -> Int {
-		return 3
+		if imageURL.count > 3 {
+			return 3
+		}
+		else{
+			return imageURL.count
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: AddedImageCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
-		cell.awakeFromNib()
-		cell.addedImageView.image = UIImage(named: "btnBack")
+		for i in 0 ..< imageURL.count {
+			cell.addedImageView.imageFromUrl(self.imageURL[i], defaultImgPath: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMjhfMjA1%2FMDAxNjA2NTczNjQ2NDM1.fM7rkGKrlK8X2RVymtLXyWGW5RNmAgU8yKsXzK9_oXMg.N3Y8IO5aKEF68xQQvQNj0S1f73o9yGpB8-gOH_S9738g.JPEG.eduvil%2F20201128%25A3%25DF180344.jpg&type=a340")			
+		}
+		
 		if self.imageURL.count > 3 {
 			if indexPath.row == 2 {
 				cell.blurView.isHidden = false
@@ -149,6 +156,7 @@ extension AddedImageTableViewCell: UICollectionViewDataSource {
 				cell.plusLabel.isHidden = false
 			}
 		}
+		cell.awakeFromNib()
 		return cell
 	}
 }
