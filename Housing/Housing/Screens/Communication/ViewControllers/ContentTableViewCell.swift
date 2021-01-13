@@ -28,11 +28,27 @@ class ContentTableViewCell: UITableViewCell {
 		}
 		return ""
 	}
-	
+
+	func determineCategoty(category : Int) -> String {
+		if category == 0 {
+			return "고장수리"
+		}else if category == 1 {
+			return "계약관련"
+		}else if category == 2 {
+			return "요금납부"
+		}else if category == 3 {
+			return "소음관련"
+		}else if category == 4 {
+			return "문의사항"
+		}else if category == 5 {
+			return "기타"
+		}
+		return ""
+	}
 	func filloutCell(){
-		categoryLabel?.text = contentData?.category
+//		statusLabel?.text = determineProgress(progress: contentData!.progress)
+//		categoryLabel?.text = determineCategoty(category: contentData!.category)
 		titleLabel?.text = contentData?.issueTitle
-		statusLabel?.text = determineProgress(progress: contentData!.progress)
 		contentLabel?.text = contentData?.issueContents
 	}
 	func makeViewRounded(){

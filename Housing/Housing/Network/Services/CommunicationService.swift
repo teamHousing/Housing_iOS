@@ -48,11 +48,8 @@ extension CommunicationService: TargetType {
 	
 	var task: Task {
 		switch self {
-		case .home(unit: let unit):
-			return .requestCompositeParameters(bodyParameters: .init(),
-																				 bodyEncoding: JSONEncoding.default,
-																				 urlParameters: ["unit": unit])
-		case .homeRoomList:
+		case .home,
+				 .homeRoomList:
 			return .requestPlain
 		}
 	}
