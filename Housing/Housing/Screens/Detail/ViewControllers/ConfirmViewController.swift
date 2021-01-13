@@ -9,13 +9,18 @@ import UIKit
 
 import SnapKit
 import Then
+import Moya
+import RxSwift
+import RxCocoa
 
-class ConfirmViewController: UIViewController {
+class ConfirmViewController: BaseViewController {
+	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	var determineButtonState : [Bool] = []
 	var method = [CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
 								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
 								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
 								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문")]
+	var selectedTime :[CommunicationMethod] = []
 	let confirmTableView = UITableView()
 	let titleLabel = UILabel().then {
 		$0.textColor = .primaryBlack
@@ -38,13 +43,15 @@ class ConfirmViewController: UIViewController {
 	}
 	
 	let confirmButton = UIButton().then {
-		$0.backgroundColor = .primaryBlack
-		$0.setBorder(borderColor: .primaryBlack, borderWidth: 1)
+		$0.backgroundColor = .gray01
+		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.layer.cornerRadius = 24
 		$0.setTitle("확정하기", for: .normal)
 		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
 		$0.titleLabel?.textAlignment = .center
 		$0.setTitleColor(.primaryWhite, for: .normal)
+		$0.isEnabled = false
+		$0.addTarget(self, action: #selector(confirmPromise), for: .touchUpInside)
 	}
 	
 	let modifyButton = UIButton().then {
@@ -55,12 +62,14 @@ class ConfirmViewController: UIViewController {
 		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
 		$0.titleLabel?.textAlignment = .center
 		$0.setTitleColor(.primaryBlack, for: .normal)
+		$0.addTarget(self, action: #selector(returnPromise(sender:)), for: .touchUpInside)
+
 	}
 	
 	func registerCell() {
 		confirmTableView.register(ConfirmTableViewCell.self, forCellReuseIdentifier: ConfirmTableViewCell.reuseIdentifier)
 	}
-	
+
 	func layout() {
 		let headerView = UIView(frame: CGRect(x: 0, y: 0, width:self.view.frame.size.width , height: 202)).then {
 			$0.backgroundColor = .primaryWhite
@@ -121,11 +130,43 @@ class ConfirmViewController: UIViewController {
 		self.confirmTableView.tableHeaderView = headerView
 		self.confirmTableView.tableFooterView = footerView
 	}
-	
+	@objc func confirmPromise(sender : UIButton) {
+		userProvider.rx.request(.homePromiseConfirm(id: 1, promise_option: self.selectedTime)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						print(next)
+					}
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+	}
+	@objc func returnPromise(sender : UIButton) {
+		userProvider.rx.request(.homePromiseHostModify(id: 1)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						
+						self.navigationController?.popViewController(animated: true)
+						//하우징 메시지 뷰 reload해야 함
+					}
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registerCell()
 		layout()
+		
 		self.confirmTableView.isScrollEnabled = true
 		self.confirmTableView.separatorStyle = .none
 		self.confirmTableView.isUserInteractionEnabled = true
@@ -189,6 +230,18 @@ extension ConfirmViewController: UITableViewDataSource {
 				self.determineButtonState[i] = false
 			}
 		}
+		//self.selctedTime.remove(at: 0)
+		if !self.selectedTime.isEmpty
+		{
+			selectedTime.removeAll()
+		}
+		self.selectedTime.append(method[indexPath.row])
+
+		
+			self.confirmButton.backgroundColor = .primaryBlack
+			self.confirmButton.setBorder(borderColor: .primaryBlack, borderWidth: 1)
+			self.confirmButton.isEnabled = true
+		print(self.selectedTime)
 		tableView.reloadData()
 	}
 }
