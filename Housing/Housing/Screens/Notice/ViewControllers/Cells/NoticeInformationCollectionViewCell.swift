@@ -7,21 +7,16 @@
 
 import UIKit
 
-struct NoticeData {
-		var title: String
-		var context: String
-}
-
 class NoticeInformationCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-		@IBOutlet weak var contextLabel: UILabel!
-		
-		var FDF: NoticeData?
-		
-		func fetchData() {
-				titleLabel.text = FDF?.title
-				contextLabel.text = FDF?.context
-				contextLabel.numberOfLines = 0
-		}
+	@IBOutlet weak var containerView: UIView!
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var contextLabel: UILabel!
+	
+	var noticeInfo: Notice?
+	
+	func fetchData() {
+        titleLabel.text = noticeInfo?.noticeTitle
+		contextLabel.text = noticeInfo?.noticeContents
+		contextLabel.numberOfLines = 0
+	}
 }

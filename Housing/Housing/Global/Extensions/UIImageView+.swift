@@ -14,14 +14,12 @@ extension UIImageView {
 	
 	func setImage(from url: String, _ defaultImage: UIImage){
 		self.kf.indicatorType = .activity
-		if url == nil || url == "" {
-			
-		} else {
-			self.kf.setImage(with: URL(string: url)!,
-											 placeholder: UIImage(),
-											 options: [.transition(.fade(1))],
-											 progressBlock: nil)
-		}
+		print(url)
+		self.kf.setImage(with: URL(string: url)!,
+										 placeholder: UIImage(),
+										 options: [.transition(.fade(1))],
+										 progressBlock: nil)
+		
 	}
 	
 	public func imageFromUrl(_ urlString: String?, defaultImgPath : String?) {
