@@ -16,11 +16,8 @@ import RxCocoa
 class ConfirmViewController: BaseViewController {
 	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	var determineButtonState : [Bool] = []
-	var method = [CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문")]
-	var selectedTime :[CommunicationMethod] = []
+	var method : [CommunicationMethod] = []
+	var selectedTime :[String] = []
 	let confirmTableView = UITableView()
 	let titleLabel = UILabel().then {
 		$0.textColor = .primaryBlack
@@ -63,13 +60,13 @@ class ConfirmViewController: BaseViewController {
 		$0.titleLabel?.textAlignment = .center
 		$0.setTitleColor(.primaryBlack, for: .normal)
 		$0.addTarget(self, action: #selector(returnPromise(sender:)), for: .touchUpInside)
-
+		
 	}
 	
 	func registerCell() {
 		confirmTableView.register(ConfirmTableViewCell.self, forCellReuseIdentifier: ConfirmTableViewCell.reuseIdentifier)
 	}
-
+	
 	func layout() {
 		let headerView = UIView(frame: CGRect(x: 0, y: 0, width:self.view.frame.size.width , height: 202)).then {
 			$0.backgroundColor = .primaryWhite
@@ -131,11 +128,13 @@ class ConfirmViewController: BaseViewController {
 		self.confirmTableView.tableFooterView = footerView
 	}
 	@objc func confirmPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseConfirm(id: 1, promise_option: self.selectedTime)).asObservable()
+		userProvider.rx.request(.homePromiseConfirm(id: 1
+																								, promise_option: self.selectedTime)).asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
 						print(next)
+						self.navigationController?.popViewController(animated: true)
 					}
 					catch {
 						print(error)
@@ -150,9 +149,8 @@ class ConfirmViewController: BaseViewController {
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
-						
+						self.navigationController?.parent?.children.last?.viewDidLoad()
 						self.navigationController?.popViewController(animated: true)
-						//하우징 메시지 뷰 reload해야 함
 					}
 					catch {
 						print(error)
@@ -166,6 +164,28 @@ class ConfirmViewController: BaseViewController {
 		super.viewDidLoad()
 		registerCell()
 		layout()
+		userProvider.rx.request(.homePromiseTimeList(id: 1)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<responseData>.self, from: next.data)
+						guard let dataArray : [[String]] = data.data?.promise_option else {return}
+						for items in dataArray {
+							let temp = CommunicationMethod(date: items[0], time: items[1], method: items[2])
+							self.method.append(temp)
+							self.determineButtonState.append(false)
+						}
+						print(self.method)
+						self.confirmTableView.reloadData()
+					}
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
 		
 		self.confirmTableView.isScrollEnabled = true
 		self.confirmTableView.separatorStyle = .none
@@ -230,18 +250,23 @@ extension ConfirmViewController: UITableViewDataSource {
 				self.determineButtonState[i] = false
 			}
 		}
-		//self.selctedTime.remove(at: 0)
 		if !self.selectedTime.isEmpty
 		{
 			selectedTime.removeAll()
 		}
-		self.selectedTime.append(method[indexPath.row])
-
+		self.selectedTime.append(method[indexPath.row].date)
+		self.selectedTime.append(method[indexPath.row].time)
+		self.selectedTime.append(method[indexPath.row].method)
 		
-			self.confirmButton.backgroundColor = .primaryBlack
-			self.confirmButton.setBorder(borderColor: .primaryBlack, borderWidth: 1)
-			self.confirmButton.isEnabled = true
+		
+		
+		self.confirmButton.backgroundColor = .primaryBlack
+		self.confirmButton.setBorder(borderColor: .primaryBlack, borderWidth: 1)
+		self.confirmButton.isEnabled = true
 		print(self.selectedTime)
 		tableView.reloadData()
 	}
+}
+private struct responseData : Codable {
+	let promise_option : [[String]]
 }
