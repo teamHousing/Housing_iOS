@@ -50,7 +50,6 @@ final class CommunicationViewController: BaseViewController {
 		networkForCommunication()
 		//testArray()
 		super.viewDidLoad()
-		
 		tableViewData = [cellData(opened: true,
 															sectionData: incomDetailCellData), /// incomplete
 										 cellData(opened: true,
@@ -112,6 +111,7 @@ final class CommunicationViewController: BaseViewController {
 	private func networkForCommunication() {
 		//let semaphore = DispatchSemaphore.init(value: 0)
 		print("통신시작")
+		let s = DispatchSemaphore(value: 0)
 		userProvider.rx.request(.home(unit: "-1"))
 			.asObservable()
 			.subscribe(onNext: { response in
@@ -146,22 +146,23 @@ final class CommunicationViewController: BaseViewController {
 //						self.comDetailCellData.append(listdata)
 						//semaphore.signal()//네트워킹이 끝나면 신호보내기
 						
-						
 						for index in 0..<result.incompleteList.count {
 							let listdata = DetailData(id: result.incompleteList[index].id, issueTitle: result.incompleteList[index].issueTitle, issueContents: result.incompleteList[index].issueContents, progress: result.incompleteList[index].progress, category: result.incompleteList[index].category)
 							self.incomDetailCellData.append(listdata)
+							//self.incomDetailCellData[index] = listdata
 						}
 
 						for index in 0..<result.completeList.count {
 							let listdata = DetailData(id: result.completeList[index].id, issueTitle: result.completeList[index].issueTitle, issueContents: result.completeList[index].issueContents, progress: result.completeList[index].progress, category: result.completeList[index].category)
+							//self.comDetailCellData[index] = listdata
 							self.comDetailCellData.append(listdata)
 						}
+						s.signal()
 							print("여기 incomplete")
 							print(self.incomDetailCellData)
 							print("여기 complete")
 							print(self.comDetailCellData)
-						
-						
+						s.wait()
 						self.communicationTableView.reloadData()
 						//semaphore.wait()
 						
@@ -402,13 +403,13 @@ extension CommunicationViewController: UITableViewDataSource{
 					print("이건 로우 \(indexPath.row)")
 					print(tableViewData[indexPath.section])
 					print("123123123",tableViewData)
-					
-					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+				
+//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
 					
 					return contentCell
 				} else { ///cell중에서도 complete부분
-					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
 					print("이건 섹션 \(indexPath.section)")
 					print("이건 로우 \(indexPath.row)")
