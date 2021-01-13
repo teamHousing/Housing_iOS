@@ -7,11 +7,17 @@
 
 import UIKit
 
-class DetailNoticeViewController: UIViewController {
+import Moya
+import RxMoya
+
+class DetailNoticeViewController: BaseViewController {
 	
 	//MARK:- Property
 	var titleData: String?
 	var contextData: String?
+	var id: Int?
+	
+	private let noticeProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var detailTitle: UILabel!
@@ -36,6 +42,7 @@ class DetailNoticeViewController: UIViewController {
 		
 		initLayout()
 		initData()
+		notice()
 		
 		navigationController?.interactivePopGestureRecognizer?.delegate = nil
 	}
@@ -49,6 +56,35 @@ class DetailNoticeViewController: UIViewController {
 	}
 	
 	//MARK:- Helper
+	func notice() {
+		guard let id = id
+		else {
+			return
+		}
+		
+		noticeProvider.rx.request(.profileNoticeDetail(id: id)).asObservable()
+			.subscribe(onNext: { response in
+				if response.statusCode == 200 {
+					do{
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<MyInfo>.self,
+																					from: response.data)
+						guard let result = data.data else {
+							
+							return
+						}
+						print(result)
+					} catch {
+						print(error)
+					}
+				}
+			}, onError: { error in
+				print(error)
+			}, onCompleted: {
+			}, onDisposed: {
+			}).disposed(by: disposeBag)
+	}
+	
 	func initLayout() {
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()

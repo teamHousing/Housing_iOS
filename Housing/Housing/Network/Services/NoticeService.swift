@@ -20,6 +20,41 @@ enum NoticeService {
 	case profileAuthorization(building: String, unit: Int)
 }
 
+struct MyInfo: Codable {
+		let houseInfo: HouseInfo
+		let notice: [Notice]
+}
+
+struct HouseInfo: Codable {
+	let hopeTime: [String]
+	let id: Int
+	let ownerName, profileMessage: String
+	let profileImg: String
+	let responseTime: String
+	
+	enum CodingKeys: String, CodingKey {
+		case hopeTime = "hope_time"
+		case id
+		case ownerName = "owner_name"
+		case profileMessage = "profile_message"
+		case profileImg = "profile_img"
+		case responseTime = "response_time"
+	}
+}
+
+// MARK: - Notice
+struct Notice: Codable {
+	let id: Int
+	let noticeTitle, noticeContents: String
+	
+	enum CodingKeys: String, CodingKey {
+		case id
+		case noticeTitle = "notice_title"
+		case noticeContents = "notice_contents"
+	}
+}
+
+
 struct noticeOption : Codable {
 	private enum CodingKeys : String, CodingKey {
 		case date = "date"

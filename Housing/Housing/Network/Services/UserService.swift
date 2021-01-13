@@ -38,6 +38,7 @@ extension UserService: TargetType {
 			return "/user/registration/1"
 		case .validation:
 			return "/authentication/confirm"
+
 		}
 	}
 	

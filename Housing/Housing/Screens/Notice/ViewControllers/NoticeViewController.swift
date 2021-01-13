@@ -7,38 +7,62 @@
 
 import UIKit
 
-final class NoticeViewController: UIViewController {
+import RxMoya
+import Moya
+import SwiftKeychainWrapper
+
+final class NoticeViewController: BaseViewController {
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var noticeCollectionView: UICollectionView!
-	
+    
 	//MARK:- Property
-	var noticeList: [NoticeData] = []
+	var houseData: HouseInfo?
+	var noticeData: [Notice] = []
+	
+	// MARK: - Service
+	private let noticeProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	
 	//MARK:- Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initLayout()
-		setNoticeList()
+		ownerProfile()
 		
 		noticeCollectionView.delegate = self
 		noticeCollectionView.dataSource = self
 	}
 	
 	//MARK:- Helper
+	func ownerProfile() {
+		noticeProvider.rx.request(.profile).asObservable().subscribe(onNext: { response in
+			if response.statusCode == 200 {
+				do{
+					let decoder = JSONDecoder()
+					let data = try decoder.decode(ResponseType<MyInfo>.self,
+																				from: response.data)
+					guard let result = data.data else {
+						return
+					}
+					self.houseData = result.houseInfo
+					self.noticeCollectionView.reloadData()
+				} catch {
+					print(error)
+				}
+			}
+		}, onError: { error in
+			print(error)
+		}, onCompleted: {
+			
+		}, onDisposed: {
+			
+		}).disposed(by: disposeBag)
+	}
+	
+	
+	
 	private func initLayout() {
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
-	}
-	
-	private func setNoticeList() {
-		noticeList.append(contentsOf: [
-			NoticeData.init(title: "11월 관리비 입금 안내",
-											context: "입금 계좌 : 1002455115135 (우리은행/김미정) 용돈 대 환영 카카오 페이도 가능 룰루랄라 미정이 용돈 줄 사람~!? 현정이 ? \n \n 입금 계좌 : 1002455115135 (우리은행/김미정) 용돈 대 환영 카카오 페이도 가능 룰루랄라 미정이 용돈 줄 사람~!? 현정이 ?"),
-			NoticeData.init(title: "22월 관리비 입금 안내",
-											context: "입금계좌 : 1002455115135(우리은행/김미정) 용돈 환영~! 카카오페이도 가능~!~!~!~! 이것도 최대 2줄~~~~~~"),
-			NoticeData.init(title: "33월 관리비 입금 안내",
-											context: "입금계좌 : 1002455115135(우리은행/김미정) 용돈 환영~! 카카오페이도 가능~!~!~!~! 이것도 최대 2줄~~~~~~")
-		])
 	}
 	
 	//MARK:- Component(Action)
@@ -72,7 +96,7 @@ extension NoticeViewController: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView,
 											numberOfItemsInSection section: Int) -> Int {
-		return noticeList.count
+		return noticeData.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView,
@@ -83,13 +107,15 @@ extension NoticeViewController: UICollectionViewDataSource {
 		else {
 			return UICollectionViewCell()
 		}
-		cell.FDF = noticeList[indexPath.row]
+		
+		cell.noticeInfo = noticeData[indexPath.row]
 		cell.fetchData()
-        cell.backgroundColor = .primaryGray
+		
+		cell.backgroundColor = .primaryGray
 		cell.containerView.layer.cornerRadius = 16 / 2
-        
-        cell.containerView.layer.applyCardShadow()
-        cell.contentView.backgroundColor = UIColor.primaryGray
+		
+		cell.containerView.layer.applyCardShadow()
+		cell.contentView.backgroundColor = UIColor.primaryGray
 		
 		return cell
 	}
@@ -130,6 +156,9 @@ extension NoticeViewController: UICollectionViewDelegate {
 					.layerMaxXMaxYCorner,
 					.layerMinXMaxYCorner
 				]
+				headerView.info = houseData
+				headerView.houseInfo()
+				headerView.headerlayout()
 				
 				return headerView
 			}
@@ -154,8 +183,8 @@ extension NoticeViewController: UICollectionViewDelegate {
 			return
 		}
 		
-		viewController.titleData = noticeList[indexPath.row].title
-		viewController.contextData = noticeList[indexPath.row].context
+		
+		viewController.id = noticeData[indexPath.row].id
 		
 		navigationController?.pushViewController(viewController, animated: true)
 	}
