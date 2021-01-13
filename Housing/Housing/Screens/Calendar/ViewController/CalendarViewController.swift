@@ -29,6 +29,9 @@ final class CalendarViewController: BaseViewController {
 																					collectionViewLayout: layout)
 		collectionView.scrollIndicatorInsets = .zero
 		collectionView.backgroundColor = .primaryGray
+		collectionView.register(
+			EmptyCalendarCollectionViewCell.self,
+			forCellWithReuseIdentifier: EmptyCalendarCollectionViewCell.reuseIdentifier)
 		collectionView.register(CalendarCollectionViewCell.self,
 														forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseIdentifier)
 		collectionView.register(NoticeCollectionViewCell.self,
@@ -94,6 +97,7 @@ final class CalendarViewController: BaseViewController {
 	var dic: [String : [FSCalendarModel]] = [:]
 	var day: String?
 	let dateFormatter = DateFormatter()
+	let dateFormatterForNotice = DateFormatter()
 
 	// MARK: - Provider
 	
@@ -121,6 +125,9 @@ final class CalendarViewController: BaseViewController {
 		let today = Date() //현재 시각 구하기
 		dateFormatter.dateFormat = "yyyy.M.d"
 		day = dateFormatter.string(from: today)
+		dateFormatterForNotice.dateFormat = "MM월 dd일"
+		let todayValue = dateFormatterForNotice.string(from: today)
+		dayScheduleLabel.text = "\(todayValue)의 일정"
 	}
 	
 	private func layout() {
@@ -137,7 +144,6 @@ final class CalendarViewController: BaseViewController {
 		calendarProvider.rx.request(.calendar(select_year: 2021, select_month: 1))
 			.asObservable()
 			.subscribe(onNext: { response in
-				//				let data = response.data
 				do{
 					let decoder = JSONDecoder()
 					let data = try decoder.decode(ResponseType<CalendarData>.self,
@@ -147,9 +153,11 @@ final class CalendarViewController: BaseViewController {
 				} catch {
 					print(error)
 				}
-				
 			}, onError: { error in
 				print(error.localizedDescription)
+			}, onCompleted: {
+				self.calendarView.reloadData()
+				self.collectionView.reloadData()
 			}).disposed(by: disposeBag)
 	}
 	
@@ -179,7 +187,6 @@ final class CalendarViewController: BaseViewController {
 			} else {
 				dic[when]?.append(model)
 			}
-			collectionView.reloadData()
 		}
 		
 	}
@@ -284,35 +291,60 @@ extension CalendarViewController: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView,
 											numberOfItemsInSection section: Int) -> Int {
-		if dic[(day ?? "")]?.count == nil {
+		guard let day = day else {
+			return 0
+		}
+		if dic[day]?.count == nil {
 			return 1
 		} else {
-			return dic[(day ?? "")]?.count ?? 0
+			return dic[day]?.count ?? 0
 		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView,
 											cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		print(day ?? "", dic[day ?? ""] ?? [:], "\(indexPath.row)번째 일정")
-		if indexPath.row%2 == 0 {
-			let cell: CalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
+		guard let day = day else {
+			return UICollectionViewCell()
+		}
+		if dic[day]?.count == nil {
+			let cell: EmptyCalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 			return cell
 		} else {
-			let cell: NoticeCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
-			return cell
+			guard let promise: [FSCalendarModel] = dic[day] else { return UICollectionViewCell() }
+			if promise[indexPath.row].isNotice == 0 {
+				let cell: CalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
+				cell.calendar = promise[indexPath.row]
+				cell.fetchCalendar()
+				cell.fetchCategory()
+				cell.fetchTime()
+				return cell
+			} else {
+				let cell: NoticeCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
+				cell.calendar = promise[indexPath.row]
+				cell.fetchCalendar()
+				cell.fetchTime()
+				return cell
+			}
 		}
 	}
-	
 }
 
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView,
 											layout collectionViewLayout: UICollectionViewLayout,
 											sizeForItemAt indexPath: IndexPath) -> CGSize {
-		if indexPath.row%2 == 0 {
-			return CGSize(width: view.frame.width, height: 112)
+		guard let day = day else {
+			return CGSize(width: 0, height: 0)
+		}
+		if dic[day]?.count == nil {
+			return CGSize(width: view.frame.width, height: view.frame.height - 700)
 		} else {
-			return CGSize(width: view.frame.width, height: 94)
+			guard let promise: [FSCalendarModel] = dic[day] else { return CGSize(width: 0, height: 0) }
+			if promise[indexPath.row].isNotice == 0 {
+				return CGSize(width: view.frame.width, height: 112)
+			} else {
+				return CGSize(width: view.frame.width, height: 94)
+			}
 		}
 	}
 }
@@ -324,11 +356,63 @@ extension CalendarViewController: FSCalendarDelegate {
 								didSelect date: Date,
 								at monthPosition: FSCalendarMonthPosition) {
 		day = dateFormatter.string(from: date)
-		print(day)
+		let today = dateFormatterForNotice.string(from: date)
+		dayScheduleLabel.text = "\(today)의 일정"
 		collectionView.reloadData()
+	}
+	
+	func calendar(_ calendar: FSCalendar,
+								numberOfEventsFor date: Date) -> Int {
+		let calendar = dateFormatter.string(from: date)
+		return dic[calendar]?.count ?? 0
 	}
 }
 
 extension CalendarViewController: FSCalendarDataSource { }
 
-extension CalendarViewController: FSCalendarDelegateAppearance { }
+extension CalendarViewController: FSCalendarDelegateAppearance {
+	
+	func calendar(_ calendar: FSCalendar,
+								appearance: FSCalendarAppearance,
+								eventDefaultColorsFor date: Date) -> [UIColor]? {
+		let key = dateFormatter.string(from: date)
+		let promise: [FSCalendarModel] = dic[key] ?? []
+		var color: [UIColor] = []
+		for atomic in promise {
+			if atomic.isNotice == 0 {
+				color.append(.primaryOrange)
+			} else {
+				color.append(.periwinkleBlue)
+			}
+		}
+		if promise.count == 1 {
+			return [color[0]]
+		} else if promise.count == 2 {
+			return [color[0], color[1]]
+		} else {
+			return nil
+		}
+	}
+	
+	func calendar(_ calendar: FSCalendar,
+								appearance: FSCalendarAppearance,
+								eventSelectionColorsFor date: Date) -> [UIColor]? {
+		let key = dateFormatter.string(from: date)
+		let promise: [FSCalendarModel] = dic[key] ?? []
+		var color: [UIColor] = []
+		for atomic in promise {
+			if atomic.isNotice == 0 {
+				color.append(.primaryOrange)
+			} else {
+				color.append(.periwinkleBlue)
+			}
+		}
+		if promise.count == 1 {
+			return [color[0]]
+		} else if promise.count == 2 {
+			return [color[0], color[1]]
+		} else {
+			return nil
+		}
+	}
+}

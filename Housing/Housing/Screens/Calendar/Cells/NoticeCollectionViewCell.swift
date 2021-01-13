@@ -29,6 +29,8 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
 	}
 	private let shadowView = UIView()
 	
+	var calendar: FSCalendarModel?
+	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
@@ -72,6 +74,23 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
 		timeLabel.snp.makeConstraints {
 			$0.leading.equalTo(titleLabel)
 			$0.top.equalTo(titleLabel.snp.bottom).offset(7)
+		}
+	}
+	func fetchCalendar() {
+		titleLabel.text = calendar?.title
+	}
+	func fetchTime() {
+		let times = calendar?.time.split(separator: "-")
+		guard let startTime = Int(times?[0] ?? "0") else {return}
+		guard let endTime = Int(times?[1] ?? "0") else {return}
+		if startTime > 12 && endTime > 12 {
+			timeLabel.text = "오후 \(startTime-12):00 ~ 오후 \(endTime-12):00"
+		} else if startTime > 12 && endTime <= 12 {
+			timeLabel.text = "오후 \(startTime-12):00 ~ 오전 \(endTime):00"
+		} else if startTime <= 12 && endTime > 12 {
+			timeLabel.text = "오전 \(startTime):00 ~ 오후 \(endTime-12):00"
+		} else {
+			timeLabel.text = "오전 \(startTime):00 ~ 오전 \(endTime):00"
 		}
 	}
 
