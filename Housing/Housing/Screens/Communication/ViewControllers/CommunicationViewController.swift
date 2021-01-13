@@ -48,17 +48,19 @@ final class CommunicationViewController: BaseViewController {
 	// MARK : - LifeCycle
 	override func viewDidLoad() {
 		networkForCommunication()
-		testArray()
+
 		super.viewDidLoad()
-		
-		tableViewData = [cellData(opened: true,
-															sectionData: incomDetailCellData), /// incomplete
-										 cellData(opened: true,
-															sectionData: comDetailCellData)] /// complete
 		configHeaderView()
 		
 		layoutNavigationBar()
 		configTableView()
+	}
+	
+	func dataSetup() {
+		tableViewData = [cellData(opened: true,
+															sectionData: incomDetailCellData), /// incomplete
+										 cellData(opened: true,
+															sectionData: comDetailCellData)] /// complete
 	}
 	
 	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
@@ -69,24 +71,7 @@ final class CommunicationViewController: BaseViewController {
 		case incom1com0
 		case incom1com1
 	}
-	private func testArray() {
-		var listdata = DetailData(id: 0, issueTitle: "0000", issueContents: "0000", progress: 0, category: 0)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 1, issueTitle: "1111", issueContents: "1111", progress: 2, category: 2)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 2, issueTitle: "2222", issueContents: "2222", progress: 2, category: 2)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 3, issueTitle: "3333", issueContents: "3333", progress: 2, category: 4)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 4, issueTitle: "4444", issueContents: "4444", progress: 2, category: 4)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 5, issueTitle: "5555", issueContents: "5555", progress: 2, category: 4)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 6, issueTitle: "6666", issueContents: "6666", progress: 2, category: 4)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 7, issueTitle: "7777", issueContents: "7777", progress: 2, category: 4)
-		self.comDetailCellData.append(listdata)
-	}
+	
 	
 	private func configTableView() {
 		communicationTableView.dataSource = self
@@ -123,45 +108,25 @@ final class CommunicationViewController: BaseViewController {
 						guard let result = data.data else {return}
 						self.completeLength = result.completeLength
 						self.incompleteLength = result.incompleteLength
-						print("incompleteLength: \(self.incompleteLength)")
-						print("completeLength: \(self.completeLength)")
-						
-						
-//						var listdata = DetailData(id: 0, issueTitle: "0000", issueContents: "0000", progress: 0, category: 0)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 1, issueTitle: "1111", issueContents: "1111", progress: 2, category: 2)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 2, issueTitle: "2222", issueContents: "2222", progress: 2, category: 2)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 3, issueTitle: "3333", issueContents: "3333", progress: 2, category: 4)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 4, issueTitle: "4444", issueContents: "4444", progress: 2, category: 4)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 5, issueTitle: "5555", issueContents: "5555", progress: 2, category: 4)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 6, issueTitle: "6666", issueContents: "6666", progress: 2, category: 4)
-//						self.incomDetailCellData.append(listdata)
-//
-//						listdata = DetailData(id: 7, issueTitle: "7777", issueContents: "7777", progress: 2, category: 4)
-//						self.comDetailCellData.append(listdata)
-						//semaphore.signal()//네트워킹이 끝나면 신호보내기
-						
-						
-						for index in 0..<result.incompleteList.count {
-							let listdata = DetailData(id: result.incompleteList[index].id, issueTitle: result.incompleteList[index].issueTitle, issueContents: result.incompleteList[index].issueContents, progress: result.incompleteList[index].progress, category: result.incompleteList[index].category)
-							self.incomDetailCellData.append(listdata)
-						}
 
-						for index in 0..<result.completeList.count {
-							let listdata = DetailData(id: result.completeList[index].id, issueTitle: result.completeList[index].issueTitle, issueContents: result.completeList[index].issueContents, progress: result.completeList[index].progress, category: result.completeList[index].category)
-							self.comDetailCellData.append(listdata)
+						
+				
+						
+						var listdata: [DetailData] = []
+						for index in 0..<result.incompleteList.count {
+							listdata.append(DetailData(id: result.incompleteList[index].id, issueTitle: result.incompleteList[index].issueTitle, issueContents: result.incompleteList[index].issueContents, progress: result.incompleteList[index].progress, category: result.incompleteList[index].category))
+
 						}
-							print("여기 incomplete")
-							print(self.incomDetailCellData)
-							print("여기 complete")
-							print(self.comDetailCellData)
+						self.incomDetailCellData=listdata
 						
-						
+						var listdata2: [DetailData] = []
+						for index in 0..<result.completeList.count {
+							listdata2.append(DetailData(id: result.completeList[index].id, issueTitle: result.completeList[index].issueTitle, issueContents: result.completeList[index].issueContents, progress: result.completeList[index].progress, category: result.completeList[index].category))
+						}
+						self.comDetailCellData=listdata2
+						self.reloadInputViews()
+
+						self.dataSetup()
 						self.communicationTableView.reloadData()
 						//semaphore.wait()
 						
@@ -173,7 +138,6 @@ final class CommunicationViewController: BaseViewController {
 				print(error)
 			}, onCompleted: {
 				self.communicationTableView.reloadData()
-
 				
 			}).disposed(by: disposeBag)
 		
@@ -300,7 +264,7 @@ extension CommunicationViewController: UITableViewDataSource{
 								 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		///title부분에 쓸 cell
-		//print(#function)
+		
 		guard let incomCell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTableViewCell")
 						as? IncompleteTableViewCell
 		else { return UITableViewCell() }
@@ -365,7 +329,7 @@ extension CommunicationViewController: UITableViewDataSource{
 			}
 		} else{  ///여기가 내부 cell 부분.
 			if incompleteLength == 0 && completeLength == 0{
-				print("여기 들어왔었음")
+	
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
 					if mode == 0{
 						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n자취생을 초대해 볼까요?"
@@ -384,8 +348,9 @@ extension CommunicationViewController: UITableViewDataSource{
 					emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!"
 					return emptyIncomCell
 				} else { ///cell중에서도 complete부분
-//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
-					contentCell.filloutCell()
+
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+					contentCell.awakeFromNib()
 					return contentCell
 				}
 			} else if incompleteLength > 0 && completeLength == 0{
@@ -398,21 +363,17 @@ extension CommunicationViewController: UITableViewDataSource{
 				}
 			} else if incompleteLength > 0 && completeLength > 0{
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-					print("이건 섹션 \(indexPath.section)")
-					print("이건 로우 \(indexPath.row)")
-					print(tableViewData[indexPath.section])
-					print("123123123",tableViewData)
+				
 					
 //					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
+				
 					
 					return contentCell
 				} else { ///cell중에서도 complete부분
 //					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
-					print("이건 섹션 \(indexPath.section)")
-					print("이건 로우 \(indexPath.row)")
-					print(tableViewData[indexPath.section])
+	
 					
 					return contentCell
 				}
