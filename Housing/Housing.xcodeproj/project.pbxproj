@@ -111,6 +111,7 @@
 		DAB3225925A72A520098175E /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225825A72A510098175E /* DatePickerViewController.swift */; };
 		DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225B25A73F900098175E /* UIDatePicker+.swift */; };
 		DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */; };
+		DAC7E48E25AF4E0300031102 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAC7E48D25AF4E0300031102 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -221,6 +222,7 @@
 				DA05097225A0722000DDB916 /* YPImagePicker in Frameworks */,
 				D1B65A1C2598D16600A9A7CB /* RxRelay in Frameworks */,
 				D1B65A1A2598D16600A9A7CB /* RxCocoa in Frameworks */,
+				DAC7E48E25AF4E0300031102 /* Lottie in Frameworks */,
 				D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */,
 				D1CF646C25AC236E009A39EC /* Moya in Frameworks */,
 				D1CF646E25AC236E009A39EC /* ReactiveMoya in Frameworks */,
@@ -700,6 +702,7 @@
 				D1CF646D25AC236E009A39EC /* ReactiveMoya */,
 				D1CF646F25AC236E009A39EC /* RxMoya */,
 				1FACC31825AD747B0072EABA /* SwiftyJSON */,
+				DAC7E48D25AF4E0300031102 /* Lottie */,
 			);
 			productName = Housing;
 			productReference = D19179E2259890A40035AF74 /* Housing.app */;
@@ -740,6 +743,7 @@
 				D1B0387325A8E65A0092CE4F /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				D1CF646A25AC236E009A39EC /* XCRemoteSwiftPackageReference "Moya" */,
 				1FACC31725AD747B0072EABA /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				DAC7E48C25AF4E0300031102 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = D19179E3259890A40035AF74 /* Products */;
 			projectDirPath = "";
@@ -1170,6 +1174,14 @@
 				minimumVersion = 2.8.2;
 			};
 		};
+		DAC7E48C25AF4E0300031102 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.9;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1247,6 +1259,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		DAC7E48D25AF4E0300031102 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAC7E48C25AF4E0300031102 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
