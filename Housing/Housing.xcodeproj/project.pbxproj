@@ -635,6 +635,7 @@
 		D1B65A022598C61800A9A7CB /* Supports */ = {
 			isa = PBXGroup;
 			children = (
+				DA1A20D625B00E2500352C81 /* LottieFiles */,
 				D12D6DDE25A1C7F600E9A43A /* BASKE1.ttf */,
 				D19179F3259890A70035AF74 /* Info.plist */,
 				D19179E7259890A40035AF74 /* SceneDelegate.swift */,
@@ -681,6 +682,13 @@
 				DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DA1A20D625B00E2500352C81 /* LottieFiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LottieFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

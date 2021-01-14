@@ -148,6 +148,7 @@ class CameraWorkViewController: UIViewController{
 				print(photo.fromCamera)
 				print(photo.image)
 				self.evidencePictures.append(photo.image)
+				self.requestData.images.append(photo.image)
 			}
 			self.photoSelectCollectionView.reloadData()
 			picker.dismiss(animated: true, completion: nil)
@@ -164,6 +165,7 @@ class CameraWorkViewController: UIViewController{
 					print(photo.image)
 					if !self.evidencePictures.contains(photo.image){
 						self.evidencePictures.append(photo.image)
+						self.requestData.images.append(photo.image)
 					}
 				case .video(v: _):
 					print("비디오")

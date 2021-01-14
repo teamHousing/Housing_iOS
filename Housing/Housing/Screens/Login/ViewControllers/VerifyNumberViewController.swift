@@ -38,6 +38,8 @@ class VerifyNumberViewController: BaseViewController {
 	
 	private let buildingNumber = UITextField().then {
 		$0.borderStyle = .none
+		$0.tintColor = .primaryOrange
+
 		$0.placeholder = "101, A, BEST"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 	}
@@ -48,6 +50,7 @@ class VerifyNumberViewController: BaseViewController {
 		$0.borderStyle = .none
 		$0.placeholder = "101"
 		$0.keyboardType = .numberPad
+		$0.tintColor = .primaryOrange
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 	}
 	private let houseNumberUnderbar = UIView().then {

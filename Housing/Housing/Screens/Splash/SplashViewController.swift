@@ -10,9 +10,11 @@ import UIKit
 import Then
 import SnapKit
 import SwiftKeychainWrapper
+import Lottie
 
 final class SplashViewController: BaseViewController {
-		
+	//private let lottieAnimationView = LOTAnimationView(named:"")
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		

@@ -11,16 +11,18 @@ import Moya
 import SwiftKeychainWrapper
 
 enum PromiseService {
-	case homePromise(is_promise: Bool,
+	case homePromise(id: Int,
+									 is_promise: Bool,
 									 category: Int,
 									 issue_title: String,
 									 issue_contents: String,
 									 requested_term: String)
-	case homePromiseTimeList(id: Int)
+	case homePromiseTimeList(id : Int)
 	case homePromiseConfirm(id: Int, promise_option: [String])
 	case homePromiseHostModify(id: Int)
 	case homePromiseGuestModify(id: Int, promise_option: [String])
 	case homePromiseComplete(id: Int)
+	case homePromiseImageUpload(issue_img : [MultipartFormData])
 }
 
 extension PromiseService: TargetType {
@@ -35,24 +37,27 @@ extension PromiseService: TargetType {
 	
 	var path: String {
 		switch self {
-		case .homePromise:
-			return "/communication"
+		case .homePromiseComplete:
+			return "/communication/"
+		case let .homePromise(id, _,_,_,_,_):
+			return "/communication/1"
 		case let .homePromiseTimeList(id):
 			return "/communication/\(id)/promise-option"
-		case let .homePromiseConfirm(id, promise_option):
+		case let .homePromiseConfirm(id, _):
 			return "/communication/\(id)/promise"
 		case let .homePromiseHostModify(id):
 			return "/communication/\(id)/request/promise-option"
-		case let .homePromiseGuestModify(id):
+		case let .homePromiseGuestModify(id, _):
 			return "/communication/\(id)/request/promise-option"
-		case .homePromiseComplete:
-			return "/communication/"
+		case .homePromiseImageUpload :
+			return "/communication/image"
 		}
 	}
 	
 	var method: Moya.Method {
 		switch self {
 		case .homePromise,
+				 .homePromiseImageUpload,
 				 .homePromiseConfirm:
 			return .post
 		case .homePromiseTimeList,
@@ -70,14 +75,14 @@ extension PromiseService: TargetType {
 	
 	var task: Task {
 		switch self {
-		case .homePromise(is_promise: let is_promise, category: let category, issue_title: let issue_title, issue_contents: let issue_contents, requested_term: let requested_term):
+		case .homePromise(id : let id, is_promise: let is_promise, category: let category, issue_title: let issue_title, issue_contents: let issue_contents, requested_term: let requested_term):
 			return .requestCompositeParameters(bodyParameters: ["is_promise": is_promise,
 																													"category": category,
 																													"issue_title": issue_title,
 																													"issue_contents": issue_contents,
 																													"requested_term": requested_term],
 																				 bodyEncoding: JSONEncoding.default,
-																				 urlParameters: .init())
+																				 urlParameters: ["id": id])
 		case .homePromiseTimeList(id: let id):
 			return .requestPlain
 
@@ -100,6 +105,8 @@ extension PromiseService: TargetType {
 			return .requestCompositeParameters(bodyParameters: .init(),
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
+		case .homePromiseImageUpload(issue_img : let issue_img) :
+			return .uploadMultipart(issue_img)
 		}
 	}
 	
