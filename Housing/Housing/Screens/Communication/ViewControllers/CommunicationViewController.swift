@@ -35,9 +35,9 @@ final class CommunicationViewController: BaseViewController {
 																				 action: #selector(settingButtonDidTap))
 	
 	//MARK: - Property
-	var incompleteLength = 7
-	var completeLength = 1
-	var mode = 1// 집주인이 0, 자취생이 1
+	var incompleteLength = 0
+	var completeLength = 0
+	var mode = 3
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData: [DetailData] = []
 	private var comDetailCellData: [DetailData] = []
@@ -46,6 +46,8 @@ final class CommunicationViewController: BaseViewController {
 	//MARK: - LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost)
+		determineType(isHost: isHost!)
 		networkForCommunication()
 		configHeaderView()
 		layoutNavigationBar()
@@ -53,6 +55,7 @@ final class CommunicationViewController: BaseViewController {
 		pullToRefresh(tableview: communicationTableView)
 		print(123)
 		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken))
+		
 	}
 	
 	func dataSetup() {
@@ -60,6 +63,16 @@ final class CommunicationViewController: BaseViewController {
 															sectionData: incomDetailCellData), /// incomplete
 										 cellData(opened: true,
 															sectionData: comDetailCellData)] /// complete
+	}
+	
+	private func determineType(isHost: Int) {
+		if isHost == 0 {
+			mode = 0
+			print("mode가 0임")
+		}else{
+			mode = 1
+			print("mode가 1임")
+		}
 	}
 	
 	private func configTableView() {
@@ -95,8 +108,8 @@ final class CommunicationViewController: BaseViewController {
 						let data = try decoder.decode(ResponseType<Communication>.self,
 																					from: response.data)
 						guard let result = data.data else {return}
-						self.completeLength = result.completeLength
-						self.incompleteLength = result.incompleteLength
+						//self.completeLength = result.completeLength
+						//self.incompleteLength = result.incompleteLength
 						
 						var listdata: [DetailData] = []
 						for index in 0..<result.incompleteList.count {
@@ -112,8 +125,6 @@ final class CommunicationViewController: BaseViewController {
 						self.reloadInputViews()
 
 						self.dataSetup()
-//						self.communicationTableView.reloadData()
-						//semaphore.wait()
 						
 					} catch {
 						print(error)
@@ -296,21 +307,29 @@ extension CommunicationViewController: UITableViewDataSource{
 		if indexPath.row == 0 { ///여기가 title 부분. /// 완료된 것이 없을 때는 title이 뜨지 않도록 했음.
 			if incompleteLength == 0 && completeLength == 0 {
 				if indexPath.section == 0 {
+					incomCell.incomButton.isHidden = true
 					return incomCell
-				} else if indexPath.section == 1 {
+				}
+				if indexPath.section == 1{
 					return emptyCell
 				}
-			} else {
-				if indexPath.section == 0 {
-					return incomCell
-				}
-				if indexPath.section == 1 {
-					return comCell
-				}
 			}
-		} else{  ///여기가 내부 cell 부분.
+			if indexPath.section == 0 {
+				if incompleteLength == 0 {
+					incomCell.incomButton.isHidden = true
+					return incomCell
+			}else {
+				return incomCell
+			}
+			}else if indexPath.section == 1 {
+					if completeLength == 0 {
+						comCell.comButton.isHidden = true
+						return comCell
+					} else { return comCell}
+				}
+		}
+		else{  ///여기가 내부 cell 부분.
 			if incompleteLength == 0 && completeLength == 0{
-	
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
 					if mode == 0{
 						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n자취생을 초대해 볼까요?"
@@ -336,6 +355,7 @@ extension CommunicationViewController: UITableViewDataSource{
 				}
 			} else if incompleteLength > 0 && completeLength == 0{
 				if indexPath.section == 0 { ///cell중에서도 incomplete부분.
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
 					return contentCell
 				} else { ///cell중에서도 complete부분
@@ -370,7 +390,7 @@ extension CommunicationViewController: UIScrollViewDelegate{
 }
 
 struct Communication: Codable {
-	let unit: String
+	let unit: String?
 	let incompleteLength: Int
 	let incompleteList: [Inquiry]
 	let completeLength: Int
