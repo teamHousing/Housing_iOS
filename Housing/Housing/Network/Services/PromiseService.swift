@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 import Moya
 import SwiftKeychainWrapper
 
@@ -22,7 +22,8 @@ enum PromiseService {
 	case homePromiseHostModify(id: Int)
 	case homePromiseGuestModify(id: Int, promise_option: [String])
 	case homePromiseComplete(id: Int)
-	case homePromiseImageUpload(issue_img : [MultipartFormData])
+	case homePromiseImageUpload(issue_img : [UIImage])
+	case homePromiseGuestRegister(id : Int, promise_option:[noticeOption])
 }
 
 extension PromiseService: TargetType {
@@ -49,8 +50,10 @@ extension PromiseService: TargetType {
 			return "/communication/\(id)/request/promise-option"
 		case let .homePromiseGuestModify(id, _):
 			return "/communication/\(id)/request/promise-option"
-		case .homePromiseImageUpload :
+		case .homePromiseImageUpload(_) :
 			return "/communication/image"
+		case let .homePromiseGuestRegister(id, _) :
+			return "/communication/\(id)/promise-option"
 		}
 	}
 	
@@ -58,7 +61,8 @@ extension PromiseService: TargetType {
 		switch self {
 		case .homePromise,
 				 .homePromiseImageUpload,
-				 .homePromiseConfirm:
+				 .homePromiseConfirm,
+				 .homePromiseGuestRegister:
 			return .post
 		case .homePromiseTimeList,
 				 .homePromiseHostModify,
@@ -106,7 +110,19 @@ extension PromiseService: TargetType {
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
 		case .homePromiseImageUpload(issue_img : let issue_img) :
-			return .uploadMultipart(issue_img)
+			let data: [Data] = issue_img.map{ $0.jpegData(compressionQuality: 1.0)!}
+			let multipart : [MultipartFormData] = data.map{ element in
+				return MultipartFormData(provider: .data(element), name: "issue_img", fileName: "file.jpeg",mimeType: "image/jpeg")
+			}
+			dump(multipart)
+
+			return .uploadMultipart(multipart)
+			
+		case .homePromiseGuestRegister(id: let id, promise_option: let promise_option):
+			let dict = promise_option.map{["date" : $0.date, "day" : $0.day , "time" : $0.time]}
+			return .requestCompositeParameters(bodyParameters: ["promise_option": dict],
+																				 bodyEncoding: JSONEncoding.default,
+																				 urlParameters: ["id": id])
 		}
 	}
 	

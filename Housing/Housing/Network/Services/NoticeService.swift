@@ -55,14 +55,6 @@ struct Notice: Codable {
 }
 
 
-struct noticeOption : Codable {
-	private enum CodingKeys : String, CodingKey {
-		case date = "date"
-		case day = "day"
-		case time = "time"
-	}
-	let date, day, time: String?
-}
 
 
 extension NoticeService: TargetType {

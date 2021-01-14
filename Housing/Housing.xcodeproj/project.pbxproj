@@ -114,6 +114,7 @@
 		DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225B25A73F900098175E /* UIDatePicker+.swift */; };
 		DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */; };
 		DAC7E48E25AF4E0300031102 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAC7E48D25AF4E0300031102 /* Lottie */; };
+		DACAAB6025B0516B006745A6 /* timeOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACAAB5F25B0516B006745A6 /* timeOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -212,6 +213,7 @@
 		DAB3225825A72A510098175E /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		DAB3225B25A73F900098175E /* UIDatePicker+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+.swift"; sourceTree = "<group>"; };
 		DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStampTableViewCell.swift; sourceTree = "<group>"; };
+		DACAAB5F25B0516B006745A6 /* timeOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeOptions.swift; sourceTree = "<group>"; };
 		EE989042B75B926FB7CC268C /* Pods_Housing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Housing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -332,6 +334,7 @@
 				D15824B725AD32920098B5AF /* Calendar.swift */,
 				CC74425E25AD8B6000D04E4D /* Detail.swift */,
 				1F53BA5025AE9AE30048CDAB /* Host.swift */,
+				DACAAB5F25B0516B006745A6 /* timeOptions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				D1311892259B6BB300897DF4 /* UITableView+.swift in Sources */,
 				CC096D5525A2415E00E07017 /* ContentViewController.swift in Sources */,
 				37259E8D25A829EF006550AF /* EmptyComTableViewCell.swift in Sources */,
+				DACAAB6025B0516B006745A6 /* timeOptions.swift in Sources */,
 				371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */,
 				1F53BA5125AE9AE30048CDAB /* Host.swift in Sources */,
 				DA050956259F692E00DDB916 /* UIImage+.swift in Sources */,

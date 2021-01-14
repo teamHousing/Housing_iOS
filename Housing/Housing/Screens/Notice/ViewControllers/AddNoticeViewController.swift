@@ -367,12 +367,8 @@ class AddNoticeViewController: BaseViewController{
 		tabBarController?.tabBar.isHidden = false
 	}
 	@objc func addNotice(sender : UIButton) {
-		print(requestData.date)
-		print(requestData.startTime)
-		print(requestData.endTime)
 		var temp = VisitDate()
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
-			print(str)
 			let day = String(str.element!.split(separator: " ")[0])
 			let date = String(str.element!.split(separator: " ")[1])
 			temp.date = date
@@ -397,18 +393,13 @@ class AddNoticeViewController: BaseViewController{
 			temp.endTime = String(Int(temp.endTime)! + 12)
 		}
 		let a = "\(temp.startTime)-\(temp.endTime)"
-		print(temp)
-		print(a)
+
 		requestData.date.onNext("")
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
-		let decoder = JSONDecoder()
 
 		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a )
 		let noticeArr: [noticeOption] = [noticetime]
-		print(noticetime)
-		print(self.noticeTitle.text)
-		print(self.noticeDescription.text)
 		userProvider.rx.request(.profileNoticeAdmit(house_info_id: 1, notice_title: self.noticeTitle.text ?? "", notice_contents: self.noticeDescription.text ?? "" , notice_option: noticeArr)).asObservable()
 			.subscribe { (response) in
 				if response.statusCode == 200 {

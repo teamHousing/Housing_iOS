@@ -95,42 +95,15 @@ class AdditionalRequestViewController: BaseViewController {
 	
 	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
-		let appointmentview = AppointmentViewController()
-		self.navigationController?.pushViewController(appointmentview, animated: true)
-	}
-	@objc func popToRootController() {
-
-		//requestData 싱글톤객체 값 초기화
-		//서버에 통신
 		userProvider.rx.request(.homePromise(id: 1,is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
 						let decoder = JSONDecoder()
 						let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
-						if !self.requestData.images.isEmpty {
-							let data: [Data] = self.requestData.images.map{ $0.jpegData(compressionQuality: 1.0)!}
-							let multipart : [MultipartFormData] = data.map{ element in
-								return MultipartFormData(provider: .data(element), name: "file\(element)", fileName: "\(element).jpg", mimeType: "사진")
-							}
-							self.userProvider.rx.request(.homePromiseImageUpload(issue_img: multipart)).asObservable()
-								.subscribe { (next) in
-									if next.statusCode == 200 {
-										do {
-											print(next.statusCode)
-										}
-										catch {
-											print(error)
-										}
-									}
-								} onError: { (error) in
-									print(error.localizedDescription)
-								}.disposed(by: self.disposeBag)
-						}
-
 						print(data.data?.issue_id)
-						self.navigationController?.popToRootViewController(animated: true)
-
+						let appointmentview = AppointmentViewController()
+						self.navigationController?.pushViewController(appointmentview, animated: true)
 					}
 					
 					catch {
@@ -145,6 +118,58 @@ class AdditionalRequestViewController: BaseViewController {
 		requestData.isPromiseNeeded = false
 		requestData.cartegory = 0
 		requestData.discription = ""
+		image()
+	}
+	@objc func popToRootController() {
+
+		//requestData 싱글톤객체 값 초기화
+		//서버에 통신
+		userProvider.rx.request(.homePromise(id: 1,is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
+						print(data.data?.issue_id)
+						self.navigationController?.popToRootViewController(animated: true)
+					}
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+		requestData.availableTimeList = []
+		requestData.title = ""
+		requestData.isPromiseNeeded = false
+		requestData.cartegory = 0
+		requestData.discription = ""
+		image()
+	}
+	private func image(){
+		if !self.requestData.images.isEmpty {
+			userProvider.rx.request(.homePromiseImageUpload(issue_img: self.requestData.images)).observeOn(MainScheduler.init()).asObservable()
+				.subscribe { (next) in
+					if next.statusCode == 200 {
+						do {
+							print(next.statusCode)
+						}
+						catch {
+							print(error)
+						}
+					}
+				} onError: { (error) in
+					print(error.localizedDescription)
+					} onCompleted: {
+						print("dp")
+					} onDisposed: {
+						print("disposed")
+						print(self.requestData)
+					}
+				.disposed(by: disposeBag)
+		}
+
 	}
 	@objc func presetMessageSelected(sender : UIButton) {
 		clearSelection()
