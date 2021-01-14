@@ -50,7 +50,6 @@
 		CC8B596025A49F6D00EC3AC7 /* AddedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */; };
 		CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */; };
 		CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */; };
-		CCDDF3A225B061C40096B973 /* EmptyDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDF3A125B061C40096B973 /* EmptyDetailTableViewCell.swift */; };
 		D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */; };
 		D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */; };
 		D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */; };
@@ -70,6 +69,7 @@
 		D15824B125AD321A0098B5AF /* ResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15824B025AD321A0098B5AF /* ResponseType.swift */; };
 		D15824B825AD32920098B5AF /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15824B725AD32920098B5AF /* Calendar.swift */; };
 		D15824E125AF201C0098B5AF /* EmptyCalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15824E025AF201C0098B5AF /* EmptyCalendarCollectionViewCell.swift */; };
+		D16C797525B0755D00BB22D1 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C797425B0755D00BB22D1 /* EmptyTableViewCell.swift */; };
 		D19179E6259890A40035AF74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19179E5259890A40035AF74 /* AppDelegate.swift */; };
 		D19179E8259890A40035AF74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19179E7259890A40035AF74 /* SceneDelegate.swift */; };
 		D19179EA259890A40035AF74 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19179E9259890A40035AF74 /* SplashViewController.swift */; };
@@ -163,7 +163,6 @@
 		CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedImageTableViewCell.swift; sourceTree = "<group>"; };
 		CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTableViewCell.swift; sourceTree = "<group>"; };
-		CCDDF3A125B061C40096B973 /* EmptyDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyDetailTableViewCell.swift; path = ../../../../../../../../../Documents/EmptyDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
 		D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -184,6 +183,7 @@
 		D15824B025AD321A0098B5AF /* ResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseType.swift; sourceTree = "<group>"; };
 		D15824B725AD32920098B5AF /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		D15824E025AF201C0098B5AF /* EmptyCalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		D16C797425B0755D00BB22D1 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		D19179E2259890A40035AF74 /* Housing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Housing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D19179E5259890A40035AF74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D19179E7259890A40035AF74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -308,6 +308,7 @@
 		CC0C715E25A1BC5E00DEF0FA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				D16C797425B0755D00BB22D1 /* EmptyTableViewCell.swift */,
 				CC8B594F25A4964200EC3AC7 /* RequestTableViewCell.swift */,
 				CC8B595225A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift */,
 				CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */,
@@ -317,7 +318,6 @@
 				CC42D06125A74E54002A461D /* MessageDetailTableViewCell.swift */,
 				CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */,
 				CC74427825AF4CAB00D04E4D /* EmptyTableViewCell.swift */,
-				CCDDF3A125B061C40096B973 /* EmptyDetailTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -909,10 +909,10 @@
 				CC6740E425ACADE500EAE4C0 /* CommunicationService.swift in Sources */,
 				1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */,
 				D13118A6259B718900897DF4 /* CALayer+.swift in Sources */,
-				CCDDF3A225B061C40096B973 /* EmptyDetailTableViewCell.swift in Sources */,
 				D15824B125AD321A0098B5AF /* ResponseType.swift in Sources */,
 				CC6A1E0E25A5AE6C00C86865 /* MessageViewController.swift in Sources */,
 				CC42D06525A7551C002A461D /* MessageCard.swift in Sources */,
+				D16C797525B0755D00BB22D1 /* EmptyTableViewCell.swift in Sources */,
 				CC74425F25AD8B6000D04E4D /* Detail.swift in Sources */,
 				CC6A1DF825A58C6C00C86865 /* AddedImageCollectionViewCell.swift in Sources */,
 				CC8B596025A49F6D00EC3AC7 /* AddedImageTableViewCell.swift in Sources */,
