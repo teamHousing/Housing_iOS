@@ -33,8 +33,7 @@ final class CommunicationViewController: BaseViewController {
 																				 style: .done,
 																				 target: self,
 																				 action: #selector(settingButtonDidTap))
-	
-	
+
 	//MARK: - Property
 	var incompleteLength = 1
 	var completeLength = 1
@@ -43,19 +42,17 @@ final class CommunicationViewController: BaseViewController {
 	private var incomDetailCellData: [DetailData] = []
 	private var comDetailCellData: [DetailData] = []
 	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-	
 	//MARK: - LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost)
 		determineType(isHost: isHost!)
 		networkForCommunication()
-		configHeaderView()
 		layoutNavigationBar()
+		configHeaderView()
 		configTableView()
 		pullToRefresh(tableview: communicationTableView)
-		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)
-		//준현군 도와줘 여기 갑자기 오류떠서 force optional했는데 괜ㅊ나하?
+		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)//준현군 도와줘 여기 갑자기 오류떠서 force optional했는데 괜ㅊ나하?
 	}
 	
 	func dataSetup() {
@@ -66,9 +63,10 @@ final class CommunicationViewController: BaseViewController {
 	}
 	
 	private func determineButtonImage(mode: Int)-> String{
+		
 		if mode == 0 {
 			print("mode = \(mode)")
-			return "btnSetting"
+			return "2003"
 		}else {
 			print("mode = \(mode)")
 			return "icWrite"
@@ -94,7 +92,7 @@ final class CommunicationViewController: BaseViewController {
 	
 	private func layoutNavigationBar() {
 		navigationItem.rightBarButtonItem = naviButton
-		navigationController?.navigationBar.shadowImage = UIImage()
+		//navigationController?.navigationBar.shadowImage = UIImage()
 		navigationController?.navigationBar.isTranslucent = true
 		//도와줘 준현군
 	}
@@ -172,13 +170,12 @@ final class CommunicationViewController: BaseViewController {
 	@objc
 	private func settingButtonDidTap() {
 		KeychainWrapper.standard.removeAllKeys()
-    dismiss(animated: true, completion: nil)
+    //dismiss(animated: true, completion: nil)
 		//준현군. 이거 현종군을 위해서 만든 기능이라면 삭제해줘
 	}
 }
 
 // MARK: - UITableView
-
 extension CommunicationViewController: UITableViewDelegate { /// 이게 cell이 아니라 button에 반응하도록 해야함.
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		//let selectedIndexPath = tableView.indexPathForSelectedRow
@@ -195,8 +192,6 @@ extension CommunicationViewController: UITableViewDelegate { /// 이게 cell이 
 				let sections = IndexSet(integer: indexPath.section)
 				tableView.reloadSections(sections, with: .none) ///animaion
 			}
-//			determ///????
-			print("리로드한다~")
 			communicationTableView.reloadData()
 		} else {
 			let viewController = DetailViewController()
@@ -275,13 +270,16 @@ extension CommunicationViewController: UITableViewDataSource{
 		else { return UITableViewCell() }
 		incomCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		incomCell.countOfIncomplete.text = "(\(incompleteLength))"
+		
+		incomCell.roomNumberButton.isHidden = true ///앱잼에서 호수별 필터링을 구현하지 않기에 넣은 코드입니다.
 		///incomCell.incomButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
 		
-		if mode == 1 {
-			incomCell.roomNumberButton.isHidden = true
-		} else {
-			incomCell.roomNumberButton.isHidden = false
-		}
+		///여기로부터 5개의 줄 주석 삭제하지마세요.
+//		if mode == 1 {
+//			incomCell.roomNumberButton.isHidden = true
+//		} else {
+//			incomCell.roomNumberButton.isHidden = false
+//		}
 		
 		guard let comCell = tableView.dequeueReusableCell(withIdentifier: "CompleteTableViewCell")
 						as? CompleteTableViewCell
@@ -304,6 +302,7 @@ extension CommunicationViewController: UITableViewDataSource{
 			}
 
 		}
+		determineTitleButtonImage()
 		
 		///cell부분에 쓸 cell
 		guard let emptyIncomCell = tableView.dequeueReusableCell(withIdentifier: "emptyIncomTableViewCell")
