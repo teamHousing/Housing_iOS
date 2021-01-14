@@ -109,6 +109,7 @@
 		DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */; };
 		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 		DA1A827725AAD41D00B1F56C /* AddNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1A827625AAD41C00B1F56C /* AddNoticeViewController.swift */; };
+		DA3C142F25B08D9700B5A4B8 /* promiseId.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C142E25B08D9700B5A4B8 /* promiseId.swift */; };
 		DA6D898525A5A98E00CF47C4 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D898425A5A98E00CF47C4 /* AppointmentViewController.swift */; };
 		DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA813FBE25A475E500D33AD2 /* AdditionalRequestViewController.swift */; };
 		DA928D2525A98ED200DA8466 /* VerifyNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA928D2425A98ED200DA8466 /* VerifyNumberViewController.swift */; };
@@ -211,7 +212,7 @@
 		DA05096B25A05A6100DDB916 /* RequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataModel.swift; sourceTree = "<group>"; };
 		DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA1A827625AAD41C00B1F56C /* AddNoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoticeViewController.swift; sourceTree = "<group>"; };
-		DA3C141E25B08B1000B5A4B8 /* promiseId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = promiseId.swift; sourceTree = "<group>"; };
+		DA3C142E25B08D9700B5A4B8 /* promiseId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = promiseId.swift; sourceTree = "<group>"; };
 		DA6D898425A5A98E00CF47C4 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
 		DA813FBE25A475E500D33AD2 /* AdditionalRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRequestViewController.swift; sourceTree = "<group>"; };
 		DA928D2425A98ED200DA8466 /* VerifyNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNumberViewController.swift; sourceTree = "<group>"; };
@@ -705,7 +706,7 @@
 		DA3C141D25B08B0900B5A4B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DA3C141E25B08B1000B5A4B8 /* promiseId.swift */,
+				DA3C142E25B08D9700B5A4B8 /* promiseId.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -866,6 +867,7 @@
 				CC74427925AF4CAB00D04E4D /* EmptyTableViewCell.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
+				DA3C142F25B08D9700B5A4B8 /* promiseId.swift in Sources */,
 				1FA03DE325A8471300AF0326 /* NoticeInformationCollectionViewCell.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,
 				1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */,
