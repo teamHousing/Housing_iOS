@@ -39,7 +39,10 @@ class DetailViewController: SegementSlideDefaultViewController {
 	private let coverSafeAreaView = UIView().then {
 		$0.backgroundColor = .white
 	}
-	
+	lazy var optionButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
+																				 style: .done,
+																				 target: self,
+																				 action: #selector(optionButtonDidTap))
 	var category: String = ""
 	var status: String = ""
 	var viewTitle: String = ""
@@ -272,6 +275,40 @@ class DetailViewController: SegementSlideDefaultViewController {
 			}
 		}
 	}
+
+	@objc
+	private func optionButtonDidTap() {
+		let optionMenu = UIAlertController(title: nil,
+																			 message: nil,
+																			 preferredStyle: .actionSheet)
+		
+		//옵션 초기화
+		let deleteAction = UIAlertAction(title: "Delete",
+																		 style: .default,
+																		 handler: {
+				(alert: UIAlertAction!) -> Void in
+		})
+		let saveAction = UIAlertAction(title: "Save",
+																	 style: .default,
+																	 handler: {
+				(alert: UIAlertAction!) -> Void in
+		})
+		
+		let cancelAction = UIAlertAction(title: "Cancel",
+																		 style: .cancel,
+																		 handler: {
+				(alert: UIAlertAction!) -> Void in
+																		 })
+
+	 //action sheet에 옵션 추가.
+		optionMenu.addAction(deleteAction)
+		optionMenu.addAction(saveAction)
+		optionMenu.addAction(cancelAction)
+		
+	 //show
+		self.present(optionMenu, animated: true, completion: nil)
+	}
+
 		
 	override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
 		let viewController = ContentViewController()
@@ -300,7 +337,8 @@ class DetailViewController: SegementSlideDefaultViewController {
 		layout()
 		setSafeArea()
 		reloadData()
-		print("requestIㅇ :",requestId)
+		
+		navigationItem.rightBarButtonItem = optionButton
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

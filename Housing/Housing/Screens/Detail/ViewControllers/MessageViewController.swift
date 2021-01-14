@@ -79,7 +79,9 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 			cell.status = self.statusModel[0].userStatus!
 			cell.userOrOwner = 1
 		}
-		cell.confirmedPromiseOption = "\(self.model.confirmedPromiseOption![0]) / \(self.model.confirmedPromiseOption![1]) / \(self.model.confirmedPromiseOption![2]) "
+		if let promiseArray = model.confirmedPromiseOption {
+			cell.confirmedPromiseOption = "\(promiseArray[0]) / \(promiseArray[1]) / \(promiseArray[2])"
+		}
 		cell.rootViewController = self
 		cell.awakeFromNib()
 		return cell
