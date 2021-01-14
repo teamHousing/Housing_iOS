@@ -52,6 +52,7 @@ class DetailNoticeViewController: BaseViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		tabBarController?.tabBar.isHidden = true
+		navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
