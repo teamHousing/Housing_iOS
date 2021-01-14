@@ -158,8 +158,11 @@ class ConfirmViewController: BaseViewController {
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
-						self.navigationController?.parent?.children.last?.viewDidLoad()
+//						self.navigationController?.parent?.children.last?.viewDidLoad()
 						self.navigationController?.popViewController(animated: true)
+						let viewcontroller = self.storyboard?.instantiateViewController(
+									withIdentifier: "DetailViewController")
+						viewcontroller.self?.viewDidLoad()
 					}
 					catch {
 						print(error)
