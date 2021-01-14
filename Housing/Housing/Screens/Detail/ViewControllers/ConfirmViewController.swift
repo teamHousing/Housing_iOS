@@ -141,7 +141,7 @@ class ConfirmViewController: BaseViewController {
 				if next.statusCode == 200 {
 					do {
 						print(next)
-						self.navigationController?.popViewController(animated: true)
+						self.navigationController?.popToRootViewController(animated: true)
 					} catch {
 						print(error)
 					}
@@ -159,7 +159,7 @@ class ConfirmViewController: BaseViewController {
 				if next.statusCode == 200 {
 					do {
 //						self.navigationController?.parent?.children.last?.viewDidLoad()
-						self.navigationController?.popViewController(animated: true)
+						self.navigationController?.popToRootViewController(animated: true)
 						let viewcontroller = self.storyboard?.instantiateViewController(
 									withIdentifier: "DetailViewController")
 						viewcontroller.self?.viewDidLoad()
