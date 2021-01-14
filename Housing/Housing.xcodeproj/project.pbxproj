@@ -109,6 +109,7 @@
 		DA05097A25A2176300DDB916 /* photoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */; };
 		DA10C689259B3C3F00AC91D9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DA10C688259B3C3F00AC91D9 /* FSCalendar */; };
 		DA1A827725AAD41D00B1F56C /* AddNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1A827625AAD41C00B1F56C /* AddNoticeViewController.swift */; };
+		DA3C141B25B0825E00B5A4B8 /* promiseId.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C141A25B0825E00B5A4B8 /* promiseId.swift */; };
 		DA6D898525A5A98E00CF47C4 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D898425A5A98E00CF47C4 /* AppointmentViewController.swift */; };
 		DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA813FBE25A475E500D33AD2 /* AdditionalRequestViewController.swift */; };
 		DA928D2525A98ED200DA8466 /* VerifyNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA928D2425A98ED200DA8466 /* VerifyNumberViewController.swift */; };
@@ -211,6 +212,7 @@
 		DA05096B25A05A6100DDB916 /* RequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataModel.swift; sourceTree = "<group>"; };
 		DA05097925A2176300DDB916 /* photoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA1A827625AAD41C00B1F56C /* AddNoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoticeViewController.swift; sourceTree = "<group>"; };
+		DA3C141A25B0825E00B5A4B8 /* promiseId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = promiseId.swift; path = "../../../../../sopt/Booster-iOS/promiseId.swift"; sourceTree = "<group>"; };
 		DA6D898425A5A98E00CF47C4 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
 		DA813FBE25A475E500D33AD2 /* AdditionalRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRequestViewController.swift; sourceTree = "<group>"; };
 		DA928D2425A98ED200DA8466 /* VerifyNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNumberViewController.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				CC0C715E25A1BC5E00DEF0FA /* Cells */,
 				D1B444CF259F08F1005C2C68 /* ViewControllers */,
 				D1B444D0259F08F4005C2C68 /* Storyboards */,
+				DA3C141A25B0825E00B5A4B8 /* promiseId.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				CC74427925AF4CAB00D04E4D /* EmptyTableViewCell.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
+				DA3C141B25B0825E00B5A4B8 /* promiseId.swift in Sources */,
 				1FA03DE325A8471300AF0326 /* NoticeInformationCollectionViewCell.swift in Sources */,
 				D1B44511259F1D5A005C2C68 /* LoginViewController.swift in Sources */,
 				1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */,
@@ -1060,7 +1064,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
-				DEVELOPMENT_TEAM = 36BC59Q598;
+				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1068,7 +1072,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.housing;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.housing.j;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

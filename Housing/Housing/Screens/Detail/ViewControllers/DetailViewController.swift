@@ -32,7 +32,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		$0.backgroundColor = .gray01
 	}
 	let disposeBag = DisposeBag()
-	
+	var idValue = promiseId.shared
 	private let detailProvider = MoyaProvider<DetailService>(
 		plugins: [NetworkLoggerPlugin(verbose: true)]
 	)
@@ -208,11 +208,13 @@ class DetailViewController: SegementSlideDefaultViewController {
 					let viewController = ContentViewController()
 					viewController.model = self.model
 					let statusViewController = MessageViewController()
+					self.idValue.id = data.data?.id ?? 11
+
 					statusViewController.model = self.model
 					statusViewController.statusModel = self.statusModel
 					viewController.tableView.reloadData()
+
 					statusViewController.tableView.reloadData()
-					
 				} catch {
 					print(error)
 				}

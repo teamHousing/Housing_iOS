@@ -11,7 +11,7 @@ class MessageTableViewCell: UITableViewCell {
 	
 	// MARK: - Property
 	let messageTableView = UITableView()
-	
+	var id : Int = 1
 	var status: [Int] = [0,1,2,3]
 	var userOrOwner = 3
 	var confirmedPromiseOption = ""
@@ -210,7 +210,8 @@ extension MessageTableViewCell: UITableViewDataSource {
 	@objc
 	func didTapConfirmButton(_ sender: UIButton) {
 		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "ConfirmViewController")
+		let viewcontroller = ConfirmViewController()
+		viewcontroller.id = self.id
 		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	
