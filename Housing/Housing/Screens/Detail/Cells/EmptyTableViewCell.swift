@@ -13,50 +13,63 @@ import Then
 class EmptyTableViewCell: UITableViewCell {
 	
 	// MARK: - Property
-	let containerView = UIView().then {
-		$0.backgroundColor = .clear
-	}
-	let emptyImageView = UIImageView().then {
-		$0.image = UIImage(named: "btnBack")
-	}
-	let emptyLabel = UILabel().then {
-		$0.text = "아직 도착한 쪽지가 없어요❌"
-		$0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-		$0.textAlignment = .center
-		$0.textColor = .primaryBlack
-	}
+	let emptyTableView = UITableView()
 	
 	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
-		return 1400
+		return 350
 	}
 	
 	private func layout() {
-		self.contentView.add(self.containerView) {
+		self.contentView.add(self.emptyTableView) {
+			$0.isScrollEnabled = false
+			$0.isPagingEnabled = false
+			$0.isUserInteractionEnabled = true
+			$0.backgroundColor = .primaryGray
 			$0.snp.makeConstraints {
-				$0.top.equalTo(self.containerView.snp.top).offset(52)
-				$0.centerX.equalTo(self.containerView.snp.centerX)
-				$0.width.equalTo(120)
-				$0.height.equalTo(900)
+				$0.edges.equalTo(self.contentView)
+				$0.height.equalTo(400)
 			}
 		}
-		self.contentView.add(self.emptyLabel) {
-			$0.snp.makeConstraints {
-				$0.top.equalTo(self.containerView.snp.bottom).offset(24)
-				$0.centerX.equalTo(self.contentView.snp.centerX)
-				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-50)
-			}
-		}
-		self.containerView.add(self.emptyImageView) {
-			$0.snp.makeConstraints {
-				$0.edges.equalTo(self.containerView)
-			}
-		}
+	}
+	
+	private func registerCell() {
+		emptyTableView.register(EmptyDetailTableViewCell.self,
+														forCellReuseIdentifier: EmptyDetailTableViewCell.reuseIdentifier)
 	}
 	
 	// MARK: - Lifecycle
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		layout()
+		registerCell()
+		self.emptyTableView.delegate = self
+		self.emptyTableView.dataSource = self
+		self.emptyTableView.estimatedRowHeight = EmptyDetailTableViewCell.estimatedRowHeight()
+		self.emptyTableView.rowHeight = UITableView.automaticDimension
+		self.emptyTableView.separatorStyle = .none
+		self.emptyTableView.reloadData()
+		self.backgroundColor = .primaryGray
+	}
+}
+
+// MARK: - UITableView Delegate
+extension EmptyTableViewCell: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 400
+	}
+}
+// MARK: - UITableView DataSource
+extension EmptyTableViewCell: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		1
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell: EmptyDetailTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
+		cell.awakeFromNib()
+		tableView.isScrollEnabled = false
+		cell.selectionStyle = .none
+		return cell
 	}
 }

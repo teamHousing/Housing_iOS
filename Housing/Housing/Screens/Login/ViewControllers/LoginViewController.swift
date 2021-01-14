@@ -56,7 +56,9 @@ final class LoginViewController: BaseViewController {
 			LoginButton.isEnabled = true
 		}
 	}
-	
+	private func makeAlert() {
+
+	}
 	private func initLayout() {
 		navigationController?.navigationBar.isHidden = true
 		
@@ -117,12 +119,28 @@ final class LoginViewController: BaseViewController {
 																				 forKey: KeychainStorage.accessToken)
 						
 						let viewcontroller = TabBarViewController()
+//						let p = PromiseViewController()
+//						let viewcontroller = UINavigationController(rootViewController: p)
 						viewcontroller.modalPresentationStyle = .fullScreen
 						self.present(viewcontroller, animated: true)
 						
 					} catch {
 						print(error)
 					}
+				}
+				else if next.statusCode == 400 {
+					let alert = UIAlertController(title : "로그인 실패", message: "아이디나 비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
+					let action = UIAlertAction(title: "확인", style: .cancel) {(action) in
+						self.idTextField.text = nil
+						self.passwordTextField.text = nil
+						self.LoginButton.backgroundColor = UIColor(red: 219 / 255,
+																									green: 219 / 255,
+																									blue: 219 / 255,
+																									alpha: 1)
+						self.LoginButton.isEnabled = false
+					}
+					alert.addAction(action)
+					self.present(alert, animated: false, completion: nil)
 				}
 			} onError: { (error) in
 				print(error.localizedDescription)

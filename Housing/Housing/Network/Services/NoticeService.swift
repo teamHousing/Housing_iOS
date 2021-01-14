@@ -55,16 +55,6 @@ struct Notice: Codable {
 }
 
 
-struct noticeOption : Codable {
-	private enum CodingKeys : String, CodingKey {
-		case date = "date"
-		case day = "day"
-		case time = "time"
-	}
-	let date, day, time: String?
-}
-
-
 extension NoticeService: TargetType {
 	
 	private var token: String {
@@ -107,10 +97,8 @@ extension NoticeService: TargetType {
 		switch self {
 		case .profile:
 			return .requestPlain
-		case .profileNoticeDetail(id: let id):
-			return .requestCompositeParameters(bodyParameters: .init(),
-																				 bodyEncoding: JSONEncoding.default,
-																				 urlParameters: ["id": id])
+		case .profileNoticeDetail(id: _):
+			return .requestPlain
 		case .profileNoticeAdmit(house_info_id: let house_info_id,
 														 notice_title: let notice_title,
 														 notice_contents: let notice_contents,

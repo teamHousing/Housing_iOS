@@ -10,9 +10,11 @@ import UIKit
 import Then
 import SnapKit
 import SwiftKeychainWrapper
+import Lottie
 
 final class SplashViewController: BaseViewController {
-		
+	//private let lottieAnimationView = LOTAnimationView(named:"")
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -38,10 +40,10 @@ final class SplashViewController: BaseViewController {
 	
 	private func detectIsSignIn() {
 		let token = KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)
-//		if token == "" || token == nil {
+		if token == "" || token == nil {
 			toLogin()
-//		} else {
-//			toMain()
-//		}
+		} else {
+			toMain()
+		}
 	}
 }

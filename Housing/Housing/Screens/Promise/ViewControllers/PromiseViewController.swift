@@ -22,7 +22,7 @@ class PromiseViewController: UIViewController {
 		$0.addTarget(self, action: #selector(backButtonDidTab), for: .touchUpInside)
 	}
 	private let backgroundLabel = UILabel().then{
-		$0.text = "인증번호 생성하기"
+		$0.text = "무슨 일이 생겼나요?"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
 		$0.textColor = .black
 		$0.textAlignment = .left
@@ -293,8 +293,23 @@ class PromiseViewController: UIViewController {
 		self.view.endEditing(true)
 	}
 	func dataPreset(){
+		self.promiseRequiredView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
+		self.promiseNotRequiredView.setBorder(borderColor: .gray01, borderWidth: 1)
+		self.page.numberOfPages = 4
 		requestData.isPromiseNeeded = true
+		buttonBackgroundRefresher()
+		fixRepairButton.backgroundColor = .primaryOrange
+		fixRepairButton.setTitleColor(.white, for: .normal)
+		fixRepairButton.setBorder(borderColor: .primaryOrange, borderWidth: 1)
 		requestData.cartegory = 0
+		questionTitle.text = ""
+		questionDescription.text = "내용을 작성해주세요"
+		questionDescription.textColor = UIColor.gray01
+		questionDescription.delegate = self
+		questionTitle.delegate = self
+		requestData.title = ""
+		requestData.discription = ""
+		underBar.backgroundColor = .gray01
 	}
 	private func initLayout() {
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -337,7 +352,7 @@ class PromiseViewController: UIViewController {
 			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -152))
 		}
 		lineImage.snp.makeConstraints{
-			$0.top.equalToSuperview().offset(22)
+			$0.top.equalToSuperview().offset(28)
 			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(backgroundLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
@@ -529,6 +544,12 @@ class PromiseViewController: UIViewController {
 		initLayout()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.contentView.addGestureRecognizer(tap)
+	}
+	override func viewWillAppear(_ animated: Bool) {
+		bind()
+		dataPreset()
+		layout()
+		initLayout()
 	}
 }
 

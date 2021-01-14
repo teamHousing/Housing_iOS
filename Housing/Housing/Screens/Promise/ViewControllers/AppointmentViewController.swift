@@ -10,13 +10,16 @@ import RxSwift
 import RxCocoa
 import SnapKit
 import Then
+import Moya
 
-class AppointmentViewController: UIViewController {
+class AppointmentViewController: BaseViewController {
 	// MARK: - Component
 	var requestData = RequestDataModel.shared
-	let disposeBag = DisposeBag()
+	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
+	private var promiseArr: [noticeOption] = []
+
 	private let backgroundLabel = UILabel().then{
 		$0.text = "문제를 어떻게 해결할까요?"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
@@ -163,6 +166,7 @@ class AppointmentViewController: UIViewController {
 		$0.setTitle("등록하기", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setTitleColor(.white, for: .normal)
+		$0.addTarget(self, action: #selector(addPromise), for: .touchUpInside)
 		$0.setRounded(radius: 25)
 	}
 	private let page = UIPageControl().then{
@@ -214,12 +218,12 @@ class AppointmentViewController: UIViewController {
 														addButton,
 														underGrayView])
 		backgroundLabel.snp.makeConstraints{
-			$0.top.equalToSuperview().offset(0)
+			$0.top.equalToSuperview().offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
 			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -85))
 		}
 		lineImage.snp.makeConstraints{
-			$0.top.equalToSuperview().offset(22)
+			$0.top.equalToSuperview().offset(28)
 			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(backgroundLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
@@ -381,6 +385,55 @@ class AppointmentViewController: UIViewController {
 		self.tableViewBind()
 		self.timeStampTableView.reloadData()
 	}
+	@objc func addPromise(sender : UIButton) {
+		userProvider.rx.request(.homePromiseGuestRegister(id: 1, promise_option: self.promiseArr)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						
+					}
+					catch {
+						
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+
+		
+	}
+	func timeToNoticeOption() -> noticeOption {
+		var temp = VisitDate()
+		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
+			let day = String(str.element!.split(separator: " ")[0])
+			let date = String(str.element!.split(separator: " ")[1])
+			temp.date = date
+			temp.day = day
+			}.disposed(by: disposeBag)
+		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
+		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
+		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
+		temp.endTime = temp.startTime.replacingOccurrences(of: "시", with: "")
+		if temp.startTime.hasPrefix("오전") {
+			temp.startTime = temp.startTime.replacingOccurrences(of: "오전 ", with: "")
+		}
+		else if temp.startTime.hasPrefix("오후") {
+			temp.startTime = temp.startTime.replacingOccurrences(of: "오후 ", with: "")
+			temp.startTime = String(Int(temp.startTime)! + 12)
+		}
+		if temp.endTime.hasPrefix("오전") {
+			temp.endTime = temp.endTime.replacingOccurrences(of: "오전 ", with: "")
+		}
+		else if temp.endTime.hasPrefix("오후") {
+			temp.endTime = temp.endTime.replacingOccurrences(of: "오후 ", with: "")
+			temp.endTime = String(Int(temp.endTime)! + 12)
+		}
+		let a = "\(temp.startTime)-\(temp.endTime)"
+		
+		let promiseTime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a )
+		
+		return promiseTime
+	}
 	func resetTableViewHeight() {
 		self.timeStampTableView.snp.updateConstraints{
 			$0.height.equalTo(CGFloat(70 * self.requestData.availableTimeList.count))
@@ -413,6 +466,7 @@ class AppointmentViewController: UIViewController {
 			}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
+		promiseArr.append(timeToNoticeOption())
 		requestData.availableTimeList.append(temp)
 	
 		requestData.date.onNext("")

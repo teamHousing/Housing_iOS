@@ -100,12 +100,12 @@ class CameraWorkViewController: UIViewController{
 				
 		mainLabel.snp.makeConstraints{
 			
-			$0.top.equalTo(view.safeAreaLayoutGuide).offset(0)
+			$0.top.equalTo(view.safeAreaLayoutGuide).offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
 			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: 85))
 		}
 		lineImage.snp.makeConstraints{
-			$0.top.equalTo(view.safeAreaLayoutGuide).offset(58)
+			$0.top.equalTo(view.safeAreaLayoutGuide).offset(64)
 			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(mainLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
@@ -148,6 +148,7 @@ class CameraWorkViewController: UIViewController{
 				print(photo.fromCamera)
 				print(photo.image)
 				self.evidencePictures.append(photo.image)
+				self.requestData.images.append(photo.image)
 			}
 			self.photoSelectCollectionView.reloadData()
 			picker.dismiss(animated: true, completion: nil)
@@ -164,6 +165,7 @@ class CameraWorkViewController: UIViewController{
 					print(photo.image)
 					if !self.evidencePictures.contains(photo.image){
 						self.evidencePictures.append(photo.image)
+						self.requestData.images.append(photo.image)
 					}
 				case .video(v: _):
 					print("비디오")

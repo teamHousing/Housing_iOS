@@ -26,7 +26,6 @@ final class AddressViewController: BaseViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initLayout()
-		print(loginData)
 		addressTextField.addTarget(self,
 															 action: #selector(addressTextFieldChanged(_:)),
 															 for: .editingChanged)

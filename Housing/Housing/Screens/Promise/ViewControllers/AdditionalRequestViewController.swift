@@ -95,22 +95,43 @@ class AdditionalRequestViewController: BaseViewController {
 	
 	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
-		let appointmentview = AppointmentViewController()
-		self.navigationController?.pushViewController(appointmentview, animated: true)
-	}
-	@objc func popToRootController() {
-
-		//requestData 싱글톤객체 값 초기화
-		//서버에 통신
-		userProvider.rx.request(.homePromise(is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
+		userProvider.rx.request(.homePromise(id: 1,is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
 						let decoder = JSONDecoder()
 						let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
+						print(data.data?.issue_id)
+						let appointmentview = AppointmentViewController()
+						self.navigationController?.pushViewController(appointmentview, animated: true)
+					}
+					
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+		requestData.availableTimeList = []
+		requestData.title = ""
+		requestData.isPromiseNeeded = false
+		requestData.cartegory = 0
+		requestData.discription = ""
+		image()
+	}
+	@objc func popToRootController() {
+
+		//requestData 싱글톤객체 값 초기화
+		//서버에 통신
+		userProvider.rx.request(.homePromise(id: 1,is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
+						print(data.data?.issue_id)
 						self.navigationController?.popToRootViewController(animated: true)
-						print(data.data)
-						
 					}
 					catch {
 						print(error)
@@ -124,6 +145,31 @@ class AdditionalRequestViewController: BaseViewController {
 		requestData.isPromiseNeeded = false
 		requestData.cartegory = 0
 		requestData.discription = ""
+		image()
+	}
+	private func image(){
+		if !self.requestData.images.isEmpty {
+			userProvider.rx.request(.homePromiseImageUpload(issue_img: self.requestData.images)).observeOn(MainScheduler.init()).asObservable()
+				.subscribe { (next) in
+					if next.statusCode == 200 {
+						do {
+							print(next.statusCode)
+						}
+						catch {
+							print(error)
+						}
+					}
+				} onError: { (error) in
+					print(error.localizedDescription)
+					} onCompleted: {
+						print("dp")
+					} onDisposed: {
+						print("disposed")
+						print(self.requestData)
+					}
+				.disposed(by: disposeBag)
+		}
+
 	}
 	@objc func presetMessageSelected(sender : UIButton) {
 		clearSelection()
@@ -170,12 +216,12 @@ class AdditionalRequestViewController: BaseViewController {
 			page
 		])
 		mainLabel.snp.makeConstraints{
-			$0.top.equalTo(view.safeAreaLayoutGuide).offset(0)
+			$0.top.equalTo(view.safeAreaLayoutGuide).offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
 			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -101))
 		}
 		lineImage.snp.makeConstraints{
-			$0.top.equalTo(view.safeAreaLayoutGuide).offset(58)
+			$0.top.equalTo(view.safeAreaLayoutGuide).offset(64)
 			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(mainLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
@@ -259,7 +305,6 @@ class AdditionalRequestViewController: BaseViewController {
 		self.view.addGestureRecognizer(tap)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-		
 	}
 	
 }

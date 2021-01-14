@@ -115,8 +115,8 @@ final class CommunicationViewController: BaseViewController {
 						let data = try decoder.decode(ResponseType<Communication>.self,
 																					from: response.data)
 						guard let result = data.data else {return}
-						//self.completeLength = result.completeLength
-						//self.incompleteLength = result.incompleteLength
+						self.completeLength = result.completeLength
+						self.incompleteLength = result.incompleteLength
 						
 						var listdata: [DetailData] = []
 						for index in 0..<result.incompleteList.count {
@@ -172,6 +172,7 @@ final class CommunicationViewController: BaseViewController {
 	@objc
 	private func settingButtonDidTap() {
 		KeychainWrapper.standard.removeAllKeys()
+    dismiss(animated: true, completion: nil)
 		//준현군. 이거 현종군을 위해서 만든 기능이라면 삭제해줘
 	}
 }

@@ -20,6 +20,7 @@
 		1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */; };
 		1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */; };
 		1FACC31925AD747B0072EABA /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 1FACC31825AD747B0072EABA /* SwiftyJSON */; };
+		1FCC3A3825B0167B00A20DEF /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCC3A3725B0167B00A20DEF /* Notice.swift */; };
 		37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */; };
 		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
 		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
@@ -49,6 +50,7 @@
 		CC8B596025A49F6D00EC3AC7 /* AddedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */; };
 		CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */; };
 		CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */; };
+		CCDDF3A225B061C40096B973 /* EmptyDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDF3A125B061C40096B973 /* EmptyDetailTableViewCell.swift */; };
 		D11C1BE125A1FE68002606B2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */; };
 		D11C1BE625A201AD002606B2 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */; };
 		D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */; };
@@ -114,6 +116,7 @@
 		DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225B25A73F900098175E /* UIDatePicker+.swift */; };
 		DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */; };
 		DAC7E48E25AF4E0300031102 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAC7E48D25AF4E0300031102 /* Lottie */; };
+		DACAAB6025B0516B006745A6 /* timeOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACAAB5F25B0516B006745A6 /* timeOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +132,7 @@
 		1FA03DE825A8473000AF0326 /* Notice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notice.storyboard; sourceTree = "<group>"; };
 		1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewController.swift; sourceTree = "<group>"; };
 		1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeViewController.swift; sourceTree = "<group>"; };
+		1FCC3A3725B0167B00A20DEF /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		340DE7B3E8247CCAEA231AB4 /* Pods-Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.release.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.release.xcconfig"; sourceTree = "<group>"; };
 		37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
 		37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTableViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 		CC8B595F25A49F6D00EC3AC7 /* AddedImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedImageTableViewCell.swift; sourceTree = "<group>"; };
 		CC8C35F025A83E33002D7304 /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTableViewCell.swift; sourceTree = "<group>"; };
+		CCDDF3A125B061C40096B973 /* EmptyDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyDetailTableViewCell.swift; path = ../../../../../../../../../Documents/EmptyDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE025A1FE68002606B2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		D11C1BE525A201AD002606B2 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
 		D11C1BEA25A20265002606B2 /* CalendarCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -212,6 +217,7 @@
 		DAB3225825A72A510098175E /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		DAB3225B25A73F900098175E /* UIDatePicker+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+.swift"; sourceTree = "<group>"; };
 		DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStampTableViewCell.swift; sourceTree = "<group>"; };
+		DACAAB5F25B0516B006745A6 /* timeOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeOptions.swift; sourceTree = "<group>"; };
 		EE989042B75B926FB7CC268C /* Pods_Housing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Housing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -311,6 +317,7 @@
 				CC42D06125A74E54002A461D /* MessageDetailTableViewCell.swift */,
 				CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */,
 				CC74427825AF4CAB00D04E4D /* EmptyTableViewCell.swift */,
+				CCDDF3A125B061C40096B973 /* EmptyDetailTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -332,6 +339,8 @@
 				D15824B725AD32920098B5AF /* Calendar.swift */,
 				CC74425E25AD8B6000D04E4D /* Detail.swift */,
 				1F53BA5025AE9AE30048CDAB /* Host.swift */,
+				DACAAB5F25B0516B006745A6 /* timeOptions.swift */,
+				1FCC3A3725B0167B00A20DEF /* Notice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -635,6 +644,7 @@
 		D1B65A022598C61800A9A7CB /* Supports */ = {
 			isa = PBXGroup;
 			children = (
+				DA1A20D625B00E2500352C81 /* LottieFiles */,
 				D12D6DDE25A1C7F600E9A43A /* BASKE1.ttf */,
 				D19179F3259890A70035AF74 /* Info.plist */,
 				D19179E7259890A40035AF74 /* SceneDelegate.swift */,
@@ -681,6 +691,13 @@
 				DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DA1A20D625B00E2500352C81 /* LottieFiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LottieFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -853,6 +870,7 @@
 				DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */,
+				1FCC3A3825B0167B00A20DEF /* Notice.swift in Sources */,
 				CC8B595325A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift in Sources */,
 				CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
@@ -869,6 +887,7 @@
 				D1311892259B6BB300897DF4 /* UITableView+.swift in Sources */,
 				CC096D5525A2415E00E07017 /* ContentViewController.swift in Sources */,
 				37259E8D25A829EF006550AF /* EmptyComTableViewCell.swift in Sources */,
+				DACAAB6025B0516B006745A6 /* timeOptions.swift in Sources */,
 				371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */,
 				1F53BA5125AE9AE30048CDAB /* Host.swift in Sources */,
 				DA050956259F692E00DDB916 /* UIImage+.swift in Sources */,
@@ -890,6 +909,7 @@
 				CC6740E425ACADE500EAE4C0 /* CommunicationService.swift in Sources */,
 				1F8ECE5725A5A71300C0E0FA /* SignupViewController.swift in Sources */,
 				D13118A6259B718900897DF4 /* CALayer+.swift in Sources */,
+				CCDDF3A225B061C40096B973 /* EmptyDetailTableViewCell.swift in Sources */,
 				D15824B125AD321A0098B5AF /* ResponseType.swift in Sources */,
 				CC6A1E0E25A5AE6C00C86865 /* MessageViewController.swift in Sources */,
 				CC42D06525A7551C002A461D /* MessageCard.swift in Sources */,
@@ -1039,7 +1059,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1062,7 +1082,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

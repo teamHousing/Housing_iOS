@@ -33,7 +33,7 @@ class DatePickerViewController: UIViewController {
 			$0.preferredDatePickerStyle = .wheels
 		}
 		$0.timeZone = NSTimeZone.local
-		$0.minimumDate = Date()
+//		$0.minimumDate = Date()
 		$0.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
 	}
 	private let confirmButton = UIButton().then{
@@ -98,8 +98,6 @@ class DatePickerViewController: UIViewController {
 			}
 			else {
 				datePicker.datePickerMode = .time
-//				datePicker.locale = Locale(identifier: "en_GB")
-				datePicker.minuteInterval = 1
 			}
 			dimmerView.alpha = 0.0
 		}
