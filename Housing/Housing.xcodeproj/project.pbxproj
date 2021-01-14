@@ -20,6 +20,7 @@
 		1FA03DED25A86E5600AF0326 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */; };
 		1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */; };
 		1FACC31925AD747B0072EABA /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 1FACC31825AD747B0072EABA /* SwiftyJSON */; };
+		1FCC3A3825B0167B00A20DEF /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCC3A3725B0167B00A20DEF /* Notice.swift */; };
 		37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */; };
 		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
 		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
@@ -129,6 +130,7 @@
 		1FA03DE825A8473000AF0326 /* Notice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notice.storyboard; sourceTree = "<group>"; };
 		1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewController.swift; sourceTree = "<group>"; };
 		1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeViewController.swift; sourceTree = "<group>"; };
+		1FCC3A3725B0167B00A20DEF /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		340DE7B3E8247CCAEA231AB4 /* Pods-Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.release.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.release.xcconfig"; sourceTree = "<group>"; };
 		37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
 		37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTableViewCell.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				D15824B725AD32920098B5AF /* Calendar.swift */,
 				CC74425E25AD8B6000D04E4D /* Detail.swift */,
 				1F53BA5025AE9AE30048CDAB /* Host.swift */,
+				1FCC3A3725B0167B00A20DEF /* Notice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 				DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
 				DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */,
+				1FCC3A3825B0167B00A20DEF /* Notice.swift in Sources */,
 				CC8B595325A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift in Sources */,
 				CC8C35F125A83E33002D7304 /* ConfirmViewController.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
