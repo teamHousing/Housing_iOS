@@ -31,7 +31,7 @@ class ContentTableViewCell: UITableViewCell {
 
 	func determineCategoty(category : Int) -> String {
 		if category == 0 {
-			return "고장수리"
+			return "고장/수리"
 		}else if category == 1 {
 			return "계약관련"
 		}else if category == 2 {
