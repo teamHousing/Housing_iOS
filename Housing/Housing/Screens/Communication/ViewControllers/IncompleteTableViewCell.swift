@@ -9,19 +9,17 @@ import UIKit
 
 class IncompleteTableViewCell: UITableViewCell {
 
-	@IBOutlet var roomNumberView: UIView!
+	@IBOutlet var roomNumberButton: UIButton!
 	@IBOutlet var countOfIncomplete: UILabel!
 	@IBOutlet var incomButton: UIButton!
+	
 	
 	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 	
-	func makeViewRounded(){
-		roomNumberView.setRounded(radius: 15)
-	}
-	
+
 	@IBAction func touchUpInComButton(_ sender: Any) {
 	}
 	//	@IBAction func touchUpIncomButton(_ sender: Any) {
