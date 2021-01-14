@@ -66,24 +66,27 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 	
 	override func tableView(_ tableView: UITableView,
 													cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//		let cell: EmptyTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
-//		cell.awakeFromNib()
-//		return cell
-		print("123123",statusModel)
-		let cell: MessageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
-		if self.statusModel[0].userStatus?.isEmpty == true {
-			cell.status = self.statusModel[0].ownerStatus!
-			cell.userOrOwner = 0
+		if self.statusModel[0].userStatus == [0] {
+			let cell: EmptyTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
+			cell.awakeFromNib()
+			return cell
 		}
-		else if self.statusModel[0].ownerStatus?.isEmpty == true {
-			cell.status = self.statusModel[0].userStatus!
-			cell.userOrOwner = 1
+		else {
+			let cell: MessageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
+			if self.statusModel[0].userStatus?.isEmpty == true {
+				cell.status = self.statusModel[0].ownerStatus!
+				cell.userOrOwner = 0
+			}
+			else if self.statusModel[0].ownerStatus?.isEmpty == true {
+				cell.status = self.statusModel[0].userStatus!
+				cell.userOrOwner = 1
+			}
+			if let promiseArray = model.confirmedPromiseOption {
+				cell.confirmedPromiseOption = "\(promiseArray[0]) / \(promiseArray[1]) / \(promiseArray[2])"
+			}
+			cell.rootViewController = self
+			cell.awakeFromNib()
+			return cell
 		}
-		if let promiseArray = model.confirmedPromiseOption {
-			cell.confirmedPromiseOption = "\(promiseArray[0]) / \(promiseArray[1]) / \(promiseArray[2])"
-		}
-		cell.rootViewController = self
-		cell.awakeFromNib()
-		return cell
 	}	
 }
