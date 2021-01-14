@@ -167,6 +167,9 @@ extension MessageTableViewCell: UITableViewDataSource {
 				cell.contextLabel.attributedText = self.makeAttributed(
 					context: "관리자가 문의사항을 확인했어요.\n문제가 해결되었나요?"
 				)
+				cell.transitionButton.addTarget(self,
+																				action: #selector(didTapFinishButton(_:)),
+																				for: .touchUpInside)
 				cell.transitionButton.setTitle("해결이 완료되었어요!", for: .normal)
 			}
 			else if self.status[indexPath.row] == 3 {
@@ -210,16 +213,29 @@ extension MessageTableViewCell: UITableViewDataSource {
 	@objc
 	func didTapConfirmButton(_ sender: UIButton) {
 		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
-		let viewcontroller = ConfirmViewController()
-		viewcontroller.id = self.id
+
+		let viewcontroller = storyboard.instantiateViewController(
+			withIdentifier: "ConfirmViewController")
 		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	
 	@objc
 	func didTapCalendarButton(_ sender: UIButton) {
 		let storyboard = UIStoryboard(name: StoryboardStorage.calendar, bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "CalendarViewController")
+		let viewcontroller = storyboard.instantiateViewController(
+			withIdentifier: "CalendarViewController")
 		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
+	}
+	
+	@objc
+	func didTapFinishButton(_ sender: UIButton) {
+		self.status.append(4)
+		print("여기가진짜")
+		self.messageTableView.reloadData()
+		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
+		let viewcontroller = storyboard.instantiateViewController(
+			withIdentifier: "MessageViewController")
+		viewcontroller.reloadInputViews()
 	}
 	
 }

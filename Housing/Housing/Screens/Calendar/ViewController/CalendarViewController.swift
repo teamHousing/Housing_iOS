@@ -102,7 +102,7 @@ final class CalendarViewController: BaseViewController {
 
 	// MARK: - Provider
 	
-	let calendarProvider = MoyaProvider<CalendarService>()
+	let calendarProvider = MoyaProvider<CalendarService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	
 	// MARK: - Life Cycle
 	
@@ -217,8 +217,21 @@ extension CalendarViewController: UIScrollViewDelegate {
 extension CalendarViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView,
 											didSelectItemAt indexPath: IndexPath) {
-		let viewController = DetailViewController()
-		navigationController?.pushViewController(viewController, animated: true)
+		guard let day = day else { return }
+		guard let promise: [FSCalendarModel] = dic[day] else { return }
+		if promise[indexPath.row].isNotice == 0 {
+			let viewController = DetailViewController()
+			viewController.requestId = promise[indexPath.row].id
+			navigationController?.pushViewController(viewController, animated: true)
+		} else {
+			let storyboard = UIStoryboard(name: StoryboardStorage.notice, bundle: nil)
+			guard let viewController = storyboard
+							.instantiateViewController(
+								withIdentifier: "DetailNoticeViewController") as? DetailNoticeViewController
+			else { return }
+			viewController.id = promise[indexPath.row].id
+			navigationController?.pushViewController(viewController, animated: true)
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView,
