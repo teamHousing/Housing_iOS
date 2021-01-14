@@ -170,12 +170,12 @@ class AdditionalRequestViewController: BaseViewController {
 			page
 		])
 		mainLabel.snp.makeConstraints{
-			$0.top.equalTo(view.safeAreaLayoutGuide).offset(0)
+			$0.top.equalTo(view.safeAreaLayoutGuide).offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
 			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -101))
 		}
 		lineImage.snp.makeConstraints{
-			$0.top.equalTo(view.safeAreaLayoutGuide).offset(58)
+			$0.top.equalTo(view.safeAreaLayoutGuide).offset(64)
 			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(mainLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)

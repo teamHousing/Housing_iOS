@@ -337,7 +337,7 @@ class PromiseViewController: UIViewController {
 			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -152))
 		}
 		lineImage.snp.makeConstraints{
-			$0.top.equalToSuperview().offset(22)
+			$0.top.equalToSuperview().offset(28)
 			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(backgroundLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
