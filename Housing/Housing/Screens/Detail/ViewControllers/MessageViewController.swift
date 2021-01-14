@@ -14,6 +14,7 @@ import Then
 class MessageViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
 	
 	// MARK: - Property
+	var id = 1
 	var model = DetailModel(id: 0,
 													issueImages: [],
 													promiseOption: [[]],
@@ -58,7 +59,9 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 		tableView.backgroundColor = .primaryGray
 		pullToRefresh(scrollview: scrollView)
 	}
-	
+	override func viewWillAppear(_ animated: Bool) {
+		tableView.reloadData()
+	}
 	// MARK: - UITableView data source
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
@@ -86,6 +89,7 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 				cell.confirmedPromiseOption =
 					"\(promiseArray![0]) / \(promiseArray![1]) / \(promiseArray![2])"
 			}
+			cell.id = self.id
 			cell.rootViewController = self
 			cell.awakeFromNib()
 			return cell

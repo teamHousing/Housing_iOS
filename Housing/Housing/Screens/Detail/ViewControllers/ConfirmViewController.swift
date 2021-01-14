@@ -15,9 +15,10 @@ import RxCocoa
 
 class ConfirmViewController: BaseViewController {
 	// MARK: - Property
+	private var idValue = promiseId.shared
 	private let userProvider = MoyaProvider<PromiseService>(
 		plugins: [NetworkLoggerPlugin(verbose: true)])
-	
+	var id : Int = 1
 	var determineButtonState : [Bool] = []
 	var method : [CommunicationMethod] = []
 	var selectedTime :[String] = []
@@ -133,7 +134,7 @@ class ConfirmViewController: BaseViewController {
 	
 	@objc
 	private func confirmPromise() {
-		userProvider.rx.request(.homePromiseConfirm(id: 1,
+		userProvider.rx.request(.homePromiseConfirm(id: self.idValue.id,
 																								promise_option: selectedTime))
 			.asObservable()
 			.subscribe { (next) in
@@ -152,7 +153,7 @@ class ConfirmViewController: BaseViewController {
 	
 	@objc
 	private func returnPromise() {
-		userProvider.rx.request(.homePromiseHostModify(id: 1))
+		userProvider.rx.request(.homePromiseHostModify(id: self.idValue.id))
 			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
@@ -185,7 +186,7 @@ class ConfirmViewController: BaseViewController {
 		registerCell()
 		layout()
 		
-		userProvider.rx.request(.homePromiseTimeList(id: 1)).asObservable()
+		userProvider.rx.request(.homePromiseTimeList(id: self.idValue.id)).asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
@@ -224,6 +225,7 @@ class ConfirmViewController: BaseViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		whenLoad()
+		print("aa")
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
