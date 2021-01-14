@@ -22,7 +22,7 @@ class PromiseViewController: UIViewController {
 		$0.addTarget(self, action: #selector(backButtonDidTab), for: .touchUpInside)
 	}
 	private let backgroundLabel = UILabel().then{
-		$0.text = "인증번호 생성하기"
+		$0.text = "무슨 일이 생겼나요?"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
 		$0.textColor = .black
 		$0.textAlignment = .left
