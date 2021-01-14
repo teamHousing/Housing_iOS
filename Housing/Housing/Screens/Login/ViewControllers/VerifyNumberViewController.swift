@@ -85,6 +85,8 @@ class VerifyNumberViewController: BaseViewController {
 	}
 	private let sideLine = UIView().then{
 		$0.backgroundColor = .black
+		$0.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 8)
+		$0.clipsToBounds = false
 	}
 	private let noticeLabel = UILabel().then{
 		$0.text = "유의사항"
@@ -146,7 +148,7 @@ class VerifyNumberViewController: BaseViewController {
 										deleteButton2,
 		])
 		backgroundLabel.snp.makeConstraints{
-			$0.top.equalToSuperview().offset(0)
+			$0.top.equalToSuperview().offset(6)
 			$0.leading.equalTo(view).offset(20)
 		}
 		lineImage.snp.makeConstraints{
@@ -171,7 +173,7 @@ class VerifyNumberViewController: BaseViewController {
 		//			$0.leading.equalTo(buildingNumber.snp.trailing).offset(8)
 		//		}
 		houseNumber.snp.makeConstraints{
-			$0.top.equalTo(lineImage.snp.bottom).offset(68)
+			$0.top.equalTo(lineImage.snp.bottom).offset(70)
 			$0.centerX.equalTo(upperView).offset(-15)
 			$0.width.equalTo(120)
 		}
@@ -199,7 +201,7 @@ class VerifyNumberViewController: BaseViewController {
 			$0.width.height.equalTo(24)
 		}
 		makeNumber.snp.makeConstraints{
-			$0.top.equalTo(houseNumberUnderbar.snp.bottom).offset(52)
+			$0.top.equalTo(houseNumberUnderbar.snp.bottom).offset(78)
 			$0.centerX.equalTo(view)
 			$0.width.equalTo(255)
 			$0.height.equalTo(48)
@@ -208,7 +210,7 @@ class VerifyNumberViewController: BaseViewController {
 			$0.leading.equalTo(upperView.snp.leading).offset(30)
 			$0.trailing.equalTo(upperView.snp.trailing).offset(-30)
 			$0.top.equalTo(makeNumber.snp.bottom).offset(-12)
-			$0.bottom.equalTo(upperView.snp.bottom).offset(-40)
+			$0.bottom.equalTo(upperView.snp.bottom).offset(-60)
 			$0.centerX.equalTo(upperView)
 			$0.height.equalTo(0)
 		}
