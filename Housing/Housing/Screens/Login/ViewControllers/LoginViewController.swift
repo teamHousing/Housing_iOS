@@ -116,9 +116,9 @@ final class LoginViewController: BaseViewController {
 						KeychainWrapper.standard.set(cookie,
 																				 forKey: KeychainStorage.accessToken)
 						
-						//let viewcontroller = TabBarViewController()
-						let p = PromiseViewController()
-						let viewcontroller = UINavigationController(rootViewController: p)
+						let viewcontroller = TabBarViewController()
+//						let p = PromiseViewController()
+//						let viewcontroller = UINavigationController(rootViewController: p)
 						viewcontroller.modalPresentationStyle = .fullScreen
 						self.present(viewcontroller, animated: true)
 						
