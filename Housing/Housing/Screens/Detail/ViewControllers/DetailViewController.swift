@@ -310,10 +310,12 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 
 		
-	override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+	override func segementSlideContentViewController(at index: Int)
+	-> SegementSlideContentScrollViewDelegate? {
 		let viewController = ContentViewController()
 		let messageViewController = MessageViewController()
 		if(contentView.selectedIndex == 0 ) {
+			print("이거는!\(contentView.selectedIndex)")
 			messageViewController.model = self.model
 			messageViewController.statusModel = self.statusModel
 			return messageViewController
@@ -359,5 +361,4 @@ class DetailViewController: SegementSlideDefaultViewController {
 		edgesForExtendedLayout = .top
 		extendedLayoutIncludesOpaqueBars = false
 	}
-	
 }
