@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "btnBack.png",
+      "filename" : "icHome.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "btnBack@2x.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "icHome@2x.png"
     },
     {
-      "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "btnBack@3x.png"
+      "idiom" : "universal",
+      "filename" : "icHome@3x.png"
     }
   ],
   "info" : {
