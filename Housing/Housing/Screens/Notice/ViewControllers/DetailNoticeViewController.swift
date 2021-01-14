@@ -23,7 +23,6 @@ class DetailNoticeViewController: BaseViewController {
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var detailTitle: UILabel!
 	@IBOutlet weak var detailContext: UILabel!
-    
 	
 	//캘린더 추가 공지 컴포넌트를 담은 뷰
 	@IBOutlet weak var entireComponents: UIView!
