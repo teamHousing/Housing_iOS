@@ -348,7 +348,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 			return CGSize(width: 0, height: 0)
 		}
 		if dic[day]?.count == nil {
-			return CGSize(width: view.frame.width, height: view.frame.height - 700)
+			return CGSize(width: view.frame.width, height: view.frame.height - 558)
 		} else {
 			guard let promise: [FSCalendarModel] = dic[day] else { return CGSize(width: 0, height: 0) }
 			if promise[indexPath.row].isNotice == 0 {
