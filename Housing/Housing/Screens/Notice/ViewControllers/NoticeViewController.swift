@@ -32,6 +32,11 @@ final class NoticeViewController: BaseViewController {
 		noticeCollectionView.delegate = self
 		noticeCollectionView.dataSource = self
 	}
+	override func viewWillAppear(_ animated: Bool) {
+		pullToRefresh(collectionview: noticeCollectionView)
+		ownerProfile()
+
+	}
 
 	//MARK:- Helper
 	func ownerProfile() {
