@@ -230,7 +230,6 @@ extension MessageTableViewCell: UITableViewDataSource {
 	@objc
 	func didTapFinishButton(_ sender: UIButton) {
 		self.status.append(4)
-		print("여기가진짜")
 		self.messageTableView.reloadData()
 		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
 		let viewcontroller = storyboard.instantiateViewController(
