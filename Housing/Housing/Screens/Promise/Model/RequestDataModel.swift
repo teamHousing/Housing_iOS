@@ -14,7 +14,7 @@ import UIKit
 class RequestDataModel {
 	static let shared = RequestDataModel()
 	var isPromiseNeeded: Bool = true
-	var images: [UIImage]? = []
+	var images: [UIImage] = []
 	var cartegory: Int = 0
 	var title: String = ""
 	var discription: String = ""

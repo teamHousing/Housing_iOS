@@ -53,6 +53,7 @@ final class CommunicationViewController: BaseViewController {
 		layoutNavigationBar()
 		configTableView()
 		pullToRefresh(tableview: communicationTableView)
+
 	}
 	
 	func dataSetup() {
