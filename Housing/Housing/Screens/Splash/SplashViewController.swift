@@ -43,7 +43,7 @@ final class SplashViewController: BaseViewController {
 		if token == "" || token == nil {
 			toLogin()
 		} else {
-			toLogin()
+			toMain()
 		}
 	}
 }

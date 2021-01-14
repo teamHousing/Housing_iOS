@@ -26,6 +26,7 @@ class AddedImageCollectionViewCell: UICollectionViewCell {
 			$0.layer.cornerRadius = 16
 			$0.snp.makeConstraints {
 				$0.edges.equalTo(self.contentView)
+				$0.width.equalTo(self.addedImageView.snp.height).multipliedBy(1)
 			}
 		}
 		self.contentView.add(blurView) {
