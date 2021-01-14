@@ -339,7 +339,6 @@ class DetailViewController: SegementSlideDefaultViewController {
 		layout()
 		setSafeArea()
 		reloadData()
-		
 		navigationItem.rightBarButtonItem = optionButton
 	}
 	
@@ -353,6 +352,13 @@ class DetailViewController: SegementSlideDefaultViewController {
 		navigationController?.navigationBar.isTranslucent = false
 		navigationController?.navigationBar.tintColor = .black
 		navigationController?.setNavigationBarHidden(false, animated: true)
+		loader()
+		self.contentView.defaultSelectedIndex = 0
+		defaultSelectedIndex = 0
+		
+		layout()
+		setSafeArea()
+		reloadData()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
