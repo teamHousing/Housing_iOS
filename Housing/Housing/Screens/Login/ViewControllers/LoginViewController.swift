@@ -67,7 +67,7 @@ final class LoginViewController: BaseViewController {
 		passwordTextField.borderWidth = 1
 		passwordTextField.borderColor = .white
 		passwordTextField.tintColor = UIColor.primaryOrange
-		
+		passwordTextField.isSecureTextEntry = true
 		LoginButton.backgroundColor = UIColor(red: 219 / 255,
 																					green: 219 / 255,
 																					blue: 219 / 255,
@@ -112,6 +112,7 @@ final class LoginViewController: BaseViewController {
 						}
 						KeychainWrapper.standard.set(result,
 																				 forKey: KeychainStorage.isHost)
+						
 						KeychainWrapper.standard.set(cookie,
 																				 forKey: KeychainStorage.accessToken)
 						

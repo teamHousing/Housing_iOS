@@ -33,6 +33,7 @@ class DatePickerViewController: UIViewController {
 			$0.preferredDatePickerStyle = .wheels
 		}
 		$0.timeZone = NSTimeZone.local
+		$0.minimumDate = Date()
 		$0.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
 	}
 	private let confirmButton = UIButton().then{

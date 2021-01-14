@@ -41,6 +41,8 @@
 		CC6A1E0425A5A2A800C86865 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6A1E0325A5A2A800C86865 /* UIImageView+.swift */; };
 		CC6A1E0E25A5AE6C00C86865 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */; };
 		CC74425F25AD8B6000D04E4D /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74425E25AD8B6000D04E4D /* Detail.swift */; };
+		CC74427925AF4CAB00D04E4D /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74427825AF4CAB00D04E4D /* EmptyTableViewCell.swift */; };
+		CC74427D25AF5CAB00D04E4D /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC74427C25AF5CAB00D04E4D /* Calendar.storyboard */; };
 		CC8B595025A4964200EC3AC7 /* RequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B594F25A4964200EC3AC7 /* RequestTableViewCell.swift */; };
 		CC8B595325A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595225A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift */; };
 		CC8B595625A496B300EC3AC7 /* MethodDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */; };
@@ -112,6 +114,7 @@
 		DAB3225925A72A520098175E /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225825A72A510098175E /* DatePickerViewController.swift */; };
 		DAB3225C25A73F900098175E /* UIDatePicker+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3225B25A73F900098175E /* UIDatePicker+.swift */; };
 		DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB322B025A80E3B0098175E /* TimeStampTableViewCell.swift */; };
+		DAC7E48E25AF4E0300031102 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAC7E48D25AF4E0300031102 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +152,8 @@
 		CC6A1E0325A5A2A800C86865 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		CC6A1E0D25A5AE6C00C86865 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		CC74425E25AD8B6000D04E4D /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		CC74427825AF4CAB00D04E4D /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
+		CC74427C25AF5CAB00D04E4D /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		CC8B594F25A4964200EC3AC7 /* RequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableViewCell.swift; sourceTree = "<group>"; };
 		CC8B595225A496A100EC3AC7 /* CommunicateMethodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicateMethodTableViewCell.swift; sourceTree = "<group>"; };
 		CC8B595525A496B300EC3AC7 /* MethodDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -223,6 +228,7 @@
 				DA05097225A0722000DDB916 /* YPImagePicker in Frameworks */,
 				D1B65A1C2598D16600A9A7CB /* RxRelay in Frameworks */,
 				D1B65A1A2598D16600A9A7CB /* RxCocoa in Frameworks */,
+				DAC7E48E25AF4E0300031102 /* Lottie in Frameworks */,
 				D1B65A2C2598D27D00A9A7CB /* Then in Frameworks */,
 				D1CF646C25AC236E009A39EC /* Moya in Frameworks */,
 				D1CF646E25AC236E009A39EC /* ReactiveMoya in Frameworks */,
@@ -306,8 +312,17 @@
 				CC42D05E25A74D21002A461D /* MessageTableViewCell.swift */,
 				CC42D06125A74E54002A461D /* MessageDetailTableViewCell.swift */,
 				CC8C35F325A83E79002D7304 /* ConfirmTableViewCell.swift */,
+				CC74427825AF4CAB00D04E4D /* EmptyTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		CC74427B25AF5C9E00D04E4D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CC74427C25AF5CAB00D04E4D /* Calendar.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		CC8B595825A4989E00EC3AC7 /* Models */ = {
@@ -440,6 +455,7 @@
 		D1B444C9259F08AE005C2C68 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				CC74427B25AF5C9E00D04E4D /* Storyboards */,
 				D11C1BE925A20244002606B2 /* Views */,
 				D11C1BDF25A1FE3B002606B2 /* Cells */,
 				D1B444D7259F0948005C2C68 /* ViewController */,
@@ -703,6 +719,7 @@
 				D1CF646D25AC236E009A39EC /* ReactiveMoya */,
 				D1CF646F25AC236E009A39EC /* RxMoya */,
 				1FACC31825AD747B0072EABA /* SwiftyJSON */,
+				DAC7E48D25AF4E0300031102 /* Lottie */,
 			);
 			productName = Housing;
 			productReference = D19179E2259890A40035AF74 /* Housing.app */;
@@ -743,6 +760,7 @@
 				D1B0387325A8E65A0092CE4F /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				D1CF646A25AC236E009A39EC /* XCRemoteSwiftPackageReference "Moya" */,
 				1FACC31725AD747B0072EABA /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				DAC7E48C25AF4E0300031102 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = D19179E3259890A40035AF74 /* Products */;
 			projectDirPath = "";
@@ -758,6 +776,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC74427D25AF5CAB00D04E4D /* Calendar.storyboard in Resources */,
 				1F8ECE5425A5A6FF00C0E0FA /* Signup.storyboard in Resources */,
 				D19179F2259890A70035AF74 /* LaunchScreen.storyboard in Resources */,
 				1FA03DE925A8473000AF0326 /* Notice.storyboard in Resources */,
@@ -820,6 +839,7 @@
 				CC6740EE25ACAFB300EAE4C0 /* CalendarService.swift in Sources */,
 				D1B444DD259F096C005C2C68 /* PromiseViewController.swift in Sources */,
 				DA813FBF25A475E500D33AD2 /* AdditionalRequestViewController.swift in Sources */,
+				CC74427925AF4CAB00D04E4D /* EmptyTableViewCell.swift in Sources */,
 				D12D6DE625A1C92D00E9A43A /* TabBarViewController.swift in Sources */,
 				DA05096C25A05A6100DDB916 /* RequestDataModel.swift in Sources */,
 				1FA03DE325A8471300AF0326 /* NoticeInformationCollectionViewCell.swift in Sources */,
@@ -1023,8 +1043,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = 36BC59Q598;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1032,7 +1052,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.housing;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.housing.j;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1046,7 +1066,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1174,6 +1194,14 @@
 				minimumVersion = 2.8.2;
 			};
 		};
+		DAC7E48C25AF4E0300031102 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.9;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1251,6 +1279,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA10C687259B3C3F00AC91D9 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		DAC7E48D25AF4E0300031102 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAC7E48C25AF4E0300031102 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

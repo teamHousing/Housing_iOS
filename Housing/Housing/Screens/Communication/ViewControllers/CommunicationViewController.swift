@@ -9,6 +9,7 @@ import UIKit
 
 import Alamofire
 import Moya
+import SwiftKeychainWrapper
 
 struct cellData{
 	var opened = Bool()
@@ -26,7 +27,6 @@ struct DetailData {
 final class CommunicationViewController: BaseViewController {
 	
 	//MARK: - Component
-	
 	@IBOutlet var communicationTableView: UITableView!
 	@IBOutlet var headerView: UIView!
 	lazy var shareButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
@@ -35,57 +35,44 @@ final class CommunicationViewController: BaseViewController {
 																				 action: #selector(settingButtonDidTap))
 	
 	//MARK: - Property
-	var incompleteLength = 7
-	var completeLength = 1
-	var mode = 0// 집주인이 0, 자취생이 1
+	var incompleteLength = 0
+	var completeLength = 0
+	var mode = 3
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData: [DetailData] = []
-		//DetailData(id: 0, issueTitle: "incom",issueContents: "incom", progress: 0, category: 0)
-	
 	private var comDetailCellData: [DetailData] = []
-		//DetailData(id: 0, issueTitle: "com",issueContents: "com", progress: 0, category: 1)
+	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	
-	// MARK : - LifeCycle
+	//MARK: - LifeCycle
 	override func viewDidLoad() {
-		networkForCommunication()
-		testArray()
 		super.viewDidLoad()
+		let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost)
+		determineType(isHost: isHost!)
+		networkForCommunication()
+		configHeaderView()
+		layoutNavigationBar()
+		configTableView()
+		pullToRefresh(tableview: communicationTableView)
+		print(123)
+		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken))
 		
+	}
+	
+	func dataSetup() {
 		tableViewData = [cellData(opened: true,
 															sectionData: incomDetailCellData), /// incomplete
 										 cellData(opened: true,
 															sectionData: comDetailCellData)] /// complete
-		configHeaderView()
-		
-		layoutNavigationBar()
-		configTableView()
 	}
 	
-	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-	
-	enum cases { // case문으로 하면 좋을텐데
-		case incom0com0
-		case incom0com1
-		case incom1com0
-		case incom1com1
-	}
-	private func testArray() {
-		var listdata = DetailData(id: 0, issueTitle: "0000", issueContents: "0000", progress: 0, category: 0)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 1, issueTitle: "1111", issueContents: "1111", progress: 2, category: 2)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 2, issueTitle: "2222", issueContents: "2222", progress: 2, category: 2)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 3, issueTitle: "3333", issueContents: "3333", progress: 2, category: 4)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 4, issueTitle: "4444", issueContents: "4444", progress: 2, category: 4)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 5, issueTitle: "5555", issueContents: "5555", progress: 2, category: 4)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 6, issueTitle: "6666", issueContents: "6666", progress: 2, category: 4)
-		self.incomDetailCellData.append(listdata)
-		listdata = DetailData(id: 7, issueTitle: "7777", issueContents: "7777", progress: 2, category: 4)
-		self.comDetailCellData.append(listdata)
+	private func determineType(isHost: Int) {
+		if isHost == 0 {
+			mode = 0
+			print("mode가 0임")
+		}else{
+			mode = 1
+			print("mode가 1임")
+		}
 	}
 	
 	private func configTableView() {
@@ -121,49 +108,23 @@ final class CommunicationViewController: BaseViewController {
 						let data = try decoder.decode(ResponseType<Communication>.self,
 																					from: response.data)
 						guard let result = data.data else {return}
-						self.completeLength = result.completeLength
-						self.incompleteLength = result.incompleteLength
-						print("incompleteLength: \(self.incompleteLength)")
-						print("completeLength: \(self.completeLength)")
+						//self.completeLength = result.completeLength
+						//self.incompleteLength = result.incompleteLength
 						
-						
-//						var listdata = DetailData(id: 0, issueTitle: "0000", issueContents: "0000", progress: 0, category: 0)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 1, issueTitle: "1111", issueContents: "1111", progress: 2, category: 2)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 2, issueTitle: "2222", issueContents: "2222", progress: 2, category: 2)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 3, issueTitle: "3333", issueContents: "3333", progress: 2, category: 4)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 4, issueTitle: "4444", issueContents: "4444", progress: 2, category: 4)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 5, issueTitle: "5555", issueContents: "5555", progress: 2, category: 4)
-//						self.incomDetailCellData.append(listdata)
-//						listdata = DetailData(id: 6, issueTitle: "6666", issueContents: "6666", progress: 2, category: 4)
-//						self.incomDetailCellData.append(listdata)
-//
-//						listdata = DetailData(id: 7, issueTitle: "7777", issueContents: "7777", progress: 2, category: 4)
-//						self.comDetailCellData.append(listdata)
-						//semaphore.signal()//네트워킹이 끝나면 신호보내기
-						
-						
+						var listdata: [DetailData] = []
 						for index in 0..<result.incompleteList.count {
-							let listdata = DetailData(id: result.incompleteList[index].id, issueTitle: result.incompleteList[index].issueTitle, issueContents: result.incompleteList[index].issueContents, progress: result.incompleteList[index].progress, category: result.incompleteList[index].category)
-							self.incomDetailCellData.append(listdata)
+							listdata.append(DetailData(id: result.incompleteList[index].id, issueTitle: result.incompleteList[index].issueTitle, issueContents: result.incompleteList[index].issueContents, progress: result.incompleteList[index].progress, category: result.incompleteList[index].category))
 						}
-
+						self.incomDetailCellData=listdata
+						
+						var listdata2: [DetailData] = []
 						for index in 0..<result.completeList.count {
-							let listdata = DetailData(id: result.completeList[index].id, issueTitle: result.completeList[index].issueTitle, issueContents: result.completeList[index].issueContents, progress: result.completeList[index].progress, category: result.completeList[index].category)
-							self.comDetailCellData.append(listdata)
+							listdata2.append(DetailData(id: result.completeList[index].id, issueTitle: result.completeList[index].issueTitle, issueContents: result.completeList[index].issueContents, progress: result.completeList[index].progress, category: result.completeList[index].category))
 						}
-							print("여기 incomplete")
-							print(self.incomDetailCellData)
-							print("여기 complete")
-							print(self.comDetailCellData)
-						
-						
-						self.communicationTableView.reloadData()
-						//semaphore.wait()
+						self.comDetailCellData = listdata2
+						self.reloadInputViews()
+
+						self.dataSetup()
 						
 					} catch {
 						print(error)
@@ -173,13 +134,8 @@ final class CommunicationViewController: BaseViewController {
 				print(error)
 			}, onCompleted: {
 				self.communicationTableView.reloadData()
-
-				
 			}).disposed(by: disposeBag)
-		
 	}
-
-	
 
 	//	@objc func handleExpandClose() {
 	//		print("trying") //여기서 막 열리고 닫히고 관련한 action을 넣으면 됨.
@@ -204,9 +160,10 @@ final class CommunicationViewController: BaseViewController {
 	//			communicationTableView.insertRows(at: indexPaths, with: .fade)
 	//		}
 	//	}
+	
 	@objc
 	private func settingButtonDidTap() {
-		print(#function)
+		KeychainWrapper.standard.removeAllKeys()
 	}
 }
 
@@ -230,6 +187,7 @@ extension CommunicationViewController: UITableViewDelegate { /// 이게 cell이 
 			}
 		} else {
 			let viewController = DetailViewController()
+			viewController.requestId = tableViewData[indexPath.section].sectionData[indexPath.row-1].id
 			navigationController?.pushViewController(viewController, animated: true)
 		}
 	}
@@ -298,9 +256,7 @@ extension CommunicationViewController: UITableViewDataSource{
 	
 	func tableView(_ tableView: UITableView,
 								 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
 		///title부분에 쓸 cell
-		//print(#function)
 		guard let incomCell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTableViewCell")
 						as? IncompleteTableViewCell
 		else { return UITableViewCell() }
@@ -351,21 +307,29 @@ extension CommunicationViewController: UITableViewDataSource{
 		if indexPath.row == 0 { ///여기가 title 부분. /// 완료된 것이 없을 때는 title이 뜨지 않도록 했음.
 			if incompleteLength == 0 && completeLength == 0 {
 				if indexPath.section == 0 {
+					incomCell.incomButton.isHidden = true
 					return incomCell
-				} else if indexPath.section == 1 {
+				}
+				if indexPath.section == 1{
 					return emptyCell
 				}
-			} else {
-				if indexPath.section == 0 {
-					return incomCell
-				}
-				if indexPath.section == 1 {
-					return comCell
-				}
 			}
-		} else{  ///여기가 내부 cell 부분.
+			if indexPath.section == 0 {
+				if incompleteLength == 0 {
+					incomCell.incomButton.isHidden = true
+					return incomCell
+			}else {
+				return incomCell
+			}
+			}else if indexPath.section == 1 {
+					if completeLength == 0 {
+						comCell.comButton.isHidden = true
+						return comCell
+					} else { return comCell}
+				}
+		}
+		else{  ///여기가 내부 cell 부분.
 			if incompleteLength == 0 && completeLength == 0{
-				print("여기 들어왔었음")
 				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
 					if mode == 0{
 						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n자취생을 초대해 볼까요?"
@@ -384,36 +348,27 @@ extension CommunicationViewController: UITableViewDataSource{
 					emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!"
 					return emptyIncomCell
 				} else { ///cell중에서도 complete부분
-//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
-					contentCell.filloutCell()
+
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+					contentCell.awakeFromNib()
 					return contentCell
 				}
 			} else if incompleteLength > 0 && completeLength == 0{
-				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+				if indexPath.section == 0 { ///cell중에서도 incomplete부분.
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
 					return contentCell
 				} else { ///cell중에서도 complete부분
 					return emptyComCell
 				}
-			} else if incompleteLength > 0 && completeLength > 0{
-				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-					print("이건 섹션 \(indexPath.section)")
-					print("이건 로우 \(indexPath.row)")
-					print(tableViewData[indexPath.section])
-					print("123123123",tableViewData)
-					
-//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+			} else if incompleteLength > 0 && completeLength > 0 {
+				if indexPath.section == 0 {
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
-					
 					return contentCell
-				} else { ///cell중에서도 complete부분
-//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+				} else {
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
-					print("이건 섹션 \(indexPath.section)")
-					print("이건 로우 \(indexPath.row)")
-					print(tableViewData[indexPath.section])
-					
 					return contentCell
 				}
 			}
@@ -427,13 +382,15 @@ extension CommunicationViewController: UIScrollViewDelegate{
 		
 		if scrollView.contentOffset.y < -1 {
 			communicationTableView.backgroundColor = .white
+//			communicationTableView.reloadData()
+//			print("scroll시 reload")
 		} else if scrollView.contentOffset.y >= -1 {
 			communicationTableView.backgroundColor = .primaryGray }
 	}
 }
 
 struct Communication: Codable {
-	let unit: String
+	let unit: String?
 	let incompleteLength: Int
 	let incompleteList: [Inquiry]
 	let completeLength: Int

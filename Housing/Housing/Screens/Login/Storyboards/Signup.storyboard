@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -137,16 +136,9 @@
                             <constraint firstItem="1go-QI-ycN" firstAttribute="trailing" secondItem="4Pm-h2-ujb" secondAttribute="trailing" constant="-9" id="wdo-8Z-Syv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="OUY-R2-G7E">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="rfn-iR-6Xm">
-                            <connections>
-                                <action selector="navigationBackButton:" destination="HXP-7c-81v" id="d6q-tu-oHV"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="OUY-R2-G7E"/>
                     <connections>
                         <outlet property="lessorButton" destination="4Pm-h2-ujb" id="cpN-M0-gmh"/>
-                        <outlet property="navigationBackButton" destination="rfn-iR-6Xm" id="QHK-C8-ad1"/>
                         <outlet property="nextButton" destination="4zM-j5-hfc" id="6GU-AR-vE0"/>
                         <outlet property="tenantButton" destination="kSn-eM-kEV" id="ift-Hr-aOD"/>
                     </connections>
@@ -249,14 +241,6 @@
                             <constraint firstItem="BFm-Ic-XCp" firstAttribute="trailing" secondItem="dv2-j5-TLU" secondAttribute="trailing" constant="32" id="ycL-ED-pIN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="OEI-af-DaF">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="XGx-sP-tnL">
-                            <imageReference key="image" image="arrow.backward" catalog="system" symbolScale="default" renderingMode="original"/>
-                            <connections>
-                                <action selector="toSelectButton:" destination="ZD4-9l-Bhg" id="v5E-ai-4fa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="addressTextField" destination="DUc-CD-vyG" id="DlW-EK-ZhI"/>
                         <outlet property="buildingTextField" destination="02i-KP-Bqg" id="QKW-wZ-dRG"/>
@@ -330,14 +314,7 @@
                             <constraint firstItem="U6K-j0-K73" firstAttribute="centerX" secondItem="vVV-Yi-vYa" secondAttribute="centerX" id="jYF-h4-Ls9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cqa-75-tcd">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Xf0-ep-SCk">
-                            <imageReference key="image" image="arrow.backward" catalog="system" renderingMode="original"/>
-                            <connections>
-                                <action selector="toAddressViewButton:" destination="qig-Ux-Va3" id="S19-gD-1QO"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="cqa-75-tcd"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="completeView" destination="oGT-jh-a5g" id="KNF-UX-eic"/>
@@ -367,7 +344,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.backward" catalog="system" width="128" height="98"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

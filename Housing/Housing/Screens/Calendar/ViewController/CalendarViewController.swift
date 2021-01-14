@@ -98,6 +98,7 @@ final class CalendarViewController: BaseViewController {
 	var day: String?
 	let dateFormatter = DateFormatter()
 	let dateFormatterForNotice = DateFormatter()
+	let providerformatter = DateFormatter()
 
 	// MARK: - Provider
 	
@@ -110,7 +111,7 @@ final class CalendarViewController: BaseViewController {
 		
 		today()
 		layout()
-		communication()
+		communication(date: Date())
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -124,8 +125,9 @@ final class CalendarViewController: BaseViewController {
 	private func today() {
 		let today = Date() //현재 시각 구하기
 		dateFormatter.dateFormat = "yyyy.M.d"
-		day = dateFormatter.string(from: today)
 		dateFormatterForNotice.dateFormat = "MM월 dd일"
+		providerformatter.dateFormat = "yyyy.M"
+		day = dateFormatter.string(from: today)
 		let todayValue = dateFormatterForNotice.string(from: today)
 		dayScheduleLabel.text = "\(todayValue)의 일정"
 	}
@@ -140,8 +142,14 @@ final class CalendarViewController: BaseViewController {
 		}
 	}
 	
-	private func communication() {
-		calendarProvider.rx.request(.calendar(select_year: 2021, select_month: 1))
+	private func communication(date: Date) {
+		let todayDate = providerformatter.string(from: date)
+		let dateArray = todayDate.split(separator: ".")
+		guard let year = Int(dateArray[0]),
+					let month = Int(dateArray[1]) else {
+			return
+		}
+		calendarProvider.rx.request(.calendar(select_year: year, select_month: month))
 			.asObservable()
 			.subscribe(onNext: { response in
 				do{
@@ -297,6 +305,9 @@ extension CalendarViewController: UICollectionViewDataSource {
 		if dic[day]?.count == nil {
 			return 1
 		} else {
+			if dic[day]?.count == 1 {
+				collectionView.backgroundColor = .primaryGray
+			}
 			return dic[day]?.count ?? 0
 		}
 	}
@@ -337,7 +348,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 			return CGSize(width: 0, height: 0)
 		}
 		if dic[day]?.count == nil {
-			return CGSize(width: view.frame.width, height: view.frame.height - 700)
+			return CGSize(width: view.frame.width, height: view.frame.height - 558)
 		} else {
 			guard let promise: [FSCalendarModel] = dic[day] else { return CGSize(width: 0, height: 0) }
 			if promise[indexPath.row].isNotice == 0 {
@@ -365,6 +376,11 @@ extension CalendarViewController: FSCalendarDelegate {
 								numberOfEventsFor date: Date) -> Int {
 		let calendar = dateFormatter.string(from: date)
 		return dic[calendar]?.count ?? 0
+	}
+	
+	func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+		let currentDate = calendar.currentPage
+		communication(date: currentDate)
 	}
 }
 

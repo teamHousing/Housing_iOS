@@ -358,6 +358,7 @@ class AddNoticeViewController: BaseViewController{
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		navigationController?.navigationBar.topItem?.title = ""
 		tabBarController?.tabBar.isHidden = true
 	}
 	
@@ -414,7 +415,6 @@ class AddNoticeViewController: BaseViewController{
 					do {
 						let decoder = JSONDecoder()
 						let data = try decoder.decode(Response.self, from: response.data)
-						print(data.message)
 						self.navigationController?.popViewController(animated: true)
 					}
 					catch {

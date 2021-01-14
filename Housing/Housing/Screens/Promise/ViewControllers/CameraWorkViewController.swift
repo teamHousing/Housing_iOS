@@ -85,6 +85,7 @@ class CameraWorkViewController: UIViewController{
 		return (value / 677) * superViewHeight
 	}
 	private func layout() {
+		navigationController?.navigationBar.topItem?.title = ""
 		if !requestData.isPromiseNeeded {
 			page.numberOfPages = 3
 		}

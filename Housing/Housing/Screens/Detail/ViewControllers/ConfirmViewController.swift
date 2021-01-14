@@ -14,14 +14,16 @@ import RxSwift
 import RxCocoa
 
 class ConfirmViewController: BaseViewController {
-	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	// MARK: - Property
+	private let userProvider = MoyaProvider<PromiseService>(
+		plugins: [NetworkLoggerPlugin(verbose: true)])
+	
 	var determineButtonState : [Bool] = []
-	var method = [CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문"),
-								CommunicationMethod(date: "2020. 10. 20", time: "14 - 18시", method: "집 방문")]
-	var selectedTime :[CommunicationMethod] = []
+	var method : [CommunicationMethod] = []
+	var selectedTime :[String] = []
+	
 	let confirmTableView = UITableView()
+	
 	let titleLabel = UILabel().then {
 		$0.textColor = .primaryBlack
 		$0.text = "약속 확정하기"
@@ -41,7 +43,6 @@ class ConfirmViewController: BaseViewController {
 		$0.textAlignment = .center
 		$0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
 	}
-	
 	let confirmButton = UIButton().then {
 		$0.backgroundColor = .gray01
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
@@ -53,7 +54,6 @@ class ConfirmViewController: BaseViewController {
 		$0.isEnabled = false
 		$0.addTarget(self, action: #selector(confirmPromise), for: .touchUpInside)
 	}
-	
 	let modifyButton = UIButton().then {
 		$0.backgroundColor = .primaryWhite
 		$0.setBorder(borderColor: .primaryBlack, borderWidth: 1)
@@ -62,15 +62,15 @@ class ConfirmViewController: BaseViewController {
 		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
 		$0.titleLabel?.textAlignment = .center
 		$0.setTitleColor(.primaryBlack, for: .normal)
-		$0.addTarget(self, action: #selector(returnPromise(sender:)), for: .touchUpInside)
-
+		$0.addTarget(self, action: #selector(returnPromise), for: .touchUpInside)
 	}
 	
-	func registerCell() {
+	// MARK: - Helper
+	private func registerCell() {
 		confirmTableView.register(ConfirmTableViewCell.self, forCellReuseIdentifier: ConfirmTableViewCell.reuseIdentifier)
 	}
-
-	func layout() {
+	
+	private func layout() {
 		let headerView = UIView(frame: CGRect(x: 0, y: 0, width:self.view.frame.size.width , height: 202)).then {
 			$0.backgroundColor = .primaryWhite
 		}
@@ -130,14 +130,18 @@ class ConfirmViewController: BaseViewController {
 		self.confirmTableView.tableHeaderView = headerView
 		self.confirmTableView.tableFooterView = footerView
 	}
-	@objc func confirmPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseConfirm(id: 1, promise_option: self.selectedTime)).asObservable()
+	
+	@objc
+	private func confirmPromise() {
+		userProvider.rx.request(.homePromiseConfirm(id: 1,
+																								promise_option: selectedTime))
+			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
 						print(next)
-					}
-					catch {
+						self.navigationController?.popViewController(animated: true)
+					} catch {
 						print(error)
 					}
 				}
@@ -145,14 +149,16 @@ class ConfirmViewController: BaseViewController {
 				print(error.localizedDescription)
 			}.disposed(by: disposeBag)
 	}
-	@objc func returnPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseHostModify(id: 1)).asObservable()
+	
+	@objc
+	private func returnPromise() {
+		userProvider.rx.request(.homePromiseHostModify(id: 1))
+			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
-						
+						self.navigationController?.parent?.children.last?.viewDidLoad()
 						self.navigationController?.popViewController(animated: true)
-						//하우징 메시지 뷰 reload해야 함
 					}
 					catch {
 						print(error)
@@ -162,10 +168,44 @@ class ConfirmViewController: BaseViewController {
 				print(error.localizedDescription)
 			}.disposed(by: disposeBag)
 	}
+	
+	private func whenLoad() {
+		tabBarController?.tabBar.isHidden = true
+		navigationController?.navigationBar.topItem?.title = ""
+		navigationController?.setNavigationBarHidden(false, animated: true)
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.tintColor = .black
+		navigationController?.navigationBar.barTintColor = .white
+	}
+	
+	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registerCell()
 		layout()
+		
+		userProvider.rx.request(.homePromiseTimeList(id: 1)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						let decoder = JSONDecoder()
+						let data = try decoder.decode(ResponseType<responseData>.self, from: next.data)
+						guard let dataArray : [[String]] = data.data?.promise_option else {return}
+						for items in dataArray {
+							let temp = CommunicationMethod(date: items[0], time: items[1], method: items[2])
+							self.method.append(temp)
+							self.determineButtonState.append(false)
+						}
+						self.confirmTableView.reloadData()
+					}
+					catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
 		
 		self.confirmTableView.isScrollEnabled = true
 		self.confirmTableView.separatorStyle = .none
@@ -175,6 +215,7 @@ class ConfirmViewController: BaseViewController {
 		self.confirmTableView.delegate = self
 		self.confirmTableView.dataSource = self
 		self.confirmTableView.reloadData()
+		
 		for _ in 0..<self.method.count {
 			self.determineButtonState.append(false)
 		}
@@ -182,12 +223,7 @@ class ConfirmViewController: BaseViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		tabBarController?.tabBar.isHidden = true
-		navigationController?.setNavigationBarHidden(false, animated: true)
-		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-		navigationController?.navigationBar.shadowImage = UIImage()
-		navigationController?.navigationBar.tintColor = .black
-		navigationController?.navigationBar.barTintColor = .white
+		whenLoad()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -195,11 +231,15 @@ class ConfirmViewController: BaseViewController {
 		tabBarController?.tabBar.isHidden = false
 	}
 }
+
+// MARK: - UITableView Delegate
 extension ConfirmViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 70
 	}
 }
+
+// MARK: - UITableView DataSource
 extension ConfirmViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return self.method.count
@@ -230,18 +270,24 @@ extension ConfirmViewController: UITableViewDataSource {
 				self.determineButtonState[i] = false
 			}
 		}
-		//self.selctedTime.remove(at: 0)
 		if !self.selectedTime.isEmpty
 		{
 			selectedTime.removeAll()
 		}
-		self.selectedTime.append(method[indexPath.row])
-
+		self.selectedTime.append(method[indexPath.row].date)
+		self.selectedTime.append(method[indexPath.row].time)
+		self.selectedTime.append(method[indexPath.row].method)
 		
-			self.confirmButton.backgroundColor = .primaryBlack
-			self.confirmButton.setBorder(borderColor: .primaryBlack, borderWidth: 1)
-			self.confirmButton.isEnabled = true
-		print(self.selectedTime)
+		
+		
+		self.confirmButton.backgroundColor = .primaryBlack
+		self.confirmButton.setBorder(borderColor: .primaryBlack, borderWidth: 1)
+		self.confirmButton.isEnabled = true
 		tableView.reloadData()
 	}
+}
+
+// MARK: - Model
+private struct responseData : Codable {
+	let promise_option : [[String]]
 }

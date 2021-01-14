@@ -254,6 +254,7 @@ class AdditionalRequestViewController: BaseViewController {
 		dataPreset()
 		layout()
 		// Do any additional setup after loading the view.
+		navigationController?.navigationBar.topItem?.title = ""
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
 		self.view.addGestureRecognizer(tap)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)

@@ -54,16 +54,17 @@ struct Detail: Codable {
 		promiseTime = (try? values.decode(String.self, forKey: .promiseTime)) ?? ""
 		solutionMethod = (try? values.decode(String.self, forKey: .solutionMethod)) ?? ""
 		confirmedPromiseOption = (try? values.decode([String].self, forKey: .confirmedPromiseOption)) ?? [""]
-		replies = (try? values.decode([DetailStatus].self, forKey: .replies)) ?? [DetailStatus.init(ownerStatus: [0], id: 0)]
+		replies = (try? values.decode([DetailStatus].self, forKey: .replies)) ?? [DetailStatus.init(ownerStatus: [0], userStatus: [0], id: 0)]
 	}
 }
 
 struct DetailStatus: Codable {
-	let ownerStatus: [Int]?
+	let ownerStatus, userStatus: [Int]?
 	let id: Int
 	
 	enum CodinKeys: String, CodingKey {
 		case ownerStatus = "owner_status"
+		case userStatus = "user_status"
 		case id
 	}
 	

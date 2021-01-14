@@ -27,11 +27,17 @@ final class NoticeViewController: BaseViewController {
 		super.viewDidLoad()
 		initLayout()
 		ownerProfile()
-		
+//		notice()
+		pullToRefresh(collectionview: noticeCollectionView)
 		noticeCollectionView.delegate = self
 		noticeCollectionView.dataSource = self
 	}
-	
+	override func viewWillAppear(_ animated: Bool) {
+		pullToRefresh(collectionview: noticeCollectionView)
+		ownerProfile()
+
+	}
+
 	//MARK:- Helper
 	func ownerProfile() {
 		noticeProvider.rx.request(.profile).asObservable().subscribe(onNext: { response in

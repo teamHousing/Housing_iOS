@@ -248,6 +248,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="paleGrey"/>
                                         <connections>
+                                            <outlet property="comButton" destination="T9h-J9-Jeu" id="TKH-Yw-BNJ"/>
                                             <outlet property="countOfComplete" destination="x3u-kC-IOR" id="tZP-gJ-Bn2"/>
                                         </connections>
                                     </tableViewCell>

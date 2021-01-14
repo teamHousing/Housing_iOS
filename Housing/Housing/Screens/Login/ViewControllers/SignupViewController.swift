@@ -21,7 +21,7 @@ final class SignupViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		initLayout()
+		layout()
 		
 		navigationController?.interactivePopGestureRecognizer?.delegate = nil
 	}
@@ -33,13 +33,12 @@ final class SignupViewController: UIViewController {
 	}
 	
 	// MARK: - Helper
-	private func initLayout() {
+	private func layout() {
+		navigationController?.navigationBar.topItem?.title = ""
 		navigationController?.navigationBar.isHidden = false
 		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
-		
-		navigationBackButton.tintColor = .primaryBlack
-		
+				
 		nextButton.backgroundColor = UIColor(red: 219 / 255,
 																				 green: 219 / 255,
 																				 blue: 219 / 255,

@@ -45,27 +45,34 @@ class InfoViewController: BaseViewController {
 		$0.placeholder = "홍길동"
 		$0.font = .systemFont(ofSize: 14, weight: .regular)
 		$0.tintColor = .primaryOrange
+		$0.clearButtonMode = .whileEditing
 	}
 	private let ageTextField = UITextField().then {
 		$0.placeholder = "40"
 		$0.keyboardType = .numberPad
 		$0.tintColor = .primaryOrange
 		$0.font = .systemFont(ofSize: 14, weight: .regular)
+		$0.clearButtonMode = .whileEditing
 	}
 	private let idTextField = UITextField().then {
 		$0.placeholder = "아이디를 입력해 주세요."
 		$0.tintColor = .primaryOrange
 		$0.font = .systemFont(ofSize: 14, weight: .regular)
+		$0.clearButtonMode = .whileEditing
 	}
 	private let passwordTextField = UITextField().then {
 		$0.placeholder = "비밀번호를 입력해 주세요."
 		$0.tintColor = .primaryOrange
 		$0.font = .systemFont(ofSize: 14, weight: .regular)
+		$0.clearButtonMode = .whileEditing
+		$0.isSecureTextEntry = true
 	}
 	private let certificationTextField = UITextField().then {
 		$0.placeholder = "다시 한 번 입력해 주세요."
 		$0.tintColor = .primaryOrange
 		$0.font = .systemFont(ofSize: 14, weight: .regular)
+		$0.clearButtonMode = .whileEditing
+		$0.isSecureTextEntry = true
 	}
 	private let nameUnderBarView = UIView().then {
 		$0.backgroundColor = .primaryBlack
@@ -100,6 +107,7 @@ class InfoViewController: BaseViewController {
 	}
 	
 	private func layout() {
+		navigationController?.navigationBar.topItem?.title = ""
 		view.add(scrollView) {
 			$0.snp.makeConstraints {
 				$0.edges.equalTo(self.view.safeAreaLayoutGuide)
@@ -223,26 +231,20 @@ class InfoViewController: BaseViewController {
 		
 		nameTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.ageTextField.becomeFirstResponder()
-			//
 		}).disposed(by: disposeBag)
 		ageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.idTextField.becomeFirstResponder()
-			//
 		}).disposed(by: disposeBag)
 		idTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.passwordTextField.becomeFirstResponder()
-			//
 		}).disposed(by: disposeBag)
 		passwordTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.certificationTextField.becomeFirstResponder()
-			//
 		}).disposed(by: disposeBag)
 		certificationTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { next in
 			self.scrollView.setContentOffset(CGPoint(x: 0,
 																							 y: 100),
 																			 animated: true)
-			//
-			
 		}).disposed(by: disposeBag)
 		ageTextField.rx.controlEvent(.editingDidBegin).subscribe(onNext: { next in
 			self.scrollView.setContentOffset(CGPoint(x: 0,
@@ -275,9 +277,11 @@ class InfoViewController: BaseViewController {
 		}).disposed(by: disposeBag)
 		passwordTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {
 			self.detectIsEmpty()
+			self.detectPasswordCoinside()
 		}).disposed(by: disposeBag)
 		certificationTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {
 			self.detectIsEmpty()
+			
 		}).disposed(by: disposeBag)
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
 		containerView.addGestureRecognizer(tapGesture)
@@ -333,6 +337,11 @@ class InfoViewController: BaseViewController {
 																		password: password,
 																		address: nil, building: nil)
 		navigationController?.pushViewController(viewcontroller, animated: false)
+	}
+	
+	@objc
+	private func detectPasswordCoinside() {
+		
 	}
 }
 

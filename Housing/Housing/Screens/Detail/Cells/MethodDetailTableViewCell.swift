@@ -9,11 +9,12 @@ import UIKit
 
 class MethodDetailTableViewCell: UITableViewCell {
 	
+	// MARK: - Property
 	let containerView = UIView().then {
 		$0.backgroundColor = .primaryGray
 		$0.layer.cornerRadius = 16
 	}
-	let dateLabel = UILabel().then{
+	let dateLabel = UILabel().then {
 		$0.textColor = .primaryBlack
 		$0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
 		$0.textAlignment = .center
@@ -28,8 +29,7 @@ class MethodDetailTableViewCell: UITableViewCell {
 		$0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
 		$0.textAlignment = .center
 	}
-	
-	let circleView = UIView().then() {
+	let circleView = UIView().then {
 		$0.backgroundColor = .primaryBlack
 		$0.layer.cornerRadius = 6
 	}
@@ -40,13 +40,14 @@ class MethodDetailTableViewCell: UITableViewCell {
 		$0.backgroundColor = .gray01
 	}
 	
+	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
 		return 57
 	}
 	
-	func layout() {
+	private func layout() {
 		self.contentView.add(containerView) {
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.top.equalTo(self.contentView.snp.top).offset(6)
 				$0.bottom.equalTo(self.contentView.snp.bottom).offset(-6)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(48)
@@ -54,7 +55,7 @@ class MethodDetailTableViewCell: UITableViewCell {
 			}
 		}
 		self.contentView.add(circleView) {
-			$0.snp.makeConstraints{
+			$0.snp.makeConstraints {
 				$0.width.height.equalTo(12)
 				$0.leading.equalTo(self.contentView.snp.leading).offset(20)
 				$0.centerY.equalTo(self.containerView.snp.centerY)
@@ -95,16 +96,10 @@ class MethodDetailTableViewCell: UITableViewCell {
 			}
 		}
 	}
+	
+	// MARK: - Lifecycle
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		layout()
-		// Initialization code
 	}
-	
-	override func setSelected(_ selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: animated)
-		
-		// Configure the view for the selected state
-	}
-	
 }

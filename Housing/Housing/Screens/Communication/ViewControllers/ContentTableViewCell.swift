@@ -16,7 +16,7 @@ class ContentTableViewCell: UITableViewCell {
 	@IBOutlet var contentLabel: UILabel!
 	@IBOutlet var labelBackView: UIView!
 	
-	var contentData:DetailData?
+	var contentData = DetailData(id: 0, issueTitle: "", issueContents: "", progress: 0, category: 0)
 	
 	func determineProgress(progress: Int) -> String {
 		if progress == 0{
@@ -31,7 +31,7 @@ class ContentTableViewCell: UITableViewCell {
 
 	func determineCategoty(category : Int) -> String {
 		if category == 0 {
-			return "고장수리"
+			return "고장/수리"
 		}else if category == 1 {
 			return "계약관련"
 		}else if category == 2 {
@@ -46,18 +46,20 @@ class ContentTableViewCell: UITableViewCell {
 		return ""
 	}
 	func filloutCell(){
-//		statusLabel?.text = determineProgress(progress: contentData!.progress)
-//		categoryLabel?.text = determineCategoty(category: contentData!.category)
-		titleLabel?.text = contentData?.issueTitle
-		contentLabel?.text = contentData?.issueContents
+		statusLabel?.text = determineProgress(progress: contentData.progress)
+		categoryLabel?.text = determineCategoty(category: contentData.category)
+		titleLabel?.text = contentData.issueTitle
+		contentLabel?.text = contentData.issueContents
 	}
 	func makeViewRounded(){
 		whiteUIView.setRounded(radius: 16)
+		whiteUIView.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 8)
 		labelBackView.setRounded(radius: 10)
 	}
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
+		filloutCell()
 		// Initialization code
 	}
 	

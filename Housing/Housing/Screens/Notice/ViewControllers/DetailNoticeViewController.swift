@@ -94,8 +94,9 @@ class DetailNoticeViewController: BaseViewController {
 	}
 	
 	func initLayout() {
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-		self.navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.topItem?.title = ""
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
 		
 		navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(
 																												systemName: "chevron.backward"),

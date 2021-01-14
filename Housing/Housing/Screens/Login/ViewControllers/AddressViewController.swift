@@ -54,6 +54,7 @@ final class AddressViewController: BaseViewController {
 	}
 	
 	private func initLayout() {
+		navigationController?.navigationBar.topItem?.title = ""
 		addressTextField.tintColor = UIColor.primaryOrange
 		buildingTextField.tintColor = UIColor.primaryOrange
 		
@@ -90,7 +91,6 @@ final class AddressViewController: BaseViewController {
 			.asObservable()
 			.subscribe( onNext: { response in
 				if response.statusCode == 200 {
-					
 					guard let token = (response.response?.allHeaderFields["Set-Cookie"] ?? "") as? String else {
 						return
 					}
@@ -102,24 +102,13 @@ final class AddressViewController: BaseViewController {
 					guard let cookie = cookies?[1] else {
 						return
 					}
-					do{
-						let decoder = JSONDecoder()
-						let data = try decoder.decode(ResponseType<User>.self,
-																					from: response.data)
-						guard let result = data.data?.type else {
-							return
-						}
-						KeychainWrapper.standard.set(result,
-																				 forKey: KeychainStorage.isHost)
-						KeychainWrapper.standard.set(cookie,
-																				 forKey: KeychainStorage.accessToken)
-						
-						let viewcontroller = self.storyboard?.instantiateViewController(
-							withIdentifier: "SignupCompleteViewController") as! SignupCompleteViewController
-						self.navigationController?.pushViewController(viewcontroller, animated: true)
-					} catch {
-						print(error)
-					}
+					KeychainWrapper.standard.set(0,
+																			 forKey: KeychainStorage.isHost)
+					KeychainWrapper.standard.set(cookie,
+																			 forKey: KeychainStorage.accessToken)
+					let viewcontroller = self.storyboard?.instantiateViewController(
+						withIdentifier: "SignupCompleteViewController") as! SignupCompleteViewController
+					self.navigationController?.pushViewController(viewcontroller, animated: true)
 				}
 				print(response)
 			}, onError: { error in

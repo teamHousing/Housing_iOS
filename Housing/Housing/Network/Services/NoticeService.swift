@@ -17,7 +17,7 @@ enum NoticeService {
 													notice_title: String,
 													notice_contents: String,
 													notice_option: [noticeOption])
-	case profileAuthorization(building: String, unit: Int)
+	case profileAuthorization(unit: Int)
 }
 
 struct MyInfo: Codable {
@@ -81,7 +81,7 @@ extension NoticeService: TargetType {
 			return "/houseInfo"
 		case let .profileNoticeDetail(id):
 			return "/houseInfo/\(id)/notice"
-		case let .profileNoticeAdmit(house_info_id):
+		case let .profileNoticeAdmit(house_info_id,_,_,_):
 			return "/houseInfo/\(house_info_id)/notice"
 		case .profileAuthorization:
 			return "/authentication/number"
@@ -120,8 +120,8 @@ extension NoticeService: TargetType {
 																													"notice_option": dict],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["house_info_id": house_info_id])
-		case .profileAuthorization(building: let building, unit: let unit):
-			return .requestCompositeParameters(bodyParameters: ["building": building, "unit": unit],
+		case .profileAuthorization(unit: let unit):
+			return .requestCompositeParameters(bodyParameters: ["unit": unit],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: .init())
 		}
