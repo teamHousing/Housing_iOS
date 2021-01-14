@@ -112,6 +112,7 @@ final class LoginViewController: BaseViewController {
 						}
 						KeychainWrapper.standard.set(result,
 																				 forKey: KeychainStorage.isHost)
+						
 						KeychainWrapper.standard.set(cookie,
 																				 forKey: KeychainStorage.accessToken)
 						
