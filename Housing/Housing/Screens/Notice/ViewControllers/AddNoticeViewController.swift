@@ -404,7 +404,7 @@ class AddNoticeViewController: BaseViewController{
 		requestData.endTime.onNext("")
 		let decoder = JSONDecoder()
 
-		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a )
+		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a)
 		let noticeArr: [noticeOption] = [noticetime]
 		print(noticetime)
 		print(self.noticeTitle.text)
@@ -415,7 +415,6 @@ class AddNoticeViewController: BaseViewController{
 					do {
 						let decoder = JSONDecoder()
 						let data = try decoder.decode(Response.self, from: response.data)
-						self.navigationController?.parent?.viewDidLoad()
 						self.navigationController?.popViewController(animated: true)
 					}
 					catch {

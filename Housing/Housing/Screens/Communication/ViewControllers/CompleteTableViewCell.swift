@@ -9,6 +9,7 @@ import UIKit
 
 class CompleteTableViewCell: UITableViewCell {
 	@IBOutlet var countOfComplete: UILabel!
+	@IBOutlet var comButton: UIButton!
 	
     override func awakeFromNib() {
         super.awakeFromNib()
