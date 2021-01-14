@@ -12,10 +12,10 @@ import Moya
 class VerifyNumberViewController: BaseViewController {
 	// MARK: - Component
 	private let userProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-	lazy var shareButton = UIBarButtonItem.init(image: UIImage(named: "iconShare"),
-																							style: .done,
-																							target: self,
-																							action: #selector(shareNumber(sender:)))
+	lazy var shareButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
+																				 style: .done,
+																				 target: self,
+																				 action: #selector(shareNumber))
 	private let backButton = UIButton().then{
 		$0.setImage(UIImage(named: ""), for: .normal)
 	}
@@ -120,7 +120,6 @@ class VerifyNumberViewController: BaseViewController {
 		self.navigationItem.rightBarButtonItem = shareButton
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.view.backgroundColor = .primaryGray
-		self.navigationController?.navigationBar
 		
 		self.view.adds([upperView,
 										noticeLabel,
@@ -135,15 +134,15 @@ class VerifyNumberViewController: BaseViewController {
 		}
 		upperView.adds([backgroundLabel,
 										lineImage,
-//										buildingNumber,
-//										buildingNumberUnderbar,
+										//										buildingNumber,
+										//										buildingNumberUnderbar,
 										houseNumber,
 										houseNumberUnderbar,
-//										dong,
+										//										dong,
 										ho,
 										makeNumber,
 										verifyNumber,
-//										deleteButton1,
+										//										deleteButton1,
 										deleteButton2,
 		])
 		backgroundLabel.snp.makeConstraints{
@@ -156,21 +155,21 @@ class VerifyNumberViewController: BaseViewController {
 			$0.leading.equalTo(backgroundLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
 		}
-//		buildingNumber.snp.makeConstraints{
-//			$0.top.equalTo(lineImage.snp.bottom).offset(68)
-//			$0.centerX.equalTo(upperView).offset(-15)
-//			$0.width.equalTo(120)
-//		}
-//		buildingNumberUnderbar.snp.makeConstraints{
-//			$0.centerX.equalTo(buildingNumber)
-//			$0.width.equalTo(buildingNumber)
-//			$0.top.equalTo(lineImage.snp.bottom).offset(100)
-//			$0.height.equalTo(1)
-//		}
-//		dong.snp.makeConstraints{
-//			$0.centerY.equalTo(buildingNumber)
-//			$0.leading.equalTo(buildingNumber.snp.trailing).offset(8)
-//		}
+		//		buildingNumber.snp.makeConstraints{
+		//			$0.top.equalTo(lineImage.snp.bottom).offset(68)
+		//			$0.centerX.equalTo(upperView).offset(-15)
+		//			$0.width.equalTo(120)
+		//		}
+		//		buildingNumberUnderbar.snp.makeConstraints{
+		//			$0.centerX.equalTo(buildingNumber)
+		//			$0.width.equalTo(buildingNumber)
+		//			$0.top.equalTo(lineImage.snp.bottom).offset(100)
+		//			$0.height.equalTo(1)
+		//		}
+		//		dong.snp.makeConstraints{
+		//			$0.centerY.equalTo(buildingNumber)
+		//			$0.leading.equalTo(buildingNumber.snp.trailing).offset(8)
+		//		}
 		houseNumber.snp.makeConstraints{
 			$0.top.equalTo(lineImage.snp.bottom).offset(68)
 			$0.centerX.equalTo(upperView).offset(-15)
@@ -187,12 +186,12 @@ class VerifyNumberViewController: BaseViewController {
 			$0.leading.equalTo(houseNumber.snp.trailing).offset(8)
 		}
 		
-//		deleteButton1.snp.makeConstraints{
-//			$0.trailing.equalTo(buildingNumber.snp.trailing).offset(0)
-//			$0.top.equalTo(buildingNumber.snp.top)
-//			$0.bottom.equalTo(buildingNumber.snp.bottom)
-//			$0.width.height.equalTo(24)
-//		}
+		//		deleteButton1.snp.makeConstraints{
+		//			$0.trailing.equalTo(buildingNumber.snp.trailing).offset(0)
+		//			$0.top.equalTo(buildingNumber.snp.top)
+		//			$0.bottom.equalTo(buildingNumber.snp.bottom)
+		//			$0.width.height.equalTo(24)
+		//		}
 		deleteButton2.snp.makeConstraints{
 			$0.trailing.equalTo(houseNumber.snp.trailing).offset(0)
 			$0.top.equalTo(houseNumber.snp.top)
@@ -246,9 +245,12 @@ class VerifyNumberViewController: BaseViewController {
 		
 		showNumber.startAnimation()
 	}
-	@objc func makeTheNumber(sender : UIButton) {
-		let building = self.buildingNumber.text ?? ""
-		let unit = Int(self.houseNumber.text ?? "0")!
+	@objc
+	func makeTheNumber(sender : UIButton) {
+//		guard let building = buildingNumber.text,
+		guard let house = houseNumber.text
+					else {return}
+		let unit = Int(house)!
 		userProvider.rx.request(.profileAuthorization(unit: unit))
 			.asObservable()
 			.subscribe { (response) in
@@ -314,17 +316,21 @@ class VerifyNumberViewController: BaseViewController {
 		self.makeNumber.setTitleColor( b ? .black : .gray01 , for: .normal)
 		self.makeNumber.isEnabled = b
 	}
-	@objc func shareNumber(sender : UIButton) {
+	@objc
+	func shareNumber() {
+		guard let number = verifyNumber.text else {
+			return
+		}
 		var shareObject = [Any]()
-		shareObject.append(self.verifyNumber.text)
-		let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
+		shareObject.append("\(number)")
+		let activityViewController = UIActivityViewController(activityItems : shareObject,
+																													applicationActivities: nil)
 		activityViewController.popoverPresentationController?.sourceView = self.view
-		activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.postToTwitter,UIActivity.ActivityType.mail]
+		activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
 		self.present(activityViewController, animated: true, completion: nil)
 	}
 	// MARK: - Life Cycle
 	override func viewDidLoad() {
-		print(#file)
 		bind()
 		super.viewDidLoad()
 		layout()
@@ -335,6 +341,7 @@ class VerifyNumberViewController: BaseViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		navigationController?.navigationBar.topItem?.title = ""
 		tabBarController?.tabBar.isHidden = true
 	}
 	

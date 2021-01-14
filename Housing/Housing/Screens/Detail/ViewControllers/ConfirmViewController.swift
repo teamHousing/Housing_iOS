@@ -62,7 +62,7 @@ class ConfirmViewController: BaseViewController {
 		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
 		$0.titleLabel?.textAlignment = .center
 		$0.setTitleColor(.primaryBlack, for: .normal)
-		$0.addTarget(self, action: #selector(returnPromise(sender:)), for: .touchUpInside)
+		$0.addTarget(self, action: #selector(returnPromise), for: .touchUpInside)
 	}
 	
 	// MARK: - Helper
@@ -131,16 +131,17 @@ class ConfirmViewController: BaseViewController {
 		self.confirmTableView.tableFooterView = footerView
 	}
 	
-	@objc func confirmPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseConfirm(id: 1
-																								, promise_option: self.selectedTime)).asObservable()
+	@objc
+	private func confirmPromise() {
+		userProvider.rx.request(.homePromiseConfirm(id: 1,
+																								promise_option: selectedTime))
+			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
 						print(next)
 						self.navigationController?.popViewController(animated: true)
-					}
-					catch {
+					} catch {
 						print(error)
 					}
 				}
@@ -149,8 +150,10 @@ class ConfirmViewController: BaseViewController {
 			}.disposed(by: disposeBag)
 	}
 	
-	@objc func returnPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseHostModify(id: 1)).asObservable()
+	@objc
+	private func returnPromise() {
+		userProvider.rx.request(.homePromiseHostModify(id: 1))
+			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
@@ -164,6 +167,16 @@ class ConfirmViewController: BaseViewController {
 			} onError: { (error) in
 				print(error.localizedDescription)
 			}.disposed(by: disposeBag)
+	}
+	
+	private func whenLoad() {
+		tabBarController?.tabBar.isHidden = true
+		navigationController?.navigationBar.topItem?.title = ""
+		navigationController?.setNavigationBarHidden(false, animated: true)
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.tintColor = .black
+		navigationController?.navigationBar.barTintColor = .white
 	}
 	
 	// MARK: - Lifecycle
@@ -210,12 +223,7 @@ class ConfirmViewController: BaseViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		tabBarController?.tabBar.isHidden = true
-		navigationController?.setNavigationBarHidden(false, animated: true)
-		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-		navigationController?.navigationBar.shadowImage = UIImage()
-		navigationController?.navigationBar.tintColor = .black
-		navigationController?.navigationBar.barTintColor = .white
+		whenLoad()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {

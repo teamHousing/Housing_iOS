@@ -53,6 +53,7 @@ class ContentTableViewCell: UITableViewCell {
 	}
 	func makeViewRounded(){
 		whiteUIView.setRounded(radius: 16)
+		whiteUIView.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 8)
 		labelBackView.setRounded(radius: 10)
 	}
 	

@@ -304,7 +304,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
-		
+		navigationController?.navigationBar.topItem?.title = ""
 		tabBarController?.tabBar.isHidden = true
 		edgesForExtendedLayout = .bottom
 		extendedLayoutIncludesOpaqueBars = true
@@ -322,5 +322,3 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 	
 }
-
-

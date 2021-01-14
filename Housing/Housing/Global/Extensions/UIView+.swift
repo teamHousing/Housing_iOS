@@ -23,6 +23,22 @@ extension UIView {
 		return subviews
 	}
 	
+	func applyShadow(color: UIColor, alpha: Float, x: CGFloat, y: CGFloat, blur: CGFloat) {
+		let shadowView = UIView()
+		
+		self.add(shadowView) {
+			$0.snp.makeConstraints {
+				$0.edges.equalTo(self)
+			}
+		}
+		self.layer.masksToBounds = false
+		self.layer.applyShadow(color: color,
+													 alpha: alpha,
+													 x: x,
+													 y: y,
+													 blur: blur)
+	}
+	
 	func setRounded(radius : CGFloat?){
 		// UIView 의 모서리가 둥근 정도를 설정
 		if let cornerRadius_ = radius {

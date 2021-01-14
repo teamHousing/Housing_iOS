@@ -358,6 +358,7 @@ class AddNoticeViewController: BaseViewController{
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		navigationController?.navigationBar.topItem?.title = ""
 		tabBarController?.tabBar.isHidden = true
 	}
 	

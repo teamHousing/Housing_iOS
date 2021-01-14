@@ -503,7 +503,7 @@ extension AppointmentViewController: UITableViewDelegate {
 		self.timeStampTableView.register(TimeStampTableViewCell.self, forCellReuseIdentifier: TimeStampTableViewCell.registterId)
 		self.timeStampTableView.delegate = self
 		self.timeStampTableView.dataSource = self
-		
+		navigationController?.navigationBar.topItem?.title = ""
 		layout()
 		tableViewBind()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))

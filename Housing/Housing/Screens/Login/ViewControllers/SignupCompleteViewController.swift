@@ -19,6 +19,7 @@ final class SignupCompleteViewController: UIViewController {
 	
 	//MARK:- Helper
 	private func initLayout() {
+		navigationController?.navigationBar.topItem?.title = ""
 		completeView.backgroundColor = UIColor.primaryBlack
 		completeView.layer.cornerRadius = 0.5 * completeView.bounds.size.height
 	}
