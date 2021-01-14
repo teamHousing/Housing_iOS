@@ -9,6 +9,7 @@ import UIKit
 
 import Alamofire
 import Moya
+import SwiftKeychainWrapper
 
 struct cellData{
 	var opened = Bool()
@@ -50,6 +51,8 @@ final class CommunicationViewController: BaseViewController {
 		layoutNavigationBar()
 		configTableView()
 		pullToRefresh(tableview: communicationTableView)
+		print(123)
+		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken))
 	}
 	
 	func dataSetup() {
@@ -109,7 +112,7 @@ final class CommunicationViewController: BaseViewController {
 						self.reloadInputViews()
 
 						self.dataSetup()
-						self.communicationTableView.reloadData()
+//						self.communicationTableView.reloadData()
 						//semaphore.wait()
 						
 					} catch {
@@ -149,7 +152,7 @@ final class CommunicationViewController: BaseViewController {
 	
 	@objc
 	private func settingButtonDidTap() {
-		print(#function)
+		KeychainWrapper.standard.removeAllKeys()
 	}
 }
 
@@ -173,6 +176,7 @@ extension CommunicationViewController: UITableViewDelegate { /// 이게 cell이 
 			}
 		} else {
 			let viewController = DetailViewController()
+			viewController.requestId = tableViewData[indexPath.section].sectionData[indexPath.row-1].id
 			navigationController?.pushViewController(viewController, animated: true)
 		}
 	}
@@ -331,27 +335,20 @@ extension CommunicationViewController: UITableViewDataSource{
 					return contentCell
 				}
 			} else if incompleteLength > 0 && completeLength == 0{
-				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+				if indexPath.section == 0 { ///cell중에서도 incomplete부분.
 					contentCell.filloutCell()
 					return contentCell
 				} else { ///cell중에서도 complete부분
 					return emptyComCell
 				}
-			} else if incompleteLength > 0 && completeLength > 0{
-				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-				
-					
-//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+			} else if incompleteLength > 0 && completeLength > 0 {
+				if indexPath.section == 0 {
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
-				
-					
 					return contentCell
-				} else { ///cell중에서도 complete부분
-//					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
+				} else {
+					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
-	
-					
 					return contentCell
 				}
 			}
@@ -365,8 +362,8 @@ extension CommunicationViewController: UIScrollViewDelegate{
 		
 		if scrollView.contentOffset.y < -1 {
 			communicationTableView.backgroundColor = .white
-			communicationTableView.reloadData()
-			print("scroll시 reload")
+//			communicationTableView.reloadData()
+//			print("scroll시 reload")
 		} else if scrollView.contentOffset.y >= -1 {
 			communicationTableView.backgroundColor = .primaryGray }
 	}

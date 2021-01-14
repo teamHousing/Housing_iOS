@@ -300,6 +300,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		layout()
 		setSafeArea()
 		reloadData()
+		print("requestIㅇ :",requestId)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

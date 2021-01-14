@@ -64,12 +64,12 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 		return 1
 	}
 	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
-	-> UITableViewCell {
+	override func tableView(_ tableView: UITableView,
+													cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //		let cell: EmptyTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 //		cell.awakeFromNib()
 //		return cell
-		
+		print("123123",statusModel)
 		let cell: MessageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 		if self.statusModel[0].userStatus?.isEmpty == true {
 			cell.status = self.statusModel[0].ownerStatus!
