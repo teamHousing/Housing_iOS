@@ -150,6 +150,7 @@ extension AddedImageTableViewCell: UICollectionViewDataSource {
 				cell.plusLabel.isHidden = false
 			}
 		}
+		cell.addedImageView.layer.cornerRadius = 16
 		cell.awakeFromNib()
 		return cell
 	}

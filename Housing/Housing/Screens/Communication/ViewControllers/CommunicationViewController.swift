@@ -106,8 +106,8 @@ final class CommunicationViewController: BaseViewController {
 						let data = try decoder.decode(ResponseType<Communication>.self,
 																					from: response.data)
 						guard let result = data.data else {return}
-						//self.completeLength = result.completeLength
-						//self.incompleteLength = result.incompleteLength
+						self.completeLength = result.completeLength
+						self.incompleteLength = result.incompleteLength
 						
 						var listdata: [DetailData] = []
 						for index in 0..<result.incompleteList.count {
