@@ -53,9 +53,7 @@ final class CommunicationViewController: BaseViewController {
 		layoutNavigationBar()
 		configTableView()
 		pullToRefresh(tableview: communicationTableView)
-		print(123)
-		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken))
-		
+
 	}
 	
 	func dataSetup() {
@@ -102,7 +100,7 @@ final class CommunicationViewController: BaseViewController {
 		userProvider.rx.request(.home(unit: "-1"))
 			.asObservable()
 			.subscribe(onNext: { response in
-				if response.statusCode == 200{
+				if response.statusCode == 200 {
 					do {
 						let decoder = JSONDecoder()
 						let data = try decoder.decode(ResponseType<Communication>.self,
@@ -164,6 +162,7 @@ final class CommunicationViewController: BaseViewController {
 	@objc
 	private func settingButtonDidTap() {
 		KeychainWrapper.standard.removeAllKeys()
+		dismiss(animated: true, completion: nil)
 	}
 }
 

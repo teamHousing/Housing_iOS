@@ -398,7 +398,7 @@ class AddNoticeViewController: BaseViewController{
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
 
-		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a )
+		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a)
 		let noticeArr: [noticeOption] = [noticetime]
 		userProvider.rx.request(.profileNoticeAdmit(house_info_id: 1, notice_title: self.noticeTitle.text ?? "", notice_contents: self.noticeDescription.text ?? "" , notice_option: noticeArr)).asObservable()
 			.subscribe { (response) in
