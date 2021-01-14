@@ -45,10 +45,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여긴 상세" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfO-Th-QtZ">
-                                                    <rect key="frame" x="40" y="56" width="48" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여긴" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfO-Th-QtZ">
+                                                    <rect key="frame" x="40" y="68" width="48" height="36"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="36" id="cjR-wN-QNS"/>
+                                                        <constraint firstAttribute="height" constant="36" id="Zsd-qI-qxH"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -58,13 +58,13 @@
                                             <constraints>
                                                 <constraint firstItem="Yld-w5-c70" firstAttribute="leading" secondItem="8bW-Un-LJl" secondAttribute="leading" constant="20" id="2OB-bf-0ZS"/>
                                                 <constraint firstItem="MfO-Th-QtZ" firstAttribute="leading" secondItem="8bW-Un-LJl" secondAttribute="leading" constant="20" id="6Od-2I-J8C"/>
-                                                <constraint firstItem="MfO-Th-QtZ" firstAttribute="top" secondItem="Yld-w5-c70" secondAttribute="bottom" constant="12" id="NkO-n1-rMT"/>
                                                 <constraint firstItem="8bW-Un-LJl" firstAttribute="leading" secondItem="jvQ-la-Nmd" secondAttribute="leading" constant="20" id="WOB-eK-qKu"/>
                                                 <constraint firstAttribute="bottom" secondItem="8bW-Un-LJl" secondAttribute="bottom" constant="12" id="ZPM-e3-5ap"/>
                                                 <constraint firstItem="8bW-Un-LJl" firstAttribute="trailing" secondItem="MfO-Th-QtZ" secondAttribute="trailing" constant="20" id="ciq-RL-1fz"/>
                                                 <constraint firstAttribute="trailing" secondItem="8bW-Un-LJl" secondAttribute="trailing" constant="20" id="hVa-8E-JVo"/>
                                                 <constraint firstItem="8bW-Un-LJl" firstAttribute="top" secondItem="jvQ-la-Nmd" secondAttribute="top" constant="12" id="o0Y-6u-YJL"/>
                                                 <constraint firstItem="Yld-w5-c70" firstAttribute="top" secondItem="jvQ-la-Nmd" secondAttribute="top" constant="24" id="uoc-Ji-sBp"/>
+                                                <constraint firstAttribute="bottom" secondItem="MfO-Th-QtZ" secondAttribute="bottom" constant="24" id="yi0-5o-Df3"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="128" height="128"/>

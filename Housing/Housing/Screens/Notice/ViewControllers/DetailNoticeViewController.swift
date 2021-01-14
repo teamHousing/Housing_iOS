@@ -13,10 +13,9 @@ import RxMoya
 class DetailNoticeViewController: BaseViewController {
 	
 	//MARK:- Property
-	var titleData: String?
-	var contextData: String?
+	var noticeDetail: Notice?
 	var id: Int?
-	
+
 	private let noticeProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	
 	//MARK:- Component(Outlet)
@@ -41,15 +40,16 @@ class DetailNoticeViewController: BaseViewController {
 		super.viewDidLoad()
 		
 		initLayout()
-		initData()
 		notice()
 		
 		navigationController?.interactivePopGestureRecognizer?.delegate = nil
 	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		tabBarController?.tabBar.isHidden = true
 	}
+	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		tabBarController?.tabBar.isHidden = false
@@ -61,7 +61,6 @@ class DetailNoticeViewController: BaseViewController {
 		else {
 			return
 		}
-		
 		noticeProvider.rx.request(.profileNoticeDetail(id: id)).asObservable()
 			.subscribe(onNext: { response in
 				if response.statusCode == 200 {
@@ -73,6 +72,9 @@ class DetailNoticeViewController: BaseViewController {
 							
 							return
 						}
+						self.detailTitle.text = self.noticeDetail?.noticeTitle
+						self.detailContext.text = self.noticeDetail?.noticeContents
+						
 						print(result)
 					} catch {
 						print(error)
@@ -95,11 +97,6 @@ class DetailNoticeViewController: BaseViewController {
 		circleView.cornerRadius = circleView.frame.height / 2
 		
 		addedNoticeView.layer.cornerRadius = 12
-	}
-	
-	func initData() {
-		detailTitle.text = titleData
-		detailContext.text = contextData
 	}
 	
 	@objc func toNotice() {

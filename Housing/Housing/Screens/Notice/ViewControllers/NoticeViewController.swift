@@ -27,7 +27,6 @@ final class NoticeViewController: BaseViewController {
 		super.viewDidLoad()
 		initLayout()
 		ownerProfile()
-//		notice()
 		
 		noticeCollectionView.delegate = self
 		noticeCollectionView.dataSource = self
