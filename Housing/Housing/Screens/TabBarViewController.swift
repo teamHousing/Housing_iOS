@@ -33,18 +33,18 @@ class TabBarViewController: UITabBarController {
 		let storyboard = UIStoryboard(name: StoryboardStorage.communication,
 																	bundle: nil)
 		let communicationVC = storyboard.instantiateViewController(withIdentifier: "CommunicationViewController")
-		let communicationTabItem = UITabBarItem(title: "",
-																	 image: UIImage(systemName: "house"),
-																	 tag: 0)
+		let communicationTabItem = UITabBarItem(title: "홈",
+																	 image: UIImage(named: "icHomeUnselected"),
+																	 selectedImage: UIImage(named: "icHome"))
 		communicationVC.tabBarItem = communicationTabItem
 		navigationController = UINavigationController(rootViewController: communicationVC)
 
 		let communicationTab = navigationController
 		
 		let calendarViewController = CalendarViewController()
-		let calendarTabItem = UITabBarItem(title: "",
-																	 image: UIImage(systemName: "eyes"),
-																	 tag: 1)
+		let calendarTabItem = UITabBarItem(title: "캘린더",
+																	 image: UIImage(named: "icCalendarUnselected"),
+																	 selectedImage: UIImage(named: "icCalencar"))
 		calendarViewController.tabBarItem = calendarTabItem
 		
 		navigationController = UINavigationController(rootViewController: calendarViewController)
@@ -54,9 +54,9 @@ class TabBarViewController: UITabBarController {
 		let homestoryboard = UIStoryboard(name: StoryboardStorage.notice,
 																	bundle: nil)
 		let homeVC = homestoryboard.instantiateViewController(withIdentifier: "NoticeViewController")
-		let homeTabItem = UITabBarItem(title: "",
-																	 image: UIImage(systemName: "house.fill"),
-																	 tag: 1)
+		let homeTabItem = UITabBarItem(title: "우리집 소식",
+																	 image: UIImage(named: "icNotice"),
+																	 selectedImage: UIImage(named: "icNoticeUnselected"))
 		homeVC.tabBarItem = homeTabItem
 		navigationController = UINavigationController(rootViewController: homeVC)
 
