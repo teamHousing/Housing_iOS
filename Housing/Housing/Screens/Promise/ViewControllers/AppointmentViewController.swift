@@ -19,7 +19,6 @@ class AppointmentViewController: BaseViewController {
 
 	var checkToModify = 0
 	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
@@ -409,6 +408,7 @@ class AppointmentViewController: BaseViewController {
 			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
+					self.navigationController?.popToRootViewController(animated: true)
 				}
 			} onError: { (error) in
 				print(error.localizedDescription)
@@ -485,11 +485,12 @@ class AppointmentViewController: BaseViewController {
 		var temp = VisitDate()
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
 			print(str)
+
 			let day = String(str.element!.split(separator: "-")[0])
 			let date = String(str.element!.split(separator: "-")[1])
 			temp.date = date
 			
-			let newday = day.replacingOccurrences(of: "-", with: ". ")
+			let newday = day.replacingOccurrences(of: "", with: ". ")
 			temp.day = newday
 		}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
