@@ -61,6 +61,8 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
+		let parent :DetailViewController = self.parent as! DetailViewController
+		//parent.loader()
 		navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	
