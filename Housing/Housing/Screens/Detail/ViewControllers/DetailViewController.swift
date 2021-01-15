@@ -168,6 +168,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			$0.textAlignment = .left
 			$0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
 			$0.numberOfLines = 0
+			$0.lineBreakMode = .byWordWrapping
 			$0.snp.makeConstraints {
 				$0.leading.equalTo(self.detailHeaderView.snp.leading).offset(20)
 				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
