@@ -155,13 +155,15 @@ class AdditionalRequestViewController: BaseViewController {
 		image()
 	}
 	private func image(){
+		print(#function)
 		if !self.requestData.images.isEmpty {
 			promiseProvider.rx.request(.homePromiseImageUpload(issue_img: requestData.images))
 				.observeOn(MainScheduler.init())
 				.asObservable()
 				.subscribe { (next) in
-					print(next.statusCode)
+					print("여기야 바보들아",next.statusCode)
 				} onError: { (error) in
+					print(123)
 					print(error.localizedDescription)
 				}.disposed(by: disposeBag)
 		}

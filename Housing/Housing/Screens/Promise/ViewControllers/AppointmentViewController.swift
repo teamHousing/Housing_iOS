@@ -18,7 +18,7 @@ class AppointmentViewController: BaseViewController {
 	var requestData = RequestDataModel.shared
 
 	var checkToModify = 0
-	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 
 	private let appointmentScroll = UIScrollView()
@@ -224,14 +224,12 @@ class AppointmentViewController: BaseViewController {
 		backgroundLabel.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
-			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -85))
 		}
 		lineImage.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(28)
 			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(backgroundLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
-			$0.width.equalTo(widthConstraintAmount(value: widthConstraintAmount(value: 77)))
 		}
 		registerButton.then {
 			if self.checkToModify == 1 {
@@ -283,7 +281,6 @@ class AppointmentViewController: BaseViewController {
 		timeSelectLabel.snp.makeConstraints{
 			$0.top.equalTo(underBar.snp.bottom).offset(64)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
-			$0.width.equalTo(widthConstraintAmount(value: 125))
 			$0.height.equalTo(timeSelectLabel.snp.width).multipliedBy(1 / 6.95)
 		}
 		startHour.snp.makeConstraints{
@@ -418,8 +415,9 @@ class AppointmentViewController: BaseViewController {
 			}.disposed(by: disposeBag)
 	}
 	@objc func modifyPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseGuestModify(id: issue_id, promise_option: self.promiseArr)).asObservable()
+		promiseProvider.rx.request(.homePromiseGuestModify(id: issue_id, promise_option: self.promiseArr)).asObservable()
 			.subscribe { (next) in
+				dump(next.data)
 				if next.statusCode == 200 {
 					do {
 						self.navigationController?.popToRootViewController(animated: true)
@@ -435,8 +433,8 @@ class AppointmentViewController: BaseViewController {
 	func timeToNoticeOption() -> noticeOption {
 		var temp = VisitDate()
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
-			let day = String(str.element!.split(separator: " ")[0])
-			let date = String(str.element!.split(separator: " ")[1])
+			let day = String(str.element!.split(separator: "-")[0])
+			let date = String(str.element!.split(separator: "-")[1])
 			temp.date = date
 			temp.day = day
 		}.disposed(by: disposeBag)
@@ -487,8 +485,8 @@ class AppointmentViewController: BaseViewController {
 		var temp = VisitDate()
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
 			print(str)
-			let day = String(str.element!.split(separator: " ")[0])
-			let date = String(str.element!.split(separator: " ")[1])
+			let day = String(str.element!.split(separator: "-")[0])
+			let date = String(str.element!.split(separator: "-")[1])
 			temp.date = date
 			
 			let newday = day.replacingOccurrences(of: "-", with: ". ")
