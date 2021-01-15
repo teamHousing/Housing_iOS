@@ -32,7 +32,7 @@ final class CommunicationViewController: BaseViewController {
 	lazy var naviButton = UIBarButtonItem(image: UIImage(named: determineButtonImage(mode: mode)),
 																				 style: .done,
 																				 target: self,
-																				 action: #selector(settingButtonDidTap))
+																				 action: #selector(naviButtonDidTap))
 
 	//MARK: - Property
 	var incompleteLength = 1
@@ -56,6 +56,7 @@ final class CommunicationViewController: BaseViewController {
 		layoutNavigationBar()
 		configHeaderView()
 		configTableView()
+		
 		pullToRefresh(tableview: communicationTableView)
 		
 		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)
@@ -82,10 +83,9 @@ final class CommunicationViewController: BaseViewController {
 															sectionData: comDetailCellData)]
 	}
 	
-
 	private func determineButtonImage(mode: Int)-> String {
 		if mode == 0 {
-			return "2003"
+			return ("2003")
 		}else {
 			return "icWrite"
 		}
@@ -158,9 +158,17 @@ final class CommunicationViewController: BaseViewController {
 	}
 	
 	@objc
-	private func settingButtonDidTap() {
-		let view = PromiseViewController()
-		navigationController?.pushViewController(view, animated: true)
+	private func naviButtonDidTap() {
+		if mode == 1 {
+			let view = PromiseViewController()
+			navigationController?.pushViewController(view, animated: true)
+		}else {
+				naviButton.isEnabled = false
+//			let view =  ///앱잼에서 구현하지 않음
+//			navigationController?.pushViewController(view, animated: true)
+		}
+		print("mode는")
+		print(mode)
 	}
 }
 
