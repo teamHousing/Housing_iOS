@@ -434,15 +434,19 @@ class AppointmentViewController: BaseViewController {
 	func timeToNoticeOption() -> noticeOption {
 		var temp = VisitDate()
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
-			let day = String(str.element!.split(separator: "-")[0])
-			let date = String(str.element!.split(separator: "-")[1])
+			let day = String(str.element!.split(separator: " ")[0])
+			let date = String(str.element!.split(separator: " ")[1])
 			temp.date = date
 			temp.day = day
 		}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
 		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
-		temp.endTime = temp.startTime.replacingOccurrences(of: "시", with: "")
+		temp.day = temp.day.replacingOccurrences(of: "-", with: ".")
+		temp.endTime = temp.endTime.replacingOccurrences(of: "시", with: "")
+		temp.startTime = temp.startTime + ":00"
+		temp.endTime = temp.endTime + ":00"
+
 		if temp.startTime.hasPrefix("오전") {
 			temp.startTime = temp.startTime.replacingOccurrences(of: "오전 ", with: "")
 		}
@@ -577,8 +581,9 @@ extension AppointmentViewController: UITableViewDelegate {
 		cell.awakeFromNib()
 		cell.backgroundColor = .primaryGray
 		cell.deleteButton.backgroundColor = .primaryGray
-		cell.dateLabel.text = self.requestData.availableTimeList[indexPath.row].day
-		cell.timeLabel.text = "\(self.requestData.availableTimeList[indexPath.row].startTime):00-\(self.requestData.availableTimeList[indexPath.row].endTime):00"
+		cell.dateLabel.text = String(self.requestData.availableTimeList[indexPath.row].day.split(separator: " ")[0])
+		cell.timeLabel.text = "\(self.requestData.availableTimeList[indexPath.row].startTime) - \(self.requestData.availableTimeList[indexPath.row].endTime)"
+
 		cell.methodLabel.text = self.requestData.solution
 		cell.selectionStyle = .none
 		cell.deleteButton.tag = indexPath.row

@@ -135,7 +135,7 @@ class DatePickerViewController: UIViewController {
 		switch pickerMode {
 		case 0:
 			
-			dateFormatter.dateFormat = "yyyy-MM-dd"
+			dateFormatter.dateFormat = "yyyy-MM-dd EE"
 			self.datePicker.rx.date.map{ dateFormatter.string(from: $0) }
 				.bind(onNext: {a in self.requestData.date.onNext(a)})
 			.disposed(by: disposeBag)
