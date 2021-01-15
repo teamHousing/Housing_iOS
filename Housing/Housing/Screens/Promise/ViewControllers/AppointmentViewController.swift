@@ -19,7 +19,7 @@ class AppointmentViewController: BaseViewController {
 	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
-	private var promiseArr: [noticeOption] = []
+	private var promiseArr: [[String]] = []
 
 	private let backgroundLabel = UILabel().then{
 		$0.text = "문제를 어떻게 해결할까요?"
@@ -429,7 +429,7 @@ class AppointmentViewController: BaseViewController {
 		}
 		let a = "\(temp.startTime)-\(temp.endTime)"
 		
-		let promiseTime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a )
+		let promiseTime = noticeOption( date: temp.day , day : a , time: self.requestData.solution )
 		
 		return promiseTime
 	}
@@ -465,7 +465,9 @@ class AppointmentViewController: BaseViewController {
 			}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
-		promiseArr.append(timeToNoticeOption())
+		let t = timeToNoticeOption()
+		
+		promiseArr.append([t.date!, t.day!, t.time!])
 		requestData.availableTimeList.append(temp)
 	
 		requestData.date.onNext("")

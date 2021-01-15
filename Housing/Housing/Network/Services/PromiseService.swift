@@ -23,7 +23,7 @@ enum PromiseService {
 	case homePromiseGuestModify(id: Int, promise_option: [String])
 	case homePromiseComplete(id: Int)
 	case homePromiseImageUpload(issue_img : [UIImage])
-	case homePromiseGuestRegister(id : Int, promise_option:[noticeOption])
+	case homePromiseGuestRegister(id : Int, promise_option:[[String]])
 }
 
 extension PromiseService: TargetType {
@@ -119,8 +119,8 @@ extension PromiseService: TargetType {
 			return .uploadMultipart(multipart)
 			
 		case .homePromiseGuestRegister(id: let id, promise_option: let promise_option):
-			let dict = promise_option.map{["date" : $0.date, "day" : $0.day , "time" : $0.time]}
-			return .requestCompositeParameters(bodyParameters: ["promise_option": dict],
+			//let dict = promise_option.map{["date" : $0.date, "day" : $0.day , "time" : $0.time]}
+			return .requestCompositeParameters(bodyParameters: ["promise_option": promise_option],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
 		}

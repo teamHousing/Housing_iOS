@@ -15,6 +15,7 @@ class AdditionalRequestViewController: BaseViewController {
 	// MARK: - Component
 	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	var requestData = RequestDataModel.shared
+	
 	private let mainLabel = UILabel().then {
 		$0.numberOfLines = 2
 		$0.text = """
