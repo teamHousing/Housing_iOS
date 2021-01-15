@@ -21,7 +21,7 @@ final class AddressViewController: BaseViewController {
 	//MARK: - Property
 	var loginData = Host(userName: nil, age: nil, email: nil,
 											 password: nil, address: nil, building: nil)
-	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let userProvider = MoyaProvider<UserService>()
 	//MARK:- Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()

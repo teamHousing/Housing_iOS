@@ -21,7 +21,7 @@ class TenantSignupViewController: BaseViewController {
 	
 	
 	// MARK: -
-	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let userProvider = MoyaProvider<UserService>()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
