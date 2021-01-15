@@ -285,7 +285,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		let optionMenu = UIAlertController(title: nil,
 																			 message: nil,
 																			 preferredStyle: .actionSheet)
-		
+		optionMenu.view.tintColor = .primaryBlack
 		//옵션 초기화
 		let editAction = UIAlertAction(title: "수정하기",
 																		 style: .default,
@@ -303,9 +303,11 @@ class DetailViewController: SegementSlideDefaultViewController {
 																		 handler: {
 																			(alert: UIAlertAction!) -> Void in
 																		 })
-		
-		optionMenu.addAction(editAction)
-		optionMenu.addAction(deleteAction)
+		if model.progress == 1 {
+			optionMenu.addAction(editAction)
+		} else {
+			optionMenu.addAction(deleteAction)
+		}
 		optionMenu.addAction(cancelAction)
 		
 		//show
