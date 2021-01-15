@@ -40,9 +40,9 @@ class DetailViewController: SegementSlideDefaultViewController {
 		$0.backgroundColor = .white
 	}
 	lazy var optionButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
-																				 style: .done,
-																				 target: self,
-																				 action: #selector(optionButtonDidTap))
+																					style: .done,
+																					target: self,
+																					action: #selector(optionButtonDidTap))
 	var category: String = ""
 	var status: String = ""
 	var viewTitle: String = ""
@@ -67,7 +67,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 	var heightWithSafeArea: CGFloat {
 		return 243+self.contextLabel.frame.size.height
 	}
-
+	
 	override var titlesInSwitcher: [String] {
 		return ["상세 정보","하우징 쪽지"]
 	}
@@ -94,7 +94,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		)
 		return Int(ceil(CGFloat(labelSize.height) / self.contextLabel.font.lineHeight))
 	}
-		
+	
 	private func headerViewLayout() {
 		self.detailHeaderView.add(self.categoryContainerView) {
 			$0.backgroundColor = .primaryBlack
@@ -187,7 +187,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		}
 	}
 	
-	private func loader() {
+	func loader() {
 		detailProvider.rx.request(.homeDetail(id: requestId))
 			.asObservable()
 			.subscribe(onNext: { response in
@@ -199,21 +199,21 @@ class DetailViewController: SegementSlideDefaultViewController {
 					
 					let result = data.data
 					self.statusModel.append(DetailStatus(
-																		ownerStatus: json["data"]["Replies"][0]["owner_status"].arrayValue.map{$0.intValue},
-																		userStatus: json["data"]["Replies"][0]["user_status"].arrayValue.map{$0.intValue},
-																		id: json["data"]["Replies"][0]["id"].intValue
-						)
+						ownerStatus: json["data"]["Replies"][0]["owner_status"].arrayValue.map{$0.intValue},
+						userStatus: json["data"]["Replies"][0]["user_status"].arrayValue.map{$0.intValue},
+						id: json["data"]["Replies"][0]["id"].intValue
+					)
 					)
 					self.detailDataBind(result!)
 					let viewController = ContentViewController()
 					viewController.model = self.model
 					let statusViewController = MessageViewController()
 					self.idValue.id = data.data?.id ?? 11
-
+					
 					statusViewController.model = self.model
 					statusViewController.statusModel = self.statusModel
-					viewController.tableView.reloadData()
-
+					//viewController.tableView.reloadData()
+					
 					statusViewController.tableView.reloadData()
 				} catch {
 					print(error)
@@ -266,7 +266,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		self.model = model
 		self.reloadData()
 	}
-		
+	
 	private func setSafeArea() {
 		view.add(coverSafeAreaView) {
 			$0.snp.makeConstraints {
@@ -277,7 +277,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			}
 		}
 	}
-
+	
 	@objc
 	private func optionButtonDidTap() {
 		let optionMenu = UIAlertController(title: nil,
@@ -288,28 +288,29 @@ class DetailViewController: SegementSlideDefaultViewController {
 		let deleteAction = UIAlertAction(title: "Delete",
 																		 style: .default,
 																		 handler: {
-				(alert: UIAlertAction!) -> Void in
-		})
+																			(alert: UIAlertAction!) -> Void in
+																		 })
 		let saveAction = UIAlertAction(title: "Save",
 																	 style: .default,
 																	 handler: {
-				(alert: UIAlertAction!) -> Void in
-		})
+																		(alert: UIAlertAction!) -> Void in
+																	 })
 		
 		let cancelAction = UIAlertAction(title: "Cancel",
 																		 style: .cancel,
 																		 handler: {
-				(alert: UIAlertAction!) -> Void in
+																			(alert: UIAlertAction!) -> Void in
 																		 })
-
-	 //action sheet에 옵션 추가.
+		
+		//action sheet에 옵션 추가.
 		optionMenu.addAction(deleteAction)
 		optionMenu.addAction(saveAction)
 		optionMenu.addAction(cancelAction)
 		
-	 //show
+		//show
 		self.present(optionMenu, animated: true, completion: nil)
 	}
+
 
 		
 	override func segementSlideContentViewController(at index: Int)
@@ -332,7 +333,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 	override func segementSlideHeaderView() -> UIView? {
 		return self.detailHeaderView
 	}
-		
+	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -354,13 +355,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		navigationController?.navigationBar.isTranslucent = false
 		navigationController?.navigationBar.tintColor = .black
 		navigationController?.setNavigationBarHidden(false, animated: true)
-		loader()
-		self.contentView.defaultSelectedIndex = 0
-		defaultSelectedIndex = 0
 		
-		layout()
-		setSafeArea()
-		reloadData()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {

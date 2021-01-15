@@ -39,7 +39,7 @@ class ConfirmViewController: BaseViewController {
 	}
 	let contextLabel = UILabel().then {
 		$0.textColor = .black
-		$0.text = "202호 자취생이 원하는 약속이에요!\n이 중, 가능한 일정은 무엇인가요?"
+		$0.text = "호 자취생이 원하는 약속이에요!\n이 중, 가능한 일정은 무엇인가요?"
 		$0.numberOfLines = 0
 		$0.textAlignment = .center
 		$0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -130,8 +130,11 @@ class ConfirmViewController: BaseViewController {
 		}
 		self.confirmTableView.tableHeaderView = headerView
 		self.confirmTableView.tableFooterView = footerView
+		self.navigationController?.navigationItem.backBarButtonItem?.action = #selector(backbtn(sender:))
 	}
-	
+	@objc func backbtn(sender : UIBarButtonItem) {
+		self.navigationController?.popToRootViewController(animated: true)
+	}
 	@objc
 	private func confirmPromise() {
 		userProvider.rx.request(.homePromiseConfirm(id: self.idValue.id,
@@ -141,7 +144,7 @@ class ConfirmViewController: BaseViewController {
 				if next.statusCode == 200 {
 					do {
 						print(next)
-						self.navigationController?.popViewController(animated: true)
+						self.navigationController?.popToRootViewController(animated: true)
 					} catch {
 						print(error)
 					}
@@ -159,7 +162,8 @@ class ConfirmViewController: BaseViewController {
 				if next.statusCode == 200 {
 					do {
 //						self.navigationController?.parent?.children.last?.viewDidLoad()
-						self.navigationController?.popViewController(animated: true)
+						self.navigationController?.popToRootViewController(animated: true)
+						
 						let viewcontroller = self.storyboard?.instantiateViewController(
 									withIdentifier: "DetailViewController")
 						viewcontroller.self?.viewDidLoad()
@@ -228,7 +232,6 @@ class ConfirmViewController: BaseViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		whenLoad()
-		print("aa")
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -282,9 +285,6 @@ extension ConfirmViewController: UITableViewDataSource {
 		self.selectedTime.append(method[indexPath.row].date)
 		self.selectedTime.append(method[indexPath.row].time)
 		self.selectedTime.append(method[indexPath.row].method)
-		
-		
-		
 		self.confirmButton.backgroundColor = .primaryBlack
 		self.confirmButton.setBorder(borderColor: .primaryBlack, borderWidth: 1)
 		self.confirmButton.isEnabled = true

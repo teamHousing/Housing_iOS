@@ -21,8 +21,8 @@ class AddedImageTableViewCell: UITableViewCell {
 		layout.scrollDirection = .horizontal
 		
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-		collectionView.isScrollEnabled = true
-		collectionView.isPagingEnabled = true
+		collectionView.isScrollEnabled = false
+//		collectionView.isPagingEnabled = true
 		collectionView.isUserInteractionEnabled = true
 		
 		return collectionView

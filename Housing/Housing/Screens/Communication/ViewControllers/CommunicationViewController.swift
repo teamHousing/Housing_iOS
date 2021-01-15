@@ -42,7 +42,6 @@ final class CommunicationViewController: BaseViewController {
 	private var incomDetailCellData: [DetailData] = []
 	private var comDetailCellData: [DetailData] = []
 	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-	
 	//MARK: - LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -53,6 +52,7 @@ final class CommunicationViewController: BaseViewController {
 		configHeaderView()
 		configTableView()
 		pullToRefresh(tableview: communicationTableView)
+
 		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)
 	}
 	
@@ -63,6 +63,7 @@ final class CommunicationViewController: BaseViewController {
 															sectionData: comDetailCellData)] /// complete
 	}
 	
+
 	private func determineButtonImage(mode: Int)-> String {
 		if mode == 0 {
 			return "2003"
@@ -91,6 +92,7 @@ final class CommunicationViewController: BaseViewController {
 	
 	private func layoutNavigationBar() {
 		navigationItem.rightBarButtonItem = naviButton
+
 		navigationController?.navigationBar.shadowImage = UIImage()
 		navigationController?.navigationBar.isTranslucent = false
 		navigationController?.navigationBar.tintColor = .black
@@ -139,6 +141,7 @@ final class CommunicationViewController: BaseViewController {
 	
 	@objc
 	private func settingButtonDidTap() {
+
 		print(#function)
 	}
 }
@@ -237,6 +240,7 @@ extension CommunicationViewController: UITableViewDataSource {
 		}
 		incomCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		incomCell.countOfIncomplete.text = "(\(incompleteLength))"
+
 		incomCell.roomNumberButton.isHidden = true ///앱잼에서 호수별 필터링을 구현하지 않기에 넣은 코드입니다.
 		
 		///여기로부터 5개의 줄 주석 삭제하지마세요.
