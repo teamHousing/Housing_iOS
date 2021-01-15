@@ -116,7 +116,7 @@ extension PromiseService: TargetType {
 																				 urlParameters: ["id": id])
 		case .homePromiseImageUpload(issue_img : let issue_img) :
 			if issue_img.count != 0 {
-				let data: [Data] = issue_img.map{ $0.jpegData(compressionQuality: 1.0)! }
+				let data: [Data] = issue_img.map{ $0.jpegData(compressionQuality: 0.5)! }
 				let multipart : [MultipartFormData] = data.map { element in
 					return MultipartFormData(provider: .data(element),
 																	 name: "issue_img",
