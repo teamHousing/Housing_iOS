@@ -18,6 +18,7 @@ enum NoticeService {
 													notice_contents: String,
 													notice_option: [noticeOption])
 	case profileAuthorization(unit: Int)
+	case deleteNotice(id: Int)
 }
 
 struct MyInfo: Codable {
@@ -75,6 +76,8 @@ extension NoticeService: TargetType {
 			return "/houseInfo/\(house_info_id)/notice"
 		case .profileAuthorization:
 			return "/authentication/number"
+		case let .deleteNotice(id):
+			return "/houseInfo/notice/\(id)"
 		}
 	}
 	
@@ -86,6 +89,8 @@ extension NoticeService: TargetType {
 		case .profile,
 				 .profileNoticeDetail:
 		return .get
+		case .deleteNotice:
+			return .delete
 		}
 	}
 	
@@ -114,6 +119,8 @@ extension NoticeService: TargetType {
 			return .requestCompositeParameters(bodyParameters: ["unit": unit],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: .init())
+		case .deleteNotice(id: _):
+			return .requestPlain
 		}
 	}
 	
