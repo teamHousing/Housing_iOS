@@ -14,7 +14,7 @@ import Moya
 
 class AppointmentViewController: BaseViewController {
 	// MARK: - Component
-	var requestData = RequestDataModel.shared
+	var issue_id = RequestDataModel.shared.issueId
 	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
@@ -386,7 +386,7 @@ class AppointmentViewController: BaseViewController {
 		self.timeStampTableView.reloadData()
 	}
 	@objc func addPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseGuestRegister(id: 1, promise_option: self.promiseArr)).asObservable()
+		userProvider.rx.request(.homePromiseGuestRegister(id: issue_id, promise_option: self.promiseArr)).asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
@@ -399,8 +399,6 @@ class AppointmentViewController: BaseViewController {
 			} onError: { (error) in
 				print(error.localizedDescription)
 			}.disposed(by: disposeBag)
-
-		
 	}
 	func timeToNoticeOption() -> noticeOption {
 		var temp = VisitDate()

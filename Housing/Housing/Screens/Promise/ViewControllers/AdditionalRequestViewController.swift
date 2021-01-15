@@ -132,6 +132,7 @@ class AdditionalRequestViewController: BaseViewController {
 						let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
 						print(data.data?.issue_id)
 						self.navigationController?.popToRootViewController(animated: true)
+						self.requestData.issueId = data.data?.issue_id
 					}
 					catch {
 						print(error)
