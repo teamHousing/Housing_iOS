@@ -35,7 +35,7 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 													solutionMethod: "",
 													confirmedPromiseOption: []
 	)
-	var statusModel: [DetailStatus] = []
+	var statusModel = [DetailStatus.init(ownerStatus: [], userStatus: [], id: 1)]
 	
 	// MARK: - Helper
 	private func registerCell() {
@@ -61,9 +61,13 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
-		let parent :DetailViewController = self.parent as! DetailViewController
-		//parent.loader()
+		tableView.reloadData()
 		navigationController?.setNavigationBarHidden(false, animated: true)
+	}
+	
+	// MARK: - UITableView DataSources
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 3
 	}
 	
 	// MARK: - UITableView Delegate
@@ -87,7 +91,11 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		}
 		else if indexPath.row == 2 {
 			let cell: AddedImageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
-				cell.imageURL = self.model.issueImages!			
+				cell.imageURL = self.model.issueImages!
+//			if self.statusModel[0].userStatus?.isEmpty == true{
+//				cell.cancelButton.isHidden = true
+//				cell.cancelButton.isUserInteractionEnabled = false
+//			}
 			cell.selectionStyle = .none
 			cell.awakeFromNib()
 			return cell
@@ -95,11 +103,6 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		
 		return UITableViewCell()
 		
-	}
-	
-	// MARK: - UITableView DataSources
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 3
 	}
 	
 }

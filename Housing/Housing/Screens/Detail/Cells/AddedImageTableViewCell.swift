@@ -7,7 +7,11 @@
 
 import UIKit
 
+import Moya
 import Kingfisher
+import RxCocoa
+import RxMoya
+import RxSwift
 import SnapKit
 import Then
 
@@ -15,7 +19,12 @@ class AddedImageTableViewCell: UITableViewCell {
 	
 	// MARK: - Property
 	var imageURL: [String] = []
+	var id = promiseId.shared.id
 	
+	private let detailProvider = MoyaProvider<DetailService>(
+		plugins: [NetworkLoggerPlugin(verbose: true)]
+	)
+	let disposeBag = DisposeBag()
 	let addedImageCollectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
@@ -35,7 +44,7 @@ class AddedImageTableViewCell: UITableViewCell {
 	}
 	let cancelButton = UIButton().then() {
 		$0.backgroundColor = .none
-		$0.setBorder(borderColor: .gray01, borderWidth: 1)
+		$0.setBorder(borderColor: .primaryOrange, borderWidth: 1)
 		$0.layer.cornerRadius = 24
 		$0.setTitle("요청 취소", for: .normal)
 		$0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
@@ -43,6 +52,7 @@ class AddedImageTableViewCell: UITableViewCell {
 		$0.titleLabel?.textColor = .primaryBlack
 		$0.setTitleColor(.primaryBlack, for: .normal)
 	}
+	
 	
 	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
@@ -79,12 +89,31 @@ class AddedImageTableViewCell: UITableViewCell {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		self.addedImageCollectionView.collectionViewLayout = layout
+		self.cancelButton.addTarget(self, action: #selector(didTapCancelButton(_:)), for: .touchUpInside)
 	}
 	
 	private func registerCell() {
 		addedImageCollectionView.register(AddedImageCollectionViewCell.self,
 																			forCellWithReuseIdentifier:
 																				AddedImageCollectionViewCell.reuseIdentifier)
+	}
+	
+	@objc func didTapCancelButton(_ sender: UIButton) {
+		print(#function)
+		detailProvider.rx.request(.deleteDetail(id: self.id))
+			.asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						self.cancelButton.setTitle("취소 완료", for: .normal)
+						self.cancelButton.setBorder(borderColor: .gray01, borderWidth: 1)
+					}
+					catch {
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
 	}
 	
 	// MARK: - Lifecycle

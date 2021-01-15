@@ -13,6 +13,7 @@ import SwiftKeychainWrapper
 enum DetailService {
 	case homeDetail(id: Int)
 	case confirmDetail(id: Int)
+	case deleteDetail(id: Int)
 }
 
 extension DetailService: TargetType {
@@ -31,6 +32,8 @@ extension DetailService: TargetType {
 			return "/communication/detail/\(id)"
 		case let .confirmDetail(id):
 			return "/communication/\(id)/complete/promise"
+		case let .deleteDetail(id):
+			return "/communication/promise/\(id)"
 		}
 	}
 	
@@ -40,6 +43,8 @@ extension DetailService: TargetType {
 			return .get
 		case .confirmDetail:
 			return .get
+		case .deleteDetail:
+			return .delete
 		}
 	}
 	
@@ -52,6 +57,8 @@ extension DetailService: TargetType {
 		case .homeDetail(id: let id):
 			return .requestPlain
 		case .confirmDetail(id: let id):
+			return .requestPlain
+		case .deleteDetail(id: let id):
 			return .requestPlain
 		}
 	}
