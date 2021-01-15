@@ -60,7 +60,7 @@ class ConfirmTableViewCell: UITableViewCell {
 				$0.setBackgroundImage(UIImage(named: "group580"), for: .normal)
 			}
 			else {
-				$0.setBackgroundImage(UIImage(named: "group578"), for: .normal)
+				$0.setBackgroundImage(UIImage(named: "group579"), for: .normal)
 				
 			}
 			$0.snp.makeConstraints {
