@@ -90,7 +90,9 @@ class DetailNoticeViewController: BaseViewController {
 							self.blockView.backgroundColor = .white
 						} else if result.option?[1] == "-" {
 							self.blockView.backgroundColor = .white
-						}
+                        } else if result.option?[1] == ":00-:00" {
+                            self.blockView.backgroundColor = .white
+                        }
 						
 						print(result)
 					} catch {

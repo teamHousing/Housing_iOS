@@ -17,9 +17,7 @@ class MessageTableViewCell: UITableViewCell {
 	// MARK: - Property
 	let messageTableView = UITableView()
 	let disposeBag = DisposeBag()
-	private let detailProvider = MoyaProvider<DetailService>(
-		plugins: [NetworkLoggerPlugin(verbose: true)]
-	)
+	private let detailProvider = MoyaProvider<DetailService>()
 	private let requestId = promiseId.shared.id
 	
 	var status: [Int] = [0,1,2,3]
