@@ -99,6 +99,7 @@ final class CalendarViewController: BaseViewController {
 	let dateFormatter = DateFormatter()
 	let dateFormatterForNotice = DateFormatter()
 	let providerformatter = DateFormatter()
+	var isTab: Bool = false
 
 	// MARK: - Provider
 	
@@ -116,11 +117,33 @@ final class CalendarViewController: BaseViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
-		navigationController?.setNavigationBarHidden(true, animated: true)
+		tabAppear()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		tabDisAppear()
 	}
 	
 	// MARK: - Helper
+	
+	private func tabDisAppear() {
+		if isTab {
+			tabBarController?.tabBar.isHidden = false
+		} else {
+		}
+	}
+	
+	private func tabAppear() {
+		if isTab {
+			navigationController?.setNavigationBarHidden(false, animated: true)
+			navigationController?.navigationBar.topItem?.title = ""
+			tabBarController?.tabBar.isHidden = true
+		} else {
+			navigationController?.setNavigationBarHidden(true, animated: true)
+			tabBarController?.tabBar.isHidden = false
+		}
+	}
 	
 	private func today() {
 		let today = Date() //현재 시각 구하기
@@ -135,7 +158,8 @@ final class CalendarViewController: BaseViewController {
 	private func layout() {
 		view.add(collectionView) {
 			$0.snp.makeConstraints {
-				$0.edges.equalTo(self.view.safeAreaLayoutGuide)
+				$0.top.equalTo(self.view.safeAreaLayoutGuide)
+				$0.bottom.leading.trailing.equalToSuperview()
 			}
 			$0.delegate = self
 			$0.dataSource = self
