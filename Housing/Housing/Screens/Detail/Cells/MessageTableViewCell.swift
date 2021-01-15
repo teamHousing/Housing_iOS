@@ -47,16 +47,16 @@ class MessageTableViewCell: UITableViewCell {
 	func loader() {
 		self.detailProvider.rx.request(.confirmDetail(id: requestId))
 			.asObservable()
-						.subscribe { (next) in
-							if next.statusCode == 200 {
-								do {
-								} catch {
-									print(error)
-								}
-							}
-						} onError: { (error) in
-							print(error.localizedDescription)
-						}.disposed(by: disposeBag)
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+					} catch {
+						print(error)
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
 	}
 	private func layout() {
 		self.contentView.then {
@@ -123,7 +123,12 @@ extension MessageTableViewCell: UITableViewDelegate {
 }
 
 // MARK: - UITableView DataSource
+
 extension MessageTableViewCell: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.status.count
+	}
+	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell: MessageDetailTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 		if self.userOrOwner == 0 {
@@ -211,10 +216,10 @@ extension MessageTableViewCell: UITableViewDataSource {
 				cell.transitionButton.setTitle("약속 수정하기", for: .normal)
 			}
 			else {
-				cell.titleLabel.text = "문의사항이 해결되었어요!"
-				cell.contextLabel.attributedText = self.makeAttributed(
-					context: "앞으로도 하우징과 함께\n자취생과 소통해보세요!"
-				)
+					cell.titleLabel.text = "문의사항이 해결되었어요!"
+					cell.contextLabel.attributedText = self.makeAttributed(
+						context: "앞으로도 하우징과 함께\n자취생과 소통해보세요!"
+					)
 				cell.transitionButton.snp.makeConstraints {
 					$0.height.equalTo(0)
 				}
@@ -226,6 +231,9 @@ extension MessageTableViewCell: UITableViewDataSource {
 		if indexPath.row == self.status.count-1 {
 			cell.connectLineView.isHidden = true
 			if (cell.transitionButton.isHidden == false) {
+				print(self.status)
+				print(#function)
+				print(#line)
 				cell.transitionButton.backgroundColor = .primaryOrange
 				cell.transitionButton.isUserInteractionEnabled = true
 			}
@@ -234,9 +242,6 @@ extension MessageTableViewCell: UITableViewDataSource {
 		return cell
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.status.count
-	}
 	
 	@objc
 	func didTapConfirmButton(_ sender: UIButton) {
@@ -259,6 +264,12 @@ extension MessageTableViewCell: UITableViewDataSource {
 		self.loader()
 		sender.isEnabled = false
 		sender.backgroundColor = .gray01
+		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
+		let vc = storyboard.instantiateViewController(
+			withIdentifier: "DetailViewController") as? DetailViewController
+		vc?.loader()
+		//		let vc2 = storyboard.instantiateViewController(
+		//			withIdentifier: "MessageViewController") as? MessageViewController
 	}
 	
 	@objc func didTapModifyButton(_ sender: UIButton) {
@@ -267,6 +278,5 @@ extension MessageTableViewCell: UITableViewDataSource {
 		viewcontroller.checkToModify = self.checkToModify
 		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
-	
 }
 

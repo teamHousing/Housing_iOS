@@ -199,6 +199,9 @@ class DetailViewController: SegementSlideDefaultViewController {
 																				from: response.data)
 					
 					let result = data.data
+					print(#function)
+					print(#line)
+					print(#file)
 					self.statusModel.append(DetailStatus(
 						ownerStatus: json["data"]["Replies"][0]["owner_status"].arrayValue.map{$0.intValue},
 						userStatus: json["data"]["Replies"][0]["user_status"].arrayValue.map{$0.intValue},
@@ -345,6 +348,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		setSafeArea()
 		reloadData()
 		navigationItem.rightBarButtonItem = optionButton
+		
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

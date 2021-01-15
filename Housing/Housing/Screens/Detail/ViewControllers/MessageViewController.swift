@@ -14,7 +14,6 @@ import Then
 class MessageViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
 	
 	// MARK: - Property
-	
 	var model = DetailModel(id: 0,
 													issueImages: [],
 													promiseOption: [[]],
