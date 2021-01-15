@@ -20,7 +20,7 @@ enum PromiseService {
 	case homePromiseTimeList(id : Int)
 	case homePromiseConfirm(id: Int, promise_option: [String])
 	case homePromiseHostModify(id: Int)
-	case homePromiseGuestModify(id: Int, promise_option: [String])
+	case homePromiseGuestModify(id: Int, promise_option: [[String]])
 	case homePromiseComplete(id: Int)
 	case homePromiseImageUpload(issue_img : [UIImage])
 	case homePromiseGuestRegister(id : Int, promise_option:[[String]])
@@ -49,7 +49,7 @@ extension PromiseService: TargetType {
 		case let .homePromiseHostModify(id):
 			return "/communication/\(id)/request/promise-option"
 		case let .homePromiseGuestModify(id, _):
-			return "/communication/\(id)/request/promise-option"
+			return "/communication/\(id)/promise-option"
 		case .homePromiseImageUpload(_) :
 			return "/communication/image"
 		case let .homePromiseGuestRegister(id, _) :
