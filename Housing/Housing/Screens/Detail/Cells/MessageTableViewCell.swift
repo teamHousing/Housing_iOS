@@ -50,7 +50,6 @@ class MessageTableViewCell: UITableViewCell {
 						.subscribe { (next) in
 							if next.statusCode == 200 {
 								do {
-									print("헤헿 성공")
 								} catch {
 									print(error)
 								}

@@ -206,15 +206,15 @@ class DetailViewController: SegementSlideDefaultViewController {
 					)
 					self.detailDataBind(result!)
 					let viewController = ContentViewController()
-					viewController.model = self.model
 					let statusViewController = MessageViewController()
 					self.idValue.id = data.data?.id ?? 11
 					
+					viewController.model = self.model
+					viewController.statusModel = self.statusModel
 					statusViewController.model = self.model
 					statusViewController.statusModel = self.statusModel
 					
-					//viewController.tableView.reloadData()
-					
+					viewController.tableView.reloadData()
 					statusViewController.tableView.reloadData()
 				} catch {
 					print(error)
@@ -318,7 +318,6 @@ class DetailViewController: SegementSlideDefaultViewController {
 		let viewController = ContentViewController()
 		let messageViewController = MessageViewController()
 		if(contentView.selectedIndex == 0 ) {
-			print("이거는!\(contentView.selectedIndex)")
 			messageViewController.model = self.model
 			messageViewController.statusModel = self.statusModel
 			return messageViewController

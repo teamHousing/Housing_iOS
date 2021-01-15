@@ -58,8 +58,6 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 		tableView.showsVerticalScrollIndicator = false
 		tableView.backgroundColor = .primaryGray
 		pullToRefresh(scrollview: scrollView)
-		
-		//parent?.viewDidLoad()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		
