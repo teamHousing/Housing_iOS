@@ -92,7 +92,7 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		else if indexPath.row == 2 {
 			let cell: AddedImageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 				cell.imageURL = self.model.issueImages!
-//			if self.statusModel[0].userStatus?.isEmpty == true{
+//			if self.statusModel[0].userStatus?.isEmpty == true {
 //				cell.cancelButton.isHidden = true
 //				cell.cancelButton.isUserInteractionEnabled = false
 //			}
