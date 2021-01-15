@@ -259,6 +259,7 @@ extension MessageTableViewCell: UITableViewDataSource {
 	
 	@objc func didTapModifyButton(_ sender: UIButton) {
 		let viewcontroller = AppointmentViewController()
+		viewcontroller.issue_id = self.requestId
 		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	

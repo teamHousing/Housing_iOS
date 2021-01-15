@@ -15,6 +15,7 @@ import Moya
 class AppointmentViewController: BaseViewController {
 	// MARK: - Component
 	var issue_id = RequestDataModel.shared.issueId
+	var requestData = RequestDataModel.shared
 	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
@@ -390,7 +391,7 @@ class AppointmentViewController: BaseViewController {
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
-						
+						self.navigationController?.popToRootViewController(animated: true)
 					}
 					catch {
 						
