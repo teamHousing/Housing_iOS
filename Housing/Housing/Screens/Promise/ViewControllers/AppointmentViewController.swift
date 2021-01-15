@@ -410,7 +410,6 @@ class AppointmentViewController: BaseViewController {
 																												 promise_option: promiseArr))
 			.asObservable()
 			.subscribe { (next) in
-				print("내거ㅇ야ㅑㅑㅑㅑㅑㅑㅑ")
 				dump(next.data)
 				if next.statusCode == 200 {
 					self.navigationController?.popToRootViewController(animated: true)
@@ -424,7 +423,6 @@ class AppointmentViewController: BaseViewController {
 																											 promise_option: promiseArr))
 			.asObservable()
 			.subscribe { (next) in
-				print("내거ㅇ야ㅑㅑㅑㅑㅑㅑㅑ22")
 				dump(next.data)
 				if next.statusCode == 200 {
 					do {
