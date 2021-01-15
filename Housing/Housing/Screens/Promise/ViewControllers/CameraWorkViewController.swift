@@ -9,11 +9,17 @@ import Photos
 import UIKit
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
+import Moya
+import SwiftyJSON
 
 import YPImagePicker
 
-class CameraWorkViewController: UIViewController{
+class CameraWorkViewController: BaseViewController{
 	// MARK: - Component
+	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	var requestId = promiseId.shared
 
 	var evidencePictures : [UIImage] = []
 	var requestData = RequestDataModel.shared
@@ -45,6 +51,31 @@ class CameraWorkViewController: UIViewController{
 		$0.backgroundColor = UIColor.primaryBlack
 		$0.tintColor = UIColor.primaryBlack
 		}
+	private func image(){
+			print(#function)
+		 if !self.requestData.images.isEmpty {
+			 promiseProvider.rx.request(.homePromiseImageUpload(issue_img: requestData.images))
+				 .observeOn(MainScheduler.init())
+				 .asObservable()
+				 .subscribe { (next) in
+					do {
+					 print("여기야 바보들아",next.statusCode)
+					 let json = JSON(next.data)
+					let decoder = JSONDecoder()
+					let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
+						self.requestId.id = data.data!.issue_id
+					 dump(json, name: #function)
+					}
+					catch {
+						print(error)
+					}
+				 } onError: { (error) in
+					 print(123)
+					 print(error.localizedDescription)
+				 }.disposed(by: disposeBag)
+		 }
+
+	 }
 	let photoSelectCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then{
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
@@ -59,6 +90,7 @@ class CameraWorkViewController: UIViewController{
 		$0.setTitle("다음 단계", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
 		$0.setRounded(radius: 25)
+		
 		$0.addTarget(self, action: #selector(nextButtonDidTapped), for: .touchUpInside)
 	}
 	private let page = UIPageControl().then{
@@ -72,6 +104,7 @@ class CameraWorkViewController: UIViewController{
 	@objc func nextButtonDidTapped() {
 		let additionalRequestViewController = AdditionalRequestViewController()
 		self.navigationController?.pushViewController(additionalRequestViewController, animated: true)
+		image()
 	}
 	
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
@@ -176,7 +209,6 @@ class CameraWorkViewController: UIViewController{
 		}
 		present(picker, animated: true, completion: nil)
 	}
-	
 	// MARK: - Life Cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -274,4 +306,7 @@ extension CameraWorkViewController : UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
 	}
+}
+private struct IssueId : Codable{
+	let issue_id : Int
 }

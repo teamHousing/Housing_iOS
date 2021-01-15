@@ -18,7 +18,7 @@ class AdditionalRequestViewController: BaseViewController {
 	// MARK: - Component
 	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	var requestData = RequestDataModel.shared
-	let requestId = promiseId.shared.id
+	let requestId = promiseId.shared
 	
 	private let mainLabel = UILabel().then {
 		$0.numberOfLines = 2
@@ -103,7 +103,9 @@ class AdditionalRequestViewController: BaseViewController {
 
 		dump(requestData, name: #function)
 		print(requestId)
-		promiseProvider.rx.request(.homePromise(id: requestId,
+		print(requestId.id)
+
+		promiseProvider.rx.request(.homePromise(id: requestId.id,
 																						is_promise: requestData.isPromiseNeeded,
 																						category: requestData.cartegory,
 																						issue_title: requestData.title,
@@ -137,13 +139,12 @@ class AdditionalRequestViewController: BaseViewController {
 		requestData.isPromiseNeeded = false
 		requestData.cartegory = 0
 		requestData.discription = ""
-		image()
 	}
 	@objc func popToRootController() {
 
 		//requestData 싱글톤객체 값 초기화
 		//서버에 통신
-		promiseProvider.rx.request(.homePromise(id: 1,
+		promiseProvider.rx.request(.homePromise(id: requestId.id,
 																						is_promise: requestData.isPromiseNeeded,
 																						category: requestData.cartegory,
 																						issue_title: requestData.title,
@@ -153,7 +154,6 @@ class AdditionalRequestViewController: BaseViewController {
 			.subscribe { (next) in
 				let json = JSON(next.data)
 				dump(json, name: #function)
-
 				if next.statusCode == 200 {
 					do {
 						let decoder = JSONDecoder()
@@ -173,25 +173,8 @@ class AdditionalRequestViewController: BaseViewController {
 		requestData.isPromiseNeeded = false
 		requestData.cartegory = 0
 		requestData.discription = ""
-		image()
 	}
-	private func image(){
-		print(#function)
-		if !self.requestData.images.isEmpty {
-			promiseProvider.rx.request(.homePromiseImageUpload(issue_img: requestData.images))
-				.observeOn(MainScheduler.init())
-				.asObservable()
-				.subscribe { (next) in
-					print("여기야 바보들아",next.statusCode)
-					let json = JSON(next.data)
-					dump(json, name: #function)
-				} onError: { (error) in
-					print(123)
-					print(error.localizedDescription)
-				}.disposed(by: disposeBag)
-		}
-
-	}
+	
 	@objc func presetMessageSelected(sender : UIButton) {
 		clearSelection()
 		sender.setBorder(borderColor: .primaryOrange, borderWidth: 2)
