@@ -8,7 +8,7 @@
 import UIKit
 
 class EmptyIncomTableViewCell: UITableViewCell {
-	
+
 	@IBOutlet var emptyLabel: UILabel!
 	@IBOutlet var inquiryButton: UIButton!
 	
@@ -41,4 +41,5 @@ class EmptyIncomTableViewCell: UITableViewCell {
 		}
 	}
 	
+
 }
