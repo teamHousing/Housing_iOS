@@ -94,11 +94,8 @@ final class CommunicationViewController: BaseViewController {
 
 	private func layoutNavigationBar() {
 		navigationItem.rightBarButtonItem = naviButton
-
 		navigationController?.navigationBar.shadowImage = UIImage()
-		navigationController?.navigationBar.isTranslucent = true
-		//도와줘 준현군
-	}
+		navigationController?.navigationBar.isTranslucent = false
 
 	private func makeCellGrey(cell: UITableViewCell) {
 		cell.contentView.backgroundColor = UIColor(named: "paleGrey")
