@@ -115,13 +115,20 @@ extension PromiseService: TargetType {
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
 		case .homePromiseImageUpload(issue_img : let issue_img) :
-			let data: [Data] = issue_img.map{ $0.jpegData(compressionQuality: 1.0)!}
-			let multipart : [MultipartFormData] = data.map{ element in
-				return MultipartFormData(provider: .data(element), name: "issue_img", fileName: "file.jpeg", mimeType: "image/jpeg")
+			if issue_img.count != 0 {
+				let data: [Data] = issue_img.map{ $0.jpegData(compressionQuality: 1.0)! }
+				let multipart : [MultipartFormData] = data.map { element in
+					return MultipartFormData(provider: .data(element),
+																	 name: "issue_img",
+																	 fileName: "file.jpeg",
+																	 mimeType: "image/jpeg")
+				}
+				return .uploadMultipart(multipart)
+			} else {
+				let multipart = MultipartFormData(provider: .data(Data()),
+																					name: "issue_img")
+				return .uploadMultipart([multipart])
 			}
-			dump(multipart)
-
-			return .uploadMultipart(multipart)
 			
 		case .homePromiseGuestRegister(id: let id, promise_option: let promise_option):
 			//let dict = promise_option.map{["date" : $0.date, "day" : $0.day , "time" : $0.time]}

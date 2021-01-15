@@ -19,6 +19,7 @@ class AdditionalRequestViewController: BaseViewController {
 	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	var requestData = RequestDataModel.shared
 	let requestId = promiseId.shared.id
+	var imageIndex: Int?
 	
 	private let mainLabel = UILabel().then {
 		$0.numberOfLines = 2
@@ -101,30 +102,23 @@ class AdditionalRequestViewController: BaseViewController {
 	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
 
-		dump(requestData, name: #function)
-		print(requestId)
-		promiseProvider.rx.request(.homePromise(id: requestId,
+		promiseProvider.rx.request(.homePromise(id: imageIndex ?? 0,
 																						is_promise: requestData.isPromiseNeeded,
 																						category: requestData.cartegory,
 																						issue_title: requestData.title,
 																						issue_contents: requestData.discription,
 																						requested_term: requestData.editionalRequest))
 			.asObservable()
-
 			.subscribe { (next) in
-				print("들어가나요???")
 				let json = JSON(next.data)
-				dump(json, name: #function)
-
 				if next.statusCode == 200 {
 					do {
 						let decoder = JSONDecoder()
 						let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
-						print(data.data?.issue_id)
-						let appointmentview = AppointmentViewController()
-						self.navigationController?.pushViewController(appointmentview, animated: true)
+						let viewController = AppointmentViewController()
+						viewController.registerID = self.imageIndex
+						self.navigationController?.pushViewController(viewController, animated: true)
 					}
-					
 					catch {
 						print(error)
 					}
@@ -137,13 +131,9 @@ class AdditionalRequestViewController: BaseViewController {
 		requestData.isPromiseNeeded = false
 		requestData.cartegory = 0
 		requestData.discription = ""
-		image()
 	}
 	@objc func popToRootController() {
-
-		//requestData 싱글톤객체 값 초기화
-		//서버에 통신
-		promiseProvider.rx.request(.homePromise(id: 1,
+		promiseProvider.rx.request(.homePromise(id: imageIndex ?? 0,
 																						is_promise: requestData.isPromiseNeeded,
 																						category: requestData.cartegory,
 																						issue_title: requestData.title,
@@ -173,24 +163,35 @@ class AdditionalRequestViewController: BaseViewController {
 		requestData.isPromiseNeeded = false
 		requestData.cartegory = 0
 		requestData.discription = ""
-		image()
 	}
+	
+	@objc
 	private func image(){
 		print(#function)
-		if !self.requestData.images.isEmpty {
-			promiseProvider.rx.request(.homePromiseImageUpload(issue_img: requestData.images))
-				.observeOn(MainScheduler.init())
-				.asObservable()
-				.subscribe { (next) in
-					print("여기야 바보들아",next.statusCode)
-					let json = JSON(next.data)
-					dump(json, name: #function)
-				} onError: { (error) in
-					print(123)
-					print(error.localizedDescription)
-				}.disposed(by: disposeBag)
+		if requestData.images.isEmpty {
+			requestData.images = []
 		}
+		promiseProvider.rx.request(.homePromiseImageUpload(issue_img: requestData.images))
+			.observeOn(MainScheduler.init())
+			.asObservable()
+			.subscribe { (next) in
+				do {
+					let decoder = JSONDecoder()
+					let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
+					self.imageIndex = data.data?.issue_id
+					if !self.requestData.isPromiseNeeded {
+						self.popToRootController()
+					} else {
+						self.nextButtonDidTapped()
+					}
 
+				} catch {
+					print(error)
+				}
+			} onError: { (error) in
+				print(123)
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
 	}
 	@objc func presetMessageSelected(sender : UIButton) {
 		clearSelection()
@@ -278,11 +279,11 @@ class AdditionalRequestViewController: BaseViewController {
 		}
 		if !requestData.isPromiseNeeded {
 			nextStep.setTitle("등록하기", for: .normal)
-			nextStep.addTarget(self, action: #selector(popToRootController), for: .touchUpInside)
+			nextStep.addTarget(self, action: #selector(image), for: .touchUpInside)
 			page.numberOfPages = 3
 		}
 		else {
-			nextStep.addTarget(self, action: #selector(nextButtonDidTapped), for: .touchUpInside)
+			nextStep.addTarget(self, action: #selector(image), for: .touchUpInside)
 		}
 		nextStep.snp.makeConstraints{
 			$0.centerX.equalTo(view)

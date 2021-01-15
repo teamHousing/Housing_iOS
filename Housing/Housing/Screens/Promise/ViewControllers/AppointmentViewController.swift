@@ -16,7 +16,7 @@ class AppointmentViewController: BaseViewController {
 	// MARK: - Component
 	var issue_id = RequestDataModel.shared.issueId
 	var requestData = RequestDataModel.shared
-
+	var registerID: Int?
 	var checkToModify = 0
 	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 
@@ -402,8 +402,11 @@ class AppointmentViewController: BaseViewController {
 	}
 	@objc
 	func addPromise(sender : UIButton) {
-		print(#function)
-		promiseProvider.rx.request(.homePromiseGuestRegister(id: issue_id,
+		
+		guard let id = registerID else {
+			return
+		}
+		promiseProvider.rx.request(.homePromiseGuestRegister(id: id,
 																												 promise_option: promiseArr))
 			.asObservable()
 			.subscribe { (next) in
