@@ -37,6 +37,10 @@ HOUSING
 | [SwiftKeychainWrapper](https://github.com/jrendel/SwiftKeychainWrapper) |          저장소 암호화           | SPM  |
 | [YPImagePicker](https://github.com/Yummypets/YPImagePicker)  |           사진첩 사용            | SPM  |
 | [RxKeyboard](https://github.com/RxSwiftCommunity/RxKeyboard) |         키보드 동적 사용         | SPM  |
+| [Moya](https://github.com/Moya/Moya)                         |          서버 통신              | SPM  |
+| [Lottie](https://github.com/airbnb/lottie-ios)               |          애니메이션 사용        | SPM  |
+
+
 <br>
 
 ### 서비스 workflow
