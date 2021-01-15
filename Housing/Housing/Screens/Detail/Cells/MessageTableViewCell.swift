@@ -246,10 +246,9 @@ extension MessageTableViewCell: UITableViewDataSource {
 	
 	@objc
 	func didTapCalendarButton(_ sender: UIButton) {
-		let storyboard = UIStoryboard(name: StoryboardStorage.calendar, bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(
-			withIdentifier: "CalendarViewController")
-		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
+		let viewController = CalendarViewController()
+		viewController.isTab = true
+		rootViewController?.navigationController?.pushViewController(viewController, animated: true)
 	}
 	
 	@objc
