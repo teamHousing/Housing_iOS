@@ -35,13 +35,14 @@ final class CommunicationViewController: BaseViewController {
 																				 action: #selector(settingButtonDidTap))
 
 	//MARK: - Property
-	var incompleteLength = 1
-	var completeLength = 1
+	var incompleteLength = 0
+	var completeLength = 0
 	var mode = 3
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData: [DetailData] = []
 	private var comDetailCellData: [DetailData] = []
 	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	
 	//MARK: - LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -109,8 +110,8 @@ final class CommunicationViewController: BaseViewController {
 						let data = try decoder.decode(ResponseType<Communication>.self,
 																					from: response.data)
 						guard let result = data.data else {return}
-						self.completeLength = result.completeLength
-						self.incompleteLength = result.incompleteLength
+						//self.completeLength = result.completeLength
+						//self.incompleteLength = result.incompleteLength
 						
 						var listdata: [DetailData] = []
 						for index in 0..<result.incompleteList.count {
