@@ -35,7 +35,7 @@ final class CommunicationViewController: BaseViewController {
 																				 action: #selector(settingButtonDidTap))
 
 	//MARK: - Property
-	var incompleteLength = 0
+	var incompleteLength = 1
 	var completeLength = 1
 	var mode = 3
 	let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost) ?? 0
@@ -95,7 +95,6 @@ final class CommunicationViewController: BaseViewController {
 		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
 		navigationController?.navigationBar.isTranslucent = true
-		//도와줘 준현군
 	}
 	
 	private func makeCellGrey(cell : UITableViewCell) {
@@ -197,7 +196,7 @@ extension CommunicationViewController: UITableViewDataSource {
 				}
 			} else if incompleteLength == 0 && completeLength > 0 {
 				if indexPath.section == 0 {
-					return 230 // without button
+					return 200 // without button
 				} else {
 					return 180 //contentcell의 높이
 				}
