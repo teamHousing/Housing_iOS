@@ -34,6 +34,7 @@ class MessageDetailTableViewCell: UITableViewCell {
 		$0.titleLabel?.textAlignment = .center
 		$0.titleLabel?.textColor = .primaryWhite
 		$0.setTitleColor(.primaryWhite, for: .normal)
+		$0.isEnabled = true
 	}
 	let circleView = UIView().then() {
 		$0.backgroundColor = .primaryBlack

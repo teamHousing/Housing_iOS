@@ -253,6 +253,9 @@ extension MessageTableViewCell: UITableViewDataSource {
 	@objc
 	func didTapFinishButton(_ sender: UIButton) {
 		self.loader()
+		self.status.append(4)
+		sender.isEnabled = false
+		
 		self.messageTableView.setNeedsDisplay()
 	}
 	
