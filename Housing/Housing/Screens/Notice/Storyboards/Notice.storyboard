@@ -483,6 +483,7 @@
                         <outlet property="detailTitle" destination="2C0-mc-j1l" id="gcK-qj-ohH"/>
                         <outlet property="entireComponents" destination="tgz-VD-1HV" id="xE1-na-6NI"/>
                         <outlet property="isAddedToCalendar" destination="NgT-M4-PBz" id="grm-Cl-yrD"/>
+                        <outlet property="naviRightButton" destination="Del-Cr-e42" id="lo9-EH-Bgf"/>
                         <outlet property="smallSquareView" destination="HDv-iq-xLH" id="GzV-FT-DPP"/>
                         <outlet property="timeLabel" destination="CbL-hW-mWF" id="4H6-z8-hDw"/>
                         <outlet property="timeOfNotice" destination="CbL-hW-mWF" id="NtE-hR-KXT"/>

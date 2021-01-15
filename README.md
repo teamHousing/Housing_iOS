@@ -243,10 +243,6 @@ HOUSING iOS
 > }
 > ```
 
-> ```
-> 
-> ```
-
 
 <br/>
 
@@ -328,10 +324,8 @@ HOUSING iOS
 >				}
 >				self.detailHeaderView.reloadInputViews()
 >			}).disposed(by: disposeBag)
->
 >```
->
->
+
 > 김태훈
 
 #### Then과 Snapkit을 사용해서 UI를 만들었어요🎨
@@ -378,7 +372,9 @@ HOUSING iOS
 >		timeStampTableView.reloadData()
 >	}
 >~~~
-### Dictionary 타입을 사용해봤습니다
+
+> 오준현
+#### Dictionary 타입을 사용해봤습니다
 
 기존의 프로젝트에서 사용 할 일이 없어 사용하지 않았지만 이번 프로젝트에서 캘린더를 사용하게 되면서 
 Dictionary 타입에 대해 다루어 보는 기회를 가지게 되었습니다.

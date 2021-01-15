@@ -115,6 +115,15 @@ class AddNoticeViewController: BaseViewController{
 		$0.setRounded(radius: 25)
 		$0.addTarget(self, action: #selector(addNotice), for: .touchUpInside)
 	}
+	private let pickerView = UIPickerView().then {
+			$0.backgroundColor = .white
+			$0.tintColor = .white
+	}
+	
+	var pickerData = ["1","2","3","4","5","6","7","8","9","10","11","12",
+										"13","14","15","16","17","18","19","20","21","22","23","24"]
+
+
 	// MARK: - Helper
 	private func widthConstraintAmount(value : CGFloat) -> CGFloat {
 		let superViewWidth = self.view.frame.width
@@ -337,7 +346,8 @@ class AddNoticeViewController: BaseViewController{
 		DispatchQueue.main.asyncAfter(deadline: .now(), execute:{
 			pickerView.grayImage.image = self.view.window?.asImage()
 			self.present(pickerView, animated: false, completion: nil)
-		})	}
+		})
+	}
 	@objc func callEndTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 2
@@ -345,7 +355,8 @@ class AddNoticeViewController: BaseViewController{
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute:{
 			pickerView.grayImage.image = self.view.window?.asImage()
 			self.present(pickerView, animated: false, completion: nil)
-		})	}
+		})
+	}
 	// MARK: - Life Cycle
 	
 	override func viewDidLoad() {
@@ -394,13 +405,13 @@ class AddNoticeViewController: BaseViewController{
 			temp.endTime = temp.endTime.replacingOccurrences(of: "오후 ", with: "")
 			temp.endTime = String(Int(temp.endTime)! + 12)
 		}
-		let a = "\(temp.startTime)-\(temp.endTime)"
+		let time = "\(temp.startTime):00-\(temp.endTime):00"
 
 		requestData.date.onNext("")
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
 
-		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a)
+		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: time)
 		let noticeArr: [noticeOption] = [noticetime]
 		NoticeProvider.rx.request(.profileNoticeAdmit(house_info_id: houseInfoID ?? 1,
 																									notice_title: self.noticeTitle.text ?? "",

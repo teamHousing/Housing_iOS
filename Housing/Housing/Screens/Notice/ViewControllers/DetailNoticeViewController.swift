@@ -9,6 +9,7 @@ import UIKit
 
 import Moya
 import RxMoya
+import SwiftKeychainWrapper
 
 class DetailNoticeViewController: BaseViewController {
 	
@@ -20,12 +21,14 @@ class DetailNoticeViewController: BaseViewController {
 	private let noticeProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(
 																																			verbose: true)])
 	var identifier: Int?
+	let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost) ?? 0
 	
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var detailTitle: UILabel!
 	@IBOutlet weak var detailContext: UILabel!
 	@IBOutlet weak var smallSquareView: UIView!
 	@IBOutlet weak var blockView: UIView!
+    @IBOutlet weak var naviRightButton: UIBarButtonItem!
 	
 	//캘린더 추가 공지 컴포넌트를 담은 뷰
 	@IBOutlet weak var entireComponents: UIView!
@@ -85,6 +88,8 @@ class DetailNoticeViewController: BaseViewController {
 						
 						if result.option?[1] == "null" {
 							self.blockView.backgroundColor = .white
+						} else if result.option?[1] == "-" {
+							self.blockView.backgroundColor = .white
 						}
 						
 						print(result)
@@ -114,6 +119,10 @@ class DetailNoticeViewController: BaseViewController {
 		circleView.cornerRadius = circleView.frame.height / 2
 		
 		addedNoticeView.layer.cornerRadius = 12
+		
+		if isHost != 0 {
+            naviRightButton.image = UIImage(named: "")
+		}
 	}
 	
 	@objc
