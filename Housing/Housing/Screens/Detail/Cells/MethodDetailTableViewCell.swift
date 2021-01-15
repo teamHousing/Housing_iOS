@@ -83,7 +83,7 @@ class MethodDetailTableViewCell: UITableViewCell {
 			$0.snp.makeConstraints {
 				$0.height.equalTo(self.methodLabel)
 				$0.width.equalTo(2)
-				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(-49)
+				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(-59)
 				$0.centerY.equalTo(self.containerView.snp.centerY)
 			}
 		}
@@ -91,7 +91,7 @@ class MethodDetailTableViewCell: UITableViewCell {
 			$0.snp.makeConstraints {
 				$0.height.equalTo(self.methodLabel)
 				$0.width.equalTo(2)
-				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(52)
+				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(60)
 				$0.centerY.equalTo(self.containerView.snp.centerY)
 			}
 		}
