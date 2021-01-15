@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -424,14 +424,22 @@
                                             <constraint firstItem="HDv-iq-xLH" firstAttribute="leading" secondItem="Shg-e1-7BP" secondAttribute="trailing" constant="42.5" id="muk-Lb-nvF"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feY-oR-dRu">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="133"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="feY-oR-dRu" firstAttribute="top" secondItem="tgz-VD-1HV" secondAttribute="top" id="1LT-hB-mIZ"/>
                                     <constraint firstItem="WEO-dq-FyH" firstAttribute="leading" secondItem="tgz-VD-1HV" secondAttribute="leading" id="5i4-oc-d0B"/>
                                     <constraint firstItem="K23-mW-9J5" firstAttribute="centerY" secondItem="tgz-VD-1HV" secondAttribute="centerY" id="FNC-2t-K83"/>
                                     <constraint firstItem="K23-mW-9J5" firstAttribute="top" secondItem="NgT-M4-PBz" secondAttribute="bottom" constant="20" id="Jr7-hd-hr8"/>
+                                    <constraint firstItem="feY-oR-dRu" firstAttribute="leading" secondItem="tgz-VD-1HV" secondAttribute="leading" id="g6J-Ew-5X9"/>
                                     <constraint firstItem="NgT-M4-PBz" firstAttribute="leading" secondItem="tgz-VD-1HV" secondAttribute="leading" id="gla-qX-WDC"/>
+                                    <constraint firstAttribute="bottom" secondItem="feY-oR-dRu" secondAttribute="bottom" id="kXI-iw-tak"/>
                                     <constraint firstItem="WEO-dq-FyH" firstAttribute="top" secondItem="NgT-M4-PBz" secondAttribute="bottom" constant="43" id="krN-1o-Do1"/>
+                                    <constraint firstAttribute="trailing" secondItem="feY-oR-dRu" secondAttribute="trailing" id="oA5-0w-ZUN"/>
                                     <constraint firstItem="NgT-M4-PBz" firstAttribute="top" secondItem="tgz-VD-1HV" secondAttribute="top" id="oXh-g2-8Qe"/>
                                     <constraint firstItem="K23-mW-9J5" firstAttribute="centerX" secondItem="tgz-VD-1HV" secondAttribute="centerX" constant="10" id="rk6-3F-pWd"/>
                                 </constraints>
@@ -459,11 +467,15 @@
                     <navigationItem key="navigationItem" id="Bra-FP-Bd1">
                         <barButtonItem key="rightBarButtonItem" image="ellipsis" catalog="system" id="Del-Cr-e42">
                             <color key="tintColor" name="primaryBlack"/>
+                            <connections>
+                                <action selector="editButton:" destination="9bH-kn-B5K" id="vB2-bU-MZu"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="addedNoticeView" destination="K23-mW-9J5" id="NGH-en-DeC"/>
+                        <outlet property="blockView" destination="feY-oR-dRu" id="ap1-Rx-jPO"/>
                         <outlet property="circleView" destination="WEO-dq-FyH" id="j1H-YY-Hu1"/>
                         <outlet property="dateLabel" destination="Shg-e1-7BP" id="h7v-97-C2J"/>
                         <outlet property="dateOfNotice" destination="Shg-e1-7BP" id="1vh-X9-ob7"/>
@@ -471,6 +483,7 @@
                         <outlet property="detailTitle" destination="2C0-mc-j1l" id="gcK-qj-ohH"/>
                         <outlet property="entireComponents" destination="tgz-VD-1HV" id="xE1-na-6NI"/>
                         <outlet property="isAddedToCalendar" destination="NgT-M4-PBz" id="grm-Cl-yrD"/>
+                        <outlet property="smallSquareView" destination="HDv-iq-xLH" id="GzV-FT-DPP"/>
                         <outlet property="timeLabel" destination="CbL-hW-mWF" id="4H6-z8-hDw"/>
                         <outlet property="timeOfNotice" destination="CbL-hW-mWF" id="NtE-hR-KXT"/>
                     </connections>
