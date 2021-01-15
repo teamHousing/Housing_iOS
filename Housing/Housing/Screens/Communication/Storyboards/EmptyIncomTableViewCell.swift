@@ -32,13 +32,11 @@ class EmptyIncomTableViewCell: UITableViewCell {
 	@objc
 	func inquiryButtonDidTap() {
 		guard let buttonText = inquiryButton.titleLabel?.text else { return }
-		if buttonText == "초대하기" {
-			print(123)
+		if !(buttonText == "초대하기") {
 			let viewController = VerifyNumberViewController()
 			rootViewController?.navigationController?.pushViewController(viewController, animated: true)
 		} else {
-			print(222)
-			let viewController = VerifyNumberViewController()
+			let viewController = PromiseViewController()
 			rootViewController?.navigationController?.pushViewController(viewController, animated: true)
 		}
 	}

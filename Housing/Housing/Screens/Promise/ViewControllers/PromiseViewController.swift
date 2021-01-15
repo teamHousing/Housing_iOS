@@ -224,6 +224,7 @@ class PromiseViewController: UIViewController {
 		$0.pageIndicatorTintColor = .gray01
 	}
 	
+	var keyboardY: Int = 0
 	
 	// MARK: - Helper
 
@@ -312,16 +313,18 @@ class PromiseViewController: UIViewController {
 		underBar.backgroundColor = .gray01
 	}
 	private func initLayout() {
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-		self.navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.topItem?.title = ""
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
 	}
 	private func layout() {
 		dataPreset()
-		self.navigationController?.navigationBar.backgroundColor = .white
-		self.view.backgroundColor = .white
-		self.view.addSubview(totalScroll)
+		navigationController?.navigationBar.backgroundColor = .white
+		view.backgroundColor = .white
+		view.addSubview(totalScroll)
 		totalScroll.snp.makeConstraints{
-			$0.edges.equalToSuperview()
+			$0.top.equalTo(view.safeAreaLayoutGuide)
+			$0.leading.trailing.bottom.equalToSuperview()
 		}
 		self.totalScroll.addSubview(contentView)
 		contentView.snp.makeConstraints{
@@ -518,11 +521,11 @@ class PromiseViewController: UIViewController {
 	}
 	@objc
 	func keyboardWillShow(_ sender: Notification) {
-		self.view.frame.origin.y = -150 // Move view 150 points upward
+		totalScroll.setContentOffset(CGPoint(x: 0, y: 400), animated: true)
 	}
 	@objc
 	func keyboardWillHide(_ sender: Notification) {
-		self.view.frame.origin.y = 0 // Move view to original position
+//		totalScroll.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
 	}
 	
 	@objc func handleTap(recognizer: UITapGestureRecognizer){
@@ -566,7 +569,6 @@ extension PromiseViewController : UITextViewDelegate {
 			textView.text = "내용을 작성해주세요"
 			textView.textColor = UIColor.gray01
 			requestData.discription = ""
-
 		}
 		else {
 			requestData.discription = textView.text
@@ -585,3 +587,5 @@ extension PromiseViewController : UITextFieldDelegate{
 		
 	}
 }
+
+extension PromiseViewController: UIScrollViewDelegate { }

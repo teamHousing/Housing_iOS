@@ -92,7 +92,7 @@ final class CommunicationViewController: BaseViewController {
 	
 	private func layoutNavigationBar() {
 		navigationItem.rightBarButtonItem = naviButton
-
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
 		navigationController?.navigationBar.isTranslucent = true
 		//도와줘 준현군
