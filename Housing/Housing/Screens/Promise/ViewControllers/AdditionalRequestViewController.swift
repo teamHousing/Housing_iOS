@@ -96,7 +96,7 @@ class AdditionalRequestViewController: BaseViewController {
 	
 	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
-		promiseProvider.rx.request(.homePromise(id: 1,is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
+		promiseProvider.rx.request(.homePromise(id: requestData.issueId, is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {

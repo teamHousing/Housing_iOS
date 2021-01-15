@@ -41,7 +41,7 @@ extension PromiseService: TargetType {
 		case .homePromiseComplete:
 			return "/communication/"
 		case let .homePromise(id, _,_,_,_,_):
-			return "/communication/1"
+			return "/communication/\(id)"
 		case let .homePromiseTimeList(id):
 			return "/communication/\(id)/promise-option"
 		case let .homePromiseConfirm(id, _):
@@ -112,7 +112,7 @@ extension PromiseService: TargetType {
 		case .homePromiseImageUpload(issue_img : let issue_img) :
 			let data: [Data] = issue_img.map{ $0.jpegData(compressionQuality: 1.0)!}
 			let multipart : [MultipartFormData] = data.map{ element in
-				return MultipartFormData(provider: .data(element), name: "issue_img", fileName: "file.jpeg",mimeType: "image/jpeg")
+				return MultipartFormData(provider: .data(element), name: "issue_img", fileName: "file.jpeg", mimeType: "image/jpeg")
 			}
 			dump(multipart)
 
