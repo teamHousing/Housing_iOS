@@ -19,7 +19,6 @@ class AppointmentViewController: BaseViewController {
 
 	var checkToModify = 0
 	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
@@ -409,6 +408,7 @@ class AppointmentViewController: BaseViewController {
 			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
+					self.navigationController?.popToRootViewController(animated: true)
 				}
 			} onError: { (error) in
 				print(error.localizedDescription)
