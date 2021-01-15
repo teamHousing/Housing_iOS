@@ -35,7 +35,7 @@ final class CommunicationViewController: BaseViewController {
 																				 action: #selector(settingButtonDidTap))
 
 	//MARK: - Property
-	var incompleteLength = 1
+	var incompleteLength = 0
 	var completeLength = 1
 	var mode = 3
 	private var tableViewData = [cellData]()
@@ -52,7 +52,8 @@ final class CommunicationViewController: BaseViewController {
 		configHeaderView()
 		configTableView()
 		pullToRefresh(tableview: communicationTableView)
-		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)//준현군 도와줘 여기 갑자기 오류떠서 force optional했는데 괜ㅊ나하?
+
+		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)
 	}
 	
 	func dataSetup() {
@@ -62,16 +63,15 @@ final class CommunicationViewController: BaseViewController {
 															sectionData: comDetailCellData)] /// complete
 	}
 	
-	private func determineButtonImage(mode: Int)-> String{
-		
+
+	private func determineButtonImage(mode: Int)-> String {
 		if mode == 0 {
-			print("mode = \(mode)")
 			return "2003"
 		}else {
-			print("mode = \(mode)")
 			return "icWrite"
 		}
 	}
+	
 	private func determineType(isHost: Int) {
 		if isHost == 0 {
 			mode = 0
@@ -92,9 +92,10 @@ final class CommunicationViewController: BaseViewController {
 	
 	private func layoutNavigationBar() {
 		navigationItem.rightBarButtonItem = naviButton
-		//navigationController?.navigationBar.shadowImage = UIImage()
-		navigationController?.navigationBar.isTranslucent = true
-		//도와줘 준현군
+
+		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.isTranslucent = false
+		navigationController?.navigationBar.tintColor = .black
 	}
 	
 	private func makeCellGrey(cell : UITableViewCell) {
@@ -102,8 +103,6 @@ final class CommunicationViewController: BaseViewController {
 	}
 	
 	private func networkForCommunication() {
-		//let semaphore = DispatchSemaphore.init(value: 0)
-		print("통신시작")
 		userProvider.rx.request(.home(unit: "-1"))
 			.asObservable()
 			.subscribe(onNext: { response in
@@ -128,9 +127,7 @@ final class CommunicationViewController: BaseViewController {
 						}
 						self.comDetailCellData = listdata2
 						self.reloadInputViews()
-
 						self.dataSetup()
-						
 					} catch {
 						print(error)
 					}
@@ -142,51 +139,23 @@ final class CommunicationViewController: BaseViewController {
 			}).disposed(by: disposeBag)
 	}
 	
-
-	//	@objc func handleExpandClose() {
-	//		print("trying") //여기서 막 열리고 닫히고 관련한 action을 넣으면 됨.
-	//		let section = incomButton.tag
-	//
-	//		// we'll try to close the section first by deleting the rows
-	//		var indexPaths = [IndexPath]()
-	//		for row in tableViewData[section].sectionData.indices {
-	//				print(0, row)
-	//				let indexPath = IndexPath(row: row, section: section)
-	//				indexPaths.append(indexPath)
-	//		}
-	//
-	//		let opened = tableViewData[section].opened
-	//		tableViewData[section].opened = !opened
-	//
-	//		incomButton.setTitle(opened ? "Open" : "Close", for: .normal)
-	//
-	//		if opened {
-	//			communicationTableView.deleteRows(at: indexPaths, with: .fade)
-	//		} else {
-	//			communicationTableView.insertRows(at: indexPaths, with: .fade)
-	//		}
-	//	}
-	
 	@objc
 	private func settingButtonDidTap() {
-		KeychainWrapper.standard.removeAllKeys()
-    //dismiss(animated: true, completion: nil)
-		//준현군. 이거 현종군을 위해서 만든 기능이라면 삭제해줘
+
+		print(#function)
 	}
 }
 
 // MARK: - UITableView
 extension CommunicationViewController: UITableViewDelegate { /// 이게 cell이 아니라 button에 반응하도록 해야함.
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		//let selectedIndexPath = tableView.indexPathForSelectedRow
 		if indexPath.row == 0 {
-			if tableViewData[indexPath.section].opened == true{
+			if tableViewData[indexPath.section].opened == true {
 				tableViewData[indexPath.section].opened = false
 				communicationTableView.backgroundColor = .primaryGray
 				let sections = IndexSet(integer: indexPath.section)
 				tableView.reloadSections(sections, with: .none) ///animaion
-				
-			}else {
+			} else {
 				tableViewData[indexPath.section].opened = true
 				communicationTableView.backgroundColor = .primaryGray
 				let sections = IndexSet(integer: indexPath.section)
@@ -201,8 +170,7 @@ extension CommunicationViewController: UITableViewDelegate { /// 이게 cell이 
 	}
 }
 
-extension CommunicationViewController: UITableViewDataSource{
-	
+extension CommunicationViewController: UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return tableViewData.count
 	}
@@ -212,10 +180,10 @@ extension CommunicationViewController: UITableViewDataSource{
 			if indexPath.section == 0 {
 				if mode == 0{
 					return 80 ///호수 선택하는 버튼 들어가야됨.
-				} else if mode == 1{
+				} else if mode == 1 {
 					return 70
 				}
-			} else if indexPath.section == 1{
+			} else if indexPath.section == 1 {
 				return 70
 			}
 		} else if indexPath.row > 0 { ///cell의 높이 지정
@@ -225,25 +193,26 @@ extension CommunicationViewController: UITableViewDataSource{
 				} else {
 					return 0
 				}
-			}else if incompleteLength == 0 && completeLength > 0{
+			} else if incompleteLength == 0 && completeLength > 0 {
 				if indexPath.section == 0 {
 					return 230 // without button
 				} else {
 					return 180 //contentcell의 높이
 				}
-			} else if incompleteLength > 0 && completeLength == 0{
+			} else if incompleteLength > 0 && completeLength == 0 {
 				if indexPath.section == 0 {
 					return 180 //contentcell의 높이
 				} else {
 					return 230 // emptycomcell의 높이
 				}
-			} else if incompleteLength > 0 && completeLength > 0{
+			} else if incompleteLength > 0 && completeLength > 0 {
 				return 180 //contentcell의 높이
-			}}
-		return 180}
+			}
+		}
+		return 180
+	}
 	
-	func tableView(_ tableView: UITableView,
-								 numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if tableViewData[section].opened == true {
 			if section == 0 { ///글의 수만큼 보여주기.
 				if incompleteLength == 0 { ///incomplete부분은 아무것도 없으면 EmptyCell보여줘야됨.
@@ -263,16 +232,16 @@ extension CommunicationViewController: UITableViewDataSource{
 	
 	
 	func tableView(_ tableView: UITableView,
-								 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		///title부분에 쓸 cell
+								 cellForRowAt indexPath: IndexPath) -> UITableViewCell { ///title부분에 쓸 cell
 		guard let incomCell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTableViewCell")
 						as? IncompleteTableViewCell
-		else { return UITableViewCell() }
+		else {
+			return UITableViewCell()
+		}
 		incomCell.contentView.backgroundColor = UIColor(named: "paleGrey")
 		incomCell.countOfIncomplete.text = "(\(incompleteLength))"
-		
+
 		incomCell.roomNumberButton.isHidden = true ///앱잼에서 호수별 필터링을 구현하지 않기에 넣은 코드입니다.
-		///incomCell.incomButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
 		
 		///여기로부터 5개의 줄 주석 삭제하지마세요.
 //		if mode == 1 {
@@ -280,25 +249,24 @@ extension CommunicationViewController: UITableViewDataSource{
 //		} else {
 //			incomCell.roomNumberButton.isHidden = false
 //		}
-		
 		guard let comCell = tableView.dequeueReusableCell(withIdentifier: "CompleteTableViewCell")
 						as? CompleteTableViewCell
 		else { return UITableViewCell()}
 		comCell.countOfComplete.text = "(\(completeLength))"
 		makeCellGrey(cell: comCell)
 		
-		func determineTitleButtonImage() { //뭔가 더 좋은 방법이 있을 거 같긴 한데...ㅠㅅㅠ
+		func determineTitleButtonImage() {
 			if tableViewData[0].opened {
-				incomCell.incomButton.setImage(UIImage(named: "btnListDown"), for: .normal)
+				incomCell.incomToggle.image = UIImage(named: "btnListDown")
 			}
 			if !tableViewData[0].opened {
-				incomCell.incomButton.setImage(UIImage(named: "btnListUp"), for: .normal)
+				incomCell.incomToggle.image = UIImage(named: "btnListUp")
 			}
 			if tableViewData[1].opened {
-				comCell.comButton.setImage(UIImage(named: "btnListDown"), for: .normal)
+				comCell.comToggle.image = UIImage(named: "btnListDown")
 			}
 			if !tableViewData[1].opened {
-				comCell.comButton.setImage(UIImage(named: "btnListUp"), for: .normal)
+				comCell.comToggle.image = UIImage(named: "btnListUp")
 			}
 
 		}
@@ -328,14 +296,13 @@ extension CommunicationViewController: UITableViewDataSource{
 		guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: "RealEmptyTableViewCell")
 						as? RealEmptyTableViewCell
 		else { return UITableViewCell() }
-		///let incomcell : IncompleteTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-		///let comcell : CompleteTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+
 		makeCellGrey(cell: emptyCell)
 		
 		if indexPath.row == 0 { ///여기가 title 부분. /// 완료된 것이 없을 때는 title이 뜨지 않도록 했음.
 			if incompleteLength == 0 && completeLength == 0 {
 				if indexPath.section == 0 {
-					incomCell.incomButton.isHidden = true
+					incomCell.incomToggle.isHidden = true
 					return incomCell
 				}
 				if indexPath.section == 1{
@@ -344,25 +311,25 @@ extension CommunicationViewController: UITableViewDataSource{
 			}
 			if indexPath.section == 0 {
 				if incompleteLength == 0 {
-					incomCell.incomButton.isHidden = true
+					incomCell.incomToggle.isHidden = true
 					return incomCell
-			}else {
+			} else {
 				return incomCell
 			}
-			}else if indexPath.section == 1 {
+			} else if indexPath.section == 1 {
 					if completeLength == 0 {
-						comCell.comButton.isHidden = true
+						comCell.comToggle.isHidden = true
 						return comCell
 					} else { return comCell}
 				}
 		}
-		else{  ///여기가 내부 cell 부분.
-			if incompleteLength == 0 && completeLength == 0{
-				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
-					if mode == 0{
+		else {  ///여기가 내부 cell 부분.
+			if incompleteLength == 0 && completeLength == 0 {
+				if indexPath.section == 0 { ///cell중에서도 incomplete부분.
+					if mode == 0 {
 						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n자취생을 초대해 볼까요?"
 						emptyIncomCell.inquiryButton.setTitle("초대하기", for: .normal)
-					} else{
+					} else {
 						emptyIncomCell.emptyLabel.text = "등록된 문의 사항이 없어요!\n집주인과 소통을 시작해볼까요?"
 						emptyIncomCell.inquiryButton.setTitle("문의하기", for: .normal)
 					}
@@ -370,13 +337,12 @@ extension CommunicationViewController: UITableViewDataSource{
 				} else { ///cell중에서도 complete부분
 					return emptyCell
 				}
-			} else if incompleteLength == 0 && completeLength > 0{
-				if indexPath.section == 0{ ///cell중에서도 incomplete부분.
+			} else if incompleteLength == 0 && completeLength > 0 {
+				if indexPath.section == 0 { ///cell중에서도 incomplete부분.
 					emptyIncomCell.inquiryButton.isHidden = true
 					emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!"
 					return emptyIncomCell
 				} else { ///cell중에서도 complete부분
-
 					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.awakeFromNib()
 					return contentCell
@@ -405,13 +371,11 @@ extension CommunicationViewController: UITableViewDataSource{
 	}
 }
 
-extension CommunicationViewController: UIScrollViewDelegate{
+extension CommunicationViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		
 		if scrollView.contentOffset.y < -1 {
 			communicationTableView.backgroundColor = .white
-//			communicationTableView.reloadData()
-//			print("scroll시 reload")
 		} else if scrollView.contentOffset.y >= -1 {
 			communicationTableView.backgroundColor = .primaryGray }
 	}

@@ -21,6 +21,7 @@
 		1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */; };
 		1FACC31925AD747B0072EABA /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 1FACC31825AD747B0072EABA /* SwiftyJSON */; };
 		1FCC3A3825B0167B00A20DEF /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCC3A3725B0167B00A20DEF /* Notice.swift */; };
+		1FCC3A5025B11A7700A20DEF /* TenantSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCC3A4F25B11A7700A20DEF /* TenantSignupViewController.swift */; };
 		37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */; };
 		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
 		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
@@ -101,6 +102,7 @@
 		D1CF647025AC236E009A39EC /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = D1CF646F25AC236E009A39EC /* RxMoya */; };
 		D1CF647725AC2464009A39EC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CF647625AC2464009A39EC /* UserService.swift */; };
 		D1CF647B25AC26A8009A39EC /* MoyaNetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CF647A25AC26A8009A39EC /* MoyaNetworkLogger.swift */; };
+		D1DABD1225B118B1003193F6 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = D1DABD1125B118B1003193F6 /* splash.json */; };
 		DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050945259F343E00DDB916 /* CameraWorkViewController.swift */; };
 		DA050956259F692E00DDB916 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050955259F692E00DDB916 /* UIImage+.swift */; };
 		DA050965259F801A00DDB916 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DA050964259F801A00DDB916 /* SwiftKeychainWrapper */; };
@@ -134,6 +136,7 @@
 		1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewController.swift; sourceTree = "<group>"; };
 		1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeViewController.swift; sourceTree = "<group>"; };
 		1FCC3A3725B0167B00A20DEF /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		1FCC3A4F25B11A7700A20DEF /* TenantSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenantSignupViewController.swift; sourceTree = "<group>"; };
 		340DE7B3E8247CCAEA231AB4 /* Pods-Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.release.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.release.xcconfig"; sourceTree = "<group>"; };
 		37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
 		37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTableViewCell.swift; sourceTree = "<group>"; };
@@ -207,6 +210,7 @@
 		D1B44510259F1D5A005C2C68 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D1CF647625AC2464009A39EC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		D1CF647A25AC26A8009A39EC /* MoyaNetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkLogger.swift; sourceTree = "<group>"; };
+		D1DABD1125B118B1003193F6 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		DA050945259F343E00DDB916 /* CameraWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWorkViewController.swift; sourceTree = "<group>"; };
 		DA050955259F692E00DDB916 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		DA05096B25A05A6100DDB916 /* RequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataModel.swift; sourceTree = "<group>"; };
@@ -585,6 +589,7 @@
 				1F8ECE8B25A7138100C0E0FA /* SignupCompleteViewController.swift */,
 				D1B0387025A8D3BF0092CE4F /* InfoViewController.swift */,
 				DA928D2425A98ED200DA8466 /* VerifyNumberViewController.swift */,
+				1FCC3A4F25B11A7700A20DEF /* TenantSignupViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -699,6 +704,7 @@
 		DA1A20D625B00E2500352C81 /* LottieFiles */ = {
 			isa = PBXGroup;
 			children = (
+				D1DABD1125B118B1003193F6 /* splash.json */,
 			);
 			path = LottieFiles;
 			sourceTree = "<group>";
@@ -807,6 +813,7 @@
 				1FA03DE925A8473000AF0326 /* Notice.storyboard in Resources */,
 				D1B444EA259F09FF005C2C68 /* Communication.storyboard in Resources */,
 				D1B4450E259F1D4A005C2C68 /* Login.storyboard in Resources */,
+				D1DABD1225B118B1003193F6 /* splash.json in Resources */,
 				D19179EF259890A70035AF74 /* Assets.xcassets in Resources */,
 				D1B444FA259F0A9E005C2C68 /* Home.storyboard in Resources */,
 				D1B444E7259F09DD005C2C68 /* Detail.storyboard in Resources */,
@@ -853,6 +860,7 @@
 				D15824E125AF201C0098B5AF /* EmptyCalendarCollectionViewCell.swift in Sources */,
 				CC6740E725ACADEE00EAE4C0 /* DetailService.swift in Sources */,
 				D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */,
+				1FCC3A5025B11A7700A20DEF /* TenantSignupViewController.swift in Sources */,
 				CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */,
 				D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */,
 				37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */,
@@ -1071,8 +1079,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
-				DEVELOPMENT_TEAM = 7Y3Y9M4N4F;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1080,7 +1088,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.housing.j;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.housing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1094,7 +1102,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

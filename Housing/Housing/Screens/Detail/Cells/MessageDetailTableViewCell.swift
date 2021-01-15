@@ -91,7 +91,7 @@ class MessageDetailTableViewCell: UITableViewCell {
 		containerView.add(connectLineView) {
 			$0.clipsToBounds = false
 			$0.snp.makeConstraints {
-				$0.height.equalTo(180)
+				$0.height.equalTo(self.contentView.snp.height).offset(-15)
 				$0.width.equalTo(1)
 				$0.centerX.equalTo(self.circleView.snp.centerX)
 				$0.top.equalTo(self.circleView.snp.bottom).offset(12)

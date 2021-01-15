@@ -12,8 +12,9 @@ final class SignupViewController: UIViewController {
 	// MARK: - Component(Outlet)
 	@IBOutlet weak var lessorButton: UIButton!
 	@IBOutlet weak var tenantButton: UIButton!
-	@IBOutlet weak var navigationBackButton: UIBarButtonItem!
 	@IBOutlet weak var nextButton: UIButton!
+	
+	var isHost: Int?
 	
 	// MARK: - Property
 	
@@ -38,7 +39,7 @@ final class SignupViewController: UIViewController {
 		navigationController?.navigationBar.isHidden = false
 		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
-				
+		
 		nextButton.backgroundColor = UIColor(red: 219 / 255,
 																				 green: 219 / 255,
 																				 blue: 219 / 255,
@@ -68,8 +69,19 @@ final class SignupViewController: UIViewController {
 	}
 	
 	@IBAction func nextButton(_ sender: Any) {
-		let viewController = InfoViewController()
-		navigationController?.pushViewController(viewController, animated: true)
+		if lessorButton.isSelected {
+			isHost = 0
+			let viewController = InfoViewController()
+			viewController.isHost = isHost
+			navigationController?.pushViewController(viewController, animated: true)
+		}
+		else if tenantButton.isSelected {
+			isHost = 1
+			let viewcontroller = self.storyboard?.instantiateViewController(
+				withIdentifier: "TenantSignupViewController") as! TenantSignupViewController
+			viewcontroller.isHost = isHost
+			self.navigationController?.pushViewController(viewcontroller, animated: true)
+		}
 	}
 	
 	@IBAction func lessorButton(_ sender: Any) {
@@ -83,10 +95,10 @@ final class SignupViewController: UIViewController {
 			lessorButton.layer.shadowRadius = 16 / 2
 			lessorButton.layer.shadowPath = nil
 			lessorButton.isSelected = true
-			
+			isHost = 0
 			tenantButton.isEnabled = false
 			
-			nextButton.layer.backgroundColor = UIColor.primaryBlack.cgColor
+			nextButton.layer.backgroundColor = UIColor.primaryOrange.cgColor
 			nextButton.isEnabled = true
 		}
 		else {
@@ -114,15 +126,13 @@ final class SignupViewController: UIViewController {
 			tenantButton.layer.shadowRadius = 16 / 2
 			tenantButton.layer.shadowPath = nil
 			tenantButton.isSelected = true
-			
+			isHost = 1
 			lessorButton.isEnabled = false
 			
-			nextButton.layer.backgroundColor = UIColor.primaryBlack.cgColor
-			nextButton.isEnabled = false
+			nextButton.layer.backgroundColor = UIColor.primaryOrange.cgColor
+			nextButton.isEnabled = true
 			
-			
-		}
-		else {
+		} else {
 			tenantButton.isSelected = false
 			tenantButton.layer.borderColor = UIColor.clear.cgColor
 			

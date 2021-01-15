@@ -13,12 +13,21 @@ import SwiftKeychainWrapper
 import Lottie
 
 final class SplashViewController: BaseViewController {
-	//private let lottieAnimationView = LOTAnimationView(named:"")
+	
+	private let lottieAnimationView = AnimationView(name:"splash")
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+		lottieAnimationView.frame = CGRect(x: 0,
+															y: 0,
+															width: view.frame.width,
+															height: view.frame.height)
+		lottieAnimationView.contentMode = .scaleAspectFit
+		lottieAnimationView.backgroundColor = .primaryBlack
+		self.view.addSubview(lottieAnimationView)
+		lottieAnimationView.play()
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 			self.detectIsSignIn()
 		}
 	}
@@ -40,10 +49,10 @@ final class SplashViewController: BaseViewController {
 	
 	private func detectIsSignIn() {
 		let token = KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)
-		if token == "" || token == nil {
+//		if token == "" || token == nil {
 			toLogin()
-		} else {
-			toMain()
-		}
+//		} else {
+//			toMain()
+//		}
 	}
 }

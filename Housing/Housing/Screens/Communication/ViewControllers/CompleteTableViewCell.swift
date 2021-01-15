@@ -9,7 +9,7 @@ import UIKit
 
 class CompleteTableViewCell: UITableViewCell {
 	@IBOutlet var countOfComplete: UILabel!
-	@IBOutlet var comButton: UIButton!
+	@IBOutlet var comToggle: UIImageView!
 	
     override func awakeFromNib() {
         super.awakeFromNib()

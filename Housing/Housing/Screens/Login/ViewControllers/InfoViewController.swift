@@ -7,9 +7,12 @@
 
 import UIKit
 
+import RxMoya
 import RxCocoa
 import RxSwift
 import RxKeyboard
+import Moya
+import SwiftKeychainWrapper
 
 class InfoViewController: BaseViewController {
 	//MARK:- Property
@@ -98,6 +101,11 @@ class InfoViewController: BaseViewController {
 		$0.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
 	}
 	
+	var isHost: Int?
+	var number: Int?
+
+	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -311,7 +319,7 @@ class InfoViewController: BaseViewController {
 		}
 		if !name && !age && !id && !password && !certification {
 			nextButton.isEnabled = true
-			nextButton.backgroundColor = .primaryBlack
+			nextButton.backgroundColor = .primaryOrange
 		} else {
 			nextButton.isEnabled = false
 			nextButton.backgroundColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1)
@@ -328,15 +336,60 @@ class InfoViewController: BaseViewController {
 			return
 		}
 		
-		let storyboard = UIStoryboard(name: StoryboardStorage.signup,
-																	bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AddressViewController") as! AddressViewController
-		viewcontroller.loginData = Host(userName: name,
-																		age: Int(age) ?? 0,
-																		email: email,
-																		password: password,
-																		address: nil, building: nil)
-		navigationController?.pushViewController(viewcontroller, animated: false)
+		if isHost == 0 {
+			let storyboard = UIStoryboard(name: StoryboardStorage.signup,
+																		bundle: nil)
+			let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AddressViewController") as! AddressViewController
+			viewcontroller.loginData = Host(userName: name,
+																			age: Int(age) ?? 0,
+																			email: email,
+																			password: password,
+																			address: nil, building: nil)
+			navigationController?.pushViewController(viewcontroller, animated: false)
+		} else {
+			guard let number = number else {return}
+			userProvider.rx.request(.guestSignup(number: number,
+																					 userName: name,
+																					 age: Int(age) ?? 0,
+																					 email: email,
+																					 password: password))
+				.asObservable()
+				.subscribe { (response) in
+					if response.statusCode == 200 {
+						guard let token = (response.response?.allHeaderFields["Set-Cookie"] ?? "") as? String else {
+							return
+						}
+						var cookies: [String]? = []
+						
+						cookies = token.components(separatedBy: ";")
+						cookies = cookies?[0].components(separatedBy: "=")
+						
+						guard let cookie = cookies?[1] else {
+							return
+						}
+						KeychainWrapper.standard.set(1,
+																				 forKey: KeychainStorage.isHost)
+						KeychainWrapper.standard.set(cookie,
+																				 forKey: KeychainStorage.accessToken)
+						let storyboard = UIStoryboard(name: StoryboardStorage.signup, bundle: nil)
+						let viewcontroller = storyboard.instantiateViewController(
+							withIdentifier: "SignupCompleteViewController") as! SignupCompleteViewController
+						self.navigationController?.pushViewController(viewcontroller, animated: true)
+					} else {
+						self.showToast("에러가 발생했습니다.",
+													 isBottom: true,
+													 yAnchor: 0,
+													 textColor: .white,
+													 textFont: .systemFont(ofSize: 16),
+													 backgroundColor: UIColor.primaryBlack.withAlphaComponent(0.7),
+													 backgroundRadius: 10,
+													 duration: 5)
+					}
+				} onError: { (error) in
+					print(error.localizedDescription)
+				}.disposed(by: disposeBag)
+
+		}
 	}
 	
 	@objc
