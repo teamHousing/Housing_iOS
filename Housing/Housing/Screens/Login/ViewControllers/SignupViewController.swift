@@ -13,6 +13,8 @@ final class SignupViewController: UIViewController {
 	@IBOutlet weak var lessorButton: UIButton!
 	@IBOutlet weak var tenantButton: UIButton!
 	@IBOutlet weak var nextButton: UIButton!
+    
+    var isHost: Int?
 	
 	// MARK: - Property
 	
@@ -64,19 +66,30 @@ final class SignupViewController: UIViewController {
 	//MARK:- Component(Action)
 	@IBAction func navigationBackButton(_ sender: Any) {
 		navigationController?.popViewController(animated: true)
-	}
-	
-	@IBAction func nextButton(_ sender: Any) {
-		let viewController = InfoViewController()
-		navigationController?.pushViewController(viewController, animated: true)
-	}
-	
-	@IBAction func lessorButton(_ sender: Any) {
-		if !lessorButton.isSelected {
-			lessorButton.layer.borderWidth = 2
-			lessorButton.layer.borderColor = UIColor.primaryOrange.cgColor
-			lessorButton.layer.cornerRadius = 10
-			lessorButton.layer.shadowColor = UIColor.primaryBlack.withAlphaComponent(0.1).cgColor
+    }
+    
+    @IBAction func nextButton(_ sender: Any) {
+        if lessorButton.isSelected {
+            isHost = 0
+            
+            let viewController = InfoViewController()
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+        else if tenantButton.isSelected {
+            isHost = 1
+            
+            let viewcontroller = self.storyboard?.instantiateViewController(
+                withIdentifier: "TenantSignupViewController") as! TenantSignupViewController
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }
+    }
+    
+    @IBAction func lessorButton(_ sender: Any) {
+        if !lessorButton.isSelected {
+            lessorButton.layer.borderWidth = 2
+            lessorButton.layer.borderColor = UIColor.primaryOrange.cgColor
+            lessorButton.layer.cornerRadius = 10
+            lessorButton.layer.shadowColor = UIColor.primaryBlack.withAlphaComponent(0.1).cgColor
 			lessorButton.layer.shadowOpacity = 1
 			lessorButton.layer.shadowOffset = .zero
 			lessorButton.layer.shadowRadius = 16 / 2
@@ -117,7 +130,7 @@ final class SignupViewController: UIViewController {
 			lessorButton.isEnabled = false
 			
 			nextButton.layer.backgroundColor = UIColor.primaryOrange.cgColor
-			nextButton.isEnabled = false
+			nextButton.isEnabled = true
 			
 			
 		}
