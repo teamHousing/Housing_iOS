@@ -49,10 +49,10 @@ final class SplashViewController: BaseViewController {
 	
 	private func detectIsSignIn() {
 		let token = KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)
-		if token == "" || token == nil {
+//		if token == "" || token == nil {
 			toLogin()
-		} else {
-			toMain()
-		}
+//		} else {
+//			toMain()
+//		}
 	}
 }
