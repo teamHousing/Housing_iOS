@@ -111,7 +111,7 @@ final class CalendarViewController: BaseViewController {
 		
 		today()
 		layout()
-		communication(date: Date())
+		communication()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -142,14 +142,8 @@ final class CalendarViewController: BaseViewController {
 		}
 	}
 	
-	private func communication(date: Date) {
-		let todayDate = providerformatter.string(from: date)
-		let dateArray = todayDate.split(separator: ".")
-		guard let year = Int(dateArray[0]),
-					let month = Int(dateArray[1]) else {
-			return
-		}
-		calendarProvider.rx.request(.calendar(select_year: year, select_month: month))
+	private func communication() {
+		calendarProvider.rx.request(.calendar)
 			.asObservable()
 			.subscribe(onNext: { response in
 				do{
@@ -389,11 +383,6 @@ extension CalendarViewController: FSCalendarDelegate {
 								numberOfEventsFor date: Date) -> Int {
 		let calendar = dateFormatter.string(from: date)
 		return dic[calendar]?.count ?? 0
-	}
-	
-	func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-		let currentDate = calendar.currentPage
-		communication(date: currentDate)
 	}
 }
 
