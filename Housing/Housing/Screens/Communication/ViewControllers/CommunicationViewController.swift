@@ -36,7 +36,7 @@ final class CommunicationViewController: BaseViewController {
 
 	//MARK: - Property
 	var incompleteLength = 0
-	var completeLength = 0
+	var completeLength = 1
 	var mode = 3
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData: [DetailData] = []
