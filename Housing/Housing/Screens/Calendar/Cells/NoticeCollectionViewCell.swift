@@ -80,18 +80,9 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
 		titleLabel.text = calendar?.title
 	}
 	func fetchTime() {
-		let times = calendar?.time.split(separator: "-")
-		guard let startTime = Int(times?[0] ?? "0") else {return}
-		guard let endTime = Int(times?[1] ?? "0") else {return}
-		if startTime > 12 && endTime > 12 {
-			timeLabel.text = "오후 \(startTime-12):00 ~ 오후 \(endTime-12):00"
-		} else if startTime > 12 && endTime <= 12 {
-			timeLabel.text = "오후 \(startTime-12):00 ~ 오전 \(endTime):00"
-		} else if startTime <= 12 && endTime > 12 {
-			timeLabel.text = "오전 \(startTime):00 ~ 오후 \(endTime-12):00"
-		} else {
-			timeLabel.text = "오전 \(startTime):00 ~ 오전 \(endTime):00"
-		}
+		guard let startTime = times?[0] else {return}
+		guard let endTime = times?[1] else {return}
+		timeLabel.text = "\(startTime) ~ \(endTime)"
 	}
 
 }
