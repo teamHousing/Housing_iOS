@@ -134,7 +134,7 @@ HOUSING iOS
 
    Datasource를 익스텐션으로 선언하여 그 안에 셀마다의 데이터를 정해줄 수 있는 cellForRowAt 이 포함된 함수를 사용하여 텍스트를 바꿔주고 버튼이 눌렸을 때 selector를 사용하여 각 기능을 구현할 수 있었습니다.
 
-   ```
+   ```swift
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
    		let cell: MessageDetailTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
    		if self.userOrOwner == 0 {
@@ -195,7 +195,7 @@ HOUSING iOS
 
 #### CollectionView Cell에 Shadow를 넣는 방법에 대해 알게 되었습니다😋
 #### 
-> ```
+> ```swift
 > extension CALayer {
 > 	func applyShadow(
 > 		color: UIColor = .black,
@@ -239,7 +239,7 @@ HOUSING iOS
 > 김주은
 
 #### Expandable TableView를 만드는 법을 알게 되었어요👩‍💻
-> ```
+> ```swift
 >extension CommunicationViewController: UITableViewDelegate {
 >	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 >		if indexPath.row == 0 {
@@ -271,7 +271,7 @@ HOUSING iOS
 
 #### RxMoya를 사용하여 서버 통신하는 법을 알게 되었어요🙃
 
->```
+>```swift
 >detailProvider.rx.request(.homeDetail(id: requestId))
 >			.asObservable()
 >			.subscribe(onNext: { response in
@@ -317,7 +317,52 @@ HOUSING iOS
 >```
 >
 >
+> 김태훈
 
+#### Then과 Snapkit을 사용해서 UI를 만들었어요🎨
+
+>```swift
+>	private var nextStep = UIButton().then{
+>		$0.backgroundColor = .gray01
+>		$0.setTitle("다음 단계", for: .normal)
+>		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+>		$0.isEnabled = false
+>		$0.setRounded(radius: 25)
+>		$0.addTarget(self, action: #selector(nextButtonDidTapped), for: .touchUpInside)
+>	}
+>		nextStep.snp.makeConstraints{
+>			$0.top.equalTo(questionDescription.snp.bottom).offset(72)
+>			$0.centerX.equalTo(view)
+>			$0.width.equalTo(widthConstraintAmount(value: 255))
+>			$0.height.equalTo(48)
+>		}
+>```
+>
+>
+
+#### TableView의 높이를 동적으로 구성해봤어요🤸‍♀️
+
+>~~~swift
+>	func resetTableViewHeight() {
+>		self.timeStampTableView.snp.updateConstraints{
+>			$0.height.equalTo(CGFloat(70 * self.requestData.availableTimeList.count))
+>		}
+>		self.underGrayView.snp.updateConstraints{
+>			$0.height.equalTo(CGFloat(70 * requestData.availableTimeList.count) + 300)
+>		}
+>	}
+>
+>
+>	func addTimeStamp(sender : UIButton) {
+>		resetPickerLayout()
+>		resetTableViewHeight()
+>		let isTableViewEmpty = requestData.availableTimeList.isEmpty
+>		registerButton.isEnabled = isTableViewEmpty ? false : true
+>		registerButton.backgroundColor = isTableViewEmpty ? .gray : .primaryOrange
+>		tableViewBind()
+>		timeStampTableView.reloadData()
+>	}
+>~~~
 ### 팀원 역할 및 소개
 
 | <IMG src="https://github.com/5anniversary.png?size=100" width="150"> | <IMG src="https://github.com/hansolnoh95.png?size=100" width="150"> | <IMG src="https://github.com/8ugustjaden.png?size=100" width="150"> | <IMG src="https://github.com/JubyKim.png?size=100" width="150"> | <IMG src="https://github.com/iAmSomething.png?size=100" width="150"> |
