@@ -109,10 +109,9 @@ class AppointmentViewController: BaseViewController {
 	
 	private let datePickerLabel = UILabel().then {
 		$0.textColor = .textGrayBlank
-		$0.text = "YYYY.MM.DD"
+		$0.text = "2021.01.16"
 		$0.isUserInteractionEnabled = true
 		$0.isMultipleTouchEnabled = true
-		
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 	}
 	private let underBar = UIView().then{
@@ -123,7 +122,7 @@ class AppointmentViewController: BaseViewController {
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
 		$0.textColor = .black
 	}
-	private let startHour = UILabel().then {
+	private let startHour = UITextField().then {
 		$0.textColor = .textGrayBlank
 		$0.text = "07시"
 		$0.isUserInteractionEnabled = true
@@ -463,7 +462,7 @@ class AppointmentViewController: BaseViewController {
 		}
 		let a = "\(temp.startTime)-\(temp.endTime)"
 		
-		let promiseTime = noticeOption( date: temp.day , day : a , time: self.requestData.solution )
+		let promiseTime = noticeOption(date: temp.day, day: a, time: self.requestData.solution)
 		
 		return promiseTime
 	}
@@ -574,10 +573,7 @@ extension AppointmentViewController: UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: TimeStampTableViewCell.registterId,
-																									 for: indexPath) as? TimeStampTableViewCell else {
-			return UITableViewCell()
-		}
+		let cell: TimeStampTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 		cell.awakeFromNib()
 		cell.backgroundColor = .primaryGray
 		cell.deleteButton.backgroundColor = .primaryGray

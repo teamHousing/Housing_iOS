@@ -25,6 +25,7 @@ class MessageTableViewCell: UITableViewCell {
 	var confirmedPromiseOption = ""
 	var rootViewController: UIViewController?
 	var checkToModify = 1
+	var detail: UIViewController?
 	
 	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
@@ -257,6 +258,7 @@ extension MessageTableViewCell: UITableViewDataSource {
 		self.loader()
 		sender.isEnabled = false
 		sender.backgroundColor = .gray01
+		detail?.viewDidLoad()
 	}
 	
 	@objc func didTapModifyButton(_ sender: UIButton) {
