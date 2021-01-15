@@ -173,7 +173,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 				$0.leading.equalTo(self.detailHeaderView.snp.leading).offset(20)
 				$0.trailing.equalTo(self.detailHeaderView.snp.trailing).offset(-20)
 				$0.top.equalTo(self.titleLabel.snp.bottom).offset(40)
-				$0.height.equalTo(self.contextHeight()*22)
+				//$0.height.equalTo(self.contextHeight()*22)
 			}
 		}
 	}
@@ -226,7 +226,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 			}, onCompleted: {
 				self.headerViewLayout()
 				self.detailHeaderView.snp.makeConstraints{
-					$0.height.equalTo(130+self.contextHeight()*22)
+					$0.height.equalTo(160+self.contextHeight()*22)
 				}
 				self.detailHeaderView.reloadInputViews()
 			}).disposed(by: disposeBag)

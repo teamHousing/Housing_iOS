@@ -586,7 +586,7 @@ extension AppointmentViewController: UITableViewDelegate {
 		cell.awakeFromNib()
 		cell.backgroundColor = .primaryGray
 		cell.deleteButton.backgroundColor = .primaryGray
-		cell.dateLabel.text = self.requestData.availableTimeList[indexPath.row].day
+		cell.dateLabel.text = String(self.requestData.availableTimeList[indexPath.row].day.split(separator: " ")[0])
 		cell.timeLabel.text = "\(self.requestData.availableTimeList[indexPath.row].startTime) - \(self.requestData.availableTimeList[indexPath.row].endTime)"
 		cell.methodLabel.text = self.requestData.solution
 		cell.selectionStyle = .none

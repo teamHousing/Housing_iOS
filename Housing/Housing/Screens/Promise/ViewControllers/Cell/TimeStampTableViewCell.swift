@@ -14,7 +14,10 @@ class TimeStampTableViewCell: UITableViewCell {
 	let containerView = UIView().then {
 		$0.backgroundColor = .primaryWhite
 		$0.setRounded(radius: 12)
+		$0.setBorder(borderColor: .black, borderWidth: 0)
 		
+		$0.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 4)
+		$0.clipsToBounds = false
 	}
 	let dateLabel = UILabel().then{
 		$0.textColor = .primaryBlack
