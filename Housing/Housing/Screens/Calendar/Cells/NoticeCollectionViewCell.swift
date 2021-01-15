@@ -80,6 +80,7 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
 		titleLabel.text = calendar?.title
 	}
 	func fetchTime() {
+		let times = calendar?.time.split(separator: "-")
 		guard let startTime = times?[0] else {return}
 		guard let endTime = times?[1] else {return}
 		timeLabel.text = "\(startTime) ~ \(endTime)"
