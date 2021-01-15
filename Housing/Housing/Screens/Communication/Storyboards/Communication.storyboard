@@ -87,7 +87,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JB-c2-07c">
-                                                    <rect key="frame" x="340" y="0.0" width="64" height="32"/>
+                                                    <rect key="frame" x="362" y="0.0" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="4JB-c2-07c" secondAttribute="height" multiplier="2:1" id="Lvu-fj-HJm"/>
                                                     </constraints>
@@ -101,7 +101,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnListDown" translatesAutoresizingMaskIntoConstraints="NO" id="LgC-In-6Pw">
-                                                    <rect key="frame" x="374" y="32" width="30" height="30"/>
+                                                    <rect key="frame" x="374" y="21" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="ANg-pg-nmA"/>
                                                         <constraint firstAttribute="width" secondItem="LgC-In-6Pw" secondAttribute="height" id="YEY-db-mB2"/>
@@ -117,8 +117,8 @@
                                                 <constraint firstItem="hfG-4X-N3k" firstAttribute="centerY" secondItem="UhO-95-aqW" secondAttribute="centerY" id="LDc-ne-ON9"/>
                                                 <constraint firstItem="UhO-95-aqW" firstAttribute="centerY" secondItem="EIM-pE-vro" secondAttribute="centerY" id="WY0-Ub-ZOZ"/>
                                                 <constraint firstItem="JKM-16-vsl" firstAttribute="leading" secondItem="hfG-4X-N3k" secondAttribute="trailing" constant="4" id="fsv-lY-yWb"/>
-                                                <constraint firstAttribute="bottom" secondItem="LgC-In-6Pw" secondAttribute="bottom" constant="10" id="kOV-3d-xz4"/>
                                                 <constraint firstAttribute="trailing" secondItem="LgC-In-6Pw" secondAttribute="trailing" constant="10" id="oWU-ju-XZo"/>
+                                                <constraint firstItem="LgC-In-6Pw" firstAttribute="centerY" secondItem="hfG-4X-N3k" secondAttribute="centerY" id="sFh-Qp-WN7"/>
                                                 <constraint firstAttribute="trailing" secondItem="4JB-c2-07c" secondAttribute="trailing" constant="10" id="wDT-GE-Sih"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -144,7 +144,7 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYB-kI-bjU">
                                                     <rect key="frame" x="131" y="193" width="152" height="40"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" name="salmon"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="45v-hU-ocr"/>
                                                         <constraint firstAttribute="width" constant="152" id="dsc-v7-Id0"/>
@@ -208,7 +208,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnListDown" translatesAutoresizingMaskIntoConstraints="NO" id="bDd-rq-ukY">
-                                                    <rect key="frame" x="374" y="10" width="30" height="30"/>
+                                                    <rect key="frame" x="374" y="10" width="30" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="Hb8-cW-Xb9"/>
                                                         <constraint firstAttribute="width" secondItem="bDd-rq-ukY" secondAttribute="height" id="jeD-t4-mnf"/>
@@ -224,6 +224,7 @@
                                                 <constraint firstItem="gBm-c7-7pV" firstAttribute="centerY" secondItem="x3u-kC-IOR" secondAttribute="centerY" id="XPF-mB-hiB"/>
                                                 <constraint firstAttribute="trailing" secondItem="bDd-rq-ukY" secondAttribute="trailing" constant="10" id="cjl-TV-nwk"/>
                                                 <constraint firstItem="x3u-kC-IOR" firstAttribute="leading" secondItem="gBm-c7-7pV" secondAttribute="trailing" constant="4" id="iVA-XS-BH0"/>
+                                                <constraint firstItem="bDd-rq-ukY" firstAttribute="centerY" secondItem="gBm-c7-7pV" secondAttribute="centerY" id="udD-NG-8Eq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="paleGrey"/>
