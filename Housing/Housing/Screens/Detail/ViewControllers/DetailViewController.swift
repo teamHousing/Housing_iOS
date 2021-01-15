@@ -286,26 +286,25 @@ class DetailViewController: SegementSlideDefaultViewController {
 																			 preferredStyle: .actionSheet)
 		
 		//옵션 초기화
-		let deleteAction = UIAlertAction(title: "Delete",
+		let editAction = UIAlertAction(title: "수정하기",
 																		 style: .default,
 																		 handler: {
 																			(alert: UIAlertAction!) -> Void in
 																		 })
-		let saveAction = UIAlertAction(title: "Save",
+		let deleteAction = UIAlertAction(title: "삭제하기",
 																	 style: .default,
 																	 handler: {
 																		(alert: UIAlertAction!) -> Void in
 																	 })
 		
-		let cancelAction = UIAlertAction(title: "Cancel",
+		let cancelAction = UIAlertAction(title: "취소",
 																		 style: .cancel,
 																		 handler: {
 																			(alert: UIAlertAction!) -> Void in
 																		 })
 		
-		//action sheet에 옵션 추가.
+		optionMenu.addAction(editAction)
 		optionMenu.addAction(deleteAction)
-		optionMenu.addAction(saveAction)
 		optionMenu.addAction(cancelAction)
 		
 		//show

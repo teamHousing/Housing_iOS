@@ -13,7 +13,7 @@ import UIKit
 
 class AdditionalRequestViewController: BaseViewController {
 	// MARK: - Component
-	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	var requestData = RequestDataModel.shared
 	
 	private let mainLabel = UILabel().then {
@@ -96,7 +96,7 @@ class AdditionalRequestViewController: BaseViewController {
 	
 	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
-		userProvider.rx.request(.homePromise(id: 1,is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
+		promiseProvider.rx.request(.homePromise(id: 1,is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
@@ -125,13 +125,18 @@ class AdditionalRequestViewController: BaseViewController {
 
 		//requestData 싱글톤객체 값 초기화
 		//서버에 통신
-		userProvider.rx.request(.homePromise(id: 1,is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
+		promiseProvider.rx.request(.homePromise(id: 1,
+																						is_promise: requestData.isPromiseNeeded,
+																						category: requestData.cartegory,
+																						issue_title: requestData.title,
+																						issue_contents: requestData.discription,
+																						requested_term: requestData.editionalRequest))
+			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
 					do {
 						let decoder = JSONDecoder()
 						let data = try decoder.decode(ResponseType<IssueId>.self, from: next.data)
-						print(data.data?.issue_id)
 						self.navigationController?.popToRootViewController(animated: true)
 						self.requestData.issueId = data.data!.issue_id
 					}
@@ -151,25 +156,14 @@ class AdditionalRequestViewController: BaseViewController {
 	}
 	private func image(){
 		if !self.requestData.images.isEmpty {
-			userProvider.rx.request(.homePromiseImageUpload(issue_img: self.requestData.images)).observeOn(MainScheduler.init()).asObservable()
+			promiseProvider.rx.request(.homePromiseImageUpload(issue_img: requestData.images))
+				.observeOn(MainScheduler.init())
+				.asObservable()
 				.subscribe { (next) in
-					if next.statusCode == 200 {
-						do {
-							print(next.statusCode)
-						}
-						catch {
-							print(error)
-						}
-					}
+					print(next.statusCode)
 				} onError: { (error) in
 					print(error.localizedDescription)
-					} onCompleted: {
-						print("dp")
-					} onDisposed: {
-						print("disposed")
-						print(self.requestData)
-					}
-				.disposed(by: disposeBag)
+				}.disposed(by: disposeBag)
 		}
 
 	}
@@ -220,14 +214,12 @@ class AdditionalRequestViewController: BaseViewController {
 		mainLabel.snp.makeConstraints{
 			$0.top.equalTo(view.safeAreaLayoutGuide).offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
-			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -101))
 		}
 		lineImage.snp.makeConstraints{
 			$0.top.equalTo(view.safeAreaLayoutGuide).offset(64)
-			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
+			$0.trailing.equalTo(view.safeAreaLayoutGuide)
 			$0.leading.equalTo(mainLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
-			$0.width.equalTo(widthConstraintAmount(value: widthConstraintAmount(value: 93)))
 		}
 		presetButton1.snp.makeConstraints{
 			$0.centerX.equalTo(view)
@@ -308,6 +300,17 @@ class AdditionalRequestViewController: BaseViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tabBarController?.tabBar.isHidden = true
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		tabBarController?.tabBar.isHidden = false
+	}
+
 	
 }
 

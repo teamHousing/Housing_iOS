@@ -33,7 +33,7 @@ class DatePickerViewController: UIViewController {
 			$0.preferredDatePickerStyle = .wheels
 		}
 		$0.timeZone = NSTimeZone.local
-//		$0.minimumDate = Date()
+		$0.minimumDate = Date()
 		$0.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
 	}
 	private let confirmButton = UIButton().then{
@@ -134,7 +134,7 @@ class DatePickerViewController: UIViewController {
 		let dateFormatter: DateFormatter = DateFormatter()
 		switch pickerMode {
 		case 0:
-			dateFormatter.dateFormat = "yyyy-MM-dd EE"
+			dateFormatter.dateFormat = "yyyy-MM-dd"
 			self.datePicker.rx.date.map{ dateFormatter.string(from: $0) }
 				.bind(onNext: {a in self.requestData.date.onNext(a)})
 			.disposed(by: disposeBag)
@@ -150,7 +150,7 @@ class DatePickerViewController: UIViewController {
 				.bind(to: requestData.endTime)
 			.disposed(by: disposeBag)
 		default:
-			dateFormatter.dateFormat = "yyyy-MM-dd EE"
+			dateFormatter.dateFormat = "yyyy-MM-dd"
 		}
 	}
 	private func hideCardAndGoBack(){

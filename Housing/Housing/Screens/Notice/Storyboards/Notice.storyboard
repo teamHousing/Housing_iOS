@@ -293,6 +293,8 @@
                                         <outlet property="profileMessageLabel" destination="Hdo-zy-8Nd" id="pSH-MT-9Pa"/>
                                         <outlet property="profileMessageView" destination="z06-KG-3E1" id="fzT-p9-X1c"/>
                                         <outlet property="responseTimeLabel" destination="XwB-GN-p2K" id="Mlc-TP-tPs"/>
+                                        <outlet property="settingButton" destination="BE5-wy-B3s" id="C1k-3q-05T"/>
+                                        <outlet property="writeButton" destination="ERq-kK-kja" id="TAG-e1-qMb"/>
                                     </connections>
                                 </collectionReusableView>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="NoticeFooterCollectionViewCell" id="o8D-MF-4Uw" customClass="NoticeFooterCollectionViewCell" customModule="Housing" customModuleProvider="target">
@@ -324,13 +326,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="35b-VW-dD3">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="icKey" id="fPq-09-HUo">
+                        <barButtonItem key="rightBarButtonItem" image="icKey" id="fPq-09-HUo">
                             <connections>
                                 <action selector="makeVerifyCode:" destination="Nh1-GQ-PFN" id="vHp-Bk-tP7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="makeVerifyNumberButton" destination="fPq-09-HUo" id="epP-Nq-4A8"/>
                         <outlet property="noticeCollectionView" destination="BgS-ev-nLY" id="Qr7-Xi-jzU"/>
                     </connections>
                 </viewController>

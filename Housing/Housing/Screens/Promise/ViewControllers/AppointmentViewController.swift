@@ -16,8 +16,11 @@ class AppointmentViewController: BaseViewController {
 	// MARK: - Component
 	var issue_id = RequestDataModel.shared.issueId
 	var requestData = RequestDataModel.shared
+
 	var checkToModify = 0
 	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
 	private var promiseArr: [[String]] = []
@@ -354,24 +357,28 @@ class AppointmentViewController: BaseViewController {
 		self.endHour.addGestureRecognizer(callEndTimePicker)
 	}
 	
-	@objc func visitGesture(recognizer: UITapGestureRecognizer) {
+	@objc
+	func visitGesture(recognizer: UITapGestureRecognizer) {
 		self.visitView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.phoneCallView.setBorder(borderColor: .gray01, borderWidth: 1)
 		requestData.solution = "집방문"
 	}
-	@objc func phoneCallGesture(recognizer: UITapGestureRecognizer) {
+	@objc
+	func phoneCallGesture(recognizer: UITapGestureRecognizer) {
 		self.phoneCallView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.visitView.setBorder(borderColor: .gray01, borderWidth: 1)
 		requestData.solution = "전화 통화"
 	}
-	@objc func callDatePickerView(recognizer : UITapGestureRecognizer) {
+	@objc
+	func callDatePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 0
 		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
 		self.present(pickerView, animated: false, completion: nil)
 	}
-	@objc func callStartTimePickerView(recognizer : UITapGestureRecognizer) {
+	@objc
+	func callStartTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
@@ -379,14 +386,16 @@ class AppointmentViewController: BaseViewController {
 		pickerView.pickerMode = 1
 		self.present(pickerView, animated: false, completion: nil)
 	}
-	@objc func callEndTimePickerView(recognizer : UITapGestureRecognizer) {
+	@objc
+	func callEndTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 2
 		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
 		self.present(pickerView, animated: false, completion: nil)
 	}
-	@objc func addTimeStamp(sender : UIButton) {
+	@objc
+	func addTimeStamp(sender : UIButton) {
 		self.resetPickerLayout()
 		self.resetTableViewHeight()
 		let isTableViewEmpty = requestData.availableTimeList.isEmpty
@@ -395,16 +404,14 @@ class AppointmentViewController: BaseViewController {
 		self.tableViewBind()
 		self.timeStampTableView.reloadData()
 	}
-	@objc func addPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseGuestRegister(id: issue_id, promise_option: self.promiseArr)).asObservable()
+	@objc
+	func addPromise(sender : UIButton) {
+		print(#function)
+		promiseProvider.rx.request(.homePromiseGuestRegister(id: issue_id,
+																												 promise_option: promiseArr))
+			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
-					do {
-						self.navigationController?.popToRootViewController(animated: true)
-					}
-					catch {
-						
-					}
 				}
 			} onError: { (error) in
 				print(error.localizedDescription)
@@ -590,6 +597,17 @@ extension AppointmentViewController: UITableViewDelegate {
 		
 		// Do any additional setup after loading the view.
 	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tabBarController?.tabBar.isHidden = true
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		tabBarController?.tabBar.isHidden = false
+	}
+
 }
 // MARK: - TableviewDelegate
 

@@ -20,6 +20,8 @@ class NoticeHeaderCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var profileImage: UIImageView!
 	@IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var noticeLabel: UILabel!
+    @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var writeButton: UIButton!
     
 	func headerlayout() {
 		self.headerBackgroundView.layer.applyShadow()

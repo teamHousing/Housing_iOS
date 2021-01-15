@@ -163,7 +163,7 @@ class PromiseViewController: UIViewController {
 		$0.backgroundColor = .white
 		$0.setBorder(borderColor: .gray01, borderWidth: 1)
 		$0.tag = 4
-    $0.addTarget(self, action: #selector(problemTypeSelection), for: .touchUpInside)
+		$0.addTarget(self, action: #selector(problemTypeSelection), for: .touchUpInside)
 		
 	}
 	private let questionButton = UIButton().then{
@@ -224,9 +224,10 @@ class PromiseViewController: UIViewController {
 		$0.pageIndicatorTintColor = .gray01
 	}
 	
+	var keyboardY: Int = 0
 	
 	// MARK: - Helper
-
+	
 	@objc func nextButtonDidTapped() {
 		let cameraView = CameraWorkViewController()
 		navigationController?.pushViewController(cameraView, animated: true)
@@ -293,9 +294,9 @@ class PromiseViewController: UIViewController {
 		self.view.endEditing(true)
 	}
 	func dataPreset(){
-		self.promiseRequiredView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
-		self.promiseNotRequiredView.setBorder(borderColor: .gray01, borderWidth: 1)
-		self.page.numberOfPages = 4
+		promiseRequiredView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
+		promiseNotRequiredView.setBorder(borderColor: .gray01, borderWidth: 1)
+		page.numberOfPages = 4
 		requestData.isPromiseNeeded = true
 		buttonBackgroundRefresher()
 		fixRepairButton.backgroundColor = .primaryOrange
@@ -312,51 +313,52 @@ class PromiseViewController: UIViewController {
 		underBar.backgroundColor = .gray01
 	}
 	private func initLayout() {
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-		self.navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.topItem?.title = ""
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
+		tabBarController?.tabBar.isHidden = true
 	}
 	private func layout() {
 		dataPreset()
-		self.navigationController?.navigationBar.backgroundColor = .white
-		self.view.backgroundColor = .white
-		self.view.addSubview(totalScroll)
+		navigationController?.navigationBar.backgroundColor = .white
+		view.backgroundColor = .white
+		view.addSubview(totalScroll)
 		totalScroll.snp.makeConstraints{
-			$0.edges.equalToSuperview()
+			$0.top.equalTo(view.safeAreaLayoutGuide)
+			$0.leading.trailing.bottom.equalToSuperview()
 		}
 		self.totalScroll.addSubview(contentView)
 		contentView.snp.makeConstraints{
 			$0.width.equalToSuperview().priority(1000)
 			$0.centerX.top.bottom.equalToSuperview()
 		}
-		self.contentView.adds([
-														backgroundLabel,
-														lineImage,
-														solutionLabel,
-														promiseRequiredView,
-														promiseNotRequiredView,
-														requestTypeLabel,
-														fixRepairButton,
-														contractButton,
-														rentalFeeButton,
-														noiseButton,
-														questionButton,
-														etcButton,
-														message,
-														questionTitle,
-														underBar,
-														questionDescription,
-														nextStep,page])
+		contentView.adds([
+											backgroundLabel,
+											lineImage,
+											solutionLabel,
+											promiseRequiredView,
+											promiseNotRequiredView,
+											requestTypeLabel,
+											fixRepairButton,
+											contractButton,
+											rentalFeeButton,
+											noiseButton,
+											questionButton,
+											etcButton,
+											message,
+											questionTitle,
+											underBar,
+											questionDescription,
+											nextStep,page])
 		backgroundLabel.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
-			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -152))
 		}
 		lineImage.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(28)
-			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
+			$0.trailing.equalTo(view.safeAreaLayoutGuide)
 			$0.leading.equalTo(backgroundLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
-			$0.width.equalTo(widthConstraintAmount(value: widthConstraintAmount(value: 144)))
 		}
 		solutionLabel.snp.makeConstraints{
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
@@ -518,11 +520,11 @@ class PromiseViewController: UIViewController {
 	}
 	@objc
 	func keyboardWillShow(_ sender: Notification) {
-		self.view.frame.origin.y = -150 // Move view 150 points upward
+		totalScroll.setContentOffset(CGPoint(x: 0, y: 400), animated: true)
 	}
 	@objc
 	func keyboardWillHide(_ sender: Notification) {
-		self.view.frame.origin.y = 0 // Move view to original position
+		//		totalScroll.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
 	}
 	
 	@objc func handleTap(recognizer: UITapGestureRecognizer){
@@ -534,7 +536,7 @@ class PromiseViewController: UIViewController {
 		self.dismiss(animated: true, completion: nil)
 	}
 	// MARK: - Life Cycle
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		bind()
@@ -546,11 +548,20 @@ class PromiseViewController: UIViewController {
 		self.contentView.addGestureRecognizer(tap)
 	}
 	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		bind()
 		dataPreset()
 		layout()
 		initLayout()
 	}
+//	override func viewWillDisAppar(_ animated: Bool){
+//		super.viewWillDisappear(animated)
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		tabBarController?.tabBar.isHidden = false
+	}
+//	}
 }
 
 // MARK: - TextViewDelegate
@@ -566,7 +577,6 @@ extension PromiseViewController : UITextViewDelegate {
 			textView.text = "내용을 작성해주세요"
 			textView.textColor = UIColor.gray01
 			requestData.discription = ""
-
 		}
 		else {
 			requestData.discription = textView.text
@@ -585,3 +595,5 @@ extension PromiseViewController : UITextFieldDelegate{
 		
 	}
 }
+
+extension PromiseViewController: UIScrollViewDelegate { }

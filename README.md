@@ -157,29 +157,31 @@ HOUSING
 
 #### Expandable TableView를 만드는 법을 알게 되었어요👩‍💻
 #### 
+
 > ```
-extension CommunicationViewController: UITableViewDelegate { 
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if indexPath.row == 0 {
-			if tableViewData[indexPath.section].opened == true {
-				tableViewData[indexPath.section].opened = false
-				communicationTableView.backgroundColor = .primaryGray
-				let sections = IndexSet(integer: indexPath.section)
-				tableView.reloadSections(sections, with: .none) ///animaion
-			} else {
-				tableViewData[indexPath.section].opened = true
-				communicationTableView.backgroundColor = .primaryGray
-				let sections = IndexSet(integer: indexPath.section)
-				tableView.reloadSections(sections, with: .none) ///animaion
-			}
-			communicationTableView.reloadData()
-		} else {
-			let viewController = DetailViewController()
-			viewController.requestId = tableViewData[indexPath.section].sectionData[indexPath.row-1].id
-			navigationController?.pushViewController(viewController, animated: true)
-		}
-	}
-}
+>extension CommunicationViewController: UITableViewDelegate {
+>	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+>		if indexPath.row == 0 {
+>			if tableViewData[indexPath.section].opened == true {
+>				tableViewData[indexPath.section].opened = false
+>				communicationTableView.backgroundColor = .primaryGray
+>				let sections = IndexSet(integer: indexPath.section)
+>				tableView.reloadSections(sections, with: .none)
+>			} else {
+>				tableViewData[indexPath.section].opened = true
+>				communicationTableView.backgroundColor = .primaryGray
+>				let sections = IndexSet(integer: indexPath.section)
+>				tableView.reloadSections(sections, with: .none) 
+>			}
+>			communicationTableView.reloadData()
+>		} else {
+>			let viewController = DetailViewController()
+>			viewController.requestId = >tableViewData[indexPath.section].sectionData[indexPath.row-1].id
+>			navigationController?.pushViewController(viewController, animated: true)
+>		}
+>	}
+>}
+>}
 > ```
 
 
