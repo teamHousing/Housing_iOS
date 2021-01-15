@@ -92,6 +92,13 @@ class InfoViewController: BaseViewController {
 	private let certificationUnderBarView = UIView().then {
 		$0.backgroundColor = .primaryBlack
 	}
+	private let certificationLabel = UILabel().then {
+		$0.text = "비밀번호가 일치하지 않습니다."
+		$0.font = .systemFont(ofSize: 12, weight: .regular)
+		$0.textAlignment = .left
+		$0.textColor = .red
+		$0.isHidden = true
+	}
 	private let nextButton = UIButton().then {
 		$0.isEnabled = false
 		$0.backgroundColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1)
@@ -145,6 +152,7 @@ class InfoViewController: BaseViewController {
 			idUnderBarView,
 			passwordUnderBarView,
 			certificationUnderBarView,
+			certificationLabel,
 			nextButton
 		])
 		guideLabel.snp.makeConstraints {
@@ -227,6 +235,10 @@ class InfoViewController: BaseViewController {
 			$0.top.equalTo(certificationGuideLabel.snp.bottom).offset(38)
 			$0.height.equalTo(1)
 		}
+		certificationLabel.snp.makeConstraints{
+			$0.leading.equalTo(containerView).offset(32)
+			$0.top.equalTo(certificationUnderBarView.snp.bottom).offset(4)
+		}
 		nextButton.snp.makeConstraints {
 			$0.centerX.equalTo(containerView)
 			$0.width.equalTo(255)
@@ -288,14 +300,37 @@ class InfoViewController: BaseViewController {
 			self.detectPasswordCoinside()
 		}).disposed(by: disposeBag)
 		certificationTextField.rx.controlEvent(.editingChanged).subscribe(onNext: {
-			self.detectIsEmpty()
-			
+			self.passwordCertificate()
 		}).disposed(by: disposeBag)
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
 		containerView.addGestureRecognizer(tapGesture)
 		scrollView.addGestureRecognizer(tapGesture)
 	}
-	
+	private func passwordCertificate() {
+		guard
+			let password = passwordTextField.text,
+			let cirtificattion = certificationTextField.text else {
+			return
+		}
+		if password != cirtificattion {
+			self.certificationUnderBarView.backgroundColor = .red
+			self.certificationLabel.isHidden = false
+			nextButton.isEnabled = false
+			nextButton.backgroundColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1)
+		}
+		else {
+			self.certificationLabel.isHidden = true
+			self.certificationUnderBarView.backgroundColor = .black
+			
+			nextButton.isEnabled = true
+			nextButton.backgroundColor = .primaryOrange
+			detectIsEmpty()
+		}
+		if cirtificattion.isEmpty {
+			self.certificationLabel.isHidden = true
+			self.certificationUnderBarView.backgroundColor = .black
+		}
+	}
 	@objc
 	private func handleTap(sender: UIGestureRecognizer) {
 		view.endEditing(true)
@@ -318,8 +353,14 @@ class InfoViewController: BaseViewController {
 			return
 		}
 		if !name && !age && !id && !password && !certification {
-			nextButton.isEnabled = true
-			nextButton.backgroundColor = .primaryOrange
+			if password == certification {
+				nextButton.isEnabled = true
+				nextButton.backgroundColor = .primaryOrange
+			}
+			else {
+				nextButton.isEnabled = false
+				nextButton.backgroundColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1)
+			}
 		} else {
 			nextButton.isEnabled = false
 			nextButton.backgroundColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1)
