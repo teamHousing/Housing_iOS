@@ -162,23 +162,21 @@ extension AddedImageTableViewCell: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: AddedImageCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
-		for i in 0 ..< imageURL.count {
-			cell.addedImageView.imageFromUrl(
-				self.imageURL[i],
-				defaultImgPath: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMjhfMjA1%2FMDAxNjA2NTczNjQ2NDM1.fM7rkGKrlK8X2RVymtLXyWGW5RNmAgU8yKsXzK9_oXMg.N3Y8IO5aKEF68xQQvQNj0S1f73o9yGpB8-gOH_S9738g.JPEG.eduvil%2F20201128%25A3%25DF180344.jpg&type=a340"
-			)
-		}
-		if self.imageURL.count > 3 {
-			if indexPath.row == 2 {
+		cell.addedImageView.imageFromUrl(
+			self.imageURL[indexPath.row],
+			defaultImgPath: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMjhfMjA1%2FMDAxNjA2NTczNjQ2NDM1.fM7rkGKrlK8X2RVymtLXyWGW5RNmAgU8yKsXzK9_oXMg.N3Y8IO5aKEF68xQQvQNj0S1f73o9yGpB8-gOH_S9738g.JPEG.eduvil%2F20201128%25A3%25DF180344.jpg&type=a340"
+		)
+		cell.addedImageView.layer.masksToBounds = true
+		cell.addedImageView.layer.cornerRadius = 16
+		cell.awakeFromNib()
+		if indexPath.row == 2 {
+			if self.imageURL.count > 3 {
 				cell.blurView.isHidden = false
 				cell.circleView.isHidden = false
 				cell.plusLabel.text = "+\(self.imageURL.count-3)"
 				cell.plusLabel.isHidden = false
 			}
 		}
-		cell.addedImageView.layer.masksToBounds = true
-		cell.addedImageView.layer.cornerRadius = 16
-		cell.awakeFromNib()
 		return cell
 	}
 }

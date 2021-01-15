@@ -91,11 +91,17 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		else if indexPath.row == 2 {
 			let cell: AddedImageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 				cell.imageURL = self.model.issueImages!
+
 			let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost)
 			if isHost == 0 {
 				cell.cancelButton.isHidden = true
 				cell.cancelButton.isUserInteractionEnabled = false
 			}
+			if self.model.progress == 2 {
+				cell.cancelButton.isHidden = true
+				cell.cancelButton.isUserInteractionEnabled = false
+			}
+
 			cell.selectionStyle = .none
 			cell.awakeFromNib()
 			return cell
