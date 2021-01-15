@@ -11,7 +11,8 @@ class IncompleteTableViewCell: UITableViewCell {
 
 	@IBOutlet var roomNumberButton: UIButton!
 	@IBOutlet var countOfIncomplete: UILabel!
-	@IBOutlet var incomButton: UIButton!
+	@IBOutlet var incomToggle: UIImageView!
+	
 	
 	
 	override func awakeFromNib() {
