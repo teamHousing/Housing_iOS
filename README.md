@@ -118,6 +118,58 @@ HOUSING iOS
    
    ~~~
 
+2. 하우징 쪽지
+
+   SegementSlide 를 사용하여 전체 뷰를 구성했습니다.
+
+   header 부분에는 제목과 문의 내용이 들어가고 아래 두 개의 탭에는 각각 상세 정보와 하우징 쪽지가 들어갑니다.
+
+   하우징 쪽지가 집주인과 자취생의 소통 흐름을 볼 수 있는 핵심 기능인데요.
+
+   MessageViewController 내에 테이블 뷰를 넣고 그 셀 안에 다시 테이블 뷰를 넣는 방식으로 진행했습니다.
+
+   라이브러리 자체에서 내장 함수로 탭 안의 뷰가 테이블뷰로 그려지기 때문에 그 첫 번 째 셀에 다시 테이블뷰를 보여주는 방식을 선택하게 되었습니다.
+
+   셀 마다 어떤 뷰를 넣어주고 그 셀 안에 버튼에 어떤 함수를 넣는지가 가장 중요한 구현사항이었는데요.
+
+   Datasource를 익스텐션으로 선언하여 그 안에 셀마다의 데이터를 정해줄 수 있는 cellForRowAt 이 포함된 함수를 사용하여 텍스트를 바꿔주고 버튼이 눌렸을 때 selector를 사용하여 각 기능을 구현할 수 있었습니다.
+
+   ```
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+   		let cell: MessageDetailTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
+   		if self.userOrOwner == 0 {
+   			if self.status[indexPath.row] == 0 {
+   				cell.titleLabel.text = "문의사항이 등록되었어요!"
+   				cell.contextLabel.attributedText = self.makeAttributed(
+   					context: "아래의 버튼을 눌러\n약속시간을 정해보세요."
+   				)
+   				cell.transitionButton.addTarget(self,
+   																				action: #selector(didTapConfirmButton(_:)),
+   																				for: .touchUpInside
+   				)
+   				cell.transitionButton.setTitle("약속 확정하기", for: .normal)
+   			}
+   			else if self.status[indexPath.row] == 1 {
+   				cell.titleLabel.text = "약속이 확정되었어요!"
+   				var confirmedPromise = "\(self.confirmedPromiseOption)예정이에요\n 캘린더에서 일정을 확인해보세요."
+   				cell.contextLabel.attributedText = self.makeAttributed(context: confirmedPromise)				
+   				cell.transitionButton.addTarget(self,
+   																				action: #selector(didTapCalendarButton(_:)),
+   																				for: .touchUpInside)
+   				cell.transitionButton.setTitle("캘린더 보기", for: .normal)
+   			}
+   			else if self.status[indexPath.row] == 2 {
+   				cell.titleLabel.text = "약속 수정 요청을 보냈어요!"
+   				cell.contextLabel.attributedText = self.makeAttributed(
+   					context: "앞으로도 하우징과 함께\n자취생과 소통해보세요!"
+   				)
+   				cell.transitionButton.snp.makeConstraints {
+   					$0.height.equalTo(0)
+   				}
+   			}
+   			...
+   ```
+
    
 
 ### Extension을 통해 작성한 메소드 설명
@@ -213,6 +265,58 @@ HOUSING iOS
 >}
 > ```
 
+
+
+> 노한솔
+
+#### RxMoya를 사용하여 서버 통신하는 법을 알게 되었어요🙃
+
+>```
+>detailProvider.rx.request(.homeDetail(id: requestId))
+>			.asObservable()
+>			.subscribe(onNext: { response in
+>				do{
+>					let json = JSON(response.data)
+>					let decoder = JSONDecoder()
+>					let data = try decoder.decode(ResponseType<Detail>.self,
+>																				from: response.data)
+>					
+>					let result = data.data
+>					self.statusModel.append(DetailStatus(
+>						ownerStatus: json["data"]["Replies"][0]["owner_status"].arrayValue.map{$0.intValue},
+>						userStatus: json["data"]["Replies"][0]["user_status"].arrayValue.map{$0.intValue},
+>						id: json["data"]["Replies"][0]["id"].intValue
+>					)
+>					)
+>					self.detailDataBind(result!)
+>					let viewController = ContentViewController()
+>					viewController.model = self.model
+>					let statusViewController = MessageViewController()
+>					self.idValue.id = data.data?.id ?? 11
+>					
+>					statusViewController.model = self.model
+>					statusViewController.statusModel = self.statusModel
+>					
+>					//viewController.tableView.reloadData()
+>					
+>					statusViewController.tableView.reloadData()
+>				} catch {
+>					print(error)
+>				}
+>				
+>			}, onError: { error in
+>				print(error.localizedDescription)
+>			}, onCompleted: {
+>				self.headerViewLayout()
+>				self.detailHeaderView.snp.makeConstraints{
+>					$0.height.equalTo(130+self.contextHeight()*22)
+>				}
+>				self.detailHeaderView.reloadInputViews()
+>			}).disposed(by: disposeBag)
+>
+>```
+>
+>
 
 ### 팀원 역할 및 소개
 
