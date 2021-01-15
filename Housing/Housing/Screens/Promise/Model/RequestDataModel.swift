@@ -13,6 +13,7 @@ import UIKit
 //MARK: 데이터 모델
 class RequestDataModel {
 	static let shared = RequestDataModel()
+	var issueId = 1
 	var isPromiseNeeded: Bool = true
 	var images: [UIImage] = []
 	var cartegory: Int = 0

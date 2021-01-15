@@ -14,13 +14,17 @@ import Moya
 
 class AppointmentViewController: BaseViewController {
 	// MARK: - Component
+	var issue_id = RequestDataModel.shared.issueId
 	var requestData = RequestDataModel.shared
-	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
+	var checkToModify = 0
+	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
-	private var promiseArr: [noticeOption] = []
-
-	private let backgroundLabel = UILabel().then{
+	private var promiseArr: [[String]] = []
+	
+	private let backgroundLabel = UILabel().then {
 		$0.text = "문제를 어떻게 해결할까요?"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
 		$0.textColor = .black
@@ -166,7 +170,6 @@ class AppointmentViewController: BaseViewController {
 		$0.setTitle("등록하기", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setTitleColor(.white, for: .normal)
-		$0.addTarget(self, action: #selector(addPromise), for: .touchUpInside)
 		$0.setRounded(radius: 25)
 	}
 	private let page = UIPageControl().then{
@@ -220,14 +223,21 @@ class AppointmentViewController: BaseViewController {
 		backgroundLabel.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(6)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
-			$0.trailing.equalTo(view).offset(widthConstraintAmount(value: -85))
 		}
 		lineImage.snp.makeConstraints{
 			$0.top.equalToSuperview().offset(28)
 			$0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
 			$0.leading.equalTo(backgroundLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
-			$0.width.equalTo(widthConstraintAmount(value: widthConstraintAmount(value: 77)))
+		}
+		registerButton.then {
+			if self.checkToModify == 1 {
+				$0.addTarget(self, action: #selector(modifyPromise), for: .touchUpInside)
+				self.checkToModify = 0
+			}
+			else {
+				$0.addTarget(self, action: #selector(addPromise), for: .touchUpInside)
+			}
 		}
 		comunicationType.snp.makeConstraints{
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
@@ -270,7 +280,6 @@ class AppointmentViewController: BaseViewController {
 		timeSelectLabel.snp.makeConstraints{
 			$0.top.equalTo(underBar.snp.bottom).offset(64)
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
-			$0.width.equalTo(widthConstraintAmount(value: 125))
 			$0.height.equalTo(timeSelectLabel.snp.width).multipliedBy(1 / 6.95)
 		}
 		startHour.snp.makeConstraints{
@@ -344,24 +353,28 @@ class AppointmentViewController: BaseViewController {
 		self.endHour.addGestureRecognizer(callEndTimePicker)
 	}
 	
-	@objc func visitGesture(recognizer: UITapGestureRecognizer) {
+	@objc
+	func visitGesture(recognizer: UITapGestureRecognizer) {
 		self.visitView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.phoneCallView.setBorder(borderColor: .gray01, borderWidth: 1)
 		requestData.solution = "집방문"
 	}
-	@objc func phoneCallGesture(recognizer: UITapGestureRecognizer) {
+	@objc
+	func phoneCallGesture(recognizer: UITapGestureRecognizer) {
 		self.phoneCallView.setBorder(borderColor: .primaryOrange, borderWidth: 2)
 		self.visitView.setBorder(borderColor: .gray01, borderWidth: 1)
 		requestData.solution = "전화 통화"
 	}
-	@objc func callDatePickerView(recognizer : UITapGestureRecognizer) {
+	@objc
+	func callDatePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 0
 		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
 		self.present(pickerView, animated: false, completion: nil)
 	}
-	@objc func callStartTimePickerView(recognizer : UITapGestureRecognizer) {
+	@objc
+	func callStartTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
@@ -369,28 +382,50 @@ class AppointmentViewController: BaseViewController {
 		pickerView.pickerMode = 1
 		self.present(pickerView, animated: false, completion: nil)
 	}
-	@objc func callEndTimePickerView(recognizer : UITapGestureRecognizer) {
+	@objc
+	func callEndTimePickerView(recognizer : UITapGestureRecognizer) {
 		let pickerView = DatePickerViewController()
 		pickerView.pickerMode = 2
 		pickerView.grayImage.image = self.view.window?.asImage()
 		pickerView.modalPresentationStyle = .fullScreen
 		self.present(pickerView, animated: false, completion: nil)
 	}
-	@objc func addTimeStamp(sender : UIButton) {
-		self.resetPickerLayout()
-		self.resetTableViewHeight()
+	@objc
+	func addTimeStamp(sender : UIButton) {
+		resetPickerLayout()
+		resetTableViewHeight()
 		let isTableViewEmpty = requestData.availableTimeList.isEmpty
-		self.registerButton.isEnabled = isTableViewEmpty ? false : true
-		self.registerButton.backgroundColor = isTableViewEmpty ? .gray : .black
-		self.tableViewBind()
-		self.timeStampTableView.reloadData()
+		registerButton.isEnabled = isTableViewEmpty ? false : true
+		registerButton.backgroundColor = isTableViewEmpty ? .gray : .primaryOrange
+		tableViewBind()
+		timeStampTableView.reloadData()
 	}
-	@objc func addPromise(sender : UIButton) {
-		userProvider.rx.request(.homePromiseGuestRegister(id: 1, promise_option: self.promiseArr)).asObservable()
+	@objc
+	func addPromise(sender : UIButton) {
+		print(#function)
+		promiseProvider.rx.request(.homePromiseGuestRegister(id: issue_id,
+																												 promise_option: promiseArr))
+			.asObservable()
 			.subscribe { (next) in
+				print("내거ㅇ야ㅑㅑㅑㅑㅑㅑㅑ")
+				dump(next.data)
+				if next.statusCode == 200 {
+					self.navigationController?.popToRootViewController(animated: true)
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+	}
+	@objc func modifyPromise(sender : UIButton) {
+		promiseProvider.rx.request(.homePromiseGuestModify(id: issue_id,
+																											 promise_option: promiseArr))
+			.asObservable()
+			.subscribe { (next) in
+				print("내거ㅇ야ㅑㅑㅑㅑㅑㅑㅑ22")
+				dump(next.data)
 				if next.statusCode == 200 {
 					do {
-						
+						self.navigationController?.popToRootViewController(animated: true)
 					}
 					catch {
 						
@@ -399,17 +434,15 @@ class AppointmentViewController: BaseViewController {
 			} onError: { (error) in
 				print(error.localizedDescription)
 			}.disposed(by: disposeBag)
-
-		
 	}
 	func timeToNoticeOption() -> noticeOption {
 		var temp = VisitDate()
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
-			let day = String(str.element!.split(separator: " ")[0])
-			let date = String(str.element!.split(separator: " ")[1])
+			let day = String(str.element!.split(separator: "-")[0])
+			let date = String(str.element!.split(separator: "-")[1])
 			temp.date = date
 			temp.day = day
-			}.disposed(by: disposeBag)
+		}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
 		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
@@ -430,7 +463,7 @@ class AppointmentViewController: BaseViewController {
 		}
 		let a = "\(temp.startTime)-\(temp.endTime)"
 		
-		let promiseTime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a )
+		let promiseTime = noticeOption( date: temp.day , day : a , time: self.requestData.solution )
 		
 		return promiseTime
 	}
@@ -455,25 +488,32 @@ class AppointmentViewController: BaseViewController {
 		endHourUnderBar.backgroundColor = .textGrayBlank
 		endHour.text = "17시"
 		var temp = VisitDate()
-		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
-			print(str)
-			let day = String(str.element!.split(separator: " ")[0])
-			let date = String(str.element!.split(separator: " ")[1])
+		requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
+			let day = String(str.element!.split(separator: "-")[0])
+			let date = String(str.element!.split(separator: "-")[1])
 			temp.date = date
-			
-			let newday = day.replacingOccurrences(of: "-", with: ". ")
-			temp.day = newday
-			}.disposed(by: disposeBag)
-		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
-		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
-		promiseArr.append(timeToNoticeOption())
+//			let newday = day.replacingOccurrences(of: "-", with: ". ")
+			guard let str = str.element else { return }
+			temp.day = str
+//			print("진짜는 여기지롱 멍청아",newday)
+		}.disposed(by: disposeBag)
+		requestData.startTime.observeOn(MainScheduler.instance)
+			.subscribe{ str in
+			temp.startTime = str
+		}.disposed(by: disposeBag)
+		requestData.endTime.observeOn(MainScheduler.instance)
+			.subscribe{ str in
+				temp.endTime = str
+		}.disposed(by: disposeBag)
+		let t = timeToNoticeOption()
+		promiseArr.append([t.date!, t.day!, t.time!])
 		requestData.availableTimeList.append(temp)
-	
+		
 		requestData.date.onNext("")
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
 	}
-
+	
 	func tableViewBind() {
 		
 		timeStampTableView.estimatedRowHeight = CGFloat(70 * requestData.availableTimeList.count)
@@ -514,7 +554,14 @@ class AppointmentViewController: BaseViewController {
 			resultSelector: {$0 || $1 || $2})
 			.subscribe{ result in
 				self.addButton.isEnabled = !result.element!
-				self.addButton.backgroundColor = !result.element! ? .black : .white
+				self.addButton.backgroundColor = !result.element! ? .primaryOrange : .white
+				if !result.element! {
+					self.addButton.setTitleColor(.white, for: .normal)
+					self.addButton.layer.borderColor = UIColor.primaryOrange.cgColor
+				} else {
+					self.addButton.setTitleColor(.gray01, for: .normal)
+					self.addButton.layer.borderColor = UIColor.gray01.cgColor
+				}
 			}.disposed(by: disposeBag)
 	}
 	@objc func handleTap(recognizer: UITapGestureRecognizer){
@@ -527,7 +574,8 @@ extension AppointmentViewController: UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: TimeStampTableViewCell.registterId, for: indexPath) as? TimeStampTableViewCell else {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: TimeStampTableViewCell.registterId,
+																									 for: indexPath) as? TimeStampTableViewCell else {
 			return UITableViewCell()
 		}
 		cell.awakeFromNib()
@@ -565,6 +613,17 @@ extension AppointmentViewController: UITableViewDelegate {
 		
 		// Do any additional setup after loading the view.
 	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tabBarController?.tabBar.isHidden = true
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		tabBarController?.tabBar.isHidden = false
+	}
+
 }
 // MARK: - TableviewDelegate
 

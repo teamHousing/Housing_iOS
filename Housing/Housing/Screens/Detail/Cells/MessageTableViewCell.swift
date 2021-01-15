@@ -7,15 +7,26 @@
 
 import UIKit
 
+import RxMoya
+import RxSwift
+import RxCocoa
+import Moya
+
 class MessageTableViewCell: UITableViewCell {
 	
 	// MARK: - Property
 	let messageTableView = UITableView()
-	var id : Int = 1
+	let disposeBag = DisposeBag()
+	private let detailProvider = MoyaProvider<DetailService>(
+		plugins: [NetworkLoggerPlugin(verbose: true)]
+	)
+	private let requestId = promiseId.shared.id
+	
 	var status: [Int] = [0,1,2,3]
 	var userOrOwner = 3
 	var confirmedPromiseOption = ""
 	var rootViewController: UIViewController?
+	var checkToModify = 1
 	
 	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
@@ -33,7 +44,21 @@ class MessageTableViewCell: UITableViewCell {
 		)
 		return attributedString
 	}
-	
+	func loader() {
+		self.detailProvider.rx.request(.confirmDetail(id: requestId))
+			.asObservable()
+						.subscribe { (next) in
+							if next.statusCode == 200 {
+								do {
+									print("헤헿 성공")
+								} catch {
+									print(error)
+								}
+							}
+						} onError: { (error) in
+							print(error.localizedDescription)
+						}.disposed(by: disposeBag)
+	}
 	private func layout() {
 		self.contentView.then {
 			$0.backgroundColor = .primaryGray
@@ -178,7 +203,7 @@ extension MessageTableViewCell: UITableViewDataSource {
 					context: "작성하신 일정 중 가능한 일자가 없어요.😂\n일자와 시간대를 수정 혹은 추가해주세요!"
 				)
 				cell.transitionButton.addTarget(self,
-																				action: #selector(didTapConfirmButton(_:)),
+																				action: #selector(didTapModifyButton(_:)),
 																				for: .touchUpInside)
 				cell.transitionButton.setTitle("약속 수정하기", for: .normal)
 			}
@@ -213,7 +238,7 @@ extension MessageTableViewCell: UITableViewDataSource {
 	@objc
 	func didTapConfirmButton(_ sender: UIButton) {
 		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
-
+		
 		let viewcontroller = storyboard.instantiateViewController(
 			withIdentifier: "ConfirmViewController")
 		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
@@ -229,12 +254,15 @@ extension MessageTableViewCell: UITableViewDataSource {
 	
 	@objc
 	func didTapFinishButton(_ sender: UIButton) {
-		self.status.append(4)
-		self.messageTableView.reloadData()
-		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(
-			withIdentifier: "MessageViewController")
-		viewcontroller.reloadInputViews()
+		self.loader()
+		self.messageTableView.setNeedsDisplay()
+	}
+	
+	@objc func didTapModifyButton(_ sender: UIButton) {
+		let viewcontroller = AppointmentViewController()
+		viewcontroller.issue_id = self.requestId
+		viewcontroller.checkToModify = self.checkToModify
+		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	
 }

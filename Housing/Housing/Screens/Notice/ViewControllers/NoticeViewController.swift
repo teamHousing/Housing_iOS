@@ -14,10 +14,14 @@ import SwiftKeychainWrapper
 final class NoticeViewController: BaseViewController {
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var noticeCollectionView: UICollectionView!
+    @IBOutlet weak var makeVerifyNumberButton: UIBarButtonItem!
+    
     
 	//MARK:- Property
 	var houseData: HouseInfo?
 	var noticeData: [Notice] = []
+	var id: Int?
+	let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost) ?? 0
 	
 	// MARK: - Service
 	private let noticeProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
@@ -27,17 +31,17 @@ final class NoticeViewController: BaseViewController {
 		super.viewDidLoad()
 		initLayout()
 		ownerProfile()
-//		notice()
+        
 		pullToRefresh(collectionview: noticeCollectionView)
 		noticeCollectionView.delegate = self
 		noticeCollectionView.dataSource = self
 	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		pullToRefresh(collectionview: noticeCollectionView)
 		ownerProfile()
-
 	}
-
+	
 	//MARK:- Helper
 	func ownerProfile() {
 		noticeProvider.rx.request(.profile).asObservable().subscribe(onNext: { response in
@@ -64,14 +68,18 @@ final class NoticeViewController: BaseViewController {
 			
 		}).disposed(by: disposeBag)
 	}
-	
-	private func initLayout() {
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-		self.navigationController?.navigationBar.shadowImage = UIImage()
-	}
-	
-	//MARK:- Component(Action)
-	@IBAction func writeButtonDidTap(_ sender: Any) {
+    
+    private func initLayout() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        if isHost != 0 {
+            makeVerifyNumberButton.image = UIImage(named: "")
+        }
+    }
+    
+    //MARK:- Component(Action)
+    @IBAction func writeButtonDidTap(_ sender: Any) {
 		let viewController = AddNoticeViewController()
 		viewController.houseInfoID = houseData?.id
 		navigationController?.pushViewController(viewController, animated: true)
@@ -164,6 +172,11 @@ extension NoticeViewController: UICollectionViewDelegate {
 				headerView.houseInfo()
 				headerView.headerlayout()
                 headerView.noticeLabel.text = "( \(String(noticeData.count)) )"
+                
+                if isHost != 0 {
+                    headerView.settingButton.isHidden = true
+                    headerView.writeButton.isHidden = true
+                }
 				
 				return headerView
 			}

@@ -20,10 +20,10 @@ enum PromiseService {
 	case homePromiseTimeList(id : Int)
 	case homePromiseConfirm(id: Int, promise_option: [String])
 	case homePromiseHostModify(id: Int)
-	case homePromiseGuestModify(id: Int, promise_option: [String])
+	case homePromiseGuestModify(id: Int, promise_option: [[String]])
 	case homePromiseComplete(id: Int)
 	case homePromiseImageUpload(issue_img : [UIImage])
-	case homePromiseGuestRegister(id : Int, promise_option:[noticeOption])
+	case homePromiseGuestRegister(id : Int, promise_option:[[String]])
 }
 
 extension PromiseService: TargetType {
@@ -40,8 +40,8 @@ extension PromiseService: TargetType {
 		switch self {
 		case .homePromiseComplete:
 			return "/communication/"
-		case let .homePromise(id, _,_,_,_,_):
-			return "/communication/1"
+		case let .homePromise(id,_,_,_,_,_):
+			return "/communication/\(id)"
 		case let .homePromiseTimeList(id):
 			return "/communication/\(id)/promise-option"
 		case let .homePromiseConfirm(id, _):
@@ -49,7 +49,7 @@ extension PromiseService: TargetType {
 		case let .homePromiseHostModify(id):
 			return "/communication/\(id)/request/promise-option"
 		case let .homePromiseGuestModify(id, _):
-			return "/communication/\(id)/request/promise-option"
+			return "/communication/\(id)/promise-option"
 		case .homePromiseImageUpload(_) :
 			return "/communication/image"
 		case let .homePromiseGuestRegister(id, _) :
@@ -79,7 +79,12 @@ extension PromiseService: TargetType {
 	
 	var task: Task {
 		switch self {
-		case .homePromise(id : let id, is_promise: let is_promise, category: let category, issue_title: let issue_title, issue_contents: let issue_contents, requested_term: let requested_term):
+		case .homePromise(id: let id,
+											is_promise: let is_promise,
+											category: let category,
+											issue_title: let issue_title,
+											issue_contents: let issue_contents,
+											requested_term: let requested_term):
 			return .requestCompositeParameters(bodyParameters: ["is_promise": is_promise,
 																													"category": category,
 																													"issue_title": issue_title,
@@ -87,7 +92,7 @@ extension PromiseService: TargetType {
 																													"requested_term": requested_term],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
-		case .homePromiseTimeList(id: let id):
+		case .homePromiseTimeList:
 			return .requestPlain
 
 		case .homePromiseConfirm(id: let id,
@@ -97,7 +102,7 @@ extension PromiseService: TargetType {
 			return .requestCompositeParameters(bodyParameters: ["promise_option": promise_option],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
-		case .homePromiseHostModify(id: let id):
+		case .homePromiseHostModify:
 			return .requestPlain
 			
 		case .homePromiseGuestModify(id: let id, promise_option: let promise_option):
@@ -112,15 +117,15 @@ extension PromiseService: TargetType {
 		case .homePromiseImageUpload(issue_img : let issue_img) :
 			let data: [Data] = issue_img.map{ $0.jpegData(compressionQuality: 1.0)!}
 			let multipart : [MultipartFormData] = data.map{ element in
-				return MultipartFormData(provider: .data(element), name: "issue_img", fileName: "file.jpeg",mimeType: "image/jpeg")
+				return MultipartFormData(provider: .data(element), name: "issue_img", fileName: "file.jpeg", mimeType: "image/jpeg")
 			}
 			dump(multipart)
 
 			return .uploadMultipart(multipart)
 			
 		case .homePromiseGuestRegister(id: let id, promise_option: let promise_option):
-			let dict = promise_option.map{["date" : $0.date, "day" : $0.day , "time" : $0.time]}
-			return .requestCompositeParameters(bodyParameters: ["promise_option": dict],
+			//let dict = promise_option.map{["date" : $0.date, "day" : $0.day , "time" : $0.time]}
+			return .requestCompositeParameters(bodyParameters: ["promise_option": promise_option],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
 		}

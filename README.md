@@ -9,8 +9,6 @@ HOUSING
 ```
 
 <br/>
-<br/>
-<br/>
 
 ## 목차
 
@@ -25,7 +23,6 @@ HOUSING
 9. [깃 전략](https://github.com/teamHousing/Housing_iOS/wiki/git-branch-strategy)
 10. [새롭게 알게 된 것](#새롭게-알게-된-것)
 
-<br/>
 
 ### 개발환경 및 사용한 라이브러리
 
@@ -54,7 +51,7 @@ HOUSING
 | :---------: | :---------------------: | :----: | :-------: | :------------: |
 |  스플래시   |        스플래시         |  준현  |     ✅     |       ✅        |
 |   로그인    |         로그인          |  민제  |     ✅     |       ✅        |
-|  회원가입   |        초대 인증        |  민제  |      ✅     |        ✅        |
+|  회원가입   |        초대 인증        |  민제  |           |                |
 |             |        회원가입         |  민제  |     ✅     |       ✅        |
 |  소통하기   |        소통하기         |  주은  |     ✅     |       ✅        |
 |             |      소통하기 상세      |  한솔  |     ✅     |       ✅        |
@@ -81,7 +78,7 @@ HOUSING
 |             |      공지사항 작성      |  태훈  |     ✅     |       ✅        |
 |             |     초대 번호 생성      |  태훈  |     ✅     |       ✅        |
 
-<br/>
+
 
 ### 핵심기능 구현 방법
 
@@ -96,7 +93,6 @@ HOUSING
 3. 초대 번호 생성
 
    
-<br/>
 
 ### Extension을 통해 작성한 메소드 설명
 
@@ -115,15 +111,12 @@ HOUSING
 | UIDatePicker+             | DatePicker로 텍스트 컬러 넣기          |
 | UIImageView+              | URL로 이미지 넣기                      |
 
-<br/>
-
 ### 💡새롭게 알게 된 것
 
 > 곽민제
 
 #### CollectionView Cell에 Shadow를 넣는 방법에 대해 알게 되었습니다😋
 #### 
-
 > ```
 > extension CALayer {
 > func applyShadow(
@@ -156,7 +149,41 @@ HOUSING
 > 	}
 > ```
 
+
 <br/>
+
+
+> 김주은
+
+#### Expandable TableView를 만드는 법을 알게 되었어요👩‍💻
+#### 
+
+> ```
+>extension CommunicationViewController: UITableViewDelegate {
+>	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+>		if indexPath.row == 0 {
+>			if tableViewData[indexPath.section].opened == true {
+>				tableViewData[indexPath.section].opened = false
+>				communicationTableView.backgroundColor = .primaryGray
+>				let sections = IndexSet(integer: indexPath.section)
+>				tableView.reloadSections(sections, with: .none)
+>			} else {
+>				tableViewData[indexPath.section].opened = true
+>				communicationTableView.backgroundColor = .primaryGray
+>				let sections = IndexSet(integer: indexPath.section)
+>				tableView.reloadSections(sections, with: .none) 
+>			}
+>			communicationTableView.reloadData()
+>		} else {
+>			let viewController = DetailViewController()
+>			viewController.requestId = >tableViewData[indexPath.section].sectionData[indexPath.row-1].id
+>			navigationController?.pushViewController(viewController, animated: true)
+>		}
+>	}
+>}
+>}
+> ```
+
 
 ### 팀원 역할 및 소개
 

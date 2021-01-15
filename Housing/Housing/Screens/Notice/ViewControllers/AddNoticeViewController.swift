@@ -132,7 +132,8 @@ class AddNoticeViewController: BaseViewController{
 		self.view.backgroundColor = .white
 		self.view.addSubview(noticeScroll)
 		noticeScroll.snp.makeConstraints{
-			$0.edges.equalToSuperview()
+			$0.top.equalTo(view.safeAreaLayoutGuide)
+			$0.leading.trailing.bottom.equalToSuperview()
 		}
 		noticeScroll.addSubview(contentView)
 		contentView.snp.makeConstraints{
@@ -378,7 +379,7 @@ class AddNoticeViewController: BaseViewController{
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
 		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
-		temp.endTime = temp.startTime.replacingOccurrences(of: "시", with: "")
+		temp.endTime = temp.endTime.replacingOccurrences(of: "시", with: "")
 		if temp.startTime.hasPrefix("오전") {
 			temp.startTime = temp.startTime.replacingOccurrences(of: "오전 ", with: "")
 		}

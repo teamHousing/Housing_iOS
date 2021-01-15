@@ -55,7 +55,7 @@ class CameraWorkViewController: UIViewController{
 		$0.collectionViewLayout = layout
 	}
 	private let nextStep = UIButton().then{
-		$0.backgroundColor = .primaryBlack
+		$0.backgroundColor = .primaryOrange
 		$0.setTitle("다음 단계", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
 		$0.setRounded(radius: 25)
@@ -184,6 +184,16 @@ class CameraWorkViewController: UIViewController{
 		layout()
 		collectionViewConfig()
 		// Do any additional setup after loading the view.
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tabBarController?.tabBar.isHidden = true
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		tabBarController?.tabBar.isHidden = false
 	}
 }
 

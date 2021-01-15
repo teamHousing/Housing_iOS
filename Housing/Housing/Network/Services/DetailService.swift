@@ -12,6 +12,7 @@ import SwiftKeychainWrapper
 
 enum DetailService {
 	case homeDetail(id: Int)
+	case confirmDetail(id: Int)
 }
 
 extension DetailService: TargetType {
@@ -28,13 +29,17 @@ extension DetailService: TargetType {
 		switch self {
 		case let .homeDetail(id):
 			return "/communication/detail/\(id)"
+		case let .confirmDetail(id):
+			return "/communication/\(id)/complete/promise"
 		}
 	}
 	
 	var method: Moya.Method {
 		switch self {
 		case .homeDetail:
-		return .get
+			return .get
+		case .confirmDetail:
+			return .get
 		}
 	}
 	
@@ -45,6 +50,8 @@ extension DetailService: TargetType {
 	var task: Task {
 		switch self {
 		case .homeDetail(id: let id):
+			return .requestPlain
+		case .confirmDetail(id: let id):
 			return .requestPlain
 		}
 	}
