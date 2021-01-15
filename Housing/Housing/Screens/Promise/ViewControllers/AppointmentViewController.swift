@@ -488,10 +488,10 @@ class AppointmentViewController: BaseViewController {
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
 			print(str)
 			let day = String(str.element!.split(separator: " ")[0])
-			let date = String(str.element!.split(separator: " ")[1])
+			let date = String(str.element!.split(separator: "-")[1])
 			temp.date = date
 			
-			let newday = day.replacingOccurrences(of: "-", with: ". ")
+			let newday = day.replacingOccurrences(of: "", with: ". ")
 			temp.day = newday
 		}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
