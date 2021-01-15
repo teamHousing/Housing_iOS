@@ -103,7 +103,7 @@ final class CalendarViewController: BaseViewController {
 
 	// MARK: - Provider
 	
-	let calendarProvider = MoyaProvider<CalendarService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	let calendarProvider = MoyaProvider<CalendarService>()
 	
 	// MARK: - Life Cycle
 	

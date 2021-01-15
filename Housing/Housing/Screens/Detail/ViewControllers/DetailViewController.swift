@@ -33,9 +33,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 	let disposeBag = DisposeBag()
 	var idValue = promiseId.shared
-	private let detailProvider = MoyaProvider<DetailService>(
-		plugins: [NetworkLoggerPlugin(verbose: true)]
-	)
+	private let detailProvider = MoyaProvider<DetailService>()
 	private let coverSafeAreaView = UIView().then {
 		$0.backgroundColor = .white
 	}

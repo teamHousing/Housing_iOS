@@ -111,7 +111,7 @@ class InfoViewController: BaseViewController {
 	var isHost: Int?
 	var number: Int?
 
-	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let userProvider = MoyaProvider<UserService>()
 
 	
 	override func viewDidLoad() {

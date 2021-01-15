@@ -18,7 +18,7 @@ class AppointmentViewController: BaseViewController {
 	var requestData = RequestDataModel.shared
 	var registerID: Int?
 	var checkToModify = 0
-	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let promiseProvider = MoyaProvider<PromiseService>()
 
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()

@@ -24,7 +24,7 @@ final class NoticeViewController: BaseViewController {
 	let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost) ?? 0
 	
 	// MARK: - Service
-	private let noticeProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let noticeProvider = MoyaProvider<NoticeService>()
 	
 	//MARK:- Lifecycle
 	override func viewDidLoad() {

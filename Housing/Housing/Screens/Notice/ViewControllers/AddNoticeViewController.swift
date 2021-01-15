@@ -12,7 +12,7 @@ import Moya
 class AddNoticeViewController: BaseViewController{
 	// MARK: - Component
 	var requestData = RequestDataModel.shared
-	private let NoticeProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let NoticeProvider = MoyaProvider<NoticeService>()
 	var houseInfoID: Int?
 	private let noticeScroll = UIScrollView()
 	private let contentView = UIView()

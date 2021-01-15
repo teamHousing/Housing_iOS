@@ -21,9 +21,7 @@ class AddedImageTableViewCell: UITableViewCell {
 	var imageURL: [String] = []
 	var id = promiseId.shared.id
 	
-	private let detailProvider = MoyaProvider<DetailService>(
-		plugins: [NetworkLoggerPlugin(verbose: true)]
-	)
+	private let detailProvider = MoyaProvider<DetailService>()
 	let disposeBag = DisposeBag()
 	let addedImageCollectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
