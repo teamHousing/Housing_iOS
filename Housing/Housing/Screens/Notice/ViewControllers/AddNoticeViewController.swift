@@ -13,6 +13,7 @@ class AddNoticeViewController: BaseViewController{
 	// MARK: - Component
 	var requestData = RequestDataModel.shared
 	private let userProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	var houseInfoID: Int?
 	private let noticeScroll = UIScrollView()
 	private let contentView = UIView()
 	private let backgroundLabel = UILabel().then{
@@ -400,7 +401,7 @@ class AddNoticeViewController: BaseViewController{
 
 		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a)
 		let noticeArr: [noticeOption] = [noticetime]
-		userProvider.rx.request(.profileNoticeAdmit(house_info_id: 1, notice_title: self.noticeTitle.text ?? "", notice_contents: self.noticeDescription.text ?? "" , notice_option: noticeArr)).asObservable()
+		userProvider.rx.request(.profileNoticeAdmit(house_info_id: 2, notice_title: self.noticeTitle.text ?? "", notice_contents: self.noticeDescription.text ?? "" , notice_option: noticeArr)).asObservable()
 			.subscribe { (response) in
 				if response.statusCode == 200 {
 					do {

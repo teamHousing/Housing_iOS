@@ -38,6 +38,7 @@ final class CommunicationViewController: BaseViewController {
 	var incompleteLength = 0
 	var completeLength = 1
 	var mode = 3
+	let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost) ?? 0
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData: [DetailData] = []
 	private var comDetailCellData: [DetailData] = []
@@ -45,8 +46,7 @@ final class CommunicationViewController: BaseViewController {
 	//MARK: - LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost)
-		determineType(isHost: isHost!)
+		determineType(isHost: isHost)
 		networkForCommunication()
 		layoutNavigationBar()
 		configHeaderView()
@@ -94,8 +94,8 @@ final class CommunicationViewController: BaseViewController {
 		navigationItem.rightBarButtonItem = naviButton
 
 		navigationController?.navigationBar.shadowImage = UIImage()
-		navigationController?.navigationBar.isTranslucent = false
-		navigationController?.navigationBar.tintColor = .black
+		navigationController?.navigationBar.isTranslucent = true
+		//도와줘 준현군
 	}
 	
 	private func makeCellGrey(cell : UITableViewCell) {
