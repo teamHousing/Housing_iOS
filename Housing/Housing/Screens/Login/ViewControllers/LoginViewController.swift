@@ -51,7 +51,7 @@ final class LoginViewController: BaseViewController {
 			LoginButton.layer.cornerRadius = 0.5 * LoginButton.bounds.size.height
 			LoginButton.isEnabled = false
 		} else {
-			LoginButton.backgroundColor = .primaryBlack
+			LoginButton.backgroundColor = .primaryOrange
 			LoginButton.layer.cornerRadius = 0.5 * LoginButton.bounds.size.height
 			LoginButton.isEnabled = true
 		}

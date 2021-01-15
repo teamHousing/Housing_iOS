@@ -311,7 +311,7 @@ class InfoViewController: BaseViewController {
 		}
 		if !name && !age && !id && !password && !certification {
 			nextButton.isEnabled = true
-			nextButton.backgroundColor = .primaryBlack
+			nextButton.backgroundColor = .primaryOrange
 		} else {
 			nextButton.isEnabled = false
 			nextButton.backgroundColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1)
