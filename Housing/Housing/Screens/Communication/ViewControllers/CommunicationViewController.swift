@@ -141,8 +141,8 @@ final class CommunicationViewController: BaseViewController {
 	
 	@objc
 	private func settingButtonDidTap() {
-
-		print(#function)
+		let view = PromiseViewController()
+		navigationController?.pushViewController(view, animated: true)
 	}
 }
 
