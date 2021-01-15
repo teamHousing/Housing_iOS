@@ -228,7 +228,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 				self.detailHeaderView.snp.makeConstraints{
 					$0.height.equalTo(160+self.contextHeight()*22)
 				}
-				self.detailHeaderView.reloadInputViews()
+				self.headerView.reloadInputViews()
 			}).disposed(by: disposeBag)
 	}
 	
