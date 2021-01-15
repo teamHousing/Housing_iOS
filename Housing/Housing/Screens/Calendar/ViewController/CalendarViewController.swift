@@ -94,7 +94,7 @@ final class CalendarViewController: BaseViewController {
 	
 	// MARK: - Variable
 	
-	var dic: [String : [FSCalendarModel]] = [:]
+	var calendarDictionary: [String : [FSCalendarModel]] = [:]
 	var day: String?
 	let dateFormatter = DateFormatter()
 	let dateFormatterForNotice = DateFormatter()
@@ -197,7 +197,7 @@ final class CalendarViewController: BaseViewController {
 																	time: notice.time,
 																	title: notice.title,
 																	contents: notice.contents)
-			dic["\(when)"] = [model]
+			calendarDictionary["\(when)"] = [model]
 		}
 		for promise in data.issue {
 			let when = "\(promise.year).\(promise.month).\(promise.day)"
@@ -208,10 +208,10 @@ final class CalendarViewController: BaseViewController {
 																	time: promise.time,
 																	title: promise.title,
 																	contents: promise.contents)
-			if dic[when]?.count == 0 {
-				dic["\(when)"] = [model]
+			if calendarDictionary[when]?.count == 0 {
+				calendarDictionary["\(when)"] = [model]
 			} else {
-				dic[when]?.append(model)
+				calendarDictionary[when]?.append(model)
 			}
 		}
 		
@@ -236,7 +236,7 @@ extension CalendarViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView,
 											didSelectItemAt indexPath: IndexPath) {
 		guard let day = day else { return }
-		guard let promise: [FSCalendarModel] = dic[day] else { return }
+		guard let promise: [FSCalendarModel] = calendarDictionary[day] else { return }
 		if promise[indexPath.row].isNotice == 0 {
 			let viewController = DetailViewController()
 			viewController.requestId = promise[indexPath.row].id
@@ -333,13 +333,13 @@ extension CalendarViewController: UICollectionViewDataSource {
 		guard let day = day else {
 			return 0
 		}
-		if dic[day]?.count == nil {
+		if calendarDictionary[day]?.count == nil {
 			return 1
 		} else {
-			if dic[day]?.count == 1 {
+			if calendarDictionary[day]?.count == 1 {
 				collectionView.backgroundColor = .primaryGray
 			}
-			return dic[day]?.count ?? 0
+			return calendarDictionary[day]?.count ?? 0
 		}
 	}
 	
@@ -348,11 +348,11 @@ extension CalendarViewController: UICollectionViewDataSource {
 		guard let day = day else {
 			return UICollectionViewCell()
 		}
-		if dic[day]?.count == nil {
+		if calendarDictionary[day]?.count == nil {
 			let cell: EmptyCalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 			return cell
 		} else {
-			guard let promise: [FSCalendarModel] = dic[day] else { return UICollectionViewCell() }
+			guard let promise: [FSCalendarModel] = calendarDictionary[day] else { return UICollectionViewCell() }
 			if promise[indexPath.row].isNotice == 0 {
 				let cell: CalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 				cell.calendar = promise[indexPath.row]
@@ -378,10 +378,10 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 		guard let day = day else {
 			return CGSize(width: 0, height: 0)
 		}
-		if dic[day]?.count == nil {
+		if calendarDictionary[day]?.count == nil {
 			return CGSize(width: view.frame.width, height: view.frame.height - 558)
 		} else {
-			guard let promise: [FSCalendarModel] = dic[day] else { return CGSize(width: 0, height: 0) }
+			guard let promise: [FSCalendarModel] = calendarDictionary[day] else { return CGSize(width: 0, height: 0) }
 			if promise[indexPath.row].isNotice == 0 {
 				return CGSize(width: view.frame.width, height: 112)
 			} else {
@@ -406,7 +406,7 @@ extension CalendarViewController: FSCalendarDelegate {
 	func calendar(_ calendar: FSCalendar,
 								numberOfEventsFor date: Date) -> Int {
 		let calendar = dateFormatter.string(from: date)
-		return dic[calendar]?.count ?? 0
+		return calendarDictionary[calendar]?.count ?? 0
 	}
 }
 
@@ -418,7 +418,7 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
 								appearance: FSCalendarAppearance,
 								eventDefaultColorsFor date: Date) -> [UIColor]? {
 		let key = dateFormatter.string(from: date)
-		let promise: [FSCalendarModel] = dic[key] ?? []
+		let promise: [FSCalendarModel] = calendarDictionary[key] ?? []
 		var color: [UIColor] = []
 		for atomic in promise {
 			if atomic.isNotice == 0 {
@@ -440,7 +440,7 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
 								appearance: FSCalendarAppearance,
 								eventSelectionColorsFor date: Date) -> [UIColor]? {
 		let key = dateFormatter.string(from: date)
-		let promise: [FSCalendarModel] = dic[key] ?? []
+		let promise: [FSCalendarModel] = calendarDictionary[key] ?? []
 		var color: [UIColor] = []
 		for atomic in promise {
 			if atomic.isNotice == 0 {

@@ -4,8 +4,8 @@
 ```
 🍎 SOPT 27th APPJAM 🍎
 
-HOUSING 
-- 
+HOUSING iOS
+- 2020.12.26 ~ 2021.01.16
 ```
 
 <br/>
@@ -39,7 +39,7 @@ HOUSING
 | [RxKeyboard](https://github.com/RxSwiftCommunity/RxKeyboard) |         키보드 동적 사용         | SPM  |
 | [Moya](https://github.com/Moya/Moya)                         |          서버 통신              | SPM  |
 | [Lottie](https://github.com/airbnb/lottie-ios)               |          애니메이션 사용        | SPM  |
-
+| [SegementSlide](https://github.com/Jiar/SegementSlide) | 탭바 사용 | CocoaPod |
 
 <br>
 
@@ -55,7 +55,7 @@ HOUSING
 | :---------: | :---------------------: | :----: | :-------: | :------------: |
 |  스플래시   |        스플래시         |  준현  |     ✅     |       ✅        |
 |   로그인    |         로그인          |  민제  |     ✅     |       ✅        |
-|  회원가입   |        초대 인증        |  민제  |           |                |
+|  회원가입   |        초대 인증        |  민제  |     ✅     |       ✅        |
 |             |        회원가입         |  민제  |     ✅     |       ✅        |
 |  소통하기   |        소통하기         |  주은  |     ✅     |       ✅        |
 |             |      소통하기 상세      |  한솔  |     ✅     |       ✅        |
@@ -88,13 +88,35 @@ HOUSING
 
 1. 캘린더
 
+   FSCalendar 를 이용해 개발을 진행했습니다.
+
+   구현 중 가장 중요하다 생각하는 부분은 캘린더 내 정보 관리부분인데요.
+
+   서버로부터 날짜 정보를 받아와 Dictionary형태로 만들어 저장을 해두고([String : [CalendarModel]])
+
+   사용자에게 해당하는 날짜에 정보가 있는경우 반복문을 돌리는것보다 효율적으로 정보 호출을 할수가 있었습니다.
+
+   ~~~swift
+   // 캘린더 정보 저장을 위한 변수
+   var calendarDictionary: [String : [FSCalendarModel]] = [:]
    
-
-2. 상세 정보 표기
-
+   guard let promise: [FSCalendarModel] = calendarDictionary[day] else { return UICollectionViewCell() }
+   if promise[indexPath.row].isNotice == 0 {
+     let cell: CalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
+   	cell.calendar = promise[indexPath.row]
+   	cell.fetchCalendar()
+   	cell.fetchCategory()
+   	cell.fetchTime()
+   	return cell
+   } else {
+   	let cell: NoticeCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
+   	cell.calendar = promise[indexPath.row]
+   	cell.fetchCalendar()
+   	cell.fetchTime()
+   	return cell
+   }
    
-
-3. 초대 번호 생성
+   ~~~
 
    
 
@@ -122,37 +144,40 @@ HOUSING
 #### CollectionView Cell에 Shadow를 넣는 방법에 대해 알게 되었습니다😋
 #### 
 > ```
->extension CALayer {
->	func applyShadow(
->		color: UIColor = .black,
->		alpha: Float = 0.1,
->		x: CGFloat = 0,
->		y: CGFloat = 0,
->		blur: CGFloat = 8
->	) {
->		shadowColor = color.cgColor
->		shadowOpacity = alpha
->		shadowOffset = CGSize(width: x, height: y)
->		shadowRadius = blur / 1.0
->	}
->}
->
->func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) ->
->UICollectionViewCell {
->	guard let cell = collectionView.dequeueReusableCell(
->					withReuseIdentifier: "CollectionViewCell",
->					for: indexPath) as? CollectionViewCell
->	else {
->		return UICollectionViewCell()
->	}
->	// collectionViewCell에 uiView outlet을 추가했습니다.
->	cell.containerView.layer.applyShadow()
->	cell.backgroundColor = .white
->	cell.contentView.backgroundColor = UIColor.white
->	
->	return cell
->}
+> extension CALayer {
+> 	func applyShadow(
+> 		color: UIColor = .black,
+> 		alpha: Float = 0.1,
+> 		x: CGFloat = 0,
+> 		y: CGFloat = 0,
+> 		blur: CGFloat = 8
+> 	) {
+> 		shadowColor = color.cgColor
+> 		shadowOpacity = alpha
+> 		shadowOffset = CGSize(width: x, height: y)
+> 		shadowRadius = blur / 1.0
+> 	}
+> }
+> 
+> func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) ->
+> UICollectionViewCell {
+> 	guard let cell = collectionView.dequeueReusableCell(
+> 					withReuseIdentifier: "CollectionViewCell",
+> 					for: indexPath) as? CollectionViewCell
+> 	else {
+> 		return UICollectionViewCell()
+> 	}
+> 	// collectionViewCell에 uiView outlet을 추가했습니다.
+> 	cell.containerView.layer.applyShadow()
+> 	cell.backgroundColor = .white
+> 	cell.contentView.backgroundColor = UIColor.white
+> 
+> 	return cell
+> }
+> ```
 
+> ```
+> 
 > ```
 
 
@@ -162,8 +187,6 @@ HOUSING
 > 김주은
 
 #### Expandable TableView를 만드는 법을 알게 되었어요👩‍💻
-#### 
-
 > ```
 >extension CommunicationViewController: UITableViewDelegate {
 >	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

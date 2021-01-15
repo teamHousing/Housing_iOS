@@ -84,8 +84,6 @@
 		D1B444E7259F09DD005C2C68 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B444E6259F09DD005C2C68 /* Detail.storyboard */; };
 		D1B444EA259F09FF005C2C68 /* Communication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B444E9259F09FF005C2C68 /* Communication.storyboard */; };
 		D1B444EE259F0A10005C2C68 /* CommunicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B444ED259F0A10005C2C68 /* CommunicationViewController.swift */; };
-		D1B444FA259F0A9E005C2C68 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B444F9259F0A9E005C2C68 /* Home.storyboard */; };
-		D1B444FF259F0B13005C2C68 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B444FE259F0B13005C2C68 /* HomeViewController.swift */; };
 		D1B44505259F0FCE005C2C68 /* StoryboardStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B44504259F0FCE005C2C68 /* StoryboardStorage.swift */; };
 		D1B44508259F1447005C2C68 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B44507259F1447005C2C68 /* BaseViewController.swift */; };
 		D1B4450E259F1D4A005C2C68 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B4450D259F1D4A005C2C68 /* Login.storyboard */; };
@@ -202,8 +200,6 @@
 		D1B444E6259F09DD005C2C68 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		D1B444E9259F09FF005C2C68 /* Communication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Communication.storyboard; sourceTree = "<group>"; };
 		D1B444ED259F0A10005C2C68 /* CommunicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationViewController.swift; sourceTree = "<group>"; };
-		D1B444F9259F0A9E005C2C68 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		D1B444FE259F0B13005C2C68 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D1B44504259F0FCE005C2C68 /* StoryboardStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardStorage.swift; sourceTree = "<group>"; };
 		D1B44507259F1447005C2C68 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D1B4450D259F1D4A005C2C68 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -436,15 +432,6 @@
 			path = Housing;
 			sourceTree = "<group>";
 		};
-		D1B444C6259F0857005C2C68 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				D1B444D6259F093C005C2C68 /* ViewControllers */,
-				D1B444D5259F0935005C2C68 /* StoryBoards */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		D1B444C7259F088C005C2C68 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,22 +534,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		D1B444D5259F0935005C2C68 /* StoryBoards */ = {
-			isa = PBXGroup;
-			children = (
-				D1B444F9259F0A9E005C2C68 /* Home.storyboard */,
-			);
-			path = StoryBoards;
-			sourceTree = "<group>";
-		};
-		D1B444D6259F093C005C2C68 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				D1B444FE259F0B13005C2C68 /* HomeViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		D1B444D7259F0948005C2C68 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,7 +583,6 @@
 				D1B444C9259F08AE005C2C68 /* Calendar */,
 				D1B444C8259F089F005C2C68 /* Detail */,
 				D1B444C7259F088C005C2C68 /* Communication */,
-				D1B444C6259F0857005C2C68 /* Home */,
 				D1B65A042598C65900A9A7CB /* Splash */,
 				D1B44507259F1447005C2C68 /* BaseViewController.swift */,
 				D12D6DE525A1C92D00E9A43A /* TabBarViewController.swift */,
@@ -815,7 +785,6 @@
 				D1B4450E259F1D4A005C2C68 /* Login.storyboard in Resources */,
 				D1DABD1225B118B1003193F6 /* splash.json in Resources */,
 				D19179EF259890A70035AF74 /* Assets.xcassets in Resources */,
-				D1B444FA259F0A9E005C2C68 /* Home.storyboard in Resources */,
 				D1B444E7259F09DD005C2C68 /* Detail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -885,7 +854,6 @@
 				D131189E259B6BE300897DF4 /* UIViewController+.swift in Sources */,
 				D1B44505259F0FCE005C2C68 /* StoryboardStorage.swift in Sources */,
 				CC42D06225A74E54002A461D /* MessageDetailTableViewCell.swift in Sources */,
-				D1B444FF259F0B13005C2C68 /* HomeViewController.swift in Sources */,
 				D1CF647B25AC26A8009A39EC /* MoyaNetworkLogger.swift in Sources */,
 				DAB322B125A80E3B0098175E /* TimeStampTableViewCell.swift in Sources */,
 				D131189B259B6BD800897DF4 /* UIView+.swift in Sources */,
@@ -1079,7 +1047,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1102,7 +1070,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 36BC59Q598;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

@@ -42,7 +42,12 @@ final class CommunicationViewController: BaseViewController {
 	private var tableViewData = [cellData]()
 	private var incomDetailCellData: [DetailData] = []
 	private var comDetailCellData: [DetailData] = []
-	private let userProvider = MoyaProvider<CommunicationService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let userProvider = MoyaProvider<CommunicationService>()
+	private lazy var leftButton = UIBarButtonItem(image: UIImage(),
+																								style: .done,
+																								target: self,
+																								action: #selector(hiddenBarButtonDidTap))
+	
 	//MARK: - LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -52,15 +57,29 @@ final class CommunicationViewController: BaseViewController {
 		configHeaderView()
 		configTableView()
 		pullToRefresh(tableview: communicationTableView)
-
+		
 		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)
+		navigationItem.leftBarButtonItem = leftButton
 	}
 	
-	func dataSetup() {
+	@objc
+	private func hiddenBarButtonDidTap() {
+		let storyboard = UIStoryboard(name: StoryboardStorage.login,
+																	bundle: nil)
+		let viewcontroller = storyboard.instantiateViewController(
+			withIdentifier: "LoginViewController"
+		) as! LoginViewController
+		viewcontroller.isSignOut = true
+		viewcontroller.modalPresentationStyle = .fullScreen
+		KeychainWrapper.standard.removeAllKeys()
+		present(viewcontroller, animated: true)
+	}
+	
+	private func dataSetup() {
 		tableViewData = [cellData(opened: true,
-															sectionData: incomDetailCellData), /// incomplete
+															sectionData: incomDetailCellData),
 										 cellData(opened: true,
-															sectionData: comDetailCellData)] /// complete
+															sectionData: comDetailCellData)]
 	}
 	
 
@@ -349,7 +368,7 @@ extension CommunicationViewController: UITableViewDataSource {
 					contentCell.awakeFromNib()
 					return contentCell
 				}
-			} else if incompleteLength > 0 && completeLength == 0{
+			} else if incompleteLength > 0 && completeLength == 0 {
 				if indexPath.section == 0 { ///cell중에서도 incomplete부분.
 					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()

@@ -26,6 +26,7 @@ final class LoginViewController: BaseViewController {
 	
 	// MARK: - Service
 	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	var isSignOut: Bool = false
 	
 	//MARK:- Lifecycle
 	override func viewDidLoad() {
@@ -99,7 +100,7 @@ final class LoginViewController: BaseViewController {
 		userProvider.rx.request(.signin(email: idTextField.text ?? "",
 																		password: passwordTextField.text ?? ""))
 			.asObservable()
-			.subscribe { (next) in
+			.subscribe { [weak self] (next) in
 				if next.statusCode == 200 {
 					guard let token = (next.response?.allHeaderFields["Set-Cookie"] ?? "") as? String else {
 						return
@@ -124,13 +125,13 @@ final class LoginViewController: BaseViewController {
 						
 						KeychainWrapper.standard.set(cookie,
 																				 forKey: KeychainStorage.accessToken)
-						
-						let viewcontroller = TabBarViewController()
-						//						let p = PromiseViewController()
-						//						let viewcontroller = UINavigationController(rootViewController: p)
-						viewcontroller.modalPresentationStyle = .fullScreen
-						self.present(viewcontroller, animated: true)
-						
+						if ((self?.isSignOut) != nil) {
+							self?.dismiss(animated: true, completion: nil)
+						} else {
+							let viewcontroller = TabBarViewController()
+							viewcontroller.modalPresentationStyle = .fullScreen
+							self?.present(viewcontroller, animated: true)
+						}
 					} catch {
 						print(error)
 					}
@@ -138,16 +139,16 @@ final class LoginViewController: BaseViewController {
 				else if next.statusCode == 400 {
 					let alert = UIAlertController(title : "로그인 실패", message: "아이디나 비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
 					let action = UIAlertAction(title: "확인", style: .cancel) {(action) in
-						self.idTextField.text = nil
-						self.passwordTextField.text = nil
-						self.LoginButton.backgroundColor = UIColor(red: 219 / 255,
+						self?.idTextField.text = nil
+						self?.passwordTextField.text = nil
+						self?.LoginButton.backgroundColor = UIColor(red: 219 / 255,
 																											 green: 219 / 255,
 																											 blue: 219 / 255,
 																											 alpha: 1)
-						self.LoginButton.isEnabled = false
+						self?.LoginButton.isEnabled = false
 					}
 					alert.addAction(action)
-					self.present(alert, animated: false, completion: nil)
+					self?.present(alert, animated: false, completion: nil)
 				}
 			} onError: { (error) in
 				print(error.localizedDescription)
