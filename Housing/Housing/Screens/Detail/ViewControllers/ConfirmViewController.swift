@@ -16,8 +16,7 @@ import RxCocoa
 class ConfirmViewController: BaseViewController {
 	// MARK: - Property
 	private var idValue = promiseId.shared
-	private let userProvider = MoyaProvider<PromiseService>(
-		plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let userProvider = MoyaProvider<PromiseService>()
 	var id : Int = 1
 	var determineButtonState : [Bool] = []
 	var method : [CommunicationMethod] = []

@@ -16,7 +16,7 @@ import SwiftyJSON
 
 class AdditionalRequestViewController: BaseViewController {
 	// MARK: - Component
-	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let promiseProvider = MoyaProvider<PromiseService>()
 	var requestData = RequestDataModel.shared
 	let requestId = promiseId.shared.id
 	var imageIndex: Int?
