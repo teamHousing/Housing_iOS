@@ -132,7 +132,8 @@ class AddNoticeViewController: BaseViewController{
 		self.view.backgroundColor = .white
 		self.view.addSubview(noticeScroll)
 		noticeScroll.snp.makeConstraints{
-			$0.edges.equalToSuperview()
+			$0.top.equalTo(view.safeAreaLayoutGuide)
+			$0.leading.trailing.bottom.equalToSuperview()
 		}
 		noticeScroll.addSubview(contentView)
 		contentView.snp.makeConstraints{
