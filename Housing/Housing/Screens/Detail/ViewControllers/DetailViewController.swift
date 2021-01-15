@@ -39,7 +39,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 	private let coverSafeAreaView = UIView().then {
 		$0.backgroundColor = .white
 	}
-	lazy var optionButton = UIBarButtonItem(image: UIImage(named: "btnMenu"),
+	lazy var optionButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
 																					style: .done,
 																					target: self,
 																					action: #selector(optionButtonDidTap))
