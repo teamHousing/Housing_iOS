@@ -1080,6 +1080,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
+
 				DEVELOPMENT_TEAM = T2DNZQ8AY8;
 				INFOPLIST_FILE = Housing/Supports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1088,6 +1089,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
+
 				PRODUCT_BUNDLE_IDENTIFIER = kr.housing.xxx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

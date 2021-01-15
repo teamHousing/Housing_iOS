@@ -378,7 +378,7 @@ class AddNoticeViewController: BaseViewController{
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
 		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
-		temp.endTime = temp.startTime.replacingOccurrences(of: "시", with: "")
+		temp.endTime = temp.endTime.replacingOccurrences(of: "시", with: "")
 		if temp.startTime.hasPrefix("오전") {
 			temp.startTime = temp.startTime.replacingOccurrences(of: "오전 ", with: "")
 		}
