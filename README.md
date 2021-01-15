@@ -324,10 +324,8 @@ HOUSING iOS
 >				}
 >				self.detailHeaderView.reloadInputViews()
 >			}).disposed(by: disposeBag)
->
 >```
->
->
+
 > 김태훈
 
 #### Then과 Snapkit을 사용해서 UI를 만들었어요🎨

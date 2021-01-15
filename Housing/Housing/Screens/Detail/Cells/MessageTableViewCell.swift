@@ -146,6 +146,8 @@ extension MessageTableViewCell: UITableViewDataSource {
 																				action: #selector(didTapCalendarButton(_:)),
 																				for: .touchUpInside)
 				cell.transitionButton.setTitle("캘린더 보기", for: .normal)
+				cell.transitionButton.isUserInteractionEnabled = true
+				cell.transitionButton.backgroundColor = .primaryOrange
 			}
 			else if self.status[indexPath.row] == 2 {
 				cell.titleLabel.text = "약속 수정 요청을 보냈어요!"
@@ -184,6 +186,8 @@ extension MessageTableViewCell: UITableViewDataSource {
 				cell.transitionButton.addTarget(self,
 																				action: #selector(didTapCalendarButton(_:)),
 																				for: .touchUpInside)
+				cell.transitionButton.isUserInteractionEnabled = true
+				cell.transitionButton.backgroundColor = .primaryOrange
 				cell.transitionButton.setTitle("캘린더 보기", for: .normal)
 			}
 			else if self.status[indexPath.row] == 2 {
@@ -222,7 +226,7 @@ extension MessageTableViewCell: UITableViewDataSource {
 		if indexPath.row == self.status.count-1 {
 			cell.connectLineView.isHidden = true
 			if (cell.transitionButton.isHidden == false) {
-				cell.transitionButton.backgroundColor = .primaryBlack
+				cell.transitionButton.backgroundColor = .primaryOrange
 				cell.transitionButton.isUserInteractionEnabled = true
 			}
 		}
@@ -254,8 +258,7 @@ extension MessageTableViewCell: UITableViewDataSource {
 	func didTapFinishButton(_ sender: UIButton) {
 		self.loader()
 		sender.isEnabled = false
-		
-		self.messageTableView.setNeedsDisplay()
+		sender.backgroundColor = .gray01
 	}
 	
 	@objc func didTapModifyButton(_ sender: UIButton) {
