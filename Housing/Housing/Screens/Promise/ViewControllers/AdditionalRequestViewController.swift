@@ -4,17 +4,21 @@
 //
 //  Created by 김태훈 on 2021/01/05.
 //
+
+import UIKit
+
 import Then
 import SnapKit
 import RxSwift
 import Moya
 import RxCocoa
-import UIKit
+import SwiftyJSON
 
 class AdditionalRequestViewController: BaseViewController {
 	// MARK: - Component
 	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	var requestData = RequestDataModel.shared
+	let requestId = promiseId.shared.id
 	
 	private let mainLabel = UILabel().then {
 		$0.numberOfLines = 2
@@ -83,7 +87,7 @@ class AdditionalRequestViewController: BaseViewController {
 	private let nextStep = UIButton().then {
 		$0.setTitle("다음 단계", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
-		$0.backgroundColor = .black
+		$0.backgroundColor = .primaryOrange
 		$0.setRounded(radius: 25)
 	}
 	private let page = UIPageControl().then{
@@ -96,8 +100,22 @@ class AdditionalRequestViewController: BaseViewController {
 	
 	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
-		promiseProvider.rx.request(.homePromise(id: requestData.issueId, is_promise: requestData.isPromiseNeeded, category: requestData.cartegory, issue_title: requestData.title, issue_contents: requestData.discription, requested_term: requestData.editionalRequest)).asObservable()
+
+		dump(requestData, name: #function)
+		print(requestId)
+		promiseProvider.rx.request(.homePromise(id: requestId,
+																						is_promise: requestData.isPromiseNeeded,
+																						category: requestData.cartegory,
+																						issue_title: requestData.title,
+																						issue_contents: requestData.discription,
+																						requested_term: requestData.editionalRequest))
+			.asObservable()
+
 			.subscribe { (next) in
+				print("들어가나요???")
+				let json = JSON(next.data)
+				dump(json, name: #function)
+
 				if next.statusCode == 200 {
 					do {
 						let decoder = JSONDecoder()
@@ -133,6 +151,9 @@ class AdditionalRequestViewController: BaseViewController {
 																						requested_term: requestData.editionalRequest))
 			.asObservable()
 			.subscribe { (next) in
+				let json = JSON(next.data)
+				dump(json, name: #function)
+
 				if next.statusCode == 200 {
 					do {
 						let decoder = JSONDecoder()
@@ -162,6 +183,8 @@ class AdditionalRequestViewController: BaseViewController {
 				.asObservable()
 				.subscribe { (next) in
 					print("여기야 바보들아",next.statusCode)
+					let json = JSON(next.data)
+					dump(json, name: #function)
 				} onError: { (error) in
 					print(123)
 					print(error.localizedDescription)

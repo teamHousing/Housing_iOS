@@ -24,7 +24,7 @@ class AppointmentViewController: BaseViewController {
 	private let contentView = UIView()
 	private var promiseArr: [[String]] = []
 	
-	private let backgroundLabel = UILabel().then{
+	private let backgroundLabel = UILabel().then {
 		$0.text = "문제를 어떻게 해결할까요?"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
 		$0.textColor = .black
@@ -392,13 +392,13 @@ class AppointmentViewController: BaseViewController {
 	}
 	@objc
 	func addTimeStamp(sender : UIButton) {
-		self.resetPickerLayout()
-		self.resetTableViewHeight()
+		resetPickerLayout()
+		resetTableViewHeight()
 		let isTableViewEmpty = requestData.availableTimeList.isEmpty
-		self.registerButton.isEnabled = isTableViewEmpty ? false : true
-		self.registerButton.backgroundColor = isTableViewEmpty ? .gray : .black
-		self.tableViewBind()
-		self.timeStampTableView.reloadData()
+		registerButton.isEnabled = isTableViewEmpty ? false : true
+		registerButton.backgroundColor = isTableViewEmpty ? .gray : .primaryOrange
+		tableViewBind()
+		timeStampTableView.reloadData()
 	}
 	@objc
 	func addPromise(sender : UIButton) {
@@ -407,6 +407,8 @@ class AppointmentViewController: BaseViewController {
 																												 promise_option: promiseArr))
 			.asObservable()
 			.subscribe { (next) in
+				print("내거ㅇ야ㅑㅑㅑㅑㅑㅑㅑ")
+				dump(next.data)
 				if next.statusCode == 200 {
 					self.navigationController?.popToRootViewController(animated: true)
 				}
@@ -415,8 +417,11 @@ class AppointmentViewController: BaseViewController {
 			}.disposed(by: disposeBag)
 	}
 	@objc func modifyPromise(sender : UIButton) {
-		promiseProvider.rx.request(.homePromiseGuestModify(id: issue_id, promise_option: self.promiseArr)).asObservable()
+		promiseProvider.rx.request(.homePromiseGuestModify(id: issue_id,
+																											 promise_option: promiseArr))
+			.asObservable()
 			.subscribe { (next) in
+				print("내거ㅇ야ㅑㅑㅑㅑㅑㅑㅑ22")
 				dump(next.data)
 				if next.statusCode == 200 {
 					do {
@@ -483,20 +488,24 @@ class AppointmentViewController: BaseViewController {
 		endHourUnderBar.backgroundColor = .textGrayBlank
 		endHour.text = "17시"
 		var temp = VisitDate()
-		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
-			print(str)
-
+		requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
 			let day = String(str.element!.split(separator: "-")[0])
 			let date = String(str.element!.split(separator: "-")[1])
 			temp.date = date
-			
-			let newday = day.replacingOccurrences(of: "", with: ". ")
-			temp.day = newday
+//			let newday = day.replacingOccurrences(of: "-", with: ". ")
+			guard let str = str.element else { return }
+			temp.day = str
+//			print("진짜는 여기지롱 멍청아",newday)
 		}.disposed(by: disposeBag)
-		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
-		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
+		requestData.startTime.observeOn(MainScheduler.instance)
+			.subscribe{ str in
+			temp.startTime = str
+		}.disposed(by: disposeBag)
+		requestData.endTime.observeOn(MainScheduler.instance)
+			.subscribe{ str in
+				temp.endTime = str
+		}.disposed(by: disposeBag)
 		let t = timeToNoticeOption()
-		
 		promiseArr.append([t.date!, t.day!, t.time!])
 		requestData.availableTimeList.append(temp)
 		
@@ -545,7 +554,14 @@ class AppointmentViewController: BaseViewController {
 			resultSelector: {$0 || $1 || $2})
 			.subscribe{ result in
 				self.addButton.isEnabled = !result.element!
-				self.addButton.backgroundColor = !result.element! ? .black : .white
+				self.addButton.backgroundColor = !result.element! ? .primaryOrange : .white
+				if !result.element! {
+					self.addButton.setTitleColor(.white, for: .normal)
+					self.addButton.layer.borderColor = UIColor.primaryOrange.cgColor
+				} else {
+					self.addButton.setTitleColor(.gray01, for: .normal)
+					self.addButton.layer.borderColor = UIColor.gray01.cgColor
+				}
 			}.disposed(by: disposeBag)
 	}
 	@objc func handleTap(recognizer: UITapGestureRecognizer){
@@ -558,7 +574,8 @@ extension AppointmentViewController: UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: TimeStampTableViewCell.registterId, for: indexPath) as? TimeStampTableViewCell else {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: TimeStampTableViewCell.registterId,
+																									 for: indexPath) as? TimeStampTableViewCell else {
 			return UITableViewCell()
 		}
 		cell.awakeFromNib()
