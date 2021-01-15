@@ -101,6 +101,7 @@
 		D1CF647025AC236E009A39EC /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = D1CF646F25AC236E009A39EC /* RxMoya */; };
 		D1CF647725AC2464009A39EC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CF647625AC2464009A39EC /* UserService.swift */; };
 		D1CF647B25AC26A8009A39EC /* MoyaNetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CF647A25AC26A8009A39EC /* MoyaNetworkLogger.swift */; };
+		D1DABD1225B118B1003193F6 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = D1DABD1125B118B1003193F6 /* splash.json */; };
 		DA050946259F343E00DDB916 /* CameraWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050945259F343E00DDB916 /* CameraWorkViewController.swift */; };
 		DA050956259F692E00DDB916 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA050955259F692E00DDB916 /* UIImage+.swift */; };
 		DA050965259F801A00DDB916 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DA050964259F801A00DDB916 /* SwiftKeychainWrapper */; };
@@ -207,6 +208,7 @@
 		D1B44510259F1D5A005C2C68 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D1CF647625AC2464009A39EC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		D1CF647A25AC26A8009A39EC /* MoyaNetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkLogger.swift; sourceTree = "<group>"; };
+		D1DABD1125B118B1003193F6 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		DA050945259F343E00DDB916 /* CameraWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWorkViewController.swift; sourceTree = "<group>"; };
 		DA050955259F692E00DDB916 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		DA05096B25A05A6100DDB916 /* RequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataModel.swift; sourceTree = "<group>"; };
@@ -699,6 +701,7 @@
 		DA1A20D625B00E2500352C81 /* LottieFiles */ = {
 			isa = PBXGroup;
 			children = (
+				D1DABD1125B118B1003193F6 /* splash.json */,
 			);
 			path = LottieFiles;
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 				1FA03DE925A8473000AF0326 /* Notice.storyboard in Resources */,
 				D1B444EA259F09FF005C2C68 /* Communication.storyboard in Resources */,
 				D1B4450E259F1D4A005C2C68 /* Login.storyboard in Resources */,
+				D1DABD1225B118B1003193F6 /* splash.json in Resources */,
 				D19179EF259890A70035AF74 /* Assets.xcassets in Resources */,
 				D1B444FA259F0A9E005C2C68 /* Home.storyboard in Resources */,
 				D1B444E7259F09DD005C2C68 /* Detail.storyboard in Resources */,
