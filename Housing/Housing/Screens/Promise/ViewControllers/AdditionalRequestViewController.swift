@@ -100,6 +100,7 @@ class AdditionalRequestViewController: BaseViewController {
 	
 	// MARK: - Helper
 	@objc func nextButtonDidTapped() {
+
 		dump(requestData, name: #function)
 		print(requestId)
 		promiseProvider.rx.request(.homePromise(id: requestId,
@@ -109,6 +110,7 @@ class AdditionalRequestViewController: BaseViewController {
 																						issue_contents: requestData.discription,
 																						requested_term: requestData.editionalRequest))
 			.asObservable()
+
 			.subscribe { (next) in
 				print("들어가나요???")
 				let json = JSON(next.data)
