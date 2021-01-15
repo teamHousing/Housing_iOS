@@ -23,7 +23,9 @@ class DetailNoticeViewController: BaseViewController {
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var detailTitle: UILabel!
 	@IBOutlet weak var detailContext: UILabel!
-	
+    @IBOutlet weak var smallSquareView: UIView!
+    @IBOutlet weak var blockView: UIView!
+    
 	//캘린더 추가 공지 컴포넌트를 담은 뷰
 	@IBOutlet weak var entireComponents: UIView!
 	@IBOutlet weak var circleView: UIView!
@@ -80,6 +82,9 @@ class DetailNoticeViewController: BaseViewController {
 						self.dateLabel.text = result.option?[0]
 						self.timeLabel.text = result.option?[1]
 						
+                        if result.option?[1] == "null" {
+                            self.blockView.backgroundColor = .white
+                        }
 						
 						print(result)
 					} catch {
@@ -113,4 +118,23 @@ class DetailNoticeViewController: BaseViewController {
 	@objc func toNotice() {
 		navigationController?.popViewController(animated: true)
 	}
+    
+    @IBAction func editButton(_ sender: Any) {
+        let optionMenu = UIAlertController(title: nil, message: "공지사항을 삭제하시겠습니까?", preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        let cancelAction = UIAlertAction(title: "닫기", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(cancelAction)
+
+        self.present(optionMenu, animated: true, completion: nil)
+        
+        
+    }
 }
