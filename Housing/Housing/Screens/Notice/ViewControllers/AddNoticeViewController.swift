@@ -402,7 +402,7 @@ class AddNoticeViewController: BaseViewController{
 
 		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a)
 		let noticeArr: [noticeOption] = [noticetime]
-		NoticeProvider.rx.request(.profileNoticeAdmit(house_info_id: 2,
+		NoticeProvider.rx.request(.profileNoticeAdmit(house_info_id: houseInfoID ?? 1,
 																									notice_title: self.noticeTitle.text ?? "",
 																									notice_contents: self.noticeDescription.text ?? "" ,
 																									notice_option: noticeArr))
