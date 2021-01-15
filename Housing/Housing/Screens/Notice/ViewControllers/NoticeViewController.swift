@@ -73,7 +73,7 @@ final class NoticeViewController: BaseViewController {
 	//MARK:- Component(Action)
 	@IBAction func writeButtonDidTap(_ sender: Any) {
 		let viewController = AddNoticeViewController()
-		
+		viewController.houseInfoID = houseData?.id
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 	@IBAction func makeVerifyCode(_ sender: Any) {
@@ -85,7 +85,7 @@ final class NoticeViewController: BaseViewController {
 
 extension NoticeViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if scrollView.contentOffset.y > 10 {
+		if scrollView.contentOffset.y > -1 {
 			noticeCollectionView.backgroundColor = .primaryGray
 		} else {
 			noticeCollectionView.backgroundColor = .white
