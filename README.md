@@ -363,6 +363,12 @@ HOUSING iOS
 >		timeStampTableView.reloadData()
 >	}
 >~~~
+### Dictionary 타입을 사용해봤습니다
+
+기존의 프로젝트에서 사용 할 일이 없어 사용하지 않았지만 이번 프로젝트에서 캘린더를 사용하게 되면서 Dictionary 타입에 대해 다루어 보는 기회를 가지게 되었습니다.
+
+
+
 ### 팀원 역할 및 소개
 
 | <IMG src="https://github.com/5anniversary.png?size=100" width="150"> | <IMG src="https://github.com/hansolnoh95.png?size=100" width="150"> | <IMG src="https://github.com/8ugustjaden.png?size=100" width="150"> | <IMG src="https://github.com/JubyKim.png?size=100" width="150"> | <IMG src="https://github.com/iAmSomething.png?size=100" width="150"> |

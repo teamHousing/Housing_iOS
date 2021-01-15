@@ -195,6 +195,7 @@ class PromiseViewController: UIViewController {
 		$0.borderStyle = .none
 		$0.placeholder("제목을 작성해주세요")
 		$0.textColor = .black
+		$0.tintColor = .primaryOrange
 	}
 	private let underBar = UIView().then {
 		$0.backgroundColor = .gray01
@@ -206,6 +207,7 @@ class PromiseViewController: UIViewController {
 		$0.text = "내용을 작성해주세요"
 		$0.backgroundColor = .white
 		$0.textColor = .gray01
+		$0.tintColor = .primaryOrange
 		$0.textContainerInset = UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
 	}
 	private var nextStep = UIButton().then{
@@ -223,8 +225,6 @@ class PromiseViewController: UIViewController {
 		$0.tintColor = .gray01
 		$0.pageIndicatorTintColor = .gray01
 	}
-	
-	var keyboardY: Int = 0
 	
 	// MARK: - Helper
 	
