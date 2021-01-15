@@ -167,8 +167,6 @@ final class CommunicationViewController: BaseViewController {
 //			let view =  ///앱잼에서 구현하지 않음
 //			navigationController?.pushViewController(view, animated: true)
 		}
-		print("mode는")
-		print(mode)
 	}
 }
 
