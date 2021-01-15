@@ -55,6 +55,14 @@ final class CommunicationViewController: BaseViewController {
 
 		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)
 	}
+	override func viewWillAppear(_ animated: Bool) {
+		determineType(isHost: isHost)
+		networkForCommunication()
+		layoutNavigationBar()
+		configHeaderView()
+		configTableView()
+		pullToRefresh(tableview: communicationTableView)
+	}
 	
 	func dataSetup() {
 		tableViewData = [cellData(opened: true,
