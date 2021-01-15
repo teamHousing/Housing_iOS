@@ -16,11 +16,15 @@ class AppointmentViewController: BaseViewController {
 	// MARK: - Component
 	var issue_id = RequestDataModel.shared.issueId
 	var requestData = RequestDataModel.shared
+
+	var checkToModify = 0
+	private let userProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
 	private let appointmentScroll = UIScrollView()
 	private let contentView = UIView()
 	private var promiseArr: [[String]] = []
-
+	
 	private let backgroundLabel = UILabel().then{
 		$0.text = "문제를 어떻게 해결할까요?"
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
@@ -167,7 +171,6 @@ class AppointmentViewController: BaseViewController {
 		$0.setTitle("등록하기", for: .normal)
 		$0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 13)
 		$0.setTitleColor(.white, for: .normal)
-		$0.addTarget(self, action: #selector(addPromise), for: .touchUpInside)
 		$0.setRounded(radius: 25)
 	}
 	private let page = UIPageControl().then{
@@ -229,6 +232,15 @@ class AppointmentViewController: BaseViewController {
 			$0.leading.equalTo(backgroundLabel.snp.trailing).offset(8)
 			$0.height.equalTo(1)
 			$0.width.equalTo(widthConstraintAmount(value: widthConstraintAmount(value: 77)))
+		}
+		registerButton.then {
+			if self.checkToModify == 1 {
+				$0.addTarget(self, action: #selector(modifyPromise), for: .touchUpInside)
+				self.checkToModify = 0
+			}
+			else {
+				$0.addTarget(self, action: #selector(addPromise), for: .touchUpInside)
+			}
 		}
 		comunicationType.snp.makeConstraints{
 			$0.leading.equalTo(view).offset(widthConstraintAmount(value: 20))
@@ -405,6 +417,21 @@ class AppointmentViewController: BaseViewController {
 				print(error.localizedDescription)
 			}.disposed(by: disposeBag)
 	}
+	@objc func modifyPromise(sender : UIButton) {
+		userProvider.rx.request(.homePromiseGuestModify(id: issue_id, promise_option: self.promiseArr)).asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						self.navigationController?.popToRootViewController(animated: true)
+					}
+					catch {
+						
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+	}
 	func timeToNoticeOption() -> noticeOption {
 		var temp = VisitDate()
 		self.requestData.date.observeOn(MainScheduler.instance).filter{!$0.isEmpty}.subscribe{ str in
@@ -412,7 +439,7 @@ class AppointmentViewController: BaseViewController {
 			let date = String(str.element!.split(separator: " ")[1])
 			temp.date = date
 			temp.day = day
-			}.disposed(by: disposeBag)
+		}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
 		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
@@ -466,19 +493,19 @@ class AppointmentViewController: BaseViewController {
 			
 			let newday = day.replacingOccurrences(of: "-", with: ". ")
 			temp.day = newday
-			}.disposed(by: disposeBag)
+		}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
 		let t = timeToNoticeOption()
 		
 		promiseArr.append([t.date!, t.day!, t.time!])
 		requestData.availableTimeList.append(temp)
-	
+		
 		requestData.date.onNext("")
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
 	}
-
+	
 	func tableViewBind() {
 		
 		timeStampTableView.estimatedRowHeight = CGFloat(70 * requestData.availableTimeList.count)

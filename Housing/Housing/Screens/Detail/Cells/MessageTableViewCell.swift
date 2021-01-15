@@ -26,6 +26,7 @@ class MessageTableViewCell: UITableViewCell {
 	var userOrOwner = 3
 	var confirmedPromiseOption = ""
 	var rootViewController: UIViewController?
+	var checkToModify = 1
 	
 	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
@@ -254,12 +255,13 @@ extension MessageTableViewCell: UITableViewDataSource {
 	@objc
 	func didTapFinishButton(_ sender: UIButton) {
 		self.loader()
-		messageTableView.reloadData()
+		self.messageTableView.setNeedsDisplay()
 	}
 	
 	@objc func didTapModifyButton(_ sender: UIButton) {
 		let viewcontroller = AppointmentViewController()
 		viewcontroller.issue_id = self.requestId
+		viewcontroller.checkToModify = self.checkToModify
 		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
 	
