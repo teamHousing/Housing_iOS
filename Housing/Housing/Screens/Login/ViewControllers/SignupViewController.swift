@@ -12,7 +12,6 @@ final class SignupViewController: UIViewController {
 	// MARK: - Component(Outlet)
 	@IBOutlet weak var lessorButton: UIButton!
 	@IBOutlet weak var tenantButton: UIButton!
-	@IBOutlet weak var navigationBackButton: UIBarButtonItem!
 	@IBOutlet weak var nextButton: UIButton!
 	
 	// MARK: - Property
@@ -86,7 +85,7 @@ final class SignupViewController: UIViewController {
 			
 			tenantButton.isEnabled = false
 			
-			nextButton.layer.backgroundColor = UIColor.primaryBlack.cgColor
+			nextButton.layer.backgroundColor = UIColor.primaryOrange.cgColor
 			nextButton.isEnabled = true
 		}
 		else {
@@ -117,7 +116,7 @@ final class SignupViewController: UIViewController {
 			
 			lessorButton.isEnabled = false
 			
-			nextButton.layer.backgroundColor = UIColor.primaryBlack.cgColor
+			nextButton.layer.backgroundColor = UIColor.primaryOrange.cgColor
 			nextButton.isEnabled = false
 			
 			
