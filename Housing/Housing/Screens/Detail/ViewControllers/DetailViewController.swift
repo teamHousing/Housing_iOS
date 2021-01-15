@@ -212,6 +212,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 					
 					statusViewController.model = self.model
 					statusViewController.statusModel = self.statusModel
+					
 					//viewController.tableView.reloadData()
 					
 					statusViewController.tableView.reloadData()
