@@ -394,13 +394,13 @@ class AddNoticeViewController: BaseViewController{
 			temp.endTime = temp.endTime.replacingOccurrences(of: "오후 ", with: "")
 			temp.endTime = String(Int(temp.endTime)! + 12)
 		}
-		let a = "\(temp.startTime)-\(temp.endTime)"
+		let time = "\(temp.startTime):00-\(temp.endTime):00"
 
 		requestData.date.onNext("")
 		requestData.startTime.onNext("")
 		requestData.endTime.onNext("")
 
-		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: a)
+		let noticetime = noticeOption( date: temp.day , day: (temp.date + "요일") , time: time)
 		let noticeArr: [noticeOption] = [noticetime]
 		NoticeProvider.rx.request(.profileNoticeAdmit(house_info_id: houseInfoID ?? 1,
 																									notice_title: self.noticeTitle.text ?? "",
