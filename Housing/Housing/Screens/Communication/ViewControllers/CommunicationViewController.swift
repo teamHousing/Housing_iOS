@@ -59,7 +59,6 @@ final class CommunicationViewController: BaseViewController {
 		
 		pullToRefresh(tableview: communicationTableView)
 		
-		print(KeychainWrapper.standard.string(forKey: KeychainStorage.accessToken)!)
 		navigationItem.leftBarButtonItem = leftButton
 	}
 	
@@ -67,13 +66,11 @@ final class CommunicationViewController: BaseViewController {
 	private func hiddenBarButtonDidTap() {
 		let storyboard = UIStoryboard(name: StoryboardStorage.login,
 																	bundle: nil)
-		let viewcontroller = storyboard.instantiateViewController(
-			withIdentifier: "LoginViewController"
-		) as! LoginViewController
-		viewcontroller.isSignOut = true
-		viewcontroller.modalPresentationStyle = .fullScreen
+		let viewcontroller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		let navigationViewController = UINavigationController(rootViewController: viewcontroller)
+		navigationViewController.modalPresentationStyle = .fullScreen
 		KeychainWrapper.standard.removeAllKeys()
-		present(viewcontroller, animated: true)
+		present(navigationViewController, animated: true)
 	}
 	
 	private func dataSetup() {

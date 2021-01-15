@@ -16,7 +16,7 @@ class EmptyDetailTableViewCell: UITableViewCell {
 		$0.backgroundColor = .clear
 	}
 	let emptyImageView = UIImageView().then {
-		$0.image = UIImage(named: "btnBack")
+		$0.image = UIImage(named: "imgHomeBlank")
 	}
 	let emptyLabel = UILabel().then {
 		$0.text = "아직 도착한 쪽지가 없어요❌"
