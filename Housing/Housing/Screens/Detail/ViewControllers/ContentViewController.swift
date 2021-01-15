@@ -97,6 +97,10 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 				cell.cancelButton.isHidden = true
 				cell.cancelButton.isUserInteractionEnabled = false
 			}
+			if self.model.progress == 2 {
+				cell.cancelButton.isHidden = true
+				cell.cancelButton.isUserInteractionEnabled = false
+			}
 
 			cell.selectionStyle = .none
 			cell.awakeFromNib()
