@@ -425,12 +425,7 @@ class AppointmentViewController: BaseViewController {
 			.subscribe { (next) in
 				dump(next.data)
 				if next.statusCode == 200 {
-					do {
 						self.navigationController?.popToRootViewController(animated: true)
-					}
-					catch {
-						
-					}
 				}
 			} onError: { (error) in
 				print(error.localizedDescription)
@@ -588,6 +583,7 @@ extension AppointmentViewController: UITableViewDelegate {
 		cell.deleteButton.backgroundColor = .primaryGray
 		cell.dateLabel.text = String(self.requestData.availableTimeList[indexPath.row].day.split(separator: " ")[0])
 		cell.timeLabel.text = "\(self.requestData.availableTimeList[indexPath.row].startTime) - \(self.requestData.availableTimeList[indexPath.row].endTime)"
+
 		cell.methodLabel.text = self.requestData.solution
 		cell.selectionStyle = .none
 		cell.deleteButton.tag = indexPath.row
@@ -607,7 +603,8 @@ extension AppointmentViewController: UITableViewDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		bind()
-		self.timeStampTableView.register(TimeStampTableViewCell.self, forCellReuseIdentifier: TimeStampTableViewCell.registterId)
+		self.timeStampTableView.register(TimeStampTableViewCell.self,
+																		 forCellReuseIdentifier: TimeStampTableViewCell.registterId)
 		self.timeStampTableView.delegate = self
 		self.timeStampTableView.dataSource = self
 		navigationController?.navigationBar.topItem?.title = ""

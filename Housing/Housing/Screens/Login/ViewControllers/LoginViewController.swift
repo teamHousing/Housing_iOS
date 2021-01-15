@@ -125,13 +125,9 @@ final class LoginViewController: BaseViewController {
 						
 						KeychainWrapper.standard.set(cookie,
 																				 forKey: KeychainStorage.accessToken)
-						if self.isSignOut {
-							self.dismiss(animated: true, completion: nil)
-						} else {
-							let viewcontroller = TabBarViewController()
-							viewcontroller.modalPresentationStyle = .fullScreen
-							self.present(viewcontroller, animated: true)
-						}
+						let viewcontroller = TabBarViewController()
+						viewcontroller.modalPresentationStyle = .fullScreen
+						self.present(viewcontroller, animated: true)
 					} catch {
 						print(error)
 					}

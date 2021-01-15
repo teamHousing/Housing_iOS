@@ -12,16 +12,27 @@ HOUSING iOS
 
 ## 목차
 
-1. [개발환경 및 사용한 라이브러리](#개발환경-및-사용한-라이브러리)
-2. [서비스 workflow](#서비스-workflow)
-3. [기능 개발여부/담당자](#기능-개발여부/담당자)
-4. [핵심기능 구현 방법](#핵심기능-구현-방법)
-5. [Extension을 통해 작성한 메소드 설명](#Extension을-통해-작성한-메소드-설명)
-6. [팀원 역할 및 소개](팀원-역할-및-소개)
-7. [코딩 컨벤션](https://github.com/teamHousing/Housing_iOS/wiki/coding-covention)
-8. [폴더링](https://github.com/teamHousing/Housing_iOS/wiki/foldering)
-9. [깃 전략](https://github.com/teamHousing/Housing_iOS/wiki/git-branch-strategy)
-10. [새롭게 알게 된 것](#새롭게-알게-된-것)
+- [개발환경 및 사용한 라이브러리](#개발환경-및-사용한-라이브러리)
+
+- [서비스 workflow](#서비스-workflow)
+
+- [기능 개발여부/담당자](#기능-개발여부/담당자)
+
+- [핵심기능 구현 방법](#핵심기능-구현-방법)
+
+- [Extension을 통해 작성한 메소드 설명](#Extension을-통해-작성한-메소드-설명)
+
+- [팀원 역할 및 소개](팀원-역할-및-소개)
+
+- [코딩 컨벤션](https://github.com/teamHousing/Housing_iOS/wiki/coding-covention)
+
+- [폴더링](https://github.com/teamHousing/Housing_iOS/wiki/foldering)
+
+- [깃 전략](https://github.com/teamHousing/Housing_iOS/wiki/git-branch-strategy)
+
+- [새롭게 알게 된 것](#새롭게-알게-된-것)
+
+- [testflight download link](https://testflight.apple.com/join/08nlaS1d)
 
 
 ### 개발환경 및 사용한 라이브러리
@@ -44,6 +55,10 @@ HOUSING iOS
 <br>
 
 ### 서비스 workflow
+
+
+
+![KakaoTalk_Photo_2021-01-15-22-54-18](https://user-images.githubusercontent.com/22820675/104735258-bfcb3f80-5784-11eb-99d9-66e6113e972a.png)
 
 
 
@@ -363,6 +378,47 @@ HOUSING iOS
 >		timeStampTableView.reloadData()
 >	}
 >~~~
+### Dictionary 타입을 사용해봤습니다
+
+기존의 프로젝트에서 사용 할 일이 없어 사용하지 않았지만 이번 프로젝트에서 캘린더를 사용하게 되면서 
+Dictionary 타입에 대해 다루어 보는 기회를 가지게 되었습니다.
+구조체를 날짜 String Key값에 맞춰주는 코드를 작성하였습니다
+
+~~~swift
+		
+for notice in data.notice {
+	let when = "\(notice.year).\(notice.month).\(notice.day)"
+	let model = FSCalendarModel(isNotice: notice.isNotice,
+	 														id: notice.id,
+															category: notice.category,
+															solutionMethod: notice.solutionMethod,
+															time: notice.time,
+															title: notice.title,
+															contents: notice.contents)ㅈ
+	calendarDictionary["\(when)"] = [model]
+}
+for promise in data.issue {
+  let when = "\(promise.year).\(promise.month).\(promise.day)"
+  let model = FSCalendarModel(isNotice: promise.isNotice,
+                              id: promise.id,
+															category: promise.category,
+															solutionMethod: promise.solutionMethod,
+															time: promise.time,
+															title: promise.title,
+															contents: promise.contents)
+  if calendarDictionary[when]?.count == 0 {
+    calendarDictionary["\(when)"] = [model]
+	} else {
+    calendarDictionary[when]?.append(model)
+  }
+}
+
+~~~
+
+
+
+
+
 ### 팀원 역할 및 소개
 
 | <IMG src="https://github.com/5anniversary.png?size=100" width="150"> | <IMG src="https://github.com/hansolnoh95.png?size=100" width="150"> | <IMG src="https://github.com/8ugustjaden.png?size=100" width="150"> | <IMG src="https://github.com/JubyKim.png?size=100" width="150"> | <IMG src="https://github.com/iAmSomething.png?size=100" width="150"> |
