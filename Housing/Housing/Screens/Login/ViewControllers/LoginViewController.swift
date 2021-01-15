@@ -38,6 +38,7 @@ final class LoginViewController: BaseViewController {
 		passwordTextField.addTarget(self,
 																action: #selector(idTextFieldChanged),
 																for: .editingChanged)
+		passwordTextField.delegate = self
 	}
 	
 	//MARK:- Helper
@@ -57,8 +58,14 @@ final class LoginViewController: BaseViewController {
 		}
 	}
 	private func makeAlert() {
-
+		
 	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		self.view.endEditing(true)
+		return false
+	}
+	
 	private func initLayout() {
 		navigationController?.navigationBar.isHidden = true
 		
@@ -119,8 +126,8 @@ final class LoginViewController: BaseViewController {
 																				 forKey: KeychainStorage.accessToken)
 						
 						let viewcontroller = TabBarViewController()
-//						let p = PromiseViewController()
-//						let viewcontroller = UINavigationController(rootViewController: p)
+						//						let p = PromiseViewController()
+						//						let viewcontroller = UINavigationController(rootViewController: p)
 						viewcontroller.modalPresentationStyle = .fullScreen
 						self.present(viewcontroller, animated: true)
 						
@@ -134,9 +141,9 @@ final class LoginViewController: BaseViewController {
 						self.idTextField.text = nil
 						self.passwordTextField.text = nil
 						self.LoginButton.backgroundColor = UIColor(red: 219 / 255,
-																									green: 219 / 255,
-																									blue: 219 / 255,
-																									alpha: 1)
+																											 green: 219 / 255,
+																											 blue: 219 / 255,
+																											 alpha: 1)
 						self.LoginButton.isEnabled = false
 					}
 					alert.addAction(action)
@@ -158,4 +165,8 @@ final class LoginViewController: BaseViewController {
 //MARK:- Object Extension
 private struct User: Codable {
 	let id, type: Int
+}
+
+extension LoginViewController: UITextFieldDelegate {
+	
 }
