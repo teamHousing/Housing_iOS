@@ -498,7 +498,7 @@ class PromiseViewController: UIViewController {
 	}
 	func nextButtonLayout(_ b : Bool) {
 		if b {
-			self.nextStep.backgroundColor = .black
+			self.nextStep.backgroundColor = .primaryOrange
 			
 		}
 		else {

@@ -40,8 +40,8 @@ extension PromiseService: TargetType {
 		switch self {
 		case .homePromiseComplete:
 			return "/communication/"
-		case let .homePromise(id, _,_,_,_,_):
-			return "/communication/1"
+		case let .homePromise(id,_,_,_,_,_):
+			return "/communication/\(id)"
 		case let .homePromiseTimeList(id):
 			return "/communication/\(id)/promise-option"
 		case let .homePromiseConfirm(id, _):
@@ -79,7 +79,12 @@ extension PromiseService: TargetType {
 	
 	var task: Task {
 		switch self {
-		case .homePromise(id : let id, is_promise: let is_promise, category: let category, issue_title: let issue_title, issue_contents: let issue_contents, requested_term: let requested_term):
+		case .homePromise(id: let id,
+											is_promise: let is_promise,
+											category: let category,
+											issue_title: let issue_title,
+											issue_contents: let issue_contents,
+											requested_term: let requested_term):
 			return .requestCompositeParameters(bodyParameters: ["is_promise": is_promise,
 																													"category": category,
 																													"issue_title": issue_title,
@@ -87,7 +92,7 @@ extension PromiseService: TargetType {
 																													"requested_term": requested_term],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
-		case .homePromiseTimeList(id: let id):
+		case .homePromiseTimeList:
 			return .requestPlain
 
 		case .homePromiseConfirm(id: let id,
@@ -97,7 +102,7 @@ extension PromiseService: TargetType {
 			return .requestCompositeParameters(bodyParameters: ["promise_option": promise_option],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
-		case .homePromiseHostModify(id: let id):
+		case .homePromiseHostModify:
 			return .requestPlain
 			
 		case .homePromiseGuestModify(id: let id, promise_option: let promise_option):
