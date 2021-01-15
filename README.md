@@ -21,7 +21,7 @@ HOUSING
 7. [코딩 컨벤션](https://github.com/teamHousing/Housing_iOS/wiki/coding-covention)
 8. [폴더링](https://github.com/teamHousing/Housing_iOS/wiki/foldering)
 9. [깃 전략](https://github.com/teamHousing/Housing_iOS/wiki/git-branch-strategy)
-
+10. [새롭게 알게 된 것](#새롭게-알게-된-것)
 
 
 ### 개발환경 및 사용한 라이브러리
@@ -110,6 +110,45 @@ HOUSING
 | UIImage+                  | 이미지 크기 조정                       |
 | UIDatePicker+             | DatePicker로 텍스트 컬러 넣기          |
 | UIImageView+              | URL로 이미지 넣기                      |
+
+### 💡새롭게 알게 된 것
+
+> 곽민제
+
+#### CollectionView Cell에 Shadow를 넣는 방법에 대해 알게 되었습니다😋
+#### 
+
+> ```
+> extension CALayer {
+> func applyShadow(
+> 		color: UIColor = .black,
+> 		alpha: Float = 0.1,
+> 		x: CGFloat = 0,
+> 		y: CGFloat = 0,
+> 		blur: CGFloat = 8
+> 	) {
+> 		shadowColor = color.cgColor
+> 		shadowOpacity = alpha
+> 		shadowOffset = CGSize(width: x, height: y)
+> 		shadowRadius = blur / 1.0
+> 	}
+> }
+> 
+> func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> 
+>                 UICollectionViewCell {
+> 		guard let cell = collectionView.dequeueReusableCell(
+> 						withReuseIdentifier: "CollectionViewCell",
+> 						for: indexPath) as? CollectionViewCell
+> 		else {
+> 			return UICollectionViewCell()
+> 		}		
+> 		cell.backgroundColor = .white
+> 		cell.containerView.layer.applyShadow()
+> 		cell.contentView.backgroundColor = UIColor.white
+> 		
+> 		return cell
+> 	}
+> ```
 
 
 
