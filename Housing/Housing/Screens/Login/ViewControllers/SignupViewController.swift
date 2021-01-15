@@ -60,7 +60,7 @@ final class SignupViewController: UIViewController {
 		tenantButton.layer.shadowRadius = 16 / 2
 		tenantButton.layer.shadowPath = nil
 		
-		nextButton.isEnabled = false
+		
 	}
 	
 	//MARK:- Component(Action)
@@ -86,6 +86,17 @@ final class SignupViewController: UIViewController {
 	
 	@IBAction func lessorButton(_ sender: Any) {
 		if !lessorButton.isSelected {
+			
+			tenantButton.isSelected = false
+			tenantButton.layer.borderColor = UIColor.clear.cgColor
+			
+			lessorButton.isEnabled = true
+			
+			nextButton.layer.backgroundColor = CGColor(red: 219 / 255,
+																								 green: 219 / 255,
+																								 blue: 219 / 255,
+																								 alpha: 1)
+			
 			lessorButton.layer.borderWidth = 2
 			lessorButton.layer.borderColor = UIColor.primaryOrange.cgColor
 			lessorButton.layer.cornerRadius = 10
@@ -96,7 +107,6 @@ final class SignupViewController: UIViewController {
 			lessorButton.layer.shadowPath = nil
 			lessorButton.isSelected = true
 			isHost = 0
-			tenantButton.isEnabled = false
 			
 			nextButton.layer.backgroundColor = UIColor.primaryOrange.cgColor
 			nextButton.isEnabled = true
@@ -105,7 +115,6 @@ final class SignupViewController: UIViewController {
 			lessorButton.isSelected = false
 			lessorButton.layer.borderColor = UIColor.clear.cgColor
 			
-			tenantButton.isEnabled = true
 			
 			nextButton.layer.backgroundColor = CGColor(red: 219 / 255,
 																								 green: 219 / 255,
@@ -117,6 +126,14 @@ final class SignupViewController: UIViewController {
 	
 	@IBAction func tenantButton(_ sender: Any) {
 		if !tenantButton.isSelected {
+			lessorButton.isSelected = false
+			lessorButton.layer.borderColor = UIColor.clear.cgColor
+			
+			
+			nextButton.layer.backgroundColor = CGColor(red: 219 / 255,
+																								 green: 219 / 255,
+																								 blue: 219 / 255,
+																								 alpha: 1)
 			tenantButton.layer.borderWidth = 2
 			tenantButton.layer.borderColor = UIColor.primaryOrange.cgColor
 			tenantButton.layer.cornerRadius = 10
@@ -127,7 +144,6 @@ final class SignupViewController: UIViewController {
 			tenantButton.layer.shadowPath = nil
 			tenantButton.isSelected = true
 			isHost = 1
-			lessorButton.isEnabled = false
 			
 			nextButton.layer.backgroundColor = UIColor.primaryOrange.cgColor
 			nextButton.isEnabled = true
@@ -136,7 +152,6 @@ final class SignupViewController: UIViewController {
 			tenantButton.isSelected = false
 			tenantButton.layer.borderColor = UIColor.clear.cgColor
 			
-			lessorButton.isEnabled = true
 			
 			nextButton.layer.backgroundColor = CGColor(red: 219 / 255,
 																								 green: 219 / 255,
