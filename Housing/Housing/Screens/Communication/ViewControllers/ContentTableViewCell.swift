@@ -21,9 +21,9 @@ class ContentTableViewCell: UITableViewCell {
 	func determineProgress(progress: Int) -> String {
 		if progress == 0{
 			return "확인전"
-		} else if progress == 1{
+		} else if progress == 1 {
 			return "확인중"
-		} else if progress == 2{
+		} else if progress == 2 {
 			return "해결 완료"
 		}
 		return ""
@@ -45,13 +45,13 @@ class ContentTableViewCell: UITableViewCell {
 		}
 		return ""
 	}
-	func filloutCell(){
+	func filloutCell() {
 		statusLabel?.text = determineProgress(progress: contentData.progress)
 		categoryLabel?.text = determineCategoty(category: contentData.category)
 		titleLabel?.text = contentData.issueTitle
 		contentLabel?.text = contentData.issueContents
 	}
-	func makeViewRounded(){
+	func makeViewRounded() {
 		whiteUIView.setRounded(radius: 16)
 		whiteUIView.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 8)
 		labelBackView.setRounded(radius: 10)
@@ -60,12 +60,9 @@ class ContentTableViewCell: UITableViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		filloutCell()
-		// Initialization code
 	}
 	
 	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
-		
-		// Configure the view for the selected state
 	}
 }
