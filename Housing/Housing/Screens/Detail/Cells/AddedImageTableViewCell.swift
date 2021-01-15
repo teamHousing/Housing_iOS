@@ -31,7 +31,7 @@ class AddedImageTableViewCell: UITableViewCell {
 		
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.isScrollEnabled = false
-//		collectionView.isPagingEnabled = true
+		//		collectionView.isPagingEnabled = true
 		collectionView.isUserInteractionEnabled = true
 		
 		return collectionView
@@ -104,12 +104,9 @@ class AddedImageTableViewCell: UITableViewCell {
 			.asObservable()
 			.subscribe { (next) in
 				if next.statusCode == 200 {
-					do {
-						self.cancelButton.setTitle("취소 완료", for: .normal)
-						self.cancelButton.setBorder(borderColor: .gray01, borderWidth: 1)
-					}
-					catch {
-					}
+					self.cancelButton.setTitle("취소 완료", for: .normal)
+					self.cancelButton.setBorder(borderColor: .gray01, borderWidth: 1)
+					self.cancelButton.isEnabled = false
 				}
 			} onError: { (error) in
 				print(error.localizedDescription)
