@@ -372,7 +372,7 @@ extension CommunicationViewController: UITableViewDataSource {
 					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.filloutCell()
 					return contentCell
-				} else { ///cell중에서도 complete부분
+				} else { ///cell중에서도 complete부분.
 					return emptyComCell
 				}
 			} else if incompleteLength > 0 && completeLength > 0 {
