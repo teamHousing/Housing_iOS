@@ -259,7 +259,7 @@ extension CommunicationViewController: UITableViewDataSource {
 			return UITableViewCell()
 		}
 		incomCell.contentView.backgroundColor = UIColor(named: "paleGrey")
-		incomCell.countOfIncomplete.text = "(\(incompleteLength))"
+		incomCell.countOfIncomplete.text = "( \(incompleteLength) )"
 
 		incomCell.roomNumberButton.isHidden = true ///앱잼에서 호수별 필터링을 구현하지 않기에 넣은 코드입니다.
 		
@@ -272,7 +272,7 @@ extension CommunicationViewController: UITableViewDataSource {
 		guard let comCell = tableView.dequeueReusableCell(withIdentifier: "CompleteTableViewCell")
 						as? CompleteTableViewCell
 		else { return UITableViewCell()}
-		comCell.countOfComplete.text = "(\(completeLength))"
+		comCell.countOfComplete.text = "( \(completeLength) )"
 		makeCellGrey(cell: comCell)
 		
 		func determineTitleButtonImage() {
