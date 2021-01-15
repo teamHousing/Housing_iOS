@@ -88,6 +88,8 @@ class DetailNoticeViewController: BaseViewController {
 						
 						if result.option?[1] == "null" {
 							self.blockView.backgroundColor = .white
+						} else if result.option?[1] == "-" {
+							self.blockView.backgroundColor = .white
 						}
 						
 						print(result)
