@@ -9,6 +9,99 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Tenant Signup View Controller-->
+        <scene sceneID="Hep-EO-jsQ">
+            <objects>
+                <viewController storyboardIdentifier="TenantSignupViewController" id="QZM-d1-BHg" customClass="TenantSignupViewController" customModule="Housing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="295-88-Ifz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Join" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gp-Lh-9pe">
+                                <rect key="frame" x="20" y="44" width="84" height="46.5"/>
+                                <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입을 위한 인증번호를 입력해 주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZR-GS-hED">
+                                <rect key="frame" x="20" y="108.5" width="236" height="17"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S46-pE-wqh">
+                                <rect key="frame" x="264" y="120" width="150" height="1"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="1rC-Vh-MjS"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd0-s4-ogr">
+                                <rect key="frame" x="32" y="190.5" width="56" height="20"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="인증번호를 입력해 주세요." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RkL-hE-InD">
+                                <rect key="frame" x="32" y="224.5" width="350" height="19"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BME-Si-n0j">
+                                <rect key="frame" x="32" y="249.5" width="350" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="BrF-NZ-wTT"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVy-ER-dK0">
+                                <rect key="frame" x="79.5" y="758" width="255" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="MnP-io-ygB"/>
+                                    <constraint firstAttribute="width" constant="255" id="on1-eQ-KtR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <state key="normal" title="다음">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="toNextButton:" destination="QZM-d1-BHg" eventType="touchUpInside" id="CYB-c1-Yru"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fXS-qC-P70"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="S46-pE-wqh" firstAttribute="firstBaseline" secondItem="IZR-GS-hED" secondAttribute="firstBaseline" constant="-1" id="6sR-us-VAa"/>
+                            <constraint firstItem="RkL-hE-InD" firstAttribute="top" secondItem="Xd0-s4-ogr" secondAttribute="bottom" constant="14" id="ETw-Mu-Qb9"/>
+                            <constraint firstItem="MVy-ER-dK0" firstAttribute="centerX" secondItem="295-88-Ifz" secondAttribute="centerX" id="G9R-0G-2W1"/>
+                            <constraint firstItem="fXS-qC-P70" firstAttribute="bottom" secondItem="MVy-ER-dK0" secondAttribute="bottom" constant="56" id="Gfh-17-QN7"/>
+                            <constraint firstAttribute="trailing" secondItem="S46-pE-wqh" secondAttribute="trailing" id="IRC-cs-TYG"/>
+                            <constraint firstItem="fXS-qC-P70" firstAttribute="trailing" secondItem="RkL-hE-InD" secondAttribute="trailing" constant="32" id="LXZ-g1-8Ss"/>
+                            <constraint firstItem="IZR-GS-hED" firstAttribute="leading" secondItem="fXS-qC-P70" secondAttribute="leading" constant="20" id="Thi-zz-yrb"/>
+                            <constraint firstItem="Xd0-s4-ogr" firstAttribute="top" secondItem="IZR-GS-hED" secondAttribute="bottom" constant="65" id="TlN-Gx-f6V"/>
+                            <constraint firstItem="7Gp-Lh-9pe" firstAttribute="leading" secondItem="fXS-qC-P70" secondAttribute="leading" constant="20" id="XJv-SL-NZZ"/>
+                            <constraint firstItem="RkL-hE-InD" firstAttribute="leading" secondItem="fXS-qC-P70" secondAttribute="leading" constant="32" id="fVY-h3-2mx"/>
+                            <constraint firstItem="Xd0-s4-ogr" firstAttribute="leading" secondItem="fXS-qC-P70" secondAttribute="leading" constant="32" id="gxx-ee-N4S"/>
+                            <constraint firstItem="fXS-qC-P70" firstAttribute="trailing" secondItem="BME-Si-n0j" secondAttribute="trailing" constant="32" id="isI-86-0xt"/>
+                            <constraint firstItem="BME-Si-n0j" firstAttribute="top" secondItem="RkL-hE-InD" secondAttribute="bottom" constant="6" id="rTU-UD-7r6"/>
+                            <constraint firstItem="BME-Si-n0j" firstAttribute="leading" secondItem="RkL-hE-InD" secondAttribute="leading" id="tNn-ML-cFg"/>
+                            <constraint firstItem="IZR-GS-hED" firstAttribute="top" secondItem="7Gp-Lh-9pe" secondAttribute="bottom" constant="18" id="v1g-ZY-GeY"/>
+                            <constraint firstItem="7Gp-Lh-9pe" firstAttribute="top" secondItem="fXS-qC-P70" secondAttribute="top" id="wG7-f8-qET"/>
+                            <constraint firstItem="S46-pE-wqh" firstAttribute="leading" secondItem="IZR-GS-hED" secondAttribute="trailing" constant="8" id="wsQ-xi-xVI"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="nextButton" destination="MVy-ER-dK0" id="Om5-gf-8Ny"/>
+                        <outlet property="verifyNumberTextField" destination="RkL-hE-InD" id="xDB-g3-yfV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WGh-8K-Y1t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1113" y="869"/>
+        </scene>
         <!--Signup View Controller-->
         <scene sceneID="TMP-eC-rcG">
             <objects>

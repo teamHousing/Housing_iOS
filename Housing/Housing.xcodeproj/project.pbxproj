@@ -21,6 +21,7 @@
 		1FA03DF125A870D200AF0326 /* DetailNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */; };
 		1FACC31925AD747B0072EABA /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 1FACC31825AD747B0072EABA /* SwiftyJSON */; };
 		1FCC3A3825B0167B00A20DEF /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCC3A3725B0167B00A20DEF /* Notice.swift */; };
+		1FCC3A5025B11A7700A20DEF /* TenantSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCC3A4F25B11A7700A20DEF /* TenantSignupViewController.swift */; };
 		37105A0B25A6FB7A005FA220 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */; };
 		37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */; };
 		371878A725A4A6E200803944 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371878A625A4A6E200803944 /* ContentTableViewCell.swift */; };
@@ -135,6 +136,7 @@
 		1FA03DEC25A86E5600AF0326 /* VerifyCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewController.swift; sourceTree = "<group>"; };
 		1FA03DF025A870D200AF0326 /* DetailNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeViewController.swift; sourceTree = "<group>"; };
 		1FCC3A3725B0167B00A20DEF /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		1FCC3A4F25B11A7700A20DEF /* TenantSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenantSignupViewController.swift; sourceTree = "<group>"; };
 		340DE7B3E8247CCAEA231AB4 /* Pods-Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housing.release.xcconfig"; path = "Target Support Files/Pods-Housing/Pods-Housing.release.xcconfig"; sourceTree = "<group>"; };
 		37105A0A25A6FB7A005FA220 /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
 		37105A0D25A6FB8A005FA220 /* IncompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTableViewCell.swift; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 				1F8ECE8B25A7138100C0E0FA /* SignupCompleteViewController.swift */,
 				D1B0387025A8D3BF0092CE4F /* InfoViewController.swift */,
 				DA928D2425A98ED200DA8466 /* VerifyNumberViewController.swift */,
+				1FCC3A4F25B11A7700A20DEF /* TenantSignupViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -857,6 +860,7 @@
 				D15824E125AF201C0098B5AF /* EmptyCalendarCollectionViewCell.swift in Sources */,
 				CC6740E725ACADEE00EAE4C0 /* DetailService.swift in Sources */,
 				D11C1BEB25A20265002606B2 /* CalendarCollectionReusableView.swift in Sources */,
+				1FCC3A5025B11A7700A20DEF /* TenantSignupViewController.swift in Sources */,
 				CC8C35F425A83E79002D7304 /* ConfirmTableViewCell.swift in Sources */,
 				D12D6DE125A1C84200E9A43A /* BaskervilleFont.swift in Sources */,
 				37105A0E25A6FB8A005FA220 /* IncompleteTableViewCell.swift in Sources */,
