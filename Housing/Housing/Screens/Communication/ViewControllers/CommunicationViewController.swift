@@ -164,8 +164,10 @@ extension CommunicationViewController: UITableViewDelegate { /// 이게 cell이 
 			communicationTableView.reloadData()
 		} else {
 			let viewController = DetailViewController()
-			viewController.requestId = tableViewData[indexPath.section].sectionData[indexPath.row-1].id
-			navigationController?.pushViewController(viewController, animated: true)
+			if tableViewData[indexPath.section].sectionData.count == 0 { } else {
+				viewController.requestId = tableViewData[indexPath.section].sectionData[indexPath.row-1].id
+				navigationController?.pushViewController(viewController, animated: true)
+			}
 		}
 	}
 }
@@ -280,6 +282,7 @@ extension CommunicationViewController: UITableViewDataSource {
 		makeCellGrey(cell: emptyIncomCell)
 		emptyIncomCell.emptyLabel.textAlignment = .center
 		emptyIncomCell.makeButtonRounded()
+		emptyIncomCell.rootViewController = self
 		
 		guard let emptyComCell = tableView.dequeueReusableCell(withIdentifier: "emptyComTableViewCell")
 						as? EmptyComTableViewCell
