@@ -105,6 +105,8 @@ final class CommunicationViewController: BaseViewController {
 	private func configHeaderView() {
 		headerView.setRounded(radius: 15)
 		headerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+		headerView.applyShadow(color: .black, alpha: 0.1, x: 0, y: 0, blur: 30)
+//		headerView.layer.applyShadow(color: .black, alpha: 0.10000000149011612, x: 0, y: 0, blur: 30)
 	}
 
 	private func layoutNavigationBar() {
@@ -354,7 +356,7 @@ extension CommunicationViewController: UITableViewDataSource {
 						emptyIncomCell.inquiryButton.setTitle("문의하기", for: .normal)
 					}
 					return emptyIncomCell
-				} else { ///cell중에서도 complete부분
+				} else { ///cell중에서도 complete부분.
 					return emptyCell
 				}
 			} else if incompleteLength == 0 && completeLength > 0 {
@@ -362,7 +364,7 @@ extension CommunicationViewController: UITableViewDataSource {
 					emptyIncomCell.inquiryButton.isHidden = true
 					emptyIncomCell.emptyLabel.text = "모든 문의가 해결되었어요!"
 					return emptyIncomCell
-				} else { ///cell중에서도 complete부분
+				} else { ///cell중에서도 complete부분.
 					contentCell.contentData = tableViewData[indexPath.section].sectionData[indexPath.row-1]
 					contentCell.awakeFromNib()
 					return contentCell
