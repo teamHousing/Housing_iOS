@@ -203,6 +203,12 @@ extension CameraWorkViewController: UICollectionViewDelegate {
 		if indexPath.row == 0 {
 			photoLibraryWork()
 		}
+		else {
+			let viewController = ImageViewController()
+			viewController.modalPresentationStyle = .overCurrentContext
+			viewController.imageViewArray = evidencePictures
+			self.present(viewController, animated: true)
+		}
 	}
 }
 extension CameraWorkViewController: UICollectionViewDataSource {

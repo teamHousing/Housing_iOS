@@ -9,7 +9,7 @@ import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
 	
-	private let imageView = UIImageView()
+	let imageView = UIImageView()
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -32,5 +32,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
 	
 	func image(_ url: String) {
 		imageView.imageFromUrl(url, defaultImgPath: "")
+	}
+	func image(_ image: UIImage) {
+		imageView.image = image
 	}
 }
