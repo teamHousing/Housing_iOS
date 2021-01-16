@@ -131,7 +131,6 @@ extension PromiseService: TargetType {
 			}
 			
 		case .homePromiseGuestRegister(id: let id, promise_option: let promise_option):
-			//let dict = promise_option.map{["date" : $0.date, "day" : $0.day , "time" : $0.time]}
 			return .requestCompositeParameters(bodyParameters: ["promise_option": promise_option],
 																				 bodyEncoding: JSONEncoding.default,
 																				 urlParameters: ["id": id])
