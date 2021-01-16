@@ -34,11 +34,11 @@ class ImageViewController: UIViewController {
 	}
 	
 	var imageArray: [String]?
-	
+	var imageViewArray: [UIImage]?
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		layout()
+		dump(imageViewArray)
 	}
 	
 	private func layout() {
@@ -54,7 +54,7 @@ class ImageViewController: UIViewController {
 		view.add(backButton) {
 			$0.snp.makeConstraints {
 				$0.trailing.equalToSuperview().offset(-10)
-				$0.top.equalToSuperview().offset(10)
+				$0.top.equalTo(self.view.safeAreaLayoutGuide).offset(10)
 				$0.width.height.equalTo(40)
 			}
 		}
@@ -63,8 +63,17 @@ class ImageViewController: UIViewController {
 				$0.bottom.equalToSuperview().offset((self.view.frame.height - self.view.frame.width)/2 - 50)
 				$0.centerX.equalToSuperview()
 			}
-			$0.numberOfPages = self.imageArray?.count ?? 0
-			$0.currentPage = 0
+			if self.imageArray?.count == 0 {
+				$0.numberOfPages = self.imageViewArray?.count ?? 0
+				$0.currentPage = 0
+				
+			}
+			else {
+				$0.numberOfPages = self.imageArray?.count ?? 0
+				$0.currentPage = 0
+				
+			}
+
 		}
 	}
 	
@@ -81,18 +90,32 @@ extension ImageViewController: UICollectionViewDelegate {
 extension ImageViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView,
 											numberOfItemsInSection section: Int) -> Int {
-		return imageArray?.count ?? 0
+		if imageArray?.count == 0 || imageArray?.count == nil {
+			return imageViewArray?.count ?? 0
+		}
+		else {
+			return imageArray?.count ?? 0
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView,
 											cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: ImageCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 		
-		guard let imageURL = imageArray?[indexPath.row] else {
-			return UICollectionViewCell()
+
+		if imageArray?.count == 0 || imageArray == nil{
+			guard let realImage = imageViewArray?[indexPath.row] else {
+				return UICollectionViewCell()
+			}
+			cell.image(realImage)
 		}
-		
-		cell.image(imageURL)
+		else {
+			guard let imageURL = imageArray?[indexPath.row] else {
+				return UICollectionViewCell()
+			}
+
+			cell.image(imageURL)
+		}
 		
 		return cell
 	}
