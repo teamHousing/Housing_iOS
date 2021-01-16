@@ -389,8 +389,8 @@ class AddNoticeViewController: BaseViewController{
 			}.disposed(by: disposeBag)
 		self.requestData.startTime.observeOn(MainScheduler.instance).subscribe{str in temp.startTime = str}.disposed(by: disposeBag)
 		self.requestData.endTime.observeOn(MainScheduler.instance).subscribe{str in temp.endTime = str}.disposed(by: disposeBag)
-		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: ":00")
-		temp.endTime = temp.endTime.replacingOccurrences(of: "시", with: ":00")
+		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
+		temp.endTime = temp.endTime.replacingOccurrences(of: "시", with: "")
 		if temp.startTime.hasPrefix("오전") {
 			temp.startTime = temp.startTime.replacingOccurrences(of: "오전 ", with: "")
 		}
@@ -403,6 +403,7 @@ class AddNoticeViewController: BaseViewController{
 		}
 		else if temp.endTime.hasPrefix("오후") {
 			temp.endTime = temp.endTime.replacingOccurrences(of: "오후 ", with: "")
+			print(temp.endTime)
 			temp.endTime = String(Int(temp.endTime)! + 12)
 		}
 		let time = "\(temp.startTime):00-\(temp.endTime):00"
