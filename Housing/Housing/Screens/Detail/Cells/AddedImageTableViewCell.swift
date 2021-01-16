@@ -20,6 +20,7 @@ class AddedImageTableViewCell: UITableViewCell {
 	// MARK: - Property
 	var imageURL: [String] = []
 	var id = promiseId.shared.id
+	var rootViewController: UIViewController?
 	
 	private let detailProvider = MoyaProvider<DetailService>()
 	let disposeBag = DisposeBag()
@@ -148,6 +149,14 @@ extension AddedImageTableViewCell: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UICollectionView DataSource
 extension AddedImageTableViewCell: UICollectionViewDataSource {
+	func collectionView(_ collectionView: UICollectionView,
+											didSelectItemAt indexPath: IndexPath) {
+		let viewController = ImageViewController()
+		viewController.modalPresentationStyle = .overCurrentContext
+		viewController.imageArray = imageURL
+		self.rootViewController?.present(viewController, animated: true)
+	}
+	
 	func collectionView(_ collectionView: UICollectionView,
 											numberOfItemsInSection section: Int) -> Int {
 		if imageURL.count > 3 {

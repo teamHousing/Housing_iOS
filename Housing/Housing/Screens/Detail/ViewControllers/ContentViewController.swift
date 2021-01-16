@@ -19,6 +19,7 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		return tableView
 	}
 	
+	var detail: UIViewController?
 	var model = DetailModel(id: 0,
 													issueImages: [],
 													promiseOption: [["1","1","1"]],
@@ -76,7 +77,6 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 			let cell: RequestTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 			cell.awakeFromNib()
 			cell.selectionStyle = .none
-			print(model.requestedTerm)
 			cell.contextLabel.text = self.model.requestedTerm
 			cell.contextLabel.sizeToFit()
 			return cell
@@ -93,7 +93,8 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 		else if indexPath.row == 2 {
 			let cell: AddedImageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 			cell.imageURL = self.model.issueImages!
-			
+			cell.rootViewController = detail
+			print(detail)
 			let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost)
 			if isHost == 0 {
 				cell.cancelButton.isHidden = true

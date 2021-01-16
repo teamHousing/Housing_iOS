@@ -30,7 +30,7 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 													confirmedPromiseOption: []
 	)
 	var statusModel: [DetailStatus] = []
-	
+	var detail: UIViewController?
 	@objc var scrollView: UIScrollView {
 		return tableView
 	}
@@ -83,6 +83,8 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 			else {
 				cell.promiseOption = 1
 			}
+			cell.detail = detail
+
 			if self.statusModel[0].userStatus?.isEmpty == true {
 				cell.status = self.statusModel[0].ownerStatus!
 				cell.userOrOwner = 0

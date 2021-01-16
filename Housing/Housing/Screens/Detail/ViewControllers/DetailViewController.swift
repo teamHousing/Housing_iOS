@@ -216,6 +216,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 					print(self.model)
 					viewController.model = self.model
 					viewController.statusModel = self.statusModel
+					viewController.detail = self
 					statusViewController.model = self.model
 					statusViewController.statusModel = self.statusModel
 					
@@ -224,7 +225,6 @@ class DetailViewController: SegementSlideDefaultViewController {
 				} catch {
 					print(error)
 				}
-				
 			}, onError: { error in
 				print(error.localizedDescription)
 			}, onCompleted: {
@@ -323,7 +323,9 @@ class DetailViewController: SegementSlideDefaultViewController {
 	override func segementSlideContentViewController(at index: Int)
 	-> SegementSlideContentScrollViewDelegate? {
 		let viewController = ContentViewController()
+		viewController.detail = self
 		let messageViewController = MessageViewController()
+		messageViewController.detail = self
 		if(contentView.selectedIndex == 0 ) {
 			messageViewController.model = self.model
 			messageViewController.statusModel = self.statusModel

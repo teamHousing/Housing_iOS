@@ -350,16 +350,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여긴 상세" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3H-Hl-rPO">
-                                <rect key="frame" x="20" y="125.5" width="335" height="154"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="154" id="for-XB-rf1"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="125.5" width="335" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJ2-Ck-cLl">
-                                <rect key="frame" x="20" y="330.5" width="335" height="1"/>
+                                <rect key="frame" x="20" y="197" width="335" height="1"/>
                                 <color key="backgroundColor" red="0.79607843137254897" green="0.83921568627450982" blue="0.87058823529411766" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="HuI-oN-9Y3"/>
@@ -372,7 +369,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tgz-VD-1HV">
-                                <rect key="frame" x="20" y="383.5" width="335" height="133"/>
+                                <rect key="frame" x="20" y="250" width="335" height="133"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="캘린더에 추가된 공지입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgT-M4-PBz">
                                         <rect key="frame" x="0.0" y="0.0" width="167.5" height="18"/>
@@ -450,12 +447,12 @@
                         <constraints>
                             <constraint firstItem="CeZ-oB-WgP" firstAttribute="trailing" secondItem="2C0-mc-j1l" secondAttribute="trailing" constant="20" id="6Mz-jE-5yv"/>
                             <constraint firstItem="tgz-VD-1HV" firstAttribute="leading" secondItem="CeZ-oB-WgP" secondAttribute="leading" constant="20" id="6jq-iV-2ee"/>
-                            <constraint firstItem="tgz-VD-1HV" firstAttribute="top" secondItem="XJ2-Ck-cLl" secondAttribute="bottom" constant="52" id="Cnb-hn-3PK"/>
                             <constraint firstItem="Shg-e1-7BP" firstAttribute="width" secondItem="VJ1-EQ-lEI" secondAttribute="width" multiplier="0.205333" id="GKQ-Cu-93q"/>
                             <constraint firstItem="XJ2-Ck-cLl" firstAttribute="top" secondItem="s3H-Hl-rPO" secondAttribute="bottom" constant="51" id="Qca-Ul-lYr"/>
                             <constraint firstItem="CeZ-oB-WgP" firstAttribute="trailing" secondItem="XJ2-Ck-cLl" secondAttribute="trailing" constant="20" id="RUR-DN-dpF"/>
                             <constraint firstItem="XJ2-Ck-cLl" firstAttribute="leading" secondItem="CeZ-oB-WgP" secondAttribute="leading" constant="20" id="Vty-zQ-ZcJ"/>
                             <constraint firstItem="CeZ-oB-WgP" firstAttribute="trailing" secondItem="tgz-VD-1HV" secondAttribute="trailing" constant="20" id="XzY-jQ-EI9"/>
+                            <constraint firstItem="tgz-VD-1HV" firstAttribute="top" secondItem="XJ2-Ck-cLl" secondAttribute="bottom" constant="52" id="evm-Uv-xav"/>
                             <constraint firstItem="s3H-Hl-rPO" firstAttribute="leading" secondItem="CeZ-oB-WgP" secondAttribute="leading" constant="20" id="f5E-68-L2e"/>
                             <constraint firstItem="s3H-Hl-rPO" firstAttribute="top" secondItem="2C0-mc-j1l" secondAttribute="bottom" constant="40" id="fHv-XU-GEQ"/>
                             <constraint firstItem="2C0-mc-j1l" firstAttribute="top" secondItem="CeZ-oB-WgP" secondAttribute="top" constant="16" id="lET-o3-mOZ"/>

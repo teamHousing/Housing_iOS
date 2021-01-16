@@ -109,10 +109,9 @@ class AppointmentViewController: BaseViewController {
 	
 	private let datePickerLabel = UILabel().then {
 		$0.textColor = .textGrayBlank
-		$0.text = "YYYY.MM.DD"
+		$0.text = "2021.01.16"
 		$0.isUserInteractionEnabled = true
 		$0.isMultipleTouchEnabled = true
-		
 		$0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 21)
 	}
 	private let underBar = UIView().then{
@@ -123,7 +122,7 @@ class AppointmentViewController: BaseViewController {
 		$0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15)
 		$0.textColor = .black
 	}
-	private let startHour = UILabel().then {
+	private let startHour = UITextField().then {
 		$0.textColor = .textGrayBlank
 		$0.text = "07시"
 		$0.isUserInteractionEnabled = true
@@ -444,8 +443,7 @@ class AppointmentViewController: BaseViewController {
 		temp.startTime = temp.startTime.replacingOccurrences(of: "시", with: "")
 		temp.day = temp.day.replacingOccurrences(of: "-", with: ".")
 		temp.endTime = temp.endTime.replacingOccurrences(of: "시", with: "")
-		temp.startTime = temp.startTime + ":00"
-		temp.endTime = temp.endTime + ":00"
+
 
 		if temp.startTime.hasPrefix("오전") {
 			temp.startTime = temp.startTime.replacingOccurrences(of: "오전 ", with: "")
@@ -461,9 +459,11 @@ class AppointmentViewController: BaseViewController {
 			temp.endTime = temp.endTime.replacingOccurrences(of: "오후 ", with: "")
 			temp.endTime = String(Int(temp.endTime)! + 12)
 		}
+		temp.startTime = temp.startTime + ":00"
+		temp.endTime = temp.endTime + ":00"
 		let a = "\(temp.startTime)-\(temp.endTime)"
 		
-		let promiseTime = noticeOption( date: temp.day , day : a , time: self.requestData.solution )
+		let promiseTime = noticeOption(date: temp.day, day: a, time: self.requestData.solution)
 		
 		return promiseTime
 	}
@@ -574,14 +574,29 @@ extension AppointmentViewController: UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: TimeStampTableViewCell.registterId,
-																									 for: indexPath) as? TimeStampTableViewCell else {
-			return UITableViewCell()
-		}
+		let cell: TimeStampTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 		cell.awakeFromNib()
 		cell.backgroundColor = .primaryGray
 		cell.deleteButton.backgroundColor = .primaryGray
 		cell.dateLabel.text = String(self.requestData.availableTimeList[indexPath.row].day.split(separator: " ")[0])
+		requestData.availableTimeList[indexPath.row].endTime = requestData.availableTimeList[indexPath.row].endTime.replacingOccurrences(of: "시", with: "")
+		requestData.availableTimeList[indexPath.row].startTime = requestData.availableTimeList[indexPath.row].startTime.replacingOccurrences(of: "시", with: "")
+
+		if requestData.availableTimeList[indexPath.row].startTime.hasPrefix("오전") {
+			requestData.availableTimeList[indexPath.row].startTime = requestData.availableTimeList[indexPath.row].startTime.replacingOccurrences(of: "오전 ", with: "")
+		}
+		else if requestData.availableTimeList[indexPath.row].startTime.hasPrefix("오후") {
+			requestData.availableTimeList[indexPath.row].startTime = requestData.availableTimeList[indexPath.row].startTime.replacingOccurrences(of: "오후 ", with: "")
+			requestData.availableTimeList[indexPath.row].startTime = String(Int(requestData.availableTimeList[indexPath.row].startTime)! + 12)
+		}
+		if requestData.availableTimeList[indexPath.row].endTime.hasPrefix("오전") {
+			requestData.availableTimeList[indexPath.row].endTime = requestData.availableTimeList[indexPath.row].endTime.replacingOccurrences(of: "오전 ", with: "")
+		}
+		else if requestData.availableTimeList[indexPath.row].endTime.hasPrefix("오후") {
+			requestData.availableTimeList[indexPath.row].endTime = requestData.availableTimeList[indexPath.row].endTime.replacingOccurrences(of: "오후 ", with: "")
+			print(requestData.availableTimeList[indexPath.row].endTime)
+			requestData.availableTimeList[indexPath.row].endTime = String(Int(requestData.availableTimeList[indexPath.row].endTime)! + 12)
+		}
 		cell.timeLabel.text = "\(self.requestData.availableTimeList[indexPath.row].startTime) - \(self.requestData.availableTimeList[indexPath.row].endTime)"
 
 		cell.methodLabel.text = self.requestData.solution
