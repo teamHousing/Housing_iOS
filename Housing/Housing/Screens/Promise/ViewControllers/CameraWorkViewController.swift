@@ -183,6 +183,7 @@ class CameraWorkViewController: UIViewController{
 		print(requestData)
 		layout()
 		collectionViewConfig()
+		requestData.images.removeAll()
 		// Do any additional setup after loading the view.
 	}
 	
