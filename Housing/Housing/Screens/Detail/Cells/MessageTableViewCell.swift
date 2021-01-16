@@ -18,6 +18,7 @@ class MessageTableViewCell: UITableViewCell {
 	let messageTableView = UITableView()
 	let disposeBag = DisposeBag()
 	private let detailProvider = MoyaProvider<DetailService>()
+	private let promiseProvider = MoyaProvider<PromiseService>(plugins: [NetworkLoggerPlugin(verbose: true)])
 	private let requestId = promiseId.shared.id
 	
 	var status: [Int] = [0,1,2,3]
@@ -25,6 +26,7 @@ class MessageTableViewCell: UITableViewCell {
 	var confirmedPromiseOption = ""
 	var rootViewController: UIViewController?
 	var checkToModify = 1
+	var promiseOption = 1
 	
 	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
@@ -131,15 +133,28 @@ extension MessageTableViewCell: UITableViewDataSource {
 		let cell: MessageDetailTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
 		if self.userOrOwner == 0 {
 			if self.status[indexPath.row] == 0 {
-				cell.titleLabel.text = "문의사항이 등록되었어요!"
-				cell.contextLabel.attributedText = self.makeAttributed(
-					context: "아래의 버튼을 눌러\n약속시간을 정해보세요."
-				)
-				cell.transitionButton.addTarget(self,
-																				action: #selector(didTapConfirmButton(_:)),
-																				for: .touchUpInside
-				)
-				cell.transitionButton.setTitle("약속 확정하기", for: .normal)
+				if self.promiseOption == 0 {
+					cell.titleLabel.text = "문의사항이 등록되었어요!"
+					cell.contextLabel.attributedText = self.makeAttributed(
+						context: "아래의 버튼을 눌러\n진행 상황을 변경해보세요."
+					)
+					cell.transitionButton.addTarget(self,
+																					action: #selector(didTapRequestConfirm(_:)),
+																					for: .touchUpInside
+					)
+					cell.transitionButton.setTitle("문의 확정하기", for: .normal)
+				}
+				else {
+					cell.titleLabel.text = "문의사항이 등록되었어요!"
+					cell.contextLabel.attributedText = self.makeAttributed(
+						context: "아래의 버튼을 눌러\n약속 시간을 변경해보세요."
+					)
+					cell.transitionButton.addTarget(self,
+																					action: #selector(didTapConfirmButton(_:)),
+																					for: .touchUpInside
+					)
+					cell.transitionButton.setTitle("약속 확정하기", for: .normal)
+				}
 			}
 			else if self.status[indexPath.row] == 1 {
 				cell.titleLabel.text = "약속이 확정되었어요!"
@@ -214,10 +229,10 @@ extension MessageTableViewCell: UITableViewDataSource {
 				cell.transitionButton.setTitle("약속 수정하기", for: .normal)
 			}
 			else {
-					cell.titleLabel.text = "문의사항이 해결되었어요!"
-					cell.contextLabel.attributedText = self.makeAttributed(
-						context: "앞으로도 하우징과 함께\n자취생과 소통해보세요!"
-					)
+				cell.titleLabel.text = "문의사항이 해결되었어요!"
+				cell.contextLabel.attributedText = self.makeAttributed(
+					context: "앞으로도 하우징과 함께\n집주인과 소통해보세요!"
+				)
 				cell.transitionButton.snp.makeConstraints {
 					$0.height.equalTo(0)
 				}
@@ -262,12 +277,6 @@ extension MessageTableViewCell: UITableViewDataSource {
 		self.loader()
 		sender.isEnabled = false
 		sender.backgroundColor = .gray01
-		let storyboard = UIStoryboard(name: StoryboardStorage.detail,bundle: nil)
-		let vc = storyboard.instantiateViewController(
-			withIdentifier: "DetailViewController") as? DetailViewController
-		vc?.loader()
-		//		let vc2 = storyboard.instantiateViewController(
-		//			withIdentifier: "MessageViewController") as? MessageViewController
 	}
 	
 	@objc func didTapModifyButton(_ sender: UIButton) {
@@ -276,5 +285,29 @@ extension MessageTableViewCell: UITableViewDataSource {
 		viewcontroller.checkToModify = self.checkToModify
 		rootViewController?.navigationController?.pushViewController(viewcontroller, animated: true)
 	}
+	
+	@objc
+	func didTapRequestConfirm(_ sender: UIButton) {
+		print(#function)
+		print(self.requestId)
+		promiseProvider.rx.request(.homePromiseConfirm(id: self.requestId,
+																									 promise_option: []))
+			.asObservable()
+			.subscribe { (next) in
+				if next.statusCode == 200 {
+					do {
+						sender.setTitle("확인 완료", for: .normal)
+						sender.backgroundColor = .gray01
+					} catch {
+						print(error)
+						print("왜안돼")
+					}
+				}
+			} onError: { (error) in
+				print(error.localizedDescription)
+			}.disposed(by: disposeBag)
+	}
 }
+
+
 

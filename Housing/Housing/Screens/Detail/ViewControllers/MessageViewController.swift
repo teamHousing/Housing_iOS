@@ -60,7 +60,7 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		
-		tableView.reloadData()
+//		tableView.reloadData()
 
 	}
 	// MARK: - UITableView data source
@@ -77,6 +77,12 @@ class MessageViewController: UITableViewController, SegementSlideContentScrollVi
 		}
 		else {
 			let cell: MessageTableViewCell = tableView.dequeueCell(forIndexPath: indexPath)
+			if self.model.promiseOption?.isEmpty == true {
+				cell.promiseOption = 0
+			}
+			else {
+				cell.promiseOption = 1
+			}
 			if self.statusModel[0].userStatus?.isEmpty == true {
 				cell.status = self.statusModel[0].ownerStatus!
 				cell.userOrOwner = 0

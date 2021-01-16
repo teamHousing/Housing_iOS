@@ -213,7 +213,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 					let viewController = ContentViewController()
 					let statusViewController = MessageViewController()
 					self.idValue.id = data.data?.id ?? 11
-					
+					print(self.model)
 					viewController.model = self.model
 					viewController.statusModel = self.statusModel
 					statusViewController.model = self.model
