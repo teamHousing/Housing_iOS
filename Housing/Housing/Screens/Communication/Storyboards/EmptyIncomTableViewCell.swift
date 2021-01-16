@@ -11,22 +11,20 @@ class EmptyIncomTableViewCell: UITableViewCell {
 	
 	@IBOutlet var emptyLabel: UILabel!
 	@IBOutlet var inquiryButton: UIButton!
-	
+
 	var rootViewController: UIViewController?
-	
-	func makeButtonRounded(){
+
+	func makeButtonRounded() {
 		inquiryButton.setRounded(radius: 20)
 	}
-	
+
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		inquiryButton.addTarget(self, action: #selector(inquiryButtonDidTap), for: .touchUpInside)
 	}
-	
+
 	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
-		
-		// Configure the view for the selected state
 	}
 	
 	@objc
@@ -40,5 +38,4 @@ class EmptyIncomTableViewCell: UITableViewCell {
 			rootViewController?.navigationController?.pushViewController(viewController, animated: true)
 		}
 	}
-	
 }
