@@ -54,7 +54,7 @@ class ImageViewController: UIViewController {
 		view.add(backButton) {
 			$0.snp.makeConstraints {
 				$0.trailing.equalToSuperview().offset(-10)
-				$0.top.equalToSuperview().offset(10)
+				$0.top.equalTo(self.view.safeAreaLayoutGuide).offset(10)
 				$0.width.height.equalTo(40)
 			}
 		}
