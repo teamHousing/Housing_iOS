@@ -103,7 +103,7 @@ final class CalendarViewController: BaseViewController {
 
 	// MARK: - Provider
 	
-	let calendarProvider = MoyaProvider<CalendarService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	let calendarProvider = MoyaProvider<CalendarService>()
 	
 	// MARK: - Life Cycle
 	
@@ -175,8 +175,10 @@ final class CalendarViewController: BaseViewController {
 					let data = try decoder.decode(ResponseType<CalendarData>.self,
 																				from: response.data)
 					guard let result = data.data else { return }
+//					print(#function, result)
 					self.calendarDataBind(result)
 				} catch {
+					print(#function)
 					print(error)
 				}
 			}, onError: { error in
@@ -187,7 +189,7 @@ final class CalendarViewController: BaseViewController {
 			}).disposed(by: disposeBag)
 	}
 	
-	private func calendarDataBind(_ data:CalendarData) {
+	private func calendarDataBind(_ data: CalendarData) {
 		for notice in data.notice {
 			let when = "\(notice.year).\(notice.month).\(notice.day)"
 			let model = FSCalendarModel(isNotice: notice.isNotice,
@@ -197,7 +199,11 @@ final class CalendarViewController: BaseViewController {
 																	time: notice.time,
 																	title: notice.title,
 																	contents: notice.contents)
-			calendarDictionary["\(when)"] = [model]
+			if calendarDictionary[when]?.count == 0 || calendarDictionary[when]?.count == nil {
+				calendarDictionary["\(when)"] = [model]
+			} else {
+				calendarDictionary[when]?.append(model)
+			}
 		}
 		for promise in data.issue {
 			let when = "\(promise.year).\(promise.month).\(promise.day)"
@@ -208,13 +214,12 @@ final class CalendarViewController: BaseViewController {
 																	time: promise.time,
 																	title: promise.title,
 																	contents: promise.contents)
-			if calendarDictionary[when]?.count == 0 {
+			if calendarDictionary[when]?.count == 0 || calendarDictionary[when]?.count == nil {
 				calendarDictionary["\(when)"] = [model]
 			} else {
 				calendarDictionary[when]?.append(model)
 			}
 		}
-		
 	}
 }
 
@@ -348,12 +353,14 @@ extension CalendarViewController: UICollectionViewDataSource {
 		guard let day = day else {
 			return UICollectionViewCell()
 		}
+		print(day)
 		if calendarDictionary[day]?.count == nil {
 			let cell: EmptyCalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 			return cell
 		} else {
 			guard let promise: [FSCalendarModel] = calendarDictionary[day] else { return UICollectionViewCell() }
 			if promise[indexPath.row].isNotice == 0 {
+				print(0, promise[indexPath.row])
 				let cell: CalendarCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 				cell.calendar = promise[indexPath.row]
 				cell.fetchCalendar()
@@ -361,6 +368,7 @@ extension CalendarViewController: UICollectionViewDataSource {
 				cell.fetchTime()
 				return cell
 			} else {
+				print(1, promise[indexPath.row])
 				let cell: NoticeCollectionViewCell = collectionView.dequeueCell(forIndexPath: indexPath)
 				cell.calendar = promise[indexPath.row]
 				cell.fetchCalendar()

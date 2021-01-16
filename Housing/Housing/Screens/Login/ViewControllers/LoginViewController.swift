@@ -25,7 +25,7 @@ final class LoginViewController: BaseViewController {
 	@IBOutlet weak var warningLabel: UILabel!
 	
 	// MARK: - Service
-	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let userProvider = MoyaProvider<UserService>()
 	var isSignOut: Bool = false
 	
 	//MARK:- Lifecycle

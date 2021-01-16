@@ -17,9 +17,7 @@ class MessageTableViewCell: UITableViewCell {
 	// MARK: - Property
 	let messageTableView = UITableView()
 	let disposeBag = DisposeBag()
-	private let detailProvider = MoyaProvider<DetailService>(
-		plugins: [NetworkLoggerPlugin(verbose: true)]
-	)
+	private let detailProvider = MoyaProvider<DetailService>()
 	private let requestId = promiseId.shared.id
 	
 	var status: [Int] = [0,1,2,3]
@@ -27,6 +25,7 @@ class MessageTableViewCell: UITableViewCell {
 	var confirmedPromiseOption = ""
 	var rootViewController: UIViewController?
 	var checkToModify = 1
+	var detail: UIViewController?
 	
 	// MARK: - Helper
 	static func estimatedRowHeight() -> CGFloat {
@@ -259,6 +258,7 @@ extension MessageTableViewCell: UITableViewDataSource {
 		self.loader()
 		sender.isEnabled = false
 		sender.backgroundColor = .gray01
+		detail?.viewDidLoad()
 	}
 	
 	@objc func didTapModifyButton(_ sender: UIButton) {

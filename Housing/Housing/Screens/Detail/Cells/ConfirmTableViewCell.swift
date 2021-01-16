@@ -91,7 +91,7 @@ class ConfirmTableViewCell: UITableViewCell {
 			$0.snp.makeConstraints {
 				$0.height.equalTo(self.methodLabel)
 				$0.width.equalTo(2)
-				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(-40)
+				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(-46)
 				$0.centerY.equalTo(self.containerView.snp.centerY)
 			}
 		}
@@ -99,7 +99,7 @@ class ConfirmTableViewCell: UITableViewCell {
 			$0.snp.makeConstraints {
 				$0.height.equalTo(self.methodLabel)
 				$0.width.equalTo(2)
-				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(45)
+				$0.centerX.equalTo(self.timeLabel.snp.centerX).offset(55)
 				$0.centerY.equalTo(self.containerView.snp.centerY)
 			}
 		}

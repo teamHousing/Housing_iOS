@@ -33,13 +33,11 @@ class DetailViewController: SegementSlideDefaultViewController {
 	}
 	let disposeBag = DisposeBag()
 	var idValue = promiseId.shared
-	private let detailProvider = MoyaProvider<DetailService>(
-		plugins: [NetworkLoggerPlugin(verbose: true)]
-	)
+	private let detailProvider = MoyaProvider<DetailService>()
 	private let coverSafeAreaView = UIView().then {
 		$0.backgroundColor = .white
 	}
-	lazy var optionButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
+	lazy var optionButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
 																					style: .done,
 																					target: self,
 																					action: #selector(optionButtonDidTap))
@@ -83,16 +81,19 @@ class DetailViewController: SegementSlideDefaultViewController {
 	// MARK: - Helper
 	private func contextHeight() -> Int {
 		let myText = self.contextLabel.text! as NSString
-		let rect = CGSize(width: self.contextLabel.bounds.width,
-											height: CGFloat.greatestFiniteMagnitude
-		)
-		let labelSize = myText.boundingRect(with: rect,
-																				options: .usesLineFragmentOrigin,
-																				attributes: [NSAttributedString.Key.font:
-																											self.contextLabel.font],
-																				context: nil
-		)
-		return Int(ceil(CGFloat(labelSize.height) / self.contextLabel.font.lineHeight))
+//		let rect = CGSize(width: self.contextLabel.bounds.width,
+//											height: CGFloat.greatestFiniteMagnitude
+//		)
+//		let labelSize = myText.boundingRect(with: rect,
+//																				options: .usesLineFragmentOrigin,
+//																				attributes: [NSAttributedString.Key.font:
+//																											self.contextLabel.font!],
+//																				context: nil
+//		)
+		return  Int(heightForView(text: myText as String,
+															font: self.contextLabel.font,
+															width: view.frame.width - 40))
+//		return Int(ceil(CGFloat(labelSize.height) / self.contextLabel.font.lineHeight))
 	}
 	
 	private func headerViewLayout() {
@@ -212,6 +213,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 					
 					viewController.model = self.model
 					viewController.statusModel = self.statusModel
+					viewController.detail = self
 					statusViewController.model = self.model
 					statusViewController.statusModel = self.statusModel
 					
@@ -220,13 +222,12 @@ class DetailViewController: SegementSlideDefaultViewController {
 				} catch {
 					print(error)
 				}
-				
 			}, onError: { error in
 				print(error.localizedDescription)
 			}, onCompleted: {
 				self.headerViewLayout()
-				self.detailHeaderView.snp.makeConstraints{
-					$0.height.equalTo(160+self.contextHeight()*22)
+				self.detailHeaderView.snp.makeConstraints {
+					$0.height.equalTo(130+self.contextHeight())
 				}
 				self.detailHeaderView.reloadInputViews()
 			}).disposed(by: disposeBag)
@@ -285,7 +286,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		let optionMenu = UIAlertController(title: nil,
 																			 message: nil,
 																			 preferredStyle: .actionSheet)
-		
+		optionMenu.view.tintColor = .primaryBlack
 		//옵션 초기화
 		let editAction = UIAlertAction(title: "수정하기",
 																		 style: .default,
@@ -303,9 +304,11 @@ class DetailViewController: SegementSlideDefaultViewController {
 																		 handler: {
 																			(alert: UIAlertAction!) -> Void in
 																		 })
-		
-		optionMenu.addAction(editAction)
-		optionMenu.addAction(deleteAction)
+		if model.progress == 1 {
+			optionMenu.addAction(editAction)
+		} else {
+			optionMenu.addAction(deleteAction)
+		}
 		optionMenu.addAction(cancelAction)
 		
 		//show
@@ -317,7 +320,9 @@ class DetailViewController: SegementSlideDefaultViewController {
 	override func segementSlideContentViewController(at index: Int)
 	-> SegementSlideContentScrollViewDelegate? {
 		let viewController = ContentViewController()
+		viewController.detail = self
 		let messageViewController = MessageViewController()
+		messageViewController.detail = self
 		if(contentView.selectedIndex == 0 ) {
 			messageViewController.model = self.model
 			messageViewController.statusModel = self.statusModel
@@ -364,4 +369,18 @@ class DetailViewController: SegementSlideDefaultViewController {
 		edgesForExtendedLayout = .top
 		extendedLayoutIncludesOpaqueBars = false
 	}
+}
+
+func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat {
+	let label:UILabel = UILabel(frame: CGRect(x: 0,
+																						y: 0,
+																						width: width,
+																						height: CGFloat.greatestFiniteMagnitude))
+	label.numberOfLines = 0
+	label.lineBreakMode = NSLineBreakMode.byWordWrapping
+	label.font = font
+	label.text = text
+	
+	label.sizeToFit()
+	return label.frame.height
 }

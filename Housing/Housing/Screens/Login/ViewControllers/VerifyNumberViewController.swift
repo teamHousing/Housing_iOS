@@ -11,13 +11,13 @@ import RxCocoa
 import Moya
 class VerifyNumberViewController: BaseViewController {
 	// MARK: - Component
-	private let userProvider = MoyaProvider<NoticeService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let userProvider = MoyaProvider<NoticeService>()
 	lazy var shareButton = UIBarButtonItem(image: UIImage(named: "iconShare"),
 																				 style: .done,
 																				 target: self,
 																				 action: #selector(shareNumber))
 	private let backButton = UIButton().then{
-		$0.setImage(UIImage(named: ""), for: .normal)
+		$0.setImage(UIImage(), for: .normal)
 	}
 	private let upperView = UIView().then {
 		$0.backgroundColor = .white
@@ -323,11 +323,16 @@ class VerifyNumberViewController: BaseViewController {
 	}
 	@objc
 	func shareNumber() {
-		guard let number = verifyNumber.text else {
+		guard let number = verifyNumber.text,
+					let houseNumber = houseNumber.text
+					else {
 			return
 		}
 		var shareObject = [Any]()
-		shareObject.append("\(number)")
+		shareObject.append("""
+				Housing을 이용하기 위한 \(houseNumber)호의
+				인증번호는 \(number)입니다.
+		""")
 		let activityViewController = UIActivityViewController(activityItems : shareObject,
 																													applicationActivities: nil)
 		activityViewController.popoverPresentationController?.sourceView = self.view

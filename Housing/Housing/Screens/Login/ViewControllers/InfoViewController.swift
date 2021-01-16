@@ -111,7 +111,7 @@ class InfoViewController: BaseViewController {
 	var isHost: Int?
 	var number: Int?
 
-	private let userProvider = MoyaProvider<UserService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+	private let userProvider = MoyaProvider<UserService>()
 
 	
 	override func viewDidLoad() {
@@ -412,10 +412,9 @@ class InfoViewController: BaseViewController {
 																				 forKey: KeychainStorage.isHost)
 						KeychainWrapper.standard.set(cookie,
 																				 forKey: KeychainStorage.accessToken)
-						let storyboard = UIStoryboard(name: StoryboardStorage.signup, bundle: nil)
-						let viewcontroller = storyboard.instantiateViewController(
-							withIdentifier: "SignupCompleteViewController") as! SignupCompleteViewController
-						self.navigationController?.pushViewController(viewcontroller, animated: true)
+						let viewcontroller = TabBarViewController()
+						viewcontroller.modalPresentationStyle = .fullScreen
+						self.present(viewcontroller, animated: true)
 					} else {
 						self.showToast("에러가 발생했습니다.",
 													 isBottom: true,
