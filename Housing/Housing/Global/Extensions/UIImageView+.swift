@@ -25,7 +25,6 @@ extension UIImageView {
 	public func imageFromUrl(_ urlString: String?, defaultImgPath : String?) {
 		
 		let tmpUrl : String?
-		
 		if urlString == nil {
 			tmpUrl = ""
 		} else  {
@@ -38,7 +37,6 @@ extension UIImageView {
 				self.kf.setImage(with: URL(string: url), options: [.transition(ImageTransition.fade(0.5))])
 			}
 		}
-		
 	}
 	
 }
