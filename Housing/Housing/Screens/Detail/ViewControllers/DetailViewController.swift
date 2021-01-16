@@ -200,6 +200,9 @@ class DetailViewController: SegementSlideDefaultViewController {
 																				from: response.data)
 					
 					let result = data.data
+					print(#function)
+					print(#line)
+					print(#file)
 					self.statusModel.append(DetailStatus(
 						ownerStatus: json["data"]["Replies"][0]["owner_status"].arrayValue.map{$0.intValue},
 						userStatus: json["data"]["Replies"][0]["user_status"].arrayValue.map{$0.intValue},
@@ -210,7 +213,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 					let viewController = ContentViewController()
 					let statusViewController = MessageViewController()
 					self.idValue.id = data.data?.id ?? 11
-					
+					print(self.model)
 					viewController.model = self.model
 					viewController.statusModel = self.statusModel
 					viewController.detail = self
@@ -229,7 +232,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 				self.detailHeaderView.snp.makeConstraints {
 					$0.height.equalTo(130+self.contextHeight())
 				}
-				self.detailHeaderView.reloadInputViews()
+				self.headerView.reloadInputViews()
 			}).disposed(by: disposeBag)
 	}
 	
@@ -348,6 +351,7 @@ class DetailViewController: SegementSlideDefaultViewController {
 		setSafeArea()
 		reloadData()
 		navigationItem.rightBarButtonItem = optionButton
+		
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
