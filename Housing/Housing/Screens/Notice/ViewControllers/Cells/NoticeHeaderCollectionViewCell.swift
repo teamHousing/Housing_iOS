@@ -26,7 +26,7 @@ class NoticeHeaderCollectionViewCell: UICollectionViewCell {
 	func headerlayout() {
 		self.headerBackgroundView.layer.applyShadow()
         profileImage.layer.cornerRadius = profileImage.frame.height / 2
-        
+        writeButton.backgroundColor = .primaryGray
 	}
 	
 	func houseInfo() {

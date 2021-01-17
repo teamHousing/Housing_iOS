@@ -15,12 +15,12 @@ final class NoticeViewController: BaseViewController {
 	//MARK:- Component(Outlet)
 	@IBOutlet weak var noticeCollectionView: UICollectionView!
 	@IBOutlet weak var makeVerifyNumberButton: UIBarButtonItem!
-	
+    @IBOutlet weak var noticeButton: UIButton!
+    
 	
 	//MARK:- Property
 	var houseData: HouseInfo?
 	var noticeData: [Notice] = []
-	var id: Int?
 	let isHost = KeychainWrapper.standard.integer(forKey: KeychainStorage.isHost) ?? 0
 	
 	// MARK: - Service
@@ -76,6 +76,8 @@ final class NoticeViewController: BaseViewController {
 		if isHost != 0 {
 			makeVerifyNumberButton.image = UIImage(named: "")
 		}
+        
+        
 	}
 	
 	//MARK:- Component(Action)
@@ -96,7 +98,7 @@ extension NoticeViewController: UIScrollViewDelegate {
 		if scrollView.contentOffset.y > -1 {
 			noticeCollectionView.backgroundColor = .primaryGray
 		} else {
-			noticeCollectionView.backgroundColor = .white
+			noticeCollectionView.backgroundColor = .primaryGray
 		}
 	}
 }
